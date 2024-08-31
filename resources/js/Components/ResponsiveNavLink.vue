@@ -1,5 +1,5 @@
 <template>
-  <span v-show="active" class="absolute inset-y-0 left-0 w-1 rounded-tr-lg rounded-br-lg bg-blue-800"
+  <span v-show="active" class="absolute inset-y-0 left-0 w-1 rounded-tr-lg rounded-br-lg bg-white"
     aria-hidden="true"></span>
   <div class="flex">
     <slot name="icon" />

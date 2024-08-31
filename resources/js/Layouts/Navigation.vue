@@ -21,17 +21,30 @@
         </li>
 
         <li class="relative px-6 py-3">
-          <NavLink :href="route('users.index')" :active="route().current('users.index')">
-            <template #icon>
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z">
-                </path>
-              </svg>
-            </template>
-            Users
-          </NavLink>
+          <button @click="showingTwoLevelMenu = !showingTwoLevelMenu"
+            class="inline-flex items-center justify-between w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800"
+            aria-haspopup="true">
+            <span class="inline-flex items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z" />
+            </svg>
+            <span class="ml-4">Usuarios</span>
+            </span>
+            <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd"
+                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                clip-rule="evenodd"></path>
+            </svg>
+          </button>
+          <ul v-show="showingTwoLevelMenu || route().current('coordinators.index')"
+            class="p-2 mt-2 space-y-2 overflow-hidden text-sm font-medium text-gray-500 rounded-md shadow-inner bg-gray-50"
+            aria-label="submenu">
+            <li class="px-2 py-1 transition-colors duration-150 hover:text-gray-800">
+              <NavLink :href="route('coordinators.index')" :active="route().current('coordinators.index')">
+                Coordinadores
+              </NavLink>
+            </li>
+          </ul>
         </li>
 
         <li class="relative px-6 py-3">
@@ -44,38 +57,10 @@
                 </path>
               </svg>
             </template>
-            Informes
+            Reportes
           </NavLink>
         </li>
 
-        <li class="relative px-6 py-3">
-          <button @click="showingTwoLevelMenu = !showingTwoLevelMenu"
-            class="inline-flex items-center justify-between w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800"
-            aria-haspopup="true">
-            <span class="inline-flex items-center">
-              <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round"
-                stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
-                <path d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
-              </svg>
-              <span class="ml-4">Programas</span>
-            </span>
-            <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd"
-                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                clip-rule="evenodd"></path>
-            </svg>
-          </button>
-          <ul v-show="showingTwoLevelMenu"
-            class="p-2 mt-2 space-y-2 overflow-hidden text-sm font-medium text-gray-500 rounded-md shadow-inner bg-gray-50"
-            aria-label="submenu">
-            <li class="px-2 py-1 transition-colors duration-150 hover:text-gray-800">
-              <a class="w-full" href="#">Lista</a>
-            </li>
-            <li class="px-2 py-1 transition-colors duration-150 hover:text-gray-800">
-              <a class="w-full" href="#">Crear</a>
-            </li>
-          </ul>
-        </li>
       </ul>
     </div>
   </aside>
