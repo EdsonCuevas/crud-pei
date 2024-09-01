@@ -7,6 +7,8 @@ import Modal from '@/Components/Modal.vue';
 import SecondaryButton from '@/Components/SecondaryButton.vue';
 import WarningButton from '@/Components/WarningButton.vue';
 import DarkButton from '@/Components/DarkButton.vue';
+import InputGroup from '@/Components/InputGroup.vue';
+import PrimaryButton from '@/Components/PrimaryButton.vue';
 import {ref} from 'vue';
 
 // En los props van las variables que se reciben desde el controlador
@@ -58,6 +60,10 @@ const closeModalDel = () => {
     showModalDel.value = false;
 }
 
+const save = () => {
+
+}
+
 </script>
 
 <template>
@@ -84,7 +90,9 @@ const closeModalDel = () => {
                             <th class="px-4 py-3">#</th>
                             <th class="px-4 py-3">Nombre</th>
                             <th class="px-4 py-3">Email</th>
-                            <th class="px-4 py-3">Fecha de Creacion</th>
+                            <th class="px-4 py-3">Telefono</th>
+                            <th class="px-4 py-3">Fecha de Creación</th>
+                            <th class="px-4 py-3">Fecha de Actualización</th>
                             <th class="px-4 py-3">Detalles</th>
                             <th class="px-4 py-3">Editar</th>
                             <th class="px-4 py-3">Eliminar</th>
@@ -101,8 +109,14 @@ const closeModalDel = () => {
 								<td class="px-4 py-3 text-sm">
 									{{ coordi.email }}
 								</td>
+                                <td class="px-4 py-3 text-sm">
+									{{ coordi.phone }}
+								</td>
 								<td class="px-4 py-3 text-sm">
                                     {{ new Date(coordi.created_at).toLocaleString() }}
+                                </td>
+                                <td class="px-4 py-3 text-sm">
+                                    {{ new Date(coordi.updated_at).toLocaleString() }}
                                 </td>
                                 <td class="px-4 py-3 text-sm">
                                     <SecondaryButton @click="openModalView(coordi)">
@@ -133,9 +147,7 @@ const closeModalDel = () => {
 		</div>
         <Modal :show="showModalView" @close="closeModalView">
             <div class="p-6">
-                <p>Usuario: <span class="text-lg font-medium text-gray-900">{{ v.name }}</span></p>
-                <p>Telefono: <span class="text-lg font-medium text-gray-900">{{ v.phone }}</span></p>
-                Programas:
+                Programas a los que esta inscrito:
                 <ol>
                     <li class="text-lg font-medium text-gray-900" v-for="b,i in v.programs">
                         {{ (i+1)+') '+ b.name }}
@@ -149,9 +161,33 @@ const closeModalDel = () => {
         
         <Modal :show="showModalForm" @close="closeModalForm">
             <div class="p-6">
+                <h2 class="text-lg font-medium text-gray-900">{{ title }}</h2>
+                <div class="mt-6 mb-6 space-y-6 max-w-xl">
+                    <InputGroup :text="'Nombre'" :required="'required'" v-model="form.name" :type="'text'">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                        </svg>
+                    </InputGroup>
+                    <InputError class="mt-1" :message="form.errors.name"></InputError>
 
+                    <InputGroup :text="'Email'" :required="'required'" v-model="form.email" :type="'text'">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+                        </svg>
+                    </InputGroup>
+                    <InputError class="mt-1" :message="form.errors.email"></InputError>
+
+                    <InputGroup :text="'Telefono'" :required="'required'" v-model="form.phone">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 0 0 6 3.75v16.5a2.25 2.25 0 0 0 2.25 2.25h7.5A2.25 2.25 0 0 0 18 20.25V3.75a2.25 2.25 0 0 0-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" />
+                        </svg>
+                    </InputGroup>
+                    <InputError class="mt-1" :message="form.errors.phone"></InputError>
+
+                </div>
             </div>
-            <div class="m-6 flex justify-end">
+            <div class="m-6 flex justify-between">
+                <PrimaryButton @click="save">Guardar</PrimaryButton>
                 <SecondaryButton @click="closeModalForm">Cancel</SecondaryButton>
             </div>
         </Modal>
