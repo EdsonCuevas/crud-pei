@@ -1,6 +1,6 @@
 <template>
-    <div class="relative text-gray-500 focus-within:text-purple-600">
-        <input class="rounded block w-full pl-10 mt-1 text-sm text-black focus:border-purple-400 focus:outline-none focus:shadow-outline-purple form-input" 
+    <div class="relative text-gray-500 focus-within:text-blue-500">
+        <input class="rounded block w-full pl-10 mt-1 text-sm text-black focus:border-blue-400 focus:outline-none focus:shadow-outline-purple form-input" 
         :value="modelValue" @input="$emit('update:modelValue', $event.target.value)" ref="input" :placeholder="text" :type="type" :required="required" :accept="accept" > 
         <div class="absolute inset-y-0 flex items-center ml-3 pointer-events-none">
         <slot></slot>
