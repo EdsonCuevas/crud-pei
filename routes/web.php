@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\CoordiController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProgramsController;
 use App\Http\Controllers\ReportsController;
@@ -39,7 +39,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::get('coordinators', [UserController::class, 'indexCoordi'])->name('coordinators.index'); // Es una controller de prueba con la default de users
+    Route::get('coordinators', [CoordiController::class, 'index'])->name('coordinators.index'); // Es una controller de prueba con la default de users
     Route::resource('reports', ReportsController::class);
     Route::resource('programs', ProgramsController::class);
 });
