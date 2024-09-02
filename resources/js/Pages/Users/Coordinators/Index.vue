@@ -21,18 +21,20 @@ const form = useForm({
      name:'',
      email:'',
      phone:'',
+     password:'',
 });
 
 const v = ref({
     id:'',
     name:'',
     phone:'',
+    password:'',
     programs:[]
 });
 
 const showModalView = ref(false);
 const showModalForm = ref(false);
-const showModalDelete = ref(false);
+const showModalDel = ref(false);
 const title = ref('');
 const operation = ref(1);
 const msj = ref('');
@@ -54,6 +56,7 @@ const openModalForm = (op,a) => {
         title.value = 'Editar Coordinador';
         form.name = a.name;
         form.email = a.email;
+        form.password = '';
         form.phone = a.phone;
         v.value.id = a.id;
     }
@@ -74,7 +77,25 @@ const closeModalDel = () => {
 }
 
 const save = () => {
+    if (operation.value === 1) {
+        form.post(route('coordinators.store'), {
+            onSuccess: () => ok('Coordinador Creado'),
+        });
+    } else {
+        form.put(route('coordinators.update', v.value.id), {
+            onSuccess: () => ok('Coordinador Actualizado'),
+        });
+    }
+};
 
+const ok = (m) => {
+    if(operation.value == 2){
+        closeModalForm();
+    }
+    closeModalDel();
+    form.reset();
+    msj.value = m;
+    classMsj.value = 'block';
 }
 
 </script>
@@ -188,6 +209,13 @@ const save = () => {
                         </svg>
                     </InputGroup>
                     <InputError class="mt-1" :message="form.errors.email"></InputError>
+
+                    <InputGroup :text="'Password'" :required="'required'" v-model="form.password" :type="'password'">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" />
+                        </svg>
+                    </InputGroup>
+                    <InputError class="mt-1" :message="form.errors.password"></InputError>
 
                     <InputGroup :text="'Telefono'" :required="'required'" v-model="form.phone">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">

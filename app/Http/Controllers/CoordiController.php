@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class CoordiController extends Controller
 {
@@ -24,9 +25,12 @@ class CoordiController extends Controller
         $request->validate([
             'name' => 'required|max:60',
             'email' => 'required|max:60',
+            'password' => 'required|min:8',
             'phone' => 'required|max:20',
         ]);
-        $coordinador = new User($request->input());
+        $coordinador = new User($request->except('password'));
+        $coordinador->role = 'coordi';
+        $coordinador->password = Hash::make($request->password);
         $coordinador->save();
         return redirect('coordinators');
     }
@@ -38,6 +42,7 @@ class CoordiController extends Controller
             'email' => 'required|max:60',
             'phone' => 'required|max:20',
         ]);
+
         $coordinador->update($request->input());
         return redirect('coordinators');
     }

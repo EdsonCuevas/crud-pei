@@ -39,7 +39,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::get('coordinators', [CoordiController::class, 'index'])->name('coordinators.index'); // Es una controller de prueba con la default de users
+    Route::resource('coordinators', CoordiController::class);
     Route::resource('reports', ReportsController::class);
     Route::resource('programs', ProgramsController::class);
 });
