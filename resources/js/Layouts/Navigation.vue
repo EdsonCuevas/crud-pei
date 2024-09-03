@@ -34,7 +34,7 @@
               <path fill-rule="evenodd"
                 d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
                 clip-rule="evenodd"></path>
-            </svg>
+            </svg>0
           </button>
           <ul v-show="showingTwoLevelMenu || route().current('coordinators.index')"
             class="p-2 mt-2 space-y-2 overflow-hidden text-sm font-medium text-gray-500 rounded-md shadow-inner bg-gray-50"
@@ -42,6 +42,15 @@
             <li class="px-2 py-1 transition-colors duration-150 hover:text-gray-800">
               <NavLink :href="route('coordinators.index')" :active="route().current('coordinators.index')">
                 Coordinadores
+              </NavLink>
+            </li>
+          </ul>
+          <ul v-show="showingTwoLevelMenu || route().current('voluntarios.index')"
+            class="p-2 mt-2 space-y-2 overflow-hidden text-sm font-medium text-gray-500 rounded-md shadow-inner bg-gray-50"
+            aria-label="submenu">
+            <li class="px-2 py-1 transition-colors duration-150 hover:text-gray-800">
+              <NavLink :href="route('voluntarios.index')" :active="route().current('voluntarios.index')">
+                Voluntarios
               </NavLink>
             </li>
           </ul>

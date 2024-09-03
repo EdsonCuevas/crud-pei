@@ -101,11 +101,11 @@ const ok = (m) => {
 </script>
 
 <template>
-	<Head title="Coordinadores" />
+	<Head title="Cordinadores" />
 	
 	<AuthenticatedLayout>
 		<template #header>
-			Coordinadores
+			Cordinadores
             <br>
             <br>
             <DarkButton @click="openModalForm(1)">

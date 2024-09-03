@@ -4,6 +4,7 @@ use App\Http\Controllers\CoordiController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProgramsController;
 use App\Http\Controllers\ReportsController;
+use App\Http\Controllers\VoluntarioController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -40,6 +41,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::resource('coordinators', CoordiController::class);
+    Route::resource('voluntarios', VoluntarioController::class);
     Route::resource('reports', ReportsController::class);
     Route::resource('programs', ProgramsController::class);
 });
