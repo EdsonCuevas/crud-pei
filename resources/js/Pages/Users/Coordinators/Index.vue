@@ -275,7 +275,7 @@ const deleteCoordi = () => {
                 </p>
             </div>
             <div class="m-6 flex justify-between">
-                <PrimaryButton @click="deleteCoordi">Eliminar</PrimaryButton>
+                <PrimaryButton @click="deleteCoordi" class="bg-red-500 hover:bg-red-700">Eliminar</PrimaryButton>
                 <SecondaryButton @click="closeModalDel">Cancel</SecondaryButton>
             </div>
         </Modal>
