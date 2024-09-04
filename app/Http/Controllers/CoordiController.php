@@ -35,7 +35,7 @@ class CoordiController extends Controller
         return redirect('coordinators');
     }
 
-    public function update(Request $request, User $coordinador)
+    public function update(Request $request, User $coordinator)
     {
         $request->validate([
             'name' => 'required|max:60',
@@ -43,13 +43,20 @@ class CoordiController extends Controller
             'phone' => 'required|max:20',
         ]);
 
-        $coordinador->update($request->input());
+        // Verifica si la contraseña está presente en el request antes de actualizarla
+        if ($request->filled('password')) {
+            $request->merge(['password' => bcrypt($request->input('password'))]);
+        } else {
+            $request->request->remove('password');
+        }
+
+        $coordinator->update($request->input());
         return redirect('coordinators');
     }
 
-    public function destroy(User $coordinador)
+    public function destroy(User $coordinator)
     {
-        $coordinador->delete();
+        $coordinator->delete();
         return redirect('coordinators');
     }
 }
