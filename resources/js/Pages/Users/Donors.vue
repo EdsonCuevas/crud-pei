@@ -13,7 +13,7 @@ import { ref } from 'vue';
 
 // En los props van las variables que se reciben desde el controlador
 const props = defineProps({
-    voluntarios: {
+    donadores: {
         type: Array
     },
 });
@@ -50,10 +50,10 @@ const openModalForm = (op, a) => {
     showModalForm.value = true;
     operation.value = op;
     if (op === 1) {
-        title.value = 'Crear Voluntario';
+        title.value = 'Crear Donador';
     }
     else {
-        title.value = 'Editar Voluntario';
+        title.value = 'Editar Donador';
         form.name = a.name;
         form.email = a.email;
         form.password = '';
@@ -87,12 +87,12 @@ const save = () => {
     }
 
     if (operation.value === 1) {
-        form.post(route('volunteers.store'), {
-            onSuccess: () => ok('Voluntario Creado'),
+        form.post(route('donors.store'), {
+            onSuccess: () => ok('Donador Creado'),
         });
     } else {
-        form.put(route('volunteers.update', v.value.id), {
-            onSuccess: () => ok('Voluntario Actualizado'),
+        form.put(route('donors.update', v.value.id), {
+            onSuccess: () => ok('Donador Actualizado'),
         });
     }
 };
@@ -111,9 +111,9 @@ const ok = (m) => {
 }
 
 const deleteCoordi = () => {
-    console.log(route('volunteers.destroy', v.value.id));
-    form.delete(route('volunteers.destroy', v.value.id), {
-        onSuccess: () => { ok('Voluntario Elimiando') }
+
+    form.delete(route('donors.destroy', v.value.id), {
+        onSuccess: () => { ok('Donador Elimiando') }
     })
 }
 
@@ -121,11 +121,11 @@ const deleteCoordi = () => {
 
 <template>
 
-    <Head title="Voluntarios" />
+    <Head title="Donadores" />
 
     <AuthenticatedLayout>
         <template #header>
-            Voluntarios
+            Donadores
             <br>
             <br>
             <DarkButton @click="openModalForm(1)">
@@ -172,27 +172,27 @@ const deleteCoordi = () => {
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y">
-                        <tr v-for="voluntario in voluntarios" :key="voluntario.id" class="text-gray-700">
+                        <tr v-for="donador in donadores" :key="donador.id" class="text-gray-700">
                             <td class="px-4 py-3 text-sm">
-                                {{ voluntario.id }}
+                                {{ donador.id }}
                             </td>
                             <td class="px-4 py-3 text-sm">
-                                {{ voluntario.name }}
+                                {{ donador.name }}
                             </td>
                             <td class="px-4 py-3 text-sm">
-                                {{ voluntario.email }}
+                                {{ donador.email }}
                             </td>
                             <td class="px-4 py-3 text-sm">
-                                {{ voluntario.phone }}
+                                {{ donador.phone }}
                             </td>
                             <td class="px-4 py-3 text-sm">
-                                {{ new Date(voluntario.created_at).toLocaleString() }}
+                                {{ new Date(donador.created_at).toLocaleString() }}
                             </td>
                             <td class="px-4 py-3 text-sm">
-                                {{ new Date(voluntario.updated_at).toLocaleString() }}
+                                {{ new Date(donador.updated_at).toLocaleString() }}
                             </td>
                             <td class="px-4 py-3 text-sm">
-                                <SecondaryButton @click="openModalView(voluntario)">
+                                <SecondaryButton @click="openModalView(donador)">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="1.5" stroke="currentColor" class="size-6">
                                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -203,7 +203,7 @@ const deleteCoordi = () => {
                                 </SecondaryButton>
                             </td>
                             <td class="px-4 py-3 text-sm">
-                                <WarningButton @click="openModalForm(2, voluntario)">
+                                <WarningButton @click="openModalForm(2, donador)">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="1.5" stroke="currentColor" class="size-6">
                                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -212,7 +212,7 @@ const deleteCoordi = () => {
                                 </WarningButton>
                             </td>
                             <td class="px-4 py-3 text-sm">
-                                <DangerButton @click="openModalDel(voluntario)">
+                                <DangerButton @click="openModalDel(donador)">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="1.5" stroke="currentColor" class="size-6">
                                         <path stroke-linecap="round" stroke-linejoin="round"

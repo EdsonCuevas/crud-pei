@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CoordiController;
+use App\Http\Controllers\DonorsController;
 use App\Http\Controllers\VolunteersController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProgramsController;
@@ -42,7 +43,8 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('coordinators', CoordiController::class);
     Route::resource('volunteers', VolunteersController::class);
-    Route::resource('reports', ReportsController::class);
+    Route::resource('donors', DonorsController::class);
+
     Route::resource('programs', ProgramsController::class);
 });
 
