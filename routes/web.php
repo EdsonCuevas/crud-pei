@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CoordiController;
+use App\Http\Controllers\VoluntController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProgramsController;
 use App\Http\Controllers\ReportsController;
@@ -42,6 +43,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('coordinators', CoordiController::class);
     Route::resource('reports', ReportsController::class);
     Route::resource('programs', ProgramsController::class);
+    Route::resource('voluntarios', VoluntController::class);
 });
 
 require __DIR__ . '/auth.php';
