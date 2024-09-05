@@ -40,24 +40,24 @@ const props = defineProps({
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y">
-                        <tr v-for="coordi in coordinadores" :key="coordi.id" class="text-gray-700">
+                        <tr v-for="voluntario in voluntarios" :key="voluntario.id" class="text-gray-700">
                                 <td class="px-4 py-3 text-sm">
-									{{ coordi.id }}
+									{{ voluntario.id }}
 								</td>
 								<td class="px-4 py-3 text-sm">
-									{{ coordi.name }}
+									{{ voluntario.name }}
 								</td>
 								<td class="px-4 py-3 text-sm">
-									{{ coordi.email }}
+									{{ voluntario.email }}
 								</td>
                                 <td class="px-4 py-3 text-sm">
-									{{ coordi.phone }}
+									{{ voluntario.phone }}
 								</td>
 								<td class="px-4 py-3 text-sm">
-                                    {{ new Date(coordi.created_at).toLocaleString() }}
+                                    {{ new Date(voluntario.created_at).toLocaleString() }}
                                 </td>
                                 <td class="px-4 py-3 text-sm">
-                                    {{ new Date(coordi.updated_at).toLocaleString() }}
+                                    {{ new Date(voluntario.updated_at).toLocaleString() }}
                                 </td>
                                 <td class="px-4 py-3 text-sm">
                                     <SecondaryButton @click="openModalView(coordi)">

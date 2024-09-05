@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Models\Program;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -11,14 +11,16 @@ class VoluntController extends Controller
 {
 
     public function index()
-    {
-        // Filtra los usuarios que tengan el rol 'voluntario' y carga sus programas
-        $volunt = User::where('role', 'voluntarios')->with('programs:name')->get();
+{
+    // Retrieve all records from the 'programs' table
+    $programs = Program::all();
 
-        return Inertia::render('Users/Volunt/Index', [
-            'voluntarios' => $volunt
-        ]);
-    }
+    // Pass the retrieved data to the Inertia view
+    return Inertia::render('Users/Volunt/Index', [
+        'programs' => $programs
+    ]);
+}
+
 
     public function store(Request $request)
     {
@@ -30,9 +32,9 @@ class VoluntController extends Controller
         ]);
         $volunt = new User($request->except('password'));
         $volunt->role = 'voluntario';
-        $voluntario->password = Hash::make($request->password);
-        $voluntario->save();
-        return redirect('voluntarios');
+        $volunt->password = Hash::make($request->password);
+        $volunt->save();
+        return redirect('volunt');
     }
 
     public function update(Request $request, User $volunt)
@@ -44,12 +46,8 @@ class VoluntController extends Controller
         ]);
 
         $volunt->update($request->input());
-        return redirect('voluntarios');
+        return redirect('volunt');
     }
 
-    public function destroy(User $volunt)
-    {
-        $volunt->delete();
-        return redirect('voluntarios');
-    }
+
 }
