@@ -290,7 +290,7 @@ const deleteCoordi = () => {
         <Modal :show="showModalDel" @close="closeModalDel">
             <div class="p-6">
                 <p class="text-2xl text-gray-500">
-                    Seguro quieres eliminar al coordinador
+                    Seguro quieres eliminar al voluntario
                     <span class="text-2xl font-medium text-gray-900">{{ v.name }}</span>
                     ?
                 </p>
