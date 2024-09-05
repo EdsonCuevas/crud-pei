@@ -52,4 +52,10 @@ class VolunteersController extends Controller
         $volunteer->update($request->input());
         return redirect('volunteers');
     }
+
+    public function destroy(User $volunteer)
+    {
+        $volunteer->delete();
+        return redirect('volunteers');
+    }
 }
