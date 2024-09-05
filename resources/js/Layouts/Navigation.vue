@@ -42,26 +42,39 @@
             v-show="showingTwoLevelMenu || route().current('coordinators.index') || route().current('volunteers.index') || route().current('donors.index') || route().current('beneficiaries.index')"
             class="p-2 mt-2 space-y-2 overflow-hidden text-sm font-medium text-gray-500 rounded-md shadow-inner bg-gray-50"
             aria-label="submenu">
-            <li class="px-2 py-1 transition-colors duration-150 hover:text-gray-800">
+            
+            <li
+              :class="{'text-gray-900': route().current('coordinators.index')}"
+              class="px-2 py-1 transition-colors duration-150 hover:text-gray-900">
               <NavLink :href="route('coordinators.index')" :active="route().current('coordinators.index')">
                 Coordinadores
               </NavLink>
             </li>
-            <li class="px-2 py-1 transition-colors duration-150 hover:text-gray-800">
+
+            <li
+              :class="{'text-gray-900': route().current('volunteers.index')}"
+              class="px-2 py-1 transition-colors duration-150 hover:text-gray-900">
               <NavLink :href="route('volunteers.index')" :active="route().current('volunteers.index')">
                 Voluntarios
               </NavLink>
             </li>
-            <li class="px-2 py-1 transition-colors duration-150 hover:text-gray-800">
+
+            <li
+              :class="{'text-gray-900': route().current('donors.index')}"
+              class="px-2 py-1 transition-colors duration-150 hover:text-gray-900">
               <NavLink :href="route('donors.index')" :active="route().current('donors.index')">
                 Donadores
               </NavLink>
             </li>
-            <li class="px-2 py-1 transition-colors duration-150 hover:text-gray-800">
+
+            <li
+              :class="{'text-gray-900': route().current('beneficiaries.index')}"
+              class="px-2 py-1 transition-colors duration-150 hover:text-gray-900">
               <NavLink :href="route('beneficiaries.index')" :active="route().current('beneficiaries.index')">
                 Beneficiarios
               </NavLink>
             </li>
+
           </ul>
         </li>
 
