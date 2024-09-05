@@ -18,12 +18,6 @@ const props = defineProps({
 	},
 });
 
-
-
-
-
-
-
 </script>
 
 <template>
@@ -39,9 +33,10 @@ const props = defineProps({
                         <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b bg-gray-50">
                             <th class="px-4 py-3">#</th>
                             <th class="px-4 py-3">Nombre</th>
-                            <th class="px-4 py-3">Fecha de asignación</th>
-                            <th class="px-4 py-3">Cordinador</th>
-                            <th class="px-4 py-3">Acciones</th>
+                            <th class="px-4 py-3">Telefono</th>
+                            <th class="px-4 py-3">Correo</th>
+                            <th class="px-4 py-3">Rol</th>
+                            <th class="px-4 py-3">Estado</th>
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y">

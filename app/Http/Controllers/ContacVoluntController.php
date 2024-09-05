@@ -7,16 +7,15 @@ use Inertia\Inertia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
-class VoluntController extends Controller
+class ContacVoluntController extends Controller
 {
-
     public function index()
     {
         // Filtra los usuarios que tengan el rol 'voluntario' y carga sus programas
-        $volunt = User::where('role', 'voluntarios')->with('programs:name')->get();
+        $contacto = User::where('role', 'voluntarios')->with('programs:name')->get();
 
-        return Inertia::render('Users/Volunt/Index', [
-            'voluntarios' => $volunt
+        return Inertia::render('Users/Volunt/IndexCont', [
+            'contactos' => $contacto
         ]);
     }
 
@@ -28,14 +27,14 @@ class VoluntController extends Controller
             'password' => 'required|min:8',
             'phone' => 'required|max:20',
         ]);
-        $volunt = new User($request->except('password'));
-        $volunt->role = 'voluntario';
-        $voluntario->password = Hash::make($request->password);
-        $voluntario->save();
-        return redirect('voluntarios');
+        $contacto = new User($request->except('password'));
+        $contacto->role = 'voluntario';
+        $contacto->password = Hash::make($request->password);
+        $contacto->save();
+        return redirect('volunt');
     }
 
-    public function update(Request $request, User $volunt)
+    public function update(Request $request, User $contacto)
     {
         $request->validate([
             'name' => 'required|max:60',
@@ -43,13 +42,9 @@ class VoluntController extends Controller
             'phone' => 'required|max:20',
         ]);
 
-        $volunt->update($request->input());
-        return redirect('voluntarios');
+        $contacto->update($request->input());
+        return redirect('volunt');
     }
 
-    public function destroy(User $volunt)
-    {
-        $volunt->delete();
-        return redirect('voluntarios');
-    }
 }
+
