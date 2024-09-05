@@ -23,7 +23,7 @@ class BeneficiariesController extends Controller
     {
         $request->validate([
             'name' => 'required|max:60',
-            'email' => 'required|max:60',
+            'email' => 'required|email|max:60',
             'password' => 'required|min:8',
             'phone' => 'required|max:20',
         ]);
@@ -38,7 +38,7 @@ class BeneficiariesController extends Controller
     {
         $request->validate([
             'name' => 'required|max:60',
-            'email' => 'required|max:60',
+            'email' => 'required|email|max:60',
             'phone' => 'required|max:20',
         ]);
 

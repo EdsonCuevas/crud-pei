@@ -251,7 +251,7 @@ const deleteCoordi = () => {
                     </InputGroup>
                     <InputError class="mt-1" :message="form.errors.name"></InputError>
 
-                    <InputGroup :text="'Email'" :required="'required'" v-model="form.email" :type="'text'">
+                    <InputGroup :text="'Email'" :required="'required'" v-model="form.email" :type="'email'">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="size-6">
                             <path stroke-linecap="round" stroke-linejoin="round"
