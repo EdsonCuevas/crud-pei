@@ -56,18 +56,31 @@ class BeneficiariesController extends Controller
         $request->validate([
             'name' => 'required|max:60',
             'email' => 'required|email|max:60',
-            'phone' => 'required|max:20',
+            'phone' => ['required', 'digits_between:1,15'],
             'role_id' => 'required',
+            'password' => 'nullable|min:8',
+        ], [
+            'name.required' => 'El nombre es obligatorio.',
+            'name.max' => 'El nombre no puede tener más de 60 caracteres.',
+
+            'email.required' => 'El correo electrónico es obligatorio.',
+            'email.email' => 'El correo electrónico debe ser una dirección válida.',
+            'email.max' => 'El correo electrónico no puede tener más de 60 caracteres.',
+
+            'phone.required' => 'El número de teléfono es obligatorio.',
+            'phone.digits_between' => 'El número de teléfono debe tener entre 1 y 15 dígitos.',
+
+            'password.min' => 'La contraseña debe tener al menos 8 caracteres.',
         ]);
 
-        // Verifica si la contraseña está presente en el request antes de actualizarla
+        // Solo encripta la contraseña si fue proporcionada
         if ($request->filled('password')) {
             $request->merge(['password' => bcrypt($request->input('password'))]);
         } else {
             $request->request->remove('password');
         }
 
-        $beneficiary->update($request->input());
+        $beneficiary->update($request->all());
         return redirect('beneficiaries');
     }
 

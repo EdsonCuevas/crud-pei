@@ -54,6 +54,7 @@ const openModalView = (a) => {
 const openModalForm = (op, a) => {
     showModalForm.value = true;
     operation.value = op;
+    form.clearErrors();
     if (op === 1) {
         title.value = 'Crear Beneficiario';
     }
@@ -129,7 +130,7 @@ const deleteCoordi = () => {
     <Head title="Beneficiarios" />
 
     <AuthenticatedLayout>
-        <template #header>
+        <template #header>  
             Beneficiarios
             <br>
             <br>

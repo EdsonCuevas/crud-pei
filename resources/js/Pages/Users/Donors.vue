@@ -54,6 +54,7 @@ const openModalView = (a) => {
 const openModalForm = (op, a) => {
     showModalForm.value = true;
     operation.value = op;
+    form.clearErrors();
     if (op === 1) {
         title.value = 'Crear Donador';
     }
