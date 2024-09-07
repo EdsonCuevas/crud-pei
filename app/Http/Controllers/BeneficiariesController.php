@@ -25,8 +25,22 @@ class BeneficiariesController extends Controller
             'name' => 'required|max:60',
             'email' => 'required|email|max:60',
             'password' => 'required|min:8',
-            'phone' => 'required|max:20',
+            'phone' => ['required', 'digits_between:1,15'],
+        ], [
+            'name.required' => 'El nombre es obligatorio.',
+            'name.max' => 'El nombre no puede tener más de 60 caracteres.',
+
+            'email.required' => 'El correo electrónico es obligatorio.',
+            'email.email' => 'El correo electrónico debe ser una dirección válida.',
+            'email.max' => 'El correo electrónico no puede tener más de 60 caracteres.',
+
+            'password.required' => 'La contraseña es obligatoria.',
+            'password.min' => 'La contraseña debe tener al menos 8 caracteres.',
+
+            'phone.required' => 'El número de teléfono es obligatorio.',
+            'phone.digits_between' => 'El número de teléfono debe tener entre 1 y 15 dígitos.',
         ]);
+
         $benef = new User($request->except('password'));
         $benef->role = 'benef';
         $benef->password = Hash::make($request->password);

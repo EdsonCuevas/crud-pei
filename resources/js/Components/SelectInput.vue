@@ -4,7 +4,6 @@
         :value="modelValue" @input="$emit('update:modelValue', $event.target.value)" ref="input" :placeholder="text" :required="required">
         <option value="" selected>{{ text }}</option>
         <option v-for="op in options" :key="op.id" :value="op.id">
-            {{ op. }}
         </option>
         </select> 
         <div class="absolute inset-y-0 flex items-center ml-3 pointer-events-none">
