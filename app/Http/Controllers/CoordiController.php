@@ -52,4 +52,5 @@ class CoordiController extends Controller
         $coordinador->delete();
         return redirect('coordinators');
     }
+    
 }
