@@ -36,7 +36,7 @@ const form = useForm({
             
             <!-- Subir imagen -->
             <div>
-                <InputLabel for="image" value="Actualizar Imagen" />
+                <InputLabel for="image" value="Imagen" />
                     <p class="mt-1 block w-full">{{ form.image }}</p>
                 <InputError class="mt-2" :message="form.errors.image" />
             </div>            

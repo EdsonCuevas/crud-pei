@@ -4,7 +4,6 @@ import { Head, useForm } from '@inertiajs/vue3';
 import DangerButton from '@/Components/DangerButton.vue';
 import Modal from '@/Components/Modal.vue';
 import SecondaryButton from '@/Components/SecondaryButton.vue';
-
 import {ref} from 'vue';
 
 // En los props van las variables que se reciben desde el controlador
@@ -42,21 +41,7 @@ const openModalView = (a) => {
     v.value.programs = a.programs;
     showModalView.value = true;
 }
-const openModalForm = (op,a) => {
-    showModalForm.value = true;
-    operation.value = op;
-    if(op === 1){
-        title.value = 'Crear Beneficiario';
-    }
-    else{
-        title.value = 'Editar Beneficiario';
-        form.name = a.name;
-        form.email = a.email;
-        form.password = '';
-        form.phone = a.phone;
-        v.value.id = a.id;
-    }
-}
+
 const openModalDel = () => {
     showModalDel.value = true;
 }
