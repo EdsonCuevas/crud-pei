@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Role;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Hash;
 
@@ -12,10 +13,12 @@ class BeneficiariesController extends Controller
     public function index()
     {
         // Filtra los usuarios que tengan el rol 'coordi' y carga sus programas
-        $benef = User::where('role', 'benef')->with('programs:name')->get();
+        $benef = User::where('role_id', '5')->with('programs:name')->get();
+        $roles = Role::all();
 
         return Inertia::render('Users/Beneficiaries', [
-            'beneficiarios' => $benef
+            'beneficiarios' => $benef,
+            'roles' => $roles,
         ]);
     }
 
@@ -42,7 +45,7 @@ class BeneficiariesController extends Controller
         ]);
 
         $benef = new User($request->except('password'));
-        $benef->role = 'benef';
+        $benef->role_id = '5';
         $benef->password = Hash::make($request->password);
         $benef->save();
         return redirect('beneficiaries');
@@ -54,6 +57,7 @@ class BeneficiariesController extends Controller
             'name' => 'required|max:60',
             'email' => 'required|email|max:60',
             'phone' => 'required|max:20',
+            'role_id' => 'required',
         ]);
 
         // Verifica si la contraseña está presente en el request antes de actualizarla

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Role;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Hash;
 
@@ -12,10 +13,12 @@ class DonorsController extends Controller
     public function index()
     {
         // Filtra los usuarios que tengan el rol 'coordi' y carga sus programas
-        $donors = User::where('role', 'donor')->with('programs:name')->get();
+        $donors = User::where('role_id', '4')->with('programs:name')->get();
+        $roles = Role::all();
 
         return Inertia::render('Users/Donors', [
-            'donadores' => $donors
+            'donadores' => $donors,
+            'roles' => $roles,
         ]);
     }
 
@@ -28,7 +31,7 @@ class DonorsController extends Controller
             'phone' => 'required|max:20',
         ]);
         $donor = new User($request->except('password'));
-        $donor->role = 'donor';
+        $donor->role_id = '4';
         $donor->password = Hash::make($request->password);
         $donor->save();
         return redirect('donors');
@@ -40,6 +43,7 @@ class DonorsController extends Controller
             'name' => 'required|max:60',
             'email' => 'required|email|max:60',
             'phone' => 'required|max:20',
+            'role_id' => 'required',
         ]);
 
         // Verifica si la contraseña está presente en el request antes de actualizarla

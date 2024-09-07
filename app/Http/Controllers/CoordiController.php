@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Role;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -13,10 +14,12 @@ class CoordiController extends Controller
     public function index()
     {
         // Filtra los usuarios que tengan el rol 'coordi' y carga sus programas
-        $coordis = User::where('role', 'coordi')->with('programs:name')->get();
+        $coordis = User::where('role_id', '2')->with('programs:name')->get();
+        $roles = Role::all();
 
         return Inertia::render('Users/Coordinators', [
-            'coordinadores' => $coordis
+            'coordinadores' => $coordis,
+            'roles' => $roles,
         ]);
     }
 
@@ -29,7 +32,7 @@ class CoordiController extends Controller
             'phone' => 'required|max:20',
         ]);
         $coordinador = new User($request->except('password'));
-        $coordinador->role = 'coordi';
+        $coordinador->role_id = '2';
         $coordinador->password = Hash::make($request->password);
         $coordinador->save();
         return redirect('coordinators');
@@ -41,6 +44,7 @@ class CoordiController extends Controller
             'name' => 'required|max:60',
             'email' => 'required|email|max:60',
             'phone' => 'required|max:20',
+            'role_id' => 'required',
         ]);
 
         // Verifica si la contraseña está presente en el request antes de actualizarla
