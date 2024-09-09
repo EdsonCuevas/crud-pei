@@ -79,7 +79,7 @@
         </li>
 
         <li class="relative px-6 py-3">
-          <NavLink :href="route('about')" :active="route().current('about')">
+          <NavLink :href="route('programs.index')" :active="route().current('programs.index')">
             <template #icon>
               <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round"
                 stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
@@ -88,7 +88,7 @@
                 </path>
               </svg>
             </template>
-            Reportes
+            Programas
           </NavLink>
         </li>
 
