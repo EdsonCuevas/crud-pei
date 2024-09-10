@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CoordiController;
+use App\Http\Controllers\CoordProgramController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProgramsController;
 use App\Http\Controllers\ReportsController;
@@ -38,6 +39,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::resource('coord-programs', CoordProgramController::class);
+    Route::resource('coord-reports', ReportsController::class);
 
     Route::resource('coordinators', CoordiController::class);
     Route::resource('reports', ReportsController::class);

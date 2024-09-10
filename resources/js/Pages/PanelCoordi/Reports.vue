@@ -13,7 +13,7 @@ import {ref} from 'vue';
 
 // En los props van las variables que se reciben desde el controlador
 const props = defineProps({
-    coordinadores: {
+    Reportes: {
 		type: Array
 	},
 });
@@ -53,7 +53,7 @@ const openModalForm = (op,a) => {
         title.value = 'Crear Coordinador';
     }
     else{
-        title.value = 'Editar Coordinador';
+        title.value = 'Editar Coordinador ';
         form.name = a.name;
         form.email = a.email;
         form.password = '';
@@ -120,19 +120,22 @@ const deleteCoordi = () => {
 </script>
 
 <template>
-	<Head title="Coordinadores" />
+	<Head title="Reportes" />
 	
 	<AuthenticatedLayout>
-		<template #header>
-			Coordinadores
-            <br>
-            <br>
-            <DarkButton @click="openModalForm(1)">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M18 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0ZM3 19.235v-.11a6.375 6.375 0 0 1 12.75 0v.109A12.318 12.318 0 0 1 9.374 21c-2.331 0-4.512-.645-6.374-1.766Z" />
-                </svg>
-            </DarkButton>
-		</template>
+        <template #header>
+        <div class="flex items-center">
+            <span class="text-lg font-semibold">Reportes</span>
+            <button 
+            class="ml-4 w-10 h-10 flex items-center justify-center bg-blue-500 text-white rounded-full hover:bg-blue-600"
+            @click="handleClick"
+            >
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+            </svg>
+            </button>
+        </div>
+        </template>
 
         <div class="inline-flex overflow-hidden mb-4 w-full bg-white rounded-lg shadow-md" :class="classMsj">
             <div class="flex justify-center items-center w-12 bg-green-500">
@@ -154,19 +157,15 @@ const deleteCoordi = () => {
                 <table class="w-full whitespace-no-wrap">
                     <thead>
                         <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b bg-gray-50">
-                            <th class="px-4 py-3">#</th>
-                            <th class="px-4 py-3">Nombre</th>
-                            <th class="px-4 py-3">Email</th>
-                            <th class="px-4 py-3">Telefono</th>
+                            <th class="px-4 py-3">Titulo</th>
                             <th class="px-4 py-3">Fecha de Creación</th>
-                            <th class="px-4 py-3">Fecha de Actualización</th>
-                            <th class="px-4 py-3">Detalles</th>
-                            <th class="px-4 py-3">Editar</th>
-                            <th class="px-4 py-3">Eliminar</th>
+                            <th class="px-4 py-3">Fecha de Modificación</th>
+                            <th class="px-4 py-3">Asignado por:</th>
+                            <th class="px-4 py-3">Gestionar</th>
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y">
-                        <tr v-for="coordi in coordinadores" :key="coordi.id" class="text-gray-700">
+                        <tr v-for="coordi in Reportes" :key="coordi.id" class="text-gray-700">
                                 <td class="px-4 py-3 text-sm">
 									{{ coordi.id }}
 								</td>
