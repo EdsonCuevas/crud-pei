@@ -104,11 +104,11 @@ const ok = (m) => {
 </script>
 
 <template>
-    <Head title="Voluntarios" />
+    <Head title="Donadores" />
 
     <AuthenticatedLayout>
         <template #header>
-            Voluntarios
+            Donadores
             <br>
             <br>
             <DarkButton @click="openModalForm(1)">
@@ -124,14 +124,10 @@ const ok = (m) => {
                     <thead>
                         <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b bg-gray-50">
                             <th class="px-4 py-3">#</th>
-                            <th class="px-4 py-3">Nombre</th>
-                            <th class="px-4 py-3">Email</th>
-                            <th class="px-4 py-3">Teléfono</th>
-                            <th class="px-4 py-3">Fecha de Creación</th>
-                            <th class="px-4 py-3">Fecha de Actualización</th>
-                            <th class="px-4 py-3">Detalles</th>
-                            <th class="px-4 py-3">Editar</th>
-                            <th class="px-4 py-3">Eliminar</th>
+                            <th class="px-4 py-3">Titulo</th>
+                            <th class="px-4 py-3">Fecha de Realizada</th>
+                            <th class="px-4 py-3">Destino</th>
+                            <th class="px-4 py-3">Valor</th>
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y">
