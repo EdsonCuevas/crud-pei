@@ -12,7 +12,6 @@ class VoluntarioController extends Controller
 
     public function index()
     {
-        // Filtra los usuarios que tengan el rol 'voluntario' y carga sus programas
         $voluntarios = User::where('role', 'voluntario')->with('programs:name')->get();
 
         return Inertia::render('Users/Donador/Index', [

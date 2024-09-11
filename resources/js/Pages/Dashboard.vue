@@ -108,7 +108,7 @@ const ok = (m) => {
 
     <AuthenticatedLayout>
         <template #header>
-            Informes
+            Puto
             <br>
             <br>
             <DarkButton @click="openModalForm(1)">

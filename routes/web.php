@@ -5,6 +5,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProgramsController;
 use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\VoluntarioController;
+use App\Http\Controllers\InformesController;
+use App\Http\Controllers\ContactosController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -42,6 +44,8 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('coordinators', CoordiController::class);
     Route::resource('voluntarios', VoluntarioController::class);
+    Route::resource('contactos', ContactosController::class);
+    Route::resource('informes', InformesController::class);
     Route::resource('reports', ReportsController::class);
     Route::resource('programs', ProgramsController::class);
 });
