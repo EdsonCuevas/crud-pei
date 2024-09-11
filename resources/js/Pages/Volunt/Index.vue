@@ -35,7 +35,7 @@ const props = defineProps({
                             <th class="px-4 py-3">Fecha de asignación</th>
                             <th class="px-4 py-3">Fecha de modificación</th>
                             <th class="px-4 py-3">Cordinador</th>
-                            <th class="px-4 py-3">Acciones</th>
+                            <th class="px-4 py-3">Tareas</th>
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y">
@@ -66,29 +66,12 @@ const props = defineProps({
                     </tbody>
                 </table>
             </div>
-		</div>
-        <Modal :show="showModalView" @close="closeModalView">
-            <div class="p-6">
-                Programas a los que esta inscrito:
-                <ol>
-                    <li class="text-lg font-medium text-gray-900" v-for="b,i in v.programs">
-                        {{ (i+1)+') '+ b.name }}
-                    </li>
-                </ol>
-            </div>
-            <div class="m-6 flex justify-end">
-                <SecondaryButton @click="closeModalView">Cancel</SecondaryButton>
-            </div>
-        </Modal>
-        
+		</div>  
         <Modal :show="showModalForm" @close="closeModalForm">
             <div class="p-6">
                 <h2 class="text-lg font-medium text-gray-900">{{ title }}</h2>
                 <div class="mt-6 mb-6 space-y-6 max-w-xl">
                     <InputGroup :text="'Nombre'" :required="'required'" v-model="form.name" :type="'text'">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                        </svg>
                     </InputGroup>
                     <InputError class="mt-1" :message="form.errors.name"></InputError>
 
@@ -120,7 +103,6 @@ const props = defineProps({
                 <SecondaryButton @click="closeModalForm">Cancel</SecondaryButton>
             </div>
         </Modal>
-
         <Modal :show="showModalDel" @close="closeModalDel">
             <div class="p-6">
 

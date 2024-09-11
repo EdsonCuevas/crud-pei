@@ -9,18 +9,16 @@ use Illuminate\Support\Facades\Hash;
 
 class VoluntController extends Controller
 {
-
     public function index()
 {
     // Retrieve all records from the 'programs' table
     $programs = Program::all();
 
     // Pass the retrieved data to the Inertia view
-    return Inertia::render('Users/Volunt/Index', [
+    return Inertia::render('Volunt/Index', [
         'programs' => $programs
     ]);
 }
-
 
     public function store(Request $request)
     {
