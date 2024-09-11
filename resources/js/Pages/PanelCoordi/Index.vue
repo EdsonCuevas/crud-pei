@@ -46,6 +46,7 @@ const props = defineProps({
                     <thead>
                         <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b bg-gray-50">
                             <th class="px-4 py-3">Titulo</th>
+                            <th class="px-4 py-3">Descripción</th>
                             <th class="px-4 py-3">Fecha de Creación</th>
                             <th class="px-4 py-3">Fecha de Modificación</th>
                             <th class="px-4 py-3">Asignado por:</th>
@@ -54,9 +55,7 @@ const props = defineProps({
                     </thead>
                     <tbody class="bg-white divide-y">
                         <tr v-for="programa in Programas" :key="programa.id" class="text-gray-700">
-                                <td class="px-4 py-3 text-sm">
-									{{ programa.id }}
-								</td>
+                                
 								<td class="px-4 py-3 text-sm">
 									{{ programa.name }}
 								</td>
@@ -69,7 +68,8 @@ const props = defineProps({
                                 <td class="px-4 py-3 text-sm">
                                     {{ new Date(programa.updated_at).toLocaleString() }}
                                 </td>
-                                
+                                <td class="px-4 py-3 text-sm">
+                                </td>
                                 <td class="px-4 py-3 text-sm">
                                     <WarningButton>
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">

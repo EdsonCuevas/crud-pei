@@ -158,10 +158,9 @@ const deleteCoordi = () => {
                     <thead>
                         <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b bg-gray-50">
                             <th class="px-4 py-3">Titulo</th>
-                            <th class="px-4 py-3">Fecha de Creación</th>
-                            <th class="px-4 py-3">Fecha de Modificación</th>
-                            <th class="px-4 py-3">Asignado por:</th>
-                            <th class="px-4 py-3">Gestionar</th>
+                            <th class="px-4 py-3">Fecha de Envio</th>
+                            <th class="px-4 py-3">Para:</th>
+                            <th class="px-4 py-3">Acciones</th>
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y">
@@ -170,7 +169,7 @@ const deleteCoordi = () => {
 									{{ coordi.id }}
 								</td>
 								<td class="px-4 py-3 text-sm">
-									{{ coordi.name }}
+									{{ coordi.description }}
 								</td>
 								<td class="px-4 py-3 text-sm">
 									{{ coordi.email }}
