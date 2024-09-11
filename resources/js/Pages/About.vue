@@ -110,7 +110,7 @@ const ok = (mensaje) => {
 </script>
 
 <template>
-    <Head title="Contactos" />
+    <Head title="Contacts" />
     
     <AuthenticatedLayout>
         <template #header>
