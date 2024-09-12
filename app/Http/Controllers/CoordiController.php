@@ -16,6 +16,12 @@ class CoordiController extends Controller
     {
 
         $user = Auth::user();
+
+        if ($user->role->id !== 1) {
+            return redirect()->route('404')->with('error', 'No tienes acceso a esta página.');
+        }
+
+        $user = Auth::user();
         $role = $user->role->id;
 
         if ($role !== 1) {

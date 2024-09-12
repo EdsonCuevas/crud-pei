@@ -7,11 +7,19 @@ use App\Models\User;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
+
 
 class ProgramVoluntController extends Controller
 {
     public function index()
     {
+        $user = Auth::user();
+
+        if ($user->role->id !== 2) {
+            return redirect()->route('404')->with('error', 'No tienes acceso a esta página.');
+        }
+
         // Retrieve all records from the 'programs' table
         $programs = Program::all();
 
