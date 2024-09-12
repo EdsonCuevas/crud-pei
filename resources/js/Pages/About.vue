@@ -1,12 +1,6 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, useForm } from '@inertiajs/vue3';
-import InputError from '@/Components/InputError.vue';
-import Modal from '@/Components/Modal.vue';
-import SecondaryButton from '@/Components/SecondaryButton.vue';
-import DarkButton from '@/Components/DarkButton.vue';
-import InputGroup from '@/Components/InputGroup.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
 import { ref } from 'vue';
 
 const props = defineProps({
@@ -15,23 +9,6 @@ const props = defineProps({
     }
 });
 
-const form = useForm({
-    name: '',
-    email: '',
-    phone: '',
-    password: '',
-    position: '',
-
-});
-
-const v = ref({
-    id: '',
-    name: '',
-    phone: '',
-    password: '',
-    position: '',
-
-});
 
 
 </script>

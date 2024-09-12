@@ -1,7 +1,6 @@
 <script setup>
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
-import TextInput from '@/Components/TextInput.vue';
 import { Link, useForm, usePage } from '@inertiajs/vue3';
 
 defineProps({
@@ -43,7 +42,7 @@ const form = useForm({
             
             <!-- Nombre -->
             <div>
-                <InputLabel for="name" value="Name" />
+                <InputLabel for="name" value="Nombre" />
 
                     <p class="mt-1 block w-full">{{ form.name }}</p>
 
@@ -52,7 +51,7 @@ const form = useForm({
 
             <!-- Email -->
             <div>
-                <InputLabel for="email" value="Email" />
+                <InputLabel for="email" value="Correo Electronico" />
                     <p class="mt-1 block w-full">{{ form.email }}</p>
                 <InputError class="mt-2" :message="form.errors.email" />
             </div>
