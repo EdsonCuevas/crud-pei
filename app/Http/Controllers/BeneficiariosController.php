@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Models\Program;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -13,10 +13,10 @@ class BeneficiariosController extends Controller
     public function index()
     {
         // Filtra los usuarios que tengan el rol 'benefi' y carga sus programas
-        $benefis = User::where('role', 'benefi')->with('programs:name')->get();
+        $programs = Program::all();
 
         return Inertia::render('Users/Coordinators/beneficiarios/benefi', [
-            'beneficiarios' => $benefis
+            'programas' => $programs
         ]);
     }
 

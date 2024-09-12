@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CoordiController;
+use App\Http\Controllers\ContactsController;
 use App\Http\Controllers\BeneficiariosController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProgramsController;
@@ -41,6 +42,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::resource('coordinators', CoordiController::class);
+    Route::resource('contacts', ContactsController::class);
     Route::resource('beneficiaries', BeneficiariosController::class);
     Route::resource('reports', ReportsController::class);
     Route::resource('programs', ProgramsController::class);

@@ -20,7 +20,7 @@ const form = useForm({
     image: null,
     name: user.name,
     email: user.email,
-    telnum: user.telnum,
+    phone: user.phone,
 });
 </script>
 
@@ -76,17 +76,17 @@ const form = useForm({
                 <InputError class="mt-2" :message="form.errors.email" />
             </div>
             <div>
-                <InputLabel for="email" value="Numero de telefono" />
+                <InputLabel for="phone" value="Numero de telefono" />
 
                 <TextInput
-                    id="telnum"
+                    id="phone"
                     type="text"
                     class="mt-1 block w-full"
-                    v-model="form.telnum"
+                    v-model="form.phone"
                     required
-                    autocomplete="username"
+                    autocomplete="phone"
                 /><br>
-                <InputError class="mt-2" :message="form.errors.telnum" />
+                <InputError class="mt-2" :message="form.errors.phone" />
             </div>
 
             <div v-if="mustVerifyEmail && user.email_verified_at === null">

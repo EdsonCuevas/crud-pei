@@ -17,7 +17,7 @@ const user = usePage().props.auth.user;
 
 const form = useForm({
     name: user.name,
-    telnum: user.telnum,
+    phone: user.phone,
     email: user.email,
 
 });
@@ -60,8 +60,8 @@ const form = useForm({
             <!-- Numero de telefono -->
             <div>
                 <InputLabel for="telnum" value="Número de teléfono" />
-                    <p class="mt-1 block w-full">{{ form.telnum }}</p>
-                <InputError class="mt-2" :message="form.errors.telnum" />
+                    <p class="mt-1 block w-full">{{ form.phone }}</p>
+                <InputError class="mt-2" :message="form.errors.phone" />
             </div>
 
             <div class="flex items-center gap-4">
