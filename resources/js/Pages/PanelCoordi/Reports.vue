@@ -53,7 +53,7 @@ const openModalForm = (op,a) => {
         title.value = 'Crear Coordinador';
     }
     else{
-        title.value = 'Editar Coordinador ';
+        title.value = 'Reportes ';
         form.name = a.name;
         form.email = a.email;
         form.password = '';
@@ -79,6 +79,7 @@ const closeModalDel = () => {
     showModalDel.value = false;
 }
 
+
 const save = () => {
 
     // Elimina la contraseña del formulario si está vacía
@@ -88,11 +89,11 @@ const save = () => {
 
     if (operation.value === 1) {
         form.post(route('coordinators.store'), {
-            onSuccess: () => ok('Coordinador Creado'),
+            onSuccess: () => ok('Reporte Creado'),
         });
     } else {
         form.put(route('coordinators.update', v.value.id), {
-            onSuccess: () => ok('Coordinador Actualizado'),
+            onSuccess: () => ok('Reporte Actualizado'),
         });
     }
 };
@@ -110,12 +111,7 @@ const ok = (m) => {
     }, 7000)
 }
 
-const deleteCoordi = () => {
-    console.log(route('coordinators.destroy', v.value.id));
-    form.delete(route('coordinators.destroy', v.value.id), {
-        onSuccess: () => {ok('Coordinador Elimiando')}
-    })
-}
+
 
 </script>
 
@@ -128,7 +124,7 @@ const deleteCoordi = () => {
             <span class="text-lg font-semibold">Reportes</span>
             <button 
             class="ml-4 w-10 h-10 flex items-center justify-center bg-blue-500 text-white rounded-full hover:bg-blue-600"
-            @click="handleClick"
+            @click="openModalForm"
             >
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
@@ -278,4 +274,5 @@ const deleteCoordi = () => {
             </div>
         </Modal>
 	</AuthenticatedLayout>
+    
 </template>
