@@ -16,7 +16,7 @@ class ProgramVoluntController extends Controller
     {
         $user = Auth::user();
 
-        if ($user->role->id !== 2) {
+        if ($user->role->id !== 3) {
             return redirect()->route('404')->with('error', 'No tienes acceso a esta página.');
         }
 
