@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\BeneficiariesController;
 use App\Http\Controllers\CoordiController;
+use App\Http\Controllers\VoluntController;
+use App\Http\controllers\ContacVoluntController;
 use App\Http\Controllers\DonorsController;
 use App\Http\Controllers\VolunteersController;
 use App\Http\Controllers\ProfileController;
@@ -47,6 +49,9 @@ Route::middleware('auth')->group(function () {
     Route::resource('beneficiaries', BeneficiariesController::class);
 
     Route::resource('programs', ProgramsController::class);
+
+    Route::resource('voluntarios', VoluntController::class);
+    Route::resource('contactos', ContacVoluntController::class);
 });
 
 require __DIR__ . '/auth.php';

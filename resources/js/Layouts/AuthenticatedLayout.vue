@@ -22,7 +22,7 @@
 </template>
 
 <script setup>
-import Navigation from './Navigation.vue';
-import TopMenu from "./TopMenu.vue";
-import NavigationMobile from './NavigationMobile.vue';
+import Navigation from './Volunt/Navigation.vue';
+import TopMenu from "./Volunt/TopMenu.vue";
+import NavigationMobile from './Volunt/NavigationMobile.vue';
 </script>
