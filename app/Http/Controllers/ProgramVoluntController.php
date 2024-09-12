@@ -3,22 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Models\Program;
+use App\Models\User;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
-class VoluntController extends Controller
+class ProgramVoluntController extends Controller
 {
     public function index()
-{
-    // Retrieve all records from the 'programs' table
-    $programs = Program::all();
+    {
+        // Retrieve all records from the 'programs' table
+        $programs = Program::all();
 
-    // Pass the retrieved data to the Inertia view
-    return Inertia::render('Volunt/Index', [
-        'programs' => $programs
-    ]);
-}
+        // Pass the retrieved data to the Inertia view
+        return Inertia::render('Volunt/Index', [
+            'programs' => $programs
+        ]);
+    }
 
     public function store(Request $request)
     {
@@ -46,6 +47,4 @@ class VoluntController extends Controller
         $volunt->update($request->input());
         return redirect('volunt');
     }
-
-
 }

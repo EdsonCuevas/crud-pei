@@ -12,12 +12,12 @@
     <aside v-show="$page.props.showingMobileMenu"
       class="fixed inset-y-0 z-20 flex-shrink-0 w-64 mt-16 overflow-y-auto bg-blue-500 md:hidden">
       <div class="py-4 text-white">
-        <Link class="ml-6 text-lg font-bold" :href="route('programas.index')">
+        <Link class="ml-6 text-lg font-bold" :href="route('dashboard')">
         Panel Admin
         </Link>
         <ul class="mt-6">
           <li class="relative px-6 py-3">
-            <ResponsiveNavLink :href="route('programas.index')" :active="route().current('programas.index')">
+            <ResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')">
               <template #icon>
                 <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round"
                   stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">

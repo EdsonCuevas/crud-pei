@@ -23,6 +23,6 @@
 
 <script setup>
 import Navigation from './Volunt/Navigation.vue';
-import TopMenu from "./Volunt/TopMenu.vue";
+import TopMenu from "./TopMenu.vue";
 import NavigationMobile from './Volunt/NavigationMobile.vue';
 </script>

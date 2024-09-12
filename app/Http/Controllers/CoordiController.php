@@ -7,12 +7,21 @@ use App\Models\Role;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class CoordiController extends Controller
 {
 
     public function index()
     {
+
+        $user = Auth::user();
+        $role = $user->role->id;
+
+        if ($role !== 1) {
+            return redirect()->route('404')->with('error', 'No tienes acceso a esta página.');
+        }
+
         // Filtra los usuarios que tengan el rol 'coordi' y carga sus programas
         $coordis = User::where('role_id', '2')->with('programs:name')->get();
         $roles = Role::all();
@@ -20,6 +29,7 @@ class CoordiController extends Controller
         return Inertia::render('Users/Coordinators', [
             'coordinadores' => $coordis,
             'roles' => $roles,
+            'userRole' => $role,
         ]);
     }
 
