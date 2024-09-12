@@ -2,23 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Role;
 use Inertia\Inertia;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
-class CoordiController extends Controller
+class VolunteersController extends Controller
 {
-
     public function index()
     {
         // Filtra los usuarios que tengan el rol 'coordi' y carga sus programas
-        $coordis = User::where('role_id', '2')->with('programs:name')->get();
+        $volunteers = User::where('role_id', '3')->with('programs:name')->get();
         $roles = Role::all();
 
-        return Inertia::render('Users/Coordinators', [
-            'coordinadores' => $coordis,
+        return Inertia::render('Users/Volunteers', [
+            'voluntarios' => $volunteers,
             'roles' => $roles,
         ]);
     }
@@ -45,14 +44,14 @@ class CoordiController extends Controller
             'phone.digits_between' => 'El número de teléfono debe tener entre 1 y 15 dígitos.',
         ]);
 
-        $coordinador = new User($request->except('password'));
-        $coordinador->role_id = '2';
-        $coordinador->password = Hash::make($request->password);
-        $coordinador->save();
-        return redirect('coordinators');
+        $volunteer = new User($request->except('password'));
+        $volunteer->role_id = '3';
+        $volunteer->password = Hash::make($request->password);
+        $volunteer->save();
+        return redirect('volunteers');
     }
 
-    public function update(Request $request, User $coordinator)
+    public function update(Request $request, User $volunteer)
     {
         $request->validate([
             'name' => 'required|max:60',
@@ -81,15 +80,13 @@ class CoordiController extends Controller
             $request->request->remove('password');
         }
 
-        $coordinator->update($request->all());
-
-        return redirect('coordinators');
+        $volunteer->update($request->all());
+        return redirect('volunteers');
     }
 
-
-    public function destroy(User $coordinator)
+    public function destroy(User $volunteer)
     {
-        $coordinator->delete();
-        return redirect('coordinators');
+        $volunteer->delete();
+        return redirect('volunteers');
     }
 }

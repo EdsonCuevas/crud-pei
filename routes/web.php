@@ -1,11 +1,13 @@
 <?php
 
+use App\Http\Controllers\BeneficiariesController;
 use App\Http\Controllers\CoordiController;
 use App\Http\Controllers\VoluntController;
 use App\Http\controllers\ContacVoluntController;
+use App\Http\Controllers\DonorsController;
+use App\Http\Controllers\VolunteersController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProgramsController;
-use App\Http\Controllers\ReportsController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -42,9 +44,12 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::resource('coordinators', CoordiController::class);
-    Route::resource('reports', ReportsController::class);
+    Route::resource('volunteers', VolunteersController::class);
+    Route::resource('donors', DonorsController::class);
+    Route::resource('beneficiaries', BeneficiariesController::class);
+
     Route::resource('programs', ProgramsController::class);
-    
+
     Route::resource('voluntarios', VoluntController::class);
     Route::resource('contactos', ContacVoluntController::class);
 });

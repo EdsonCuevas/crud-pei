@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -21,14 +22,17 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'role',
         'phone',
-        'active',
+        'role_id',
     ];
 
     public function programs(): BelongsToMany
     {
         return $this->belongsToMany(Program::class);
+    }
+    public function role(): BelongsTo
+    {
+        return $this->belongsTo(Role::class);
     }
 
     /**

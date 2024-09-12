@@ -11,6 +11,7 @@ const form = useForm({
 	email: '',
 	password: '',
 	password_confirmation: '',
+	role: '',
 	terms: false,
 });
 
@@ -71,9 +72,9 @@ const submit = () => {
 							<InputLabel for="role" value="Role" />
 							<select id="role" class="block w-full mt-1" v-model="form.role" required>
 								<option value="" disabled>Select a role</option>
-								<option value="volunt">Voluntario</option>
-								<option value="donador">Donador</option>
-								<option value="benefi">Beneficiario</option>
+								<option value="3">Voluntario</option>
+								<option value="4">Donador</option>
+								<option value="5">Beneficiario</option>
 							</select>
 							<InputError class="mt-2" :message="form.errors.role" />
 						</div>
