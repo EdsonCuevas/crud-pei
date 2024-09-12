@@ -44,6 +44,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('coordinators', CoordiController::class);
     Route::resource('reports', ReportsController::class);
     Route::resource('programs', ProgramsController::class);
+    
     Route::resource('voluntarios', VoluntController::class);
     Route::resource('contactos', ContacVoluntController::class);
 });
