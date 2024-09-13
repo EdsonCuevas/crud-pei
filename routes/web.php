@@ -3,6 +3,8 @@
 // Controladores para el panel Administrador
 use App\Http\Controllers\BeneficiariesController;
 use App\Http\Controllers\CoordiController;
+use App\Http\Controllers\CoordProgramController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DonorsController;
 use App\Http\Controllers\VolunteersController;
 use App\Http\Controllers\ProgramsController;
@@ -43,6 +45,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::resource('coord-programs', CoordProgramController::class);
+    Route::resource('coord-reports', ReportsController::class);
 
     Route::resource('coordinators', CoordiController::class);
     Route::resource('volunteers', VolunteersController::class);
