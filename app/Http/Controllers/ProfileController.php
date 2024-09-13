@@ -18,11 +18,42 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): Response
     {
-        return Inertia::render('Profile/Edit', [
-            'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
-            'status' => session('status'),
-        ]);
+        $user = $request->user(); // Obtenemos el usuario autenticado
+        $role = $user->role->id; // Obtenemos el nombre del rol (ajusta si usas una estructura diferente)
+
+        switch ($role) {
+            case 1:
+                return Inertia::render('Profile/EditAdmin', [
+                    'mustVerifyEmail' => $user instanceof MustVerifyEmail,
+                    'status' => session('status'),
+                ]);
+
+            case 2:
+                return Inertia::render('Profile/EditCoordi', [
+                    'mustVerifyEmail' => $user instanceof MustVerifyEmail,
+                    'status' => session('status'),
+                ]);
+
+            case 3:
+                return Inertia::render('Profile/EditVolunt', [
+                    'mustVerifyEmail' => $user instanceof MustVerifyEmail,
+                    'status' => session('status'),
+                ]);
+
+            case 4:
+                return Inertia::render('Profile/EditDonor', [
+                    'mustVerifyEmail' => $user instanceof MustVerifyEmail,
+                    'status' => session('status'),
+                ]);
+
+            case 5:
+                return Inertia::render('Profile/EditBenef', [
+                    'mustVerifyEmail' => $user instanceof MustVerifyEmail,
+                    'status' => session('status'),
+                ]);
+        }
     }
+
 
     /**
      * Update the user's profile information.

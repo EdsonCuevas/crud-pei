@@ -29,10 +29,25 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
+        // Autenticar al usuario
         $request->authenticate();
 
+        // Regenerar la sesión
         $request->session()->regenerate();
 
+        // Obtener el usuario autenticado y su rol
+        $user = $request->user();
+        $roleId = $user->role->id;
+
+        if ($roleId === 1) {
+            return redirect()->route('coordinators.index');
+        } elseif ($roleId === 3) {
+            return redirect()->route('programas.index');
+        } elseif ($roleId === 2) {
+            return redirect()->route('profile.edit');
+        }
+
+        // Redirigir al dashboard por defecto si no se encuentra un rol específico
         return redirect()->intended(route('dashboard', absolute: false));
     }
 
