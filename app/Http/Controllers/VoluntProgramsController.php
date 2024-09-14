@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
 
-class ProgramVoluntController extends Controller
+class VoluntProgramsController extends Controller
 {
     public function index()
     {

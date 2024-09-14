@@ -1,13 +1,13 @@
 <template>
   <aside class="z-20 hidden w-64 overflow-y-auto bg-blue-500 md:block flex-shrink-0">
     <div class="py-4 text-white">
-      <Link class="ml-6 text-lg font-bold text-gray-100" :href="route('programas.index')">
+      <Link class="ml-6 text-lg font-bold text-gray-100" :href="route('volunt-programas.index')">
       Panel Voluntario
       </Link>
 
       <ul class="mt-6">
         <li class="relative px-6 py-3">
-          <NavLink :href="route('programas.index')" :active="route().current('programas.index')">
+          <NavLink :href="route('volunt-programas.index')" :active="route().current('volunt-programas.index')">
             <template #icon>
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                 stroke="currentColor" class="size-6">
@@ -20,7 +20,7 @@
         </li>
 
         <li class="relative px-6 py-3">
-          <NavLink :href="route('contactos.index')" :active="route().current('contactos.index')">
+          <NavLink :href="route('volunt-contactos.index')" :active="route().current('volunt-contactos.index')">
             <template #icon>
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                 stroke="currentColor" class="size-6">

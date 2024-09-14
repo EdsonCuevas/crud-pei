@@ -6,7 +6,7 @@ use App\Models\User;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
 
-class ContacVoluntController extends Controller
+class VoluntContactController extends Controller
 {
     public function index()
     {

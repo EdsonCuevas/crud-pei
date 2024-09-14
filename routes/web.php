@@ -13,8 +13,8 @@ use App\Http\Controllers\CoordProgramController;
 use App\Http\Controllers\CoordReportsController;
 
 // Controladores para el panel Voluntario
-use App\Http\Controllers\ProgramVoluntController;
-use App\Http\controllers\ContacVoluntController;
+use App\Http\Controllers\VoluntProgramsController;
+use App\Http\controllers\VoluntContactController;
 
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -57,8 +57,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('coord-programs', CoordProgramController::class);
     Route::resource('coord-reports', CoordReportsController::class);
 
-    Route::resource('programas', ProgramVoluntController::class);
-    Route::resource('contactos', ContacVoluntController::class);
+    Route::resource('volunt-programas', VoluntProgramsController::class);
+    Route::resource('volunt-contactos', VoluntContactController::class);
 });
 
 require __DIR__ . '/auth.php';
