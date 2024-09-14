@@ -41,10 +41,10 @@ class AuthenticatedSessionController extends Controller
 
         if ($roleId === 1) {
             return redirect()->route('coordinators.index');
+        } elseif ($roleId === 2) {
+            return redirect()->route('coord-programs.index');
         } elseif ($roleId === 3) {
             return redirect()->route('programas.index');
-        } elseif ($roleId === 2) {
-            return redirect()->route('profile.edit');
         }
 
         // Redirigir al dashboard por defecto si no se encuentra un rol específico

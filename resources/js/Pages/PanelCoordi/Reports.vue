@@ -118,15 +118,11 @@ const ok = (m) => {
     }, 7000)
 }
 
-<<<<<<<< HEAD:resources/js/Pages/PanelCoordi/Reports.vue
-
-========
 const deleteCoordi = () => {
     form.delete(route('coordinators.destroy', v.value.id), {
         onSuccess: () => {ok('Coordinador Elimiando')}
     })
 }
->>>>>>>> release:resources/js/Pages/Users/Coordinators.vue
 
 </script>
 
