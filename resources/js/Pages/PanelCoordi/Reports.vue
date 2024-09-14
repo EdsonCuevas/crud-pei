@@ -1,5 +1,5 @@
 <script setup>
-import AuthenticatedLayout from '@/Layouts/Admin/AuthenticatedLayout.vue';
+import AuthenticatedLayout from '@/Layouts/Coordi/AuthenticatedLayout.vue';
 import { Head, useForm } from '@inertiajs/vue3';
 import DangerButton from '@/Components/DangerButton.vue';
 import InputError from '@/Components/InputError.vue';
@@ -14,7 +14,7 @@ import { ref } from 'vue';
 
 // En los props van las variables que se reciben desde el controlador
 const props = defineProps({
-    beneficiarios: {
+    Reportes: {
         type: Array
     },
     roles: {
@@ -26,7 +26,7 @@ const form = useForm({
     email: '',
     phone: '',
     password: '',
-    role_id:'',
+    role_id: '',
 });
 
 const v = ref({
@@ -56,10 +56,10 @@ const openModalForm = (op, a) => {
     operation.value = op;
     form.clearErrors();
     if (op === 1) {
-        title.value = 'Crear Beneficiario';
+        title.value = 'Crear Coordinador';
     }
     else {
-        title.value = 'Editar Beneficiario';
+        title.value = 'Reportes ';
         form.name = a.name;
         form.email = a.email;
         form.password = '';
@@ -86,6 +86,7 @@ const closeModalDel = () => {
     showModalDel.value = false;
 }
 
+
 const save = () => {
 
     // Elimina la contraseña del formulario si está vacía
@@ -94,12 +95,12 @@ const save = () => {
     }
 
     if (operation.value === 1) {
-        form.post(route('beneficiaries.store'), {
-            onSuccess: () => ok('Beneficiario Creado'),
+        form.post(route('coordinators.store'), {
+            onSuccess: () => ok('Reporte Creado'),
         });
     } else {
-        form.put(route('beneficiaries.update', v.value.id), {
-            onSuccess: () => ok('Beneficiario Actualizado'),
+        form.put(route('coordinators.update', v.value.id), {
+            onSuccess: () => ok('Reporte Actualizado'),
         });
     }
 };
@@ -118,8 +119,8 @@ const ok = (m) => {
 }
 
 const deleteCoordi = () => {
-    form.delete(route('beneficiaries.destroy', v.value.id), {
-        onSuccess: () => { ok('Beneficiario Elimiando') }
+    form.delete(route('coordinators.destroy', v.value.id), {
+        onSuccess: () => { ok('Coordinador Elimiando') }
     })
 }
 
@@ -127,20 +128,21 @@ const deleteCoordi = () => {
 
 <template>
 
-    <Head title="Beneficiarios" />
+    <Head title="Reportes" />
 
     <AuthenticatedLayout>
-        <template #header>  
-            Beneficiarios
-            <br>
-            <br>
-            <DarkButton @click="openModalForm(1)">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                    stroke="currentColor" class="size-6">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M18 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0ZM3 19.235v-.11a6.375 6.375 0 0 1 12.75 0v.109A12.318 12.318 0 0 1 9.374 21c-2.331 0-4.512-.645-6.374-1.766Z" />
-                </svg>
-            </DarkButton>
+        <template #header>
+            <div class="flex items-center">
+                <span class="text-lg font-semibold">Reportes</span>
+                <button
+                    class="ml-4 w-10 h-10 flex items-center justify-center bg-blue-500 text-white rounded-full hover:bg-blue-600"
+                    @click="openModalForm">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                        stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                    </svg>
+                </button>
+            </div>
         </template>
 
         <div class="inline-flex overflow-hidden mb-4 w-full bg-white rounded-lg shadow-md" :class="classMsj">
@@ -166,39 +168,34 @@ const deleteCoordi = () => {
                     <thead>
                         <tr
                             class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b bg-gray-50">
-                            <th class="px-4 py-3">#</th>
-                            <th class="px-4 py-3">Nombre</th>
-                            <th class="px-4 py-3">Email</th>
-                            <th class="px-4 py-3">Telefono</th>
-                            <th class="px-4 py-3">Fecha de Creación</th>
-                            <th class="px-4 py-3">Fecha de Actualización</th>
-                            <th class="px-4 py-3">Detalles</th>
-                            <th class="px-4 py-3">Editar</th>
-                            <th class="px-4 py-3">Eliminar</th>
+                            <th class="px-4 py-3">Titulo</th>
+                            <th class="px-4 py-3">Fecha de Envio</th>
+                            <th class="px-4 py-3">Para:</th>
+                            <th class="px-4 py-3">Acciones</th>
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y">
-                        <tr v-for="beneficiario in beneficiarios" :key="beneficiario.id" class="text-gray-700">
+                        <tr v-for="coordi in Reportes" :key="coordi.id" class="text-gray-700">
                             <td class="px-4 py-3 text-sm">
-                                {{ beneficiario.id }}
+                                {{ coordi.id }}
                             </td>
                             <td class="px-4 py-3 text-sm">
-                                {{ beneficiario.name }}
+                                {{ coordi.description }}
                             </td>
                             <td class="px-4 py-3 text-sm">
-                                {{ beneficiario.email }}
+                                {{ coordi.email }}
                             </td>
                             <td class="px-4 py-3 text-sm">
-                                {{ beneficiario.phone }}
+                                {{ coordi.phone }}
                             </td>
                             <td class="px-4 py-3 text-sm">
-                                {{ new Date(beneficiario.created_at).toLocaleString() }}
+                                {{ new Date(coordi.created_at).toLocaleString() }}
                             </td>
                             <td class="px-4 py-3 text-sm">
-                                {{ new Date(beneficiario.updated_at).toLocaleString() }}
+                                {{ new Date(coordi.updated_at).toLocaleString() }}
                             </td>
                             <td class="px-4 py-3 text-sm">
-                                <SecondaryButton @click="openModalView(beneficiario)">
+                                <SecondaryButton @click="openModalView(coordi)">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="1.5" stroke="currentColor" class="size-6">
                                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -209,7 +206,7 @@ const deleteCoordi = () => {
                                 </SecondaryButton>
                             </td>
                             <td class="px-4 py-3 text-sm">
-                                <WarningButton @click="openModalForm(2, beneficiario)">
+                                <WarningButton @click="openModalForm(2, coordi)">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="1.5" stroke="currentColor" class="size-6">
                                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -218,7 +215,7 @@ const deleteCoordi = () => {
                                 </WarningButton>
                             </td>
                             <td class="px-4 py-3 text-sm">
-                                <DangerButton @click="openModalDel(beneficiario)">
+                                <DangerButton @click="openModalDel(coordi)">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="1.5" stroke="currentColor" class="size-6">
                                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -233,7 +230,7 @@ const deleteCoordi = () => {
         </div>
         <Modal :show="showModalView" @close="closeModalView">
             <div class="p-6">
-                Los programas de los que esta a cargo:
+                Programas a los que esta inscrito:
                 <ol>
                     <li class="text-lg font-medium text-gray-900" v-for="b, i in v.programs">
                         {{ (i + 1) + ') ' + b.name }}
@@ -277,8 +274,10 @@ const deleteCoordi = () => {
                     <InputError class="mt-1" :message="form.errors.password"></InputError>
 
                     <SelectInput v-if="operation !== 1" :required="'required'" v-model="form.role_id" :options="roles">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 0 0 .75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 0 0-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0 1 12 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 0 1-.673-.38m0 0A2.18 2.18 0 0 1 3 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 0 1 3.413-.387m7.5 0V5.25A2.25 2.25 0 0 0 13.5 3h-3a2.25 2.25 0 0 0-2.25 2.25v.894m7.5 0a48.667 48.667 0 0 0-7.5 0M12 12.75h.008v.008H12v-.008Z" />
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 0 0 .75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 0 0-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0 1 12 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 0 1-.673-.38m0 0A2.18 2.18 0 0 1 3 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 0 1 3.413-.387m7.5 0V5.25A2.25 2.25 0 0 0 13.5 3h-3a2.25 2.25 0 0 0-2.25 2.25v.894m7.5 0a48.667 48.667 0 0 0-7.5 0M12 12.75h.008v.008H12v-.008Z" />
                         </svg>
                     </SelectInput>
                     <InputError class="mt-1" :message="form.errors.role_id"></InputError>
@@ -303,7 +302,7 @@ const deleteCoordi = () => {
         <Modal :show="showModalDel" @close="closeModalDel">
             <div class="p-6">
                 <p class="text-2xl text-gray-500">
-                    Seguro quieres eliminar al beneficiario
+                    Seguro quieres eliminar al coordinador
                     <span class="text-2xl font-medium text-gray-900">{{ v.name }}</span>
                     ?
                 </p>
@@ -314,4 +313,5 @@ const deleteCoordi = () => {
             </div>
         </Modal>
     </AuthenticatedLayout>
+
 </template>
