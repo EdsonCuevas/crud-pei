@@ -45,6 +45,8 @@ class AuthenticatedSessionController extends Controller
             return redirect()->route('coord-programs.index');
         } elseif ($roleId === 3) {
             return redirect()->route('volunt-programas.index');
+        } elseif ($roleId === 4) {
+            return redirect()->route('donor-donations.index');
         }
 
         // Redirigir al dashboard por defecto si no se encuentra un rol específico
