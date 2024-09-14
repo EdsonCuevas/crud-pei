@@ -1,13 +1,13 @@
 <template>
   <aside class="z-20 hidden w-64 overflow-y-auto bg-blue-500 md:block flex-shrink-0">
     <div class="py-4 text-white">
-      <Link class="ml-6 text-lg font-bold text-gray-100" :href="route('coordinators.index')">
+      <Link class="ml-6 text-lg font-bold text-gray-100" :href="route('admin-coordinators.index')">
       Panel Admin
       </Link>
 
       <ul class="mt-6">
         <li class="relative px-6 py-3">
-          <NavLink :href="route('coordinators.index')" :active="route().current('coordinators.index')">
+          <NavLink :href="route('admin-coordinators.index')" :active="route().current('admin-coordinators.index')">
             <template #icon>
               <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round"
                 stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
@@ -39,38 +39,38 @@
             </svg>
           </button>
           <ul
-            v-show="showingTwoLevelMenu || route().current('coordinators.index') || route().current('volunteers.index') || route().current('donors.index') || route().current('beneficiaries.index')"
+            v-show="showingTwoLevelMenu || route().current('admin-coordinators.index') || route().current('admin-volunteers.index') || route().current('admin-donors.index') || route().current('admin-beneficiaries.index')"
             class="p-2 mt-2 space-y-2 overflow-hidden text-sm font-medium text-gray-500 rounded-md shadow-inner bg-gray-50"
             aria-label="submenu">
             
             <li
-              :class="{'text-gray-900': route().current('coordinators.index')}"
+              :class="{'text-gray-900': route().current('admin-coordinators.index')}"
               class="px-2 py-1 transition-colors duration-150 hover:text-gray-900">
-              <NavLink :href="route('coordinators.index')" :active="route().current('coordinators.index')">
+              <NavLink :href="route('admin-coordinators.index')" :active="route().current('admin-coordinators.index')">
                 Coordinadores
               </NavLink>
             </li>
 
             <li
-              :class="{'text-gray-900': route().current('volunteers.index')}"
+              :class="{'text-gray-900': route().current('admin-volunteers.index')}"
               class="px-2 py-1 transition-colors duration-150 hover:text-gray-900">
-              <NavLink :href="route('volunteers.index')" :active="route().current('volunteers.index')">
+              <NavLink :href="route('admin-volunteers.index')" :active="route().current('admin-volunteers.index')">
                 Voluntarios
               </NavLink>
             </li>
 
             <li
-              :class="{'text-gray-900': route().current('donors.index')}"
+              :class="{'text-gray-900': route().current('admin-donors.index')}"
               class="px-2 py-1 transition-colors duration-150 hover:text-gray-900">
-              <NavLink :href="route('donors.index')" :active="route().current('donors.index')">
+              <NavLink :href="route('admin-donors.index')" :active="route().current('admin-donors.index')">
                 Donadores
               </NavLink>
             </li>
 
             <li
-              :class="{'text-gray-900': route().current('beneficiaries.index')}"
+              :class="{'text-gray-900': route().current('admin-beneficiaries.index')}"
               class="px-2 py-1 transition-colors duration-150 hover:text-gray-900">
-              <NavLink :href="route('beneficiaries.index')" :active="route().current('beneficiaries.index')">
+              <NavLink :href="route('admin-beneficiaries.index')" :active="route().current('admin-beneficiaries.index')">
                 Beneficiarios
               </NavLink>
             </li>
@@ -79,7 +79,7 @@
         </li>
 
         <li class="relative px-6 py-3">
-          <NavLink :href="route('programs.index')" :active="route().current('programs.index')">
+          <NavLink :href="route('admin-programs.index')" :active="route().current('admin-programs.index')">
             <template #icon>
               <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round"
                 stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">

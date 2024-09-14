@@ -12,12 +12,13 @@
     <aside v-show="$page.props.showingMobileMenu"
       class="fixed inset-y-0 z-20 flex-shrink-0 w-64 mt-16 overflow-y-auto bg-blue-500 md:hidden">
       <div class="py-4 text-white">
-        <Link class="ml-6 text-lg font-bold" :href="route('programas.index')">
-        Panel Admin
+        <Link class="ml-6 text-lg font-bold" :href="route('volunt-programas.index')">
+        Panel Voluntario
         </Link>
+
         <ul class="mt-6">
           <li class="relative px-6 py-3">
-            <ResponsiveNavLink :href="route('programas.index')" :active="route().current('programas.index')">
+            <ResponsiveNavLink :href="route('volunt-programas.index')" :active="route().current('volunt-programas.index')">
               <template #icon>
                 <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round"
                   stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
@@ -26,65 +27,12 @@
                   </path>
                 </svg>
               </template>
-              Dashboard
+              Programas
             </ResponsiveNavLink>
           </li>
 
           <li class="relative px-6 py-3">
-            <button @click="showingTwoLevelMenu = !showingTwoLevelMenu"
-              class="inline-flex items-center justify-between w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800"
-              aria-haspopup="true">
-              <span class="inline-flex items-center">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z">
-                  </path>
-                </svg>
-                <span class="ml-4">Usuarios</span>
-              </span>
-              <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd"
-                  d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                  clip-rule="evenodd"></path>
-              </svg>
-            </button>
-            <ul v-show="showingTwoLevelMenu || route().current('coordinators.index') || route().current('volunteers.index') || route().current('donors.index') || route().current('beneficiaries.index')"
-              class="p-2 mt-2 space-y-2 overflow-hidden text-sm font-medium text-gray-500 rounded-md shadow-inner bg-gray-50"
-              aria-label="submenu">
-              <li
-              :class="{'text-gray-900': route().current('coordinators.index')}"
-              class="px-2 py-1 transition-colors duration-150 hover:text-gray-900">
-              <ResponsiveNavLink :href="route('coordinators.index')" :active="route().current('coordinators.index')">
-                Coordinadores
-              </ResponsiveNavLink>
-            </li>
-              <li
-              :class="{'text-gray-900': route().current('volunteers.index')}"
-              class="px-2 py-1 transition-colors duration-150 hover:text-gray-900">
-              <ResponsiveNavLink :href="route('volunteers.index')" :active="route().current('volunteers.index')">
-                Voluntarios
-              </ResponsiveNavLink>
-            </li>
-              <li
-              :class="{'text-gray-900': route().current('donors.index')}"
-              class="px-2 py-1 transition-colors duration-150 hover:text-gray-900">
-              <ResponsiveNavLink :href="route('donors.index')" :active="route().current('donors.index')">
-                Donadores
-              </ResponsiveNavLink>
-            </li>
-            <li
-              :class="{'text-gray-900': route().current('beneficiaries.index')}"
-              class="px-2 py-1 transition-colors duration-150 hover:text-gray-900">
-              <ResponsiveNavLink :href="route('beneficiaries.index')" :active="route().current('beneficiaries.index')">
-                Beneficiarios
-              </ResponsiveNavLink>
-            </li>
-            </ul>
-          </li>
-
-          <li class="relative px-6 py-3">
-            <ResponsiveNavLink :href="route('about')" :active="route().current('about')">
+            <ResponsiveNavLink :href="route('volunt-contactos.index')" :active="route().current('volunt-contactos.index')">
               <template #icon>
                 <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round"
                   stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
@@ -93,12 +41,9 @@
                   </path>
                 </svg>
               </template>
-              Reportes
+              Contactos
             </ResponsiveNavLink>
           </li>
-
-          
-
         </ul>
       </div>
     </aside>

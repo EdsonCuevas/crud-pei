@@ -40,7 +40,7 @@ class AuthenticatedSessionController extends Controller
         $roleId = $user->role->id;
 
         if ($roleId === 1) {
-            return redirect()->route('coordinators.index');
+            return redirect()->route('admin-coordinators.index');
         } elseif ($roleId === 2) {
             return redirect()->route('coord-programs.index');
         } elseif ($roleId === 3) {

@@ -3,16 +3,18 @@
 // Controladores para el panel Administrador
 use App\Http\Controllers\BeneficiariesController;
 use App\Http\Controllers\CoordiController;
-use App\Http\Controllers\CoordProgramController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DonorsController;
 use App\Http\Controllers\VolunteersController;
 use App\Http\Controllers\ProgramsController;
-use App\Http\Controllers\ReportsController;
+
+// Controladores para el panel Coordinador
+use App\Http\Controllers\CoordProgramController;
+use App\Http\Controllers\CoordReportsController;
 
 // Controladores para el panel Voluntario
-use App\Http\Controllers\ProgramVoluntController;
-use App\Http\controllers\ContacVoluntController;
+use App\Http\Controllers\VoluntProgramsController;
+use App\Http\controllers\VoluntContactController;
 
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -46,17 +48,17 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+    Route::resource('admin-coordinators', CoordiController::class);
+    Route::resource('admin-volunteers', VolunteersController::class);
+    Route::resource('admin-donors', DonorsController::class);
+    Route::resource('admin-beneficiaries', BeneficiariesController::class);
+    Route::resource('admin-programs', ProgramsController::class);
+
     Route::resource('coord-programs', CoordProgramController::class);
-    Route::resource('coord-reports', ReportsController::class);
+    Route::resource('coord-reports', CoordReportsController::class);
 
-    Route::resource('coordinators', CoordiController::class);
-    Route::resource('volunteers', VolunteersController::class);
-    Route::resource('donors', DonorsController::class);
-    Route::resource('beneficiaries', BeneficiariesController::class);
-    Route::resource('programs', ProgramsController::class);
-
-    Route::resource('programas', ProgramVoluntController::class);
-    Route::resource('contactos', ContacVoluntController::class);
+    Route::resource('volunt-programas', VoluntProgramsController::class);
+    Route::resource('volunt-contactos', VoluntContactController::class);
 });
 
 require __DIR__ . '/auth.php';
