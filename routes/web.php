@@ -8,7 +8,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DonorsController;
 use App\Http\Controllers\VolunteersController;
 use App\Http\Controllers\ProgramsController;
-use App\Http\Controllers\ReportsController;
+use App\Http\Controllers\CoordReportsController;
 
 // Controladores para el panel Voluntario
 use App\Http\Controllers\ProgramVoluntController;
@@ -47,7 +47,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::resource('coord-programs', CoordProgramController::class);
-    Route::resource('coord-reports', ReportsController::class);
+    Route::resource('coord-reports', CoordReportsController::class);
 
     Route::resource('coordinators', CoordiController::class);
     Route::resource('volunteers', VolunteersController::class);
