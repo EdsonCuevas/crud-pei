@@ -16,6 +16,10 @@ use App\Http\Controllers\CoordReportsController;
 use App\Http\Controllers\VoluntProgramsController;
 use App\Http\controllers\VoluntContactController;
 
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\DonorDonacionesController;
+use App\Http\Controllers\DonorInformesController;
+use App\Http\Controllers\DonorContactosController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -59,6 +63,9 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('volunt-programas', VoluntProgramsController::class);
     Route::resource('volunt-contactos', VoluntContactController::class);
+    Route::resource('donor-donations', DonorDonacionesController::class);
+    Route::resource('donor-contacts', DonorContactosController::class);
+    Route::resource('donor-informes', DonorInformesController::class);
 });
 
 require __DIR__ . '/auth.php';

@@ -1,5 +1,5 @@
 <script setup>
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import AuthenticatedLayout from '@/Layouts/Donors/AuthenticatedLayout.vue';
 import { Head, useForm } from '@inertiajs/vue3';
 import DangerButton from '@/Components/DangerButton.vue';
 import InputError from '@/Components/InputError.vue';
@@ -108,7 +108,7 @@ const ok = (m) => {
 
     <AuthenticatedLayout>
         <template #header>
-            Puto
+            Donadores
             <br>
             <br>
             <DarkButton @click="openModalForm(1)">
@@ -125,10 +125,9 @@ const ok = (m) => {
                         <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b bg-gray-50">
                             <th class="px-4 py-3">#</th>
                             <th class="px-4 py-3">Titulo</th>
-                            <th class="px-4 py-3">Por</th>
-                            <th class="px-4 py-3">Fecha de Publicacion</th>
-                            <th class="px-4 py-3">Fecha de Actualizacion</th>
-							<th class="px-4 py-3">Acciones</th>
+                            <th class="px-4 py-3">Fecha de Realizada</th>
+                            <th class="px-4 py-3">Destino</th>
+                            <th class="px-4 py-3">Valor</th>
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y">
