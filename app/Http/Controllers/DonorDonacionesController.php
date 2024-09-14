@@ -7,14 +7,14 @@ use Inertia\Inertia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
-class VoluntarioController extends Controller
+class DonorDonacionesController extends Controller
 {
 
     public function index()
     {
         $voluntarios = User::where('role', 'voluntario')->with('programs:name')->get();
 
-        return Inertia::render('Users/Donador/Index', [
+        return Inertia::render('Donador/Donaciones', [
             'voluntarios' => $voluntarios
         ]);
     }

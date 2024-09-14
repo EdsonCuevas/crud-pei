@@ -1,12 +1,9 @@
 <?php
 
-use App\Http\Controllers\CoordiController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\ProgramsController;
-use App\Http\Controllers\ReportsController;
-use App\Http\Controllers\VoluntarioController;
-use App\Http\Controllers\InformesController;
-use App\Http\Controllers\ContactosController;
+use App\Http\Controllers\DonorDonacionesController;
+use App\Http\Controllers\DonorInformesController;
+use App\Http\Controllers\DonorContactosController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -42,12 +39,9 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::resource('coordinators', CoordiController::class);
-    Route::resource('voluntarios', VoluntarioController::class);
-    Route::resource('contactos', ContactosController::class);
-    Route::resource('informes', InformesController::class);
-    Route::resource('reports', ReportsController::class);
-    Route::resource('programs', ProgramsController::class);
+    Route::resource('donor-donations', DonorDonacionesController::class);
+    Route::resource('donor-contacts', DonorContactosController::class);
+    Route::resource('donor-informes', DonorInformesController::class);
 });
 
 require __DIR__ . '/auth.php';

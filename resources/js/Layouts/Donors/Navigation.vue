@@ -1,13 +1,13 @@
 <template>
   <aside class="z-20 hidden w-64 overflow-y-auto bg-blue-500 md:block flex-shrink-0">
     <div class="py-4 text-white">
-      <Link class="ml-6 text-lg font-bold text-gray-100" :href="route('dashboard')">
+      <Link class="ml-6 text-lg font-bold text-gray-100" :href="route('donor-donations.index')">
       Panel Donadores
       </Link>
 
       <ul class="mt-6">
         <li class="relative px-6 py-3">
-          <NavLink :href="route('voluntarios.index')" :active="route().current('voluntarios.index')">
+          <NavLink :href="route('donor-donations.index')" :active="route().current('donor-donations.index')">
             <template #icon>
               <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round"
                 stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
@@ -20,7 +20,7 @@
           </NavLink>
         </li>
         <li class="relative px-6 py-3">
-          <NavLink :href="route('informes.index')" :active="route().current('informes.index')">
+          <NavLink :href="route('donor-informes.index')" :active="route().current('donor-informes.index')">
             <template #icon>
               <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round"
                 stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
@@ -33,7 +33,7 @@
         </li>
 
         <li class="relative px-6 py-3">
-          <NavLink :href="route('contactos.index')" :active="route().current('contactos.index')">
+          <NavLink :href="route('donor-contacts.index')" :active="route().current('donor-contacts.index')">
             <template #icon>
               <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round"
                   stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">

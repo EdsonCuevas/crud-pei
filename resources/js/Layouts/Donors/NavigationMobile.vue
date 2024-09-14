@@ -12,12 +12,12 @@
     <aside v-show="$page.props.showingMobileMenu"
       class="fixed inset-y-0 z-20 flex-shrink-0 w-64 mt-16 overflow-y-auto bg-blue-500 md:hidden">
       <div class="py-4 text-white">
-        <Link class="ml-6 text-lg font-bold" :href="route('dashboard')">
+        <Link class="ml-6 text-lg font-bold" :href="route('donor-donations.index')">
         Panel Admin
         </Link>
         <ul class="mt-6">
           <li class="relative px-6 py-3">
-            <ResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')">
+            <ResponsiveNavLink :href="route('donor-donations.index')" :active="route().current('donor-donations.index')">
               <template #icon>
                 <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round"
                   stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
@@ -49,11 +49,11 @@
                   clip-rule="evenodd"></path>
               </svg>
             </button>
-            <ul v-show="showingTwoLevelMenu || route().current('coordinators.index')"
+            <ul v-show="showingTwoLevelMenu || route().current('donor-donations.index')"
               class="p-2 mt-2 space-y-2 overflow-hidden text-sm font-medium text-gray-500 rounded-md shadow-inner bg-gray-50"
               aria-label="submenu">
               <li class="px-2 py-1 transition-colors duration-150 hover:text-gray-800">
-                <ResponsiveNavLink :href="route('coordinators.index')" :active="route().current('coordinators.index')">
+                <ResponsiveNavLink :href="route('donor-donations.index')" :active="route().current('donor-donations.index')">
                   Coordinadores
                 </ResponsiveNavLink>
               </li>
@@ -61,7 +61,7 @@
           </li>
 
           <li class="relative px-6 py-3">
-            <ResponsiveNavLink :href="route('about')" :active="route().current('about')">
+            <ResponsiveNavLink :href="route('donor-donations.index')" :active="route().current('donor-donations.index')">
               <template #icon>
                 <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round"
                   stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
