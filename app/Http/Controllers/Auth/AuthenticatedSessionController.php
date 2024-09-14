@@ -44,7 +44,7 @@ class AuthenticatedSessionController extends Controller
         } elseif ($roleId === 2) {
             return redirect()->route('coord-programs.index');
         } elseif ($roleId === 3) {
-            return redirect()->route('programas.index');
+            return redirect()->route('volunt-programas.index');
         }
 
         // Redirigir al dashboard por defecto si no se encuentra un rol específico
