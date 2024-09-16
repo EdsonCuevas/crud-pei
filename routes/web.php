@@ -3,7 +3,6 @@
 // Controladores para el panel Administrador
 use App\Http\Controllers\BeneficiariesController;
 use App\Http\Controllers\CoordiController;
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DonorsController;
 use App\Http\Controllers\VolunteersController;
 use App\Http\Controllers\ProgramsController;
@@ -21,10 +20,12 @@ use App\Http\Controllers\DonorDonacionesController;
 use App\Http\Controllers\DonorInformesController;
 use App\Http\Controllers\DonorContactosController;
 
+// Controladores para el panel Beneficiario
 use App\Http\Controllers\MyInfoController;
 use App\Http\Controllers\BenefContactsController;
 use App\Http\Controllers\BenefRecursosController;
 use App\Http\Controllers\ProfileController;
+
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -72,6 +73,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('donor-donations', DonorDonacionesController::class);
     Route::resource('donor-contacts', DonorContactosController::class);
     Route::resource('donor-informes', DonorInformesController::class);
+
     Route::resource('benef-myinfo', MyInfoController::class);
     Route::resource('benef-recursos', BenefRecursosController::class);
     Route::resource('benef-contacts', BenefContactsController::class);

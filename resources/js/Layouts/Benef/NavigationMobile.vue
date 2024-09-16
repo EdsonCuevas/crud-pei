@@ -12,21 +12,12 @@
     <aside v-show="$page.props.showingMobileMenu"
       class="fixed inset-y-0 z-20 flex-shrink-0 w-64 mt-16 overflow-y-auto bg-blue-500 md:hidden">
       <div class="py-4 text-white">
-<<<<<<<< HEAD:resources/js/Layouts/Donors/NavigationMobile.vue
         <Link class="ml-6 text-lg font-bold" :href="route('coord-programs.index')">
         Panel Admin
         </Link>
         <ul class="mt-6">
           <li class="relative px-6 py-3">
             <ResponsiveNavLink :href="route('coord-programs.index')" :active="route().current('coord-programs.index')">
-========
-        <Link class="ml-6 text-lg font-bold" :href="route('benef-myinfo.index')">
-          Panel Beneficiario
-        </Link>
-        <ul class="mt-6">
-          <li class="relative px-6 py-3">
-            <ResponsiveNavLink :href="route('benef-myinfo.index')" :active="route().current('benef-myinfo.index')">
->>>>>>>> dashboardBeneficiario:resources/js/Layouts/Benef/NavigationMobile.vue
               <template #icon>
                 <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round"
                   stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
@@ -58,7 +49,6 @@
                   clip-rule="evenodd"></path>
               </svg>
             </button>
-<<<<<<<< HEAD:resources/js/Layouts/Donors/NavigationMobile.vue
             <ul v-show="showingTwoLevelMenu || route().current('coord-programs.index')"
               class="p-2 mt-2 space-y-2 overflow-hidden text-sm font-medium text-gray-500 rounded-md shadow-inner bg-gray-50"
               aria-label="submenu">
@@ -66,26 +56,13 @@
                 <ResponsiveNavLink :href="route('coord-programs.index')"
                   :active="route().current('coord-programs.index')">
                   Programas
-========
-            <ul v-show="showingTwoLevelMenu || route().current('benef-recursos.index')"
-              class="p-2 mt-2 space-y-2 overflow-hidden text-sm font-medium text-gray-500 rounded-md shadow-inner bg-gray-50"
-              aria-label="submenu">
-              <li class="px-2 py-1 transition-colors duration-150 hover:text-gray-800">
-                <ResponsiveNavLink :href="route('benef-recursos.index')"
-                  :active="route().current('benef-recursos.index')">
-                  Coordinadores
->>>>>>>> dashboardBeneficiario:resources/js/Layouts/Benef/NavigationMobile.vue
                 </ResponsiveNavLink>
               </li>
             </ul>
           </li>
 
           <li class="relative px-6 py-3">
-<<<<<<<< HEAD:resources/js/Layouts/Donors/NavigationMobile.vue
             <ResponsiveNavLink :href="route('coord-programs.index')" :active="route().current('coord-programs.index')">
-========
-            <ResponsiveNavLink :href="route('benef-recursos.index')" :active="route().current('benef-recursos.index')">
->>>>>>>> dashboardBeneficiario:resources/js/Layouts/Benef/NavigationMobile.vue
               <template #icon>
                 <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round"
                   stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">

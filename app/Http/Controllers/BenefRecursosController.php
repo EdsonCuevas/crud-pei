@@ -6,12 +6,20 @@ use App\Models\Program;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class BenefRecursosController extends Controller
 {
 
     public function index()
     {
+
+        $user = Auth::user();
+
+        if ($user->role->id !== 5) {
+            return redirect()->route('404')->with('error', 'No tienes acceso a esta página.');
+        }
+
         // Filtra los usuarios que tengan el rol 'benefi' y carga sus programas
         $programs = Program::all();
 

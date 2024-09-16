@@ -1,9 +1,5 @@
 <script setup>
-<<<<<<<< HEAD:resources/js/Pages/Profile/EditAdmin.vue
 import AuthenticatedLayout from '@/Layouts/Admin/AuthenticatedLayout.vue';
-========
-import AuthenticatedLayout from '@/Layouts/Benef/AuthenticatedLayout.vue';
->>>>>>>> dashboardBeneficiario:resources/js/Pages/Profile/EditBenef.vue
 import DeleteUserForm from './Partials/DeleteUserForm.vue';
 import UpdatePasswordForm from './Partials/UpdatePasswordForm.vue';
 import UpdateProfileInformationForm from './Partials/UpdateProfileInformationForm.vue';
