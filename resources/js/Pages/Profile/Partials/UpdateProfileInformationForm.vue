@@ -17,24 +17,37 @@ defineProps({
 const user = usePage().props.auth.user;
 
 const form = useForm({
+    image: null,
     name: user.name,
     email: user.email,
+    phone: user.phone,
 });
 </script>
 
 <template>
     <section>
         <header>
-            <h2 class="text-lg font-medium text-gray-900">Profile Information</h2>
+            <h2 class="text-lg font-medium text-gray-900">Información Personal</h2>
 
             <p class="mt-1 text-sm text-gray-600">
-                Update your account's profile information and email address.
-            </p>
+                Actualice la información del perfil, la dirección de correo electrónico y su numero de telefono de su cuenta.            </p>
         </header>
 
         <form @submit.prevent="form.patch(route('profile.update'))" class="mt-6 space-y-6">
+                <!-- Subir imagen -->
             <div>
-                <InputLabel for="name" value="Name" />
+                <InputLabel for="image" value="Actualizar Imagen" />
+                <input
+                    id="image"
+                    type="file"
+                    class="mt-1 block w-full"
+                    @change="(e) => form.image = e.target.files[0]"
+                    accept="image/*"
+                />
+                <InputError class="mt-2" :message="form.errors.image" />
+            </div>
+            <div>
+                <InputLabel for="name" value="Nombre" />
 
                 <TextInput
                     id="name"
@@ -59,9 +72,21 @@ const form = useForm({
                     v-model="form.email"
                     required
                     autocomplete="username"
-                />
-
+                /><br>
                 <InputError class="mt-2" :message="form.errors.email" />
+            </div>
+            <div>
+                <InputLabel for="phone" value="Numero de telefono" />
+
+                <TextInput
+                    id="phone"
+                    type="text"
+                    class="mt-1 block w-full"
+                    v-model="form.phone"
+                    required
+                    autocomplete="phone"
+                /><br>
+                <InputError class="mt-2" :message="form.errors.phone" />
             </div>
 
             <div v-if="mustVerifyEmail && user.email_verified_at === null">
@@ -81,12 +106,12 @@ const form = useForm({
                     v-show="status === 'verification-link-sent'"
                     class="mt-2 font-medium text-sm text-green-600"
                 >
-                    A new verification link has been sent to your email address.
+                Se ha enviado un nuevo enlace de verificación a su dirección de correo electrónico.
                 </div>
             </div>
 
             <div class="flex items-center gap-4">
-                <PrimaryButton :disabled="form.processing">Save</PrimaryButton>
+                <PrimaryButton :disabled="form.processing">Guardar</PrimaryButton>
 
                 <Transition
                     enter-active-class="transition ease-in-out"
@@ -94,7 +119,7 @@ const form = useForm({
                     leave-active-class="transition ease-in-out"
                     leave-to-class="opacity-0"
                 >
-                    <p v-if="form.recentlySuccessful" class="text-sm text-gray-600">Saved.</p>
+                    <p v-if="form.recentlySuccessful" class="text-sm text-gray-600">Guardado con éxito.</p>
                 </Transition>
             </div>
         </form>

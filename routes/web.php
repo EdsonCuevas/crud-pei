@@ -21,6 +21,10 @@ use App\Http\Controllers\DonorDonacionesController;
 use App\Http\Controllers\DonorInformesController;
 use App\Http\Controllers\DonorContactosController;
 
+use App\Http\Controllers\MyInfoController;
+use App\Http\Controllers\BenefContactsController;
+use App\Http\Controllers\BenefRecursosController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -68,6 +72,9 @@ Route::middleware('auth')->group(function () {
     Route::resource('donor-donations', DonorDonacionesController::class);
     Route::resource('donor-contacts', DonorContactosController::class);
     Route::resource('donor-informes', DonorInformesController::class);
+    Route::resource('benef-myinfo', MyInfoController::class);
+    Route::resource('benef-recursos', BenefRecursosController::class);
+    Route::resource('benef-contacts', BenefContactsController::class);
 });
 
 require __DIR__ . '/auth.php';
