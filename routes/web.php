@@ -1,11 +1,9 @@
 <?php
 
-use App\Http\Controllers\CoordiController;
-use App\Http\Controllers\ContactsController;
-use App\Http\Controllers\BeneficiariosController;
+use App\Http\Controllers\MyInfoController;
+use App\Http\Controllers\BenefContactsController;
+use App\Http\Controllers\BenefRecursosController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\ProgramsController;
-use App\Http\Controllers\ReportsController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -30,10 +28,6 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
 Route::middleware('auth')->group(function () {
     Route::get('/about', fn() => Inertia::render('About'))->name('about');
 
@@ -41,11 +35,9 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::resource('coordinators', CoordiController::class);
-    Route::resource('contacts', ContactsController::class);
-    Route::resource('beneficiaries', BeneficiariosController::class);
-    Route::resource('reports', ReportsController::class);
-    Route::resource('programs', ProgramsController::class);
+    Route::resource('benef-myinfo', MyInfoController::class);
+    Route::resource('benef-recursos', BenefRecursosController::class);
+    Route::resource('benef-contacts', BenefContactsController::class);
 });
 
 require __DIR__ . '/auth.php';

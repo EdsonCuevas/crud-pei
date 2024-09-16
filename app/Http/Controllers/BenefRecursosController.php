@@ -7,7 +7,7 @@ use Inertia\Inertia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
-class BeneficiariosController extends Controller
+class BenefRecursosController extends Controller
 {
 
     public function index()
@@ -15,7 +15,7 @@ class BeneficiariosController extends Controller
         // Filtra los usuarios que tengan el rol 'benefi' y carga sus programas
         $programs = Program::all();
 
-        return Inertia::render('Users/Coordinators/beneficiarios/benefi', [
+        return Inertia::render('Benef/Recursos', [
             'programas' => $programs
         ]);
     }
