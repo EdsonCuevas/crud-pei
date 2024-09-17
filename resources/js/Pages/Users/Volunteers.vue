@@ -94,11 +94,11 @@ const save = () => {
     }
 
     if (operation.value === 1) {
-        form.post(route('volunteers.store'), {
+        form.post(route('admin-volunteers.store'), {
             onSuccess: () => ok('Voluntario Creado'),
         });
     } else {
-        form.put(route('volunteers.update', v.value.id), {
+        form.put(route('admin-volunteers.update', v.value.id), {
             onSuccess: () => ok('Voluntario Actualizado'),
         });
     }
@@ -118,7 +118,7 @@ const ok = (m) => {
 }
 
 const deleteCoordi = () => {
-    form.delete(route('volunteers.destroy', v.value.id), {
+    form.delete(route('admin-volunteers.destroy', v.value.id), {
         onSuccess: () => { ok('Voluntario Elimiando') }
     })
 }

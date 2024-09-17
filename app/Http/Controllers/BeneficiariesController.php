@@ -56,10 +56,10 @@ class BeneficiariesController extends Controller
         $benef->role_id = '5';
         $benef->password = Hash::make($request->password);
         $benef->save();
-        return redirect('beneficiaries');
+        return redirect('admin-beneficiaries');
     }
 
-    public function update(Request $request, User $beneficiary)
+    public function update(Request $request, User $admin_beneficiary)
     {
         $request->validate([
             'name' => 'required|max:60',
@@ -88,13 +88,13 @@ class BeneficiariesController extends Controller
             $request->request->remove('password');
         }
 
-        $beneficiary->update($request->all());
-        return redirect('beneficiaries');
+        $admin_beneficiary->update($request->all());
+        return redirect('admin-beneficiaries');
     }
 
-    public function destroy(User $beneficiary)
+    public function destroy(User $admin_beneficiary)
     {
-        $beneficiary->delete();
-        return redirect('beneficiaries');
+        $admin_beneficiary->delete();
+        return redirect('admin-beneficiaries');
     }
 }

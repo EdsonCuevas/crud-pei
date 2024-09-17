@@ -56,10 +56,10 @@ class DonorsController extends Controller
         $donor->role_id = '4';
         $donor->password = Hash::make($request->password);
         $donor->save();
-        return redirect('donors');
+        return redirect('admin-donors');
     }
 
-    public function update(Request $request, User $donor)
+    public function update(Request $request, User $admin_donor)
     {
         $request->validate([
             'name' => 'required|max:60',
@@ -88,13 +88,13 @@ class DonorsController extends Controller
             $request->request->remove('password');
         }
 
-        $donor->update($request->all());
-        return redirect('donors');
+        $admin_donor->update($request->all());
+        return redirect('admin-donors');
     }
 
-    public function destroy(User $donor)
+    public function destroy(User $admin_donor)
     {
-        $donor->delete();
-        return redirect('donors');
+        $admin_donor->delete();
+        return redirect('admin-donors');
     }
 }

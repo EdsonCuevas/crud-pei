@@ -21,13 +21,6 @@ class CoordiController extends Controller
             return redirect()->route('404')->with('error', 'No tienes acceso a esta página.');
         }
 
-        $user = Auth::user();
-        $role = $user->role->id;
-
-        if ($role !== 1) {
-            return redirect()->route('404')->with('error', 'No tienes acceso a esta página.');
-        }
-
         // Filtra los usuarios que tengan el rol 'coordi' y carga sus programas
         $coordis = User::where('role_id', '2')->with('programs:name')->get();
         $roles = Role::all();
@@ -35,7 +28,6 @@ class CoordiController extends Controller
         return Inertia::render('Users/Coordinators', [
             'coordinadores' => $coordis,
             'roles' => $roles,
-            'userRole' => $role,
         ]);
     }
 
@@ -65,10 +57,10 @@ class CoordiController extends Controller
         $coordinador->role_id = '2';
         $coordinador->password = Hash::make($request->password);
         $coordinador->save();
-        return redirect('coordinators');
+        return redirect('admin-coordinators');
     }
 
-    public function update(Request $request, User $coordinator)
+    public function update(Request $request, User $admin_coordinator)
     {
         $request->validate([
             'name' => 'required|max:60',
@@ -97,15 +89,15 @@ class CoordiController extends Controller
             $request->request->remove('password');
         }
 
-        $coordinator->update($request->all());
+        $admin_coordinator->update($request->all());
 
-        return redirect('coordinators');
+        return redirect('admin-coordinators');
     }
 
 
-    public function destroy(User $coordinator)
+    public function destroy(User $admin_coordinator)
     {
-        $coordinator->delete();
-        return redirect('coordinators');
+        $admin_coordinator->delete();
+        return redirect('admin-coordinators');
     }
 }

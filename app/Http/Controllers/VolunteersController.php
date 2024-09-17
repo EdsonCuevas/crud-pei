@@ -56,10 +56,10 @@ class VolunteersController extends Controller
         $volunteer->role_id = '3';
         $volunteer->password = Hash::make($request->password);
         $volunteer->save();
-        return redirect('volunteers');
+        return redirect('admin-volunteers');
     }
 
-    public function update(Request $request, User $volunteer)
+    public function update(Request $request, User $admin_volunteer)
     {
         $request->validate([
             'name' => 'required|max:60',
@@ -88,13 +88,13 @@ class VolunteersController extends Controller
             $request->request->remove('password');
         }
 
-        $volunteer->update($request->all());
-        return redirect('volunteers');
+        $admin_volunteer->update($request->all());
+        return redirect('admin-volunteers');
     }
 
-    public function destroy(User $volunteer)
+    public function destroy(User $admin_volunteer)
     {
-        $volunteer->delete();
-        return redirect('volunteers');
+        $admin_volunteer->delete();
+        return redirect('admin-volunteers');
     }
 }

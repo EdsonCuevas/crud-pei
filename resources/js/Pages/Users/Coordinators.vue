@@ -94,11 +94,11 @@ const save = () => {
     }
 
     if (operation.value === 1) {
-        form.post(route('coordinators.store'), {
+        form.post(route('admin-coordinators.store'), {
             onSuccess: () => ok('Coordinador Creado'),
         });
     } else {
-        form.put(route('coordinators.update', v.value.id), {
+        form.put(route('admin-coordinators.update', v.value.id), {
             onSuccess: () => ok('Coordinador Actualizado'),
         });
     }
@@ -118,7 +118,7 @@ const ok = (m) => {
 }
 
 const deleteCoordi = () => {
-    form.delete(route('coordinators.destroy', v.value.id), {
+    form.delete(route('admin-coordinators.destroy', v.value.id), {
         onSuccess: () => { ok('Coordinador Elimiando') }
     })
 }
