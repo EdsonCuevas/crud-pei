@@ -9,7 +9,7 @@ use Inertia\Inertia;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
-class DonorsController extends Controller
+class AdminDonorsController extends Controller
 {
     public function index()
     {

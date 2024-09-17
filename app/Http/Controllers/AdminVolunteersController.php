@@ -9,7 +9,7 @@ use Inertia\Inertia;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
-class BeneficiariesController extends Controller
+class AdminVolunteersController extends Controller
 {
     public function index()
     {
@@ -21,11 +21,11 @@ class BeneficiariesController extends Controller
         }
 
         // Filtra los usuarios que tengan el rol 'coordi' y carga sus programas
-        $benef = User::where('role_id', '5')->with('programs:name')->get();
+        $volunteers = User::where('role_id', '3')->with('programs:name')->get();
         $roles = Role::all();
 
-        return Inertia::render('Users/Beneficiaries', [
-            'beneficiarios' => $benef,
+        return Inertia::render('Users/Volunteers', [
+            'voluntarios' => $volunteers,
             'roles' => $roles,
         ]);
     }
@@ -52,14 +52,14 @@ class BeneficiariesController extends Controller
             'phone.digits_between' => 'El número de teléfono debe tener entre 1 y 15 dígitos.',
         ]);
 
-        $benef = new User($request->except('password'));
-        $benef->role_id = '5';
-        $benef->password = Hash::make($request->password);
-        $benef->save();
-        return redirect('admin-beneficiaries');
+        $volunteer = new User($request->except('password'));
+        $volunteer->role_id = '3';
+        $volunteer->password = Hash::make($request->password);
+        $volunteer->save();
+        return redirect('admin-volunteers');
     }
 
-    public function update(Request $request, User $admin_beneficiary)
+    public function update(Request $request, User $admin_volunteer)
     {
         $request->validate([
             'name' => 'required|max:60',
@@ -88,13 +88,13 @@ class BeneficiariesController extends Controller
             $request->request->remove('password');
         }
 
-        $admin_beneficiary->update($request->all());
-        return redirect('admin-beneficiaries');
+        $admin_volunteer->update($request->all());
+        return redirect('admin-volunteers');
     }
 
-    public function destroy(User $admin_beneficiary)
+    public function destroy(User $admin_volunteer)
     {
-        $admin_beneficiary->delete();
-        return redirect('admin-beneficiaries');
+        $admin_volunteer->delete();
+        return redirect('admin-volunteers');
     }
 }

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
 
-class ProgramsController extends Controller
+class AdminProgramsController extends Controller
 {
     public function index()
     {
