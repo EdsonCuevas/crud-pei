@@ -26,6 +26,8 @@ use App\Http\Controllers\BenefContactsController;
 use App\Http\Controllers\BenefRecursosController;
 use App\Http\Controllers\ProfileController;
 
+use App\Http\Controllers\MainController;
+
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -56,6 +58,8 @@ Route::get('/', function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/about', fn() => Inertia::render('About'))->name('about');
+
+    Route::get('dashboard', [MainController::class, 'autoredirect']);
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
