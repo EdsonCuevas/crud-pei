@@ -35,24 +35,7 @@ class AuthenticatedSessionController extends Controller
         // Regenerar la sesión
         $request->session()->regenerate();
 
-        // Obtener el usuario autenticado y su rol
-        $user = $request->user();
-        $roleId = $user->role->id;
-
-        if ($roleId === 1) {
-            return redirect()->route('admin-coordinators.index');
-        } elseif ($roleId === 2) {
-            return redirect()->route('coord-programs.index');
-        } elseif ($roleId === 3) {
-            return redirect()->route('volunt-programas.index');
-        } elseif ($roleId === 4) {
-            return redirect()->route('donor-donations.index');
-        } elseif ($roleId === 5) {
-            return redirect()->route('benef-myinfo.index');
-        }
-
-        // Redirigir al dashboard por defecto si no se encuentra un rol específico
-        return redirect()->intended(route('dashboard', absolute: false));
+        return redirect('dashboard');
     }
 
     /**
