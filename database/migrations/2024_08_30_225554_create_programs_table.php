@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('programs', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 100);
-            $table->string('description');
-            $table->unsignedBigInteger('creator_id');
+            $table->string('name', 100)->nullable();
+            $table->string('description')->nullable();
+            $table->unsignedBigInteger('creator_id')->nullable();
             $table->unsignedBigInteger('coordi_id');
             $table->foreign('creator_id')->references('id')->on('users');
             $table->foreign('coordi_id')->references('id')->on('users');

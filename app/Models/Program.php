@@ -13,6 +13,8 @@ class Program extends Model
     protected $fillable = [
         'name',
         'description',
+        'creator_id',
+        'coordi_id',
     ];
 
     public function users(): BelongsToMany

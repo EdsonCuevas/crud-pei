@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('donations', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('destination');
+            $table->string('concept');
             $table->integer('value');
             $table->foreignId('users_id')->constrained('users')->onUpdate('cascade')->onDelete('set null');
+            $table->foreignId('programs_id')->constrained('programs')->onUpdate('cascade')->onDelete('set null');
             $table->timestamps();
         });
     }
