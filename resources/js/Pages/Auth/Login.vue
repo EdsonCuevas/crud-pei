@@ -45,15 +45,15 @@ const submit = () => {
 						{{ status }}
 					</div>
 					
-					<form @submit.prevent="submit">
+					<form @submit.prevent="submit" />
 						<div class="mt-4">
-							<InputLabel for="email" value="Email" />
+							<InputLabel for="email" value="Correo electronico" />
 							<TextInput id="email" type="email" class="block w-full mt-1" v-model="form.email" required autofocus autocomplete="username" />
 							<InputError class="mt-2" :message="form.errors.email" />
 						</div>
 						
 						<div class="mt-4">
-							<InputLabel for="password" value="Password" />
+							<InputLabel for="password" value="Contraseña" />
 							<TextInput id="password" type="password" class="block w-full mt-1" v-model="form.password" required autocomplete="current-password" />
 							<InputError class="mt-2" :message="form.errors.password" />
 						</div>
@@ -61,21 +61,26 @@ const submit = () => {
 						<div class="block mt-4">
 							<label class="flex items-center">
 								<Checkbox name="remember" v-model:checked="form.remember" />
-								<span class="ml-2 text-sm text-gray-600">Remember me</span> </label>
+								<span class="ml-2 text-sm text-gray-600">Recuerdame</span> </label>
 						</div>
 						
 						<div class="flex items-center justify-end mt-4">
+							<Link :href="route('register')" class="text-sm  text-gray-600 underline hover:text-gray-900 mr-10">
+								Registrarse
+							</Link> 
 							<Link v-if="canResetPassword" :href="route('password.request')" class="text-sm text-gray-600 underline  hover:text-gray-900">
-								Forgot your password?
+								¿Olvidaste tu contraseña?
 							</Link>
+							<!-- Link que redirige a la página de registro --> 
 							
-							<PrimaryButton class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-								Log in
+							
+							<PrimaryButton class="" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+								Iniciar Sesión
 							</PrimaryButton>
 						</div>
-					</form>
+						</div>
+					
 				</div>
 			</div>
-		</div>
 	</GuestLayout>
 </template>
