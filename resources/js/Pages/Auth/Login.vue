@@ -45,7 +45,7 @@ const submit = () => {
 						{{ status }}
 					</div>
 					
-					<form @submit.prevent="submit" />
+					<form @submit.prevent="submit">
 						<div class="mt-4">
 							<InputLabel for="email" value="Correo electronico" />
 							<TextInput id="email" type="email" class="block w-full mt-1" v-model="form.email" required autofocus autocomplete="username" />
@@ -74,12 +74,12 @@ const submit = () => {
 							<!-- Link que redirige a la página de registro --> 
 							
 							
-							<PrimaryButton class="" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+							<PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
 								Iniciar Sesión
 							</PrimaryButton>
 						</div>
-						</div>
-					
+					</form>
+				</div>	
 				</div>
 			</div>
 	</GuestLayout>
