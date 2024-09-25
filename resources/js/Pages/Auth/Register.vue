@@ -10,6 +10,7 @@ const form = useForm({
 	name: '',
 	email: '',
 	password: '',
+	phone: '',
 	password_confirmation: '',
 	role: '',
 	terms: false,
@@ -60,6 +61,12 @@ const submit = () => {
 								required autocomplete="new-password" />
 							<InputError class="mt-2" :message="form.errors.password" />
 						</div>
+						<div class="mt-4">
+							<InputLabel for="phone" value="Phone" />
+							<TextInput id="phone" type="tel" class="block w-full mt-1" v-model="form.phone" required autocomplete="tel" />
+							<InputError class="mt-2" :message="form.errors.phone" />
+						</div>
+
 
 						<div class="mt-4">
 							<InputLabel for="password_confirmation" value="Confirm Password" />
