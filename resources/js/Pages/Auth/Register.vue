@@ -56,17 +56,17 @@ const submit = () => {
 						</div>
 
 						<div class="mt-4">
-							<InputLabel for="password" value="Password" />
-							<TextInput id="password" type="password" class="block w-full mt-1" v-model="form.password"
-								required autocomplete="new-password" />
-							<InputError class="mt-2" :message="form.errors.password" />
-						</div>
-						<div class="mt-4">
 							<InputLabel for="phone" value="Phone" />
 							<TextInput id="phone" type="tel" class="block w-full mt-1" v-model="form.phone" required autocomplete="tel" />
 							<InputError class="mt-2" :message="form.errors.phone" />
 						</div>
 
+						<div class="mt-4">
+							<InputLabel for="password" value="Password" />
+							<TextInput id="password" type="password" class="block w-full mt-1" v-model="form.password"
+								required autocomplete="new-password" />
+							<InputError class="mt-2" :message="form.errors.password" />
+						</div>
 
 						<div class="mt-4">
 							<InputLabel for="password_confirmation" value="Confirm Password" />
