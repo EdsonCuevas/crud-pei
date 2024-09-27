@@ -72,7 +72,7 @@ const form = useForm({
                     v-model="form.email"
                     required
                     autocomplete="username"
-                /><br>
+                />
                 <InputError class="mt-2" :message="form.errors.email" />
             </div>
             <div>
@@ -85,7 +85,7 @@ const form = useForm({
                     v-model="form.phone"
                     required
                     autocomplete="phone"
-                /><br>
+                />
                 <InputError class="mt-2" :message="form.errors.phone" />
             </div>
 
