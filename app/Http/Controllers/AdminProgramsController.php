@@ -21,4 +21,10 @@ class AdminProgramsController extends Controller
             'programas' => Program::with(['creator', 'coordinator'])->paginate(2)
         ]);
     }
+
+    public function destroy(Program $admin_program)
+    {
+        $admin_program->delete();
+        return redirect('admin-programs')->with('success', 'Programa Eliminado');
+    }
 }
