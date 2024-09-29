@@ -18,7 +18,7 @@ class DonorInformesController extends Controller
             return redirect()->route('404')->with('error', 'No tienes acceso a esta página.');
         }
 
-        $informes = User::where('role', 'voluntario')->with('programs:name')->get();
+        $informes = User::where('role', 'voluntario')->with('programs:title')->get();
 
         return Inertia::render('Donador/Informes', [
             'informes' => $informes

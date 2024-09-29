@@ -21,7 +21,7 @@ class AdminDonorsController extends Controller
         }
 
         // Filtra los usuarios que tengan el rol 'coordi' y carga sus programas
-        $donors = User::where('role_id', '4')->with('programs:name')->get();
+        $donors = User::where('role_id', '4')->with('programs:title')->get();
         $roles = Role::all();
 
         return Inertia::render('Users/Donors', [

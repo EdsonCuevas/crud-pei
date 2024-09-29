@@ -21,7 +21,7 @@ class AdminBeneficiariesController extends Controller
         }
 
         // Filtra los usuarios que tengan el rol 'coordi' y carga sus programas
-        $benef = User::where('role_id', '5')->with('programs:name')->get();
+        $benef = User::where('role_id', '5')->with('programs:title')->get();
         $roles = Role::all();
 
         return Inertia::render('Users/Beneficiaries', [

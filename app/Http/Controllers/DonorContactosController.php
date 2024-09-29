@@ -19,7 +19,7 @@ class DonorContactosController extends Controller
             return redirect()->route('404')->with('error', 'No tienes acceso a esta página.');
         }
 
-        $contactos = User::where('role', 'voluntario')->with('programs:name')->get();
+        $contactos = User::where('role', 'voluntario')->with('programs:title')->get();
 
         return Inertia::render('Donador/Contactos', [
             'contactos' => $contactos

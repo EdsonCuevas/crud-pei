@@ -21,7 +21,7 @@ class AdminVolunteersController extends Controller
         }
 
         // Filtra los usuarios que tengan el rol 'coordi' y carga sus programas
-        $volunteers = User::where('role_id', '3')->with('programs:name')->get();
+        $volunteers = User::where('role_id', '3')->with('programs:title')->get();
         $roles = Role::all();
 
         return Inertia::render('Users/Volunteers', [
