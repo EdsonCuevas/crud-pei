@@ -20,7 +20,7 @@ class DonorDonacionesController extends Controller
             return redirect()->route('404')->with('error', 'No tienes acceso a esta página.');
         }
 
-        $voluntarios = User::where('role', 'voluntario')->with('programs:name')->get();
+        $voluntarios = User::where('role', 'voluntario')->with('programs:title')->get();
 
         return Inertia::render('Donador/Donaciones', [
             'voluntarios' => $voluntarios

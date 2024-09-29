@@ -21,11 +21,15 @@ class Program extends Model
     public function users(): BelongsToMany
     {
         return $this->belongsToMany(User::class);
-
     }
 
-    public function creator(): BelongsTo
+    public function creator()
     {
         return $this->belongsTo(User::class, 'creator_id');
+    }
+
+    public function coordinator()
+    {
+        return $this->belongsTo(User::class, 'coordi_id');
     }
 }
