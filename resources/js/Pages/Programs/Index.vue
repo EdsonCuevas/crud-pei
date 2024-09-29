@@ -38,6 +38,22 @@ const openModalDel = (b) => {
 const closeModalDel = () => {
 	showModalDel.value = false;
 }
+
+const deleteProgram = () => {
+	form.delete(route('admin-programs.destroy', form.id),{
+		onSuccess: () => {ok('Programa Eliminado')}
+	});
+}
+
+const ok = (m) => {
+    closeModalDel();
+    form.reset();
+    msj.value = m;
+    classMsj.value = 'block';
+    setTimeout(() => {
+        classMsj.value = 'hidden';
+    }, 7000)
+}
 </script>
 
 <template>
@@ -151,13 +167,13 @@ const closeModalDel = () => {
         <Modal :show="showModalDel" @close="closeModalDel">
             <div class="p-6">
                 <p class="text-2xl text-gray-500">
-                    Seguro quieres eliminar al voluntario
-                    <span class="text-2xl font-medium text-gray-900">{{ b.title }}</span>
+                    Seguro quieres eliminar el programa
+                    <span class="text-2xl font-medium text-gray-900">{{ form.title }}</span>
                     ?
                 </p>
             </div>
             <div class="m-6 flex justify-between">
-                <PrimaryButton @click="" class="bg-red-500 hover:bg-red-700">Eliminar</PrimaryButton>
+                <PrimaryButton @click="deleteProgram" class="bg-red-500 hover:bg-red-700">Eliminar</PrimaryButton>
                 <SecondaryButton @click="closeModalDel">Cancel</SecondaryButton>
             </div>
         </Modal>
