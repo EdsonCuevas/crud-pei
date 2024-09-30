@@ -17,8 +17,21 @@ class AdminProgramsController extends Controller
             return redirect()->route('404')->with('error', 'No tienes acceso a esta página.');
         }
 
-        return Inertia::render('Programs/Index', [
+        return Inertia::render('Admin/Programs/Index', [
             'programas' => Program::with(['creator', 'coordinator'])->paginate(2)
+        ]);
+    }
+
+    public function show(Program $admin_program)
+    {
+
+        $admin_program->load(['creator', 'coordinator']); // Cargar las relaciones
+
+        return Inertia::render('Admin/Programs/Show', [
+            'program' => $admin_program,
+            'creator' => $admin_program->creator,
+            'coordinator' => $admin_program->coordinator,
+            'users' => $admin_program->users
         ]);
     }
 

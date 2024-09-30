@@ -25,7 +25,7 @@ class AdminCoordiController extends Controller
         $coordis = User::where('role_id', '2')->with('programs:title')->get();
         $roles = Role::all();
 
-        return Inertia::render('Users/Coordinators', [
+        return Inertia::render('Admin/Users/Coordinators', [
             'coordinadores' => $coordis,
             'roles' => $roles,
         ]);

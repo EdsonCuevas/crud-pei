@@ -24,7 +24,7 @@ class AdminDonorsController extends Controller
         $donors = User::where('role_id', '4')->with('programs:title')->get();
         $roles = Role::all();
 
-        return Inertia::render('Users/Donors', [
+        return Inertia::render('Admin/Users/Donors', [
             'donadores' => $donors,
             'roles' => $roles,
         ]);

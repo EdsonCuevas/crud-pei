@@ -24,7 +24,7 @@ class AdminBeneficiariesController extends Controller
         $benef = User::where('role_id', '5')->with('programs:title')->get();
         $roles = Role::all();
 
-        return Inertia::render('Users/Beneficiaries', [
+        return Inertia::render('Admin/Users/Beneficiaries', [
             'beneficiarios' => $benef,
             'roles' => $roles,
         ]);
