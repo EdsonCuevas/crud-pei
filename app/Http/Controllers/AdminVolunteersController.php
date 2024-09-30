@@ -24,7 +24,7 @@ class AdminVolunteersController extends Controller
         $volunteers = User::where('role_id', '3')->with('programs:title')->get();
         $roles = Role::all();
 
-        return Inertia::render('Users/Volunteers', [
+        return Inertia::render('Admin/Users/Volunteers', [
             'voluntarios' => $volunteers,
             'roles' => $roles,
         ]);
