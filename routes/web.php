@@ -43,6 +43,10 @@ use Inertia\Inertia;
 |
 */
 
+Route::get('/home', function () {
+    return Inertia::render('HomePage');
+})->name('home');
+
 Route::get('/', function () {
     /*
     return Inertia::render('Welcome', [

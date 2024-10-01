@@ -1,0 +1,90 @@
+<template>
+    <div class="flex flex-col min-h-screen">
+      <!-- Header -->
+      <Header />
+
+  
+      <!-- Main Content -->
+      <main class="flex-grow">
+        <!-- Section 1: Intro -->
+        <section class="bg-blue-800 text-white py-20">
+          <div class="container mx-auto px-4">
+            <h1 class="text-5xl font-bold mb-6">Impulsando el conocimiento y la innovación</h1>
+            <p class="text-xl mb-8">Descubre cómo estamos transformando vidas a través de la ciencia, la cultura y la educación.</p>
+            <button class="text-white border-white hover:bg-white hover:text-blue-800 border p-2 rounded">
+              Explorar proyectos
+            </button>
+          </div>
+        </section>
+  
+        <!-- Section 2: Areas de Actuación -->
+        <section class="py-16 bg-gray-100">
+          <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-8 text-center">Nuestras Áreas de Actuación</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <!-- Tarjeta con imagen -->
+              <div class="bg-white shadow-md rounded-lg p-4">
+                <img src="https://th.bing.com/th/id/OIP.0LEiZH0IjiXl_xQ6bbx7aQHaD9?rs=1&pid=ImgDetMain" alt="Ciencia y Tecnología" class="w-full h-40 object-cover mb-4 rounded-md">
+                <h3 class="text-xl font-bold mb-2">Ciencia y Tecnología</h3>
+                <p>Apoyamos la investigación científica y el desarrollo tecnológico para abordar los desafíos globales.</p>
+              </div>
+              <div class="bg-white shadow-md rounded-lg p-4">
+                <img src="https://live.staticflickr.com/5082/5373580138_61a2ec8c0e_b.jpg" alt="Cultura" class="w-full h-40 object-cover mb-4 rounded-md">
+                <h3 class="text-xl font-bold mb-2">Cultura</h3>
+                <p>Promovemos la creación artística y la difusión del conocimiento cultural en todas sus formas.</p>
+              </div>
+              <div class="bg-white shadow-md rounded-lg p-4">
+                <img src="https://economipedia.com/wp-content/uploads/Fundacion.jpg" alt="Educación" class="w-full h-40 object-cover mb-4 rounded-md">
+                <h3 class="text-xl font-bold mb-2">Educación</h3>
+                <p>Impulsamos programas educativos innovadores para formar a los líderes del futuro.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+  
+        <!-- Section 3: Noticias -->
+        <section class="py-16">
+          <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-8 text-center">Últimas Noticias</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <div v-for="i in 3" :key="i" class="bg-white shadow-md rounded-lg p-4">
+                <img :src="'https://via.placeholder.com/400x200?text=Noticia+' + i" :alt="'Noticia ' + i" class="w-full h-40 object-cover mb-4 rounded-md">
+                <h3 class="text-xl font-bold mb-2">{{ 'Título de la noticia ' + i }}</h3>
+                <p>Descripción.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+  
+        <!-- Section 4: Misión -->
+        <section class="py-16 bg-blue-900 text-white">
+          <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold mb-6">Nuestra Misión</h2>
+            <p class="text-xl max-w-3xl mx-auto">
+              En la Fundación CTI, nos dedicamos a impulsar el conocimiento, la investigación y la innovación para construir un futuro mejor para todos. 
+              Trabajamos en colaboración con instituciones líderes y expertos de todo el mundo para generar un impacto positivo en la sociedad.
+            </p>
+            <button class="mt-8 border-white border text-white p-2 rounded hover:bg-white hover:text-blue-800">
+              Conoce más sobre nosotros
+            </button>
+          </div>
+        </section>
+      </main>
+      
+      <!-- Footer -->
+      <Footer />
+    </div>
+  </template>
+  
+  <script>
+  import Footer from '@/Components/Footer.vue';
+  import Header from '@/Components/Header.vue';
+
+  export default {
+    components:{
+    Header,
+    Footer,
+    },
+  };
+  </script>
+  

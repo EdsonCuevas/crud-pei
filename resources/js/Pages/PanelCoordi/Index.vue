@@ -55,7 +55,6 @@ const closeModalFormBlue = () => showModalFormBlue.value = false;
                 <thead>
                     <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b bg-gray-50">
                         <th class="px-4 py-3">Título</th>
-                        <th class="px-4 py-3">Descripción</th>
                         <th class="px-4 py-3">Fecha de Creación</th>
                         <th class="px-4 py-3">Fecha de Modificación</th>
                         <th class="px-4 py-3">Asignador por:</th>
@@ -64,8 +63,7 @@ const closeModalFormBlue = () => showModalFormBlue.value = false;
                 </thead>
                 <tbody class="bg-white divide-y">
                     <tr v-for="programa in Programas" :key="programa.id" class="text-gray-700">
-                        <td class="px-4 py-3 text-sm">{{ programa.name }}</td>
-                        <td class="px-4 py-3 text-sm">{{ programa.description }}</td>
+                        <td class="px-4 py-3 text-sm">{{ programa.title }}</td>
                         <td class="px-4 py-3 text-sm">{{ new Date(programa.created_at).toLocaleString() }}</td>
                         <td class="px-4 py-3 text-sm">{{ new Date(programa.updated_at).toLocaleString() }}</td>
                         <td class="px-4 py-3 text-sm">{{programa.creator.name}}</td>
