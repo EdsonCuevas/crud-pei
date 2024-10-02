@@ -1,8 +1,8 @@
 <template>
     <AuthenticatedLayout>
 
-    <div class="min-h-screen bg-gradient-to-b from-blue-100 to-white">
-      <div class="container mx-auto px-4 py-8">
+    <div class="min-h-screen bg-gradient-to-b to-white">
+      <div class="container mx-auto">
           <div class="bg-blue-500 text-white p-6">
             <h2 class="text-3xl font-semibold">Becas Benito Juarez</h2>
             <p class="text-blue-100">Programa de apoyo educativo</p>
@@ -10,7 +10,7 @@
           <div class="p-6 grid md:grid-cols-2 gap-6">
             <div class="space-y-4">
             <div class="flex items-center space-x-2 text-sm text-gray-500">
-            <UserIcon class="h-4 w-4" />
+            <NotebookText class="h-4 w-4" />
             <span><strong>Descripción:</strong> {{ program.description }}</span>
             </div>
               <div class="flex items-center space-x-2 text-sm text-gray-500">
@@ -55,8 +55,8 @@
   
   <script setup>
   import { ref } from 'vue'
-  import { CalendarIcon, UserIcon, UsersIcon } from 'lucide-vue-next'
-  import AuthenticatedLayout from '@/Layouts/Admin/AuthenticatedLayout.vue';
+  import { CalendarIcon, UserIcon, UsersIcon, NotebookText } from 'lucide-vue-next'
+  import AuthenticatedLayout from '@/Layouts/Admin/AuthenticatedLayoutProgram.vue';
 import { Head } from '@inertiajs/vue3';
 import NavLink from '@/Components/NavLink.vue';
 import DarkButton from '@/Components/DarkButton.vue';

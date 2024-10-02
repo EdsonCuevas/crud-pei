@@ -20,7 +20,7 @@
               00-.75-.75zm10.5 0h-2.5a.75.75 0 00-.75.75v.75h4.5v-.75a.75.75 0 00-.75-.75z" />
               </svg>
           </template>
-            Programas
+            <span class="ml-3">Programas</span>
           </NavLink>
         </li>
 
@@ -35,7 +35,7 @@
                 d="M4 12h2v8H4v-8zm4-2h2v10H8V10zm4-4h2v14h-2V6zm4-6h2v20h-2V0z" />
               </svg>
             </template>
-            Reportes
+            <span class="ml-3">Reportes</span>
           </NavLink>
         </li>
 
