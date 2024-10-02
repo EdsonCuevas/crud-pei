@@ -45,7 +45,7 @@
         <!-- Section 3: Noticias -->
         <section class="py-16">
           <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold mb-8 text-center">Últimas Noticias</h2>
+            <h2 class="text-3xl font-bold mb-8 text-center">Últimos Programas</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               <div v-for="i in 3" :key="i" class="bg-white shadow-md rounded-lg p-4">
                 <img :src="'https://via.placeholder.com/400x200?text=Noticia+' + i" :alt="'Noticia ' + i" class="w-full h-40 object-cover mb-4 rounded-md">
