@@ -63,6 +63,8 @@ Route::get('/', function () {
 Route::middleware('auth')->group(function () {
     Route::get('/about', fn() => Inertia::render('About'))->name('about');
 
+    Route::get('401', fn() => inertia::render('401'))->name('401');
+
     Route::get('dashboard', [MainController::class, 'autoredirect']);
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -74,7 +76,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('admin-donors', AdminDonorsController::class);
     Route::resource('admin-beneficiaries', AdminBeneficiariesController::class);
     Route::resource('admin-programs', AdminProgramsController::class);
-    
+
     Route::resource('coord-programs', CoordProgramController::class);
     Route::resource('coord-reports', CoordReportsController::class);
 

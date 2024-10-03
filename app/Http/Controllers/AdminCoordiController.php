@@ -18,7 +18,7 @@ class AdminCoordiController extends Controller
         $user = Auth::user();
 
         if ($user->role->id !== 1) {
-            return redirect()->route('404')->with('error', 'No tienes acceso a esta página.');
+            return redirect()->route('401')->with('error', 'No tienes acceso a esta página.');
         }
 
         // Filtra los usuarios que tengan el rol 'coordi' y carga sus programas

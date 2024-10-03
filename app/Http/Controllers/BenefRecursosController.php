@@ -17,7 +17,7 @@ class BenefRecursosController extends Controller
         $user = Auth::user();
 
         if ($user->role->id !== 5) {
-            return redirect()->route('404')->with('error', 'No tienes acceso a esta página.');
+            return redirect()->route('401')->with('error', 'No tienes acceso a esta página.');
         }
 
         // Filtra los usuarios que tengan el rol 'benefi' y carga sus programas

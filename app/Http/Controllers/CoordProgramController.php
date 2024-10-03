@@ -15,13 +15,13 @@ class CoordProgramController extends Controller
         $user = Auth::user();
 
         if ($user->role->id !== 2) {
-            return redirect()->route('404')->with('error', 'No tienes acceso a esta página.');
+            return redirect()->route('401')->with('error', 'No tienes acceso a esta página.');
         }
-       
+
 
 
         $userId = Auth::id();
-        
+
 
         $programs = Program::where('coordi_id', $userId)
             ->with(['users', 'creator'])
@@ -30,6 +30,5 @@ class CoordProgramController extends Controller
         return Inertia::render("PanelCoordi/Index", [
             "Programas" => $programs,
         ]);
-        
     }
 }
