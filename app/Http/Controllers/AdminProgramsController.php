@@ -35,6 +35,24 @@ class AdminProgramsController extends Controller
         ]);
     }
 
+    public function create()
+    {
+        return Inertia::render('Admin/Programs/Create', [
+            'programas' => Program::all()
+        ]);
+    }
+
+    public function edit(Program $admin_program)
+    {
+        return Inertia::render('Admin/Programs/Edit', [
+            'programas' => Program::all(),
+            'program' => $admin_program,
+            'creator' => $admin_program->creator,
+            'coordinator' => $admin_program->coordinator,
+            'users' => $admin_program->users
+        ]);
+    }
+
     public function destroy(Program $admin_program)
     {
         $admin_program->delete();
