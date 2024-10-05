@@ -47,6 +47,11 @@ Route::get('/home', function () {
     return Inertia::render('HomePage');
 })->name('home');
 
+Route::get('/terminos-condiciones', function () {
+    return Inertia::render('Terminos&condiciones');
+})->name('terminos.condiciones');
+
+
 Route::get('/', function () {
     /*
     return Inertia::render('Welcome', [
