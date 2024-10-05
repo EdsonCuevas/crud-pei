@@ -32,7 +32,7 @@ const props = defineProps({
                       </div>
                       <div class="flex items-center space-x-2 text-sm text-gray-500">
                           <UserIcon class="h-4 w-4" />
-                          <span><strong>Coordinado por:</strong> {{ coordinator.name }}</span>
+                          <span><strong>Coordinador:</strong> {{ coordinator.name }}</span>
                       </div>
                       <div class="flex items-center space-x-2 text-sm text-gray-500">
                           <CalendarIcon class="h-4 w-4" />

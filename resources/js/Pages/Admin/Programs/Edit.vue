@@ -5,12 +5,12 @@ const props = defineProps({
     programas:{type:Object},
     program:{type:Object},
     creator:{type:Object},
-    coordinator:{type:Object},
+    coordinators:{type:Object},
     users:{type:Object}
 });
 
 </script>
 
 <template>
-    <Form :programas="programas" :program="program" :creator="creator" :coordinator="coordinator" :users="users" />
+    <Form :programas="programas" :program="program" :creator="creator" :coordinators="coordinators" :users="users" />
 </template>

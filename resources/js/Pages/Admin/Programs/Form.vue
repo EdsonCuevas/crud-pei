@@ -5,7 +5,6 @@ import NavLink from '@/Components/NavLink.vue';
 import DarkButton from '@/Components/DarkButton.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import InputError from '@/Components/InputError.vue';
-import SelectInputProgram from '@/Components/SelectInput.vue';
 import InputGroup from '@/Components/InputGroup.vue';
 import {ref} from 'vue';
 
@@ -36,12 +35,12 @@ if(props.program != null){
     form.id = props.program.id;
     form.title = props.program.title;
     form.description = props.program.description;
+    form.coordi_id = props.program.coordi_id;
     form.image = props.program.image;
     srcImg.value = '../../storage/img/'+props.program.image;
 }
 
 const save = () => {
-    console.log(form.title);
     if(props.program == null){
         form.post(route('admin-programs.store'),{
             onSuccess: () => {ok('Programa Creado')}
@@ -109,9 +108,9 @@ const showImg = (e) => {
                             <InputError :message="form.errors.description" />
 
                             <div class="relative text-gray-500 focus-within:text-blue-500">
-                                
                                 <select class="rounded block w-full pl-10 mt-1 text-sm text-black focus:border-blue-400 focus:outline-none focus:shadow-outline-purple form-input" 
-                                :required="required" v-model="form.coordi_id">
+                                :required="'required'" v-model="form.coordi_id">
+                                <option disabled value="">Coordinador Encargado</option>
                                     <option v-for="coordi in coordinators" :key="coordi.id" :value="coordi.id">
                                         {{ coordi.name }}
                                     </option>
