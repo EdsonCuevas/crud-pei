@@ -16,21 +16,12 @@
           </div>
           <div>
             <h3 class="text-lg font-bold mb-4">Contacto</h3>
-            <p>Email:</p>
-            <p>Teléfono:</p>
-          </div>
-          <div>
-            <h3 class="text-lg font-bold mb-4">Síguenos</h3>
-            <div class="flex space-x-4">
-              <a href="#" class="hover:text-blue-400"><Facebook /></a>
-              <a href="#" class="hover:text-blue-400"><Twitter /></a>
-              <a href="#" class="hover:text-blue-400"><Linkedin /></a>
-              <a href="#" class="hover:text-blue-400"><Youtube /></a>
-            </div>
+            <p>Email: cti@support.com</p>
+            <p>Teléfono: 3131410000</p>
           </div>
         </div>
         <div class="mt-8 pt-8 border-t border-gray-700 text-center">
-          <p>&copy; {{ new Date().getFullYear() }} Fundación BBVA. Todos los derechos reservados.</p>
+          <p>&copy; {{ new Date().getFullYear() }} Fundación CTI. Todos los derechos reservados.</p>
         </div>
       </div>
     </footer>
