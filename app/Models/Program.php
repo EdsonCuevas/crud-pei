@@ -12,7 +12,7 @@ class Program extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
+        'title',
         'description',
         'creator_id',
         'coordi_id',

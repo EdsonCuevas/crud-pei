@@ -76,6 +76,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('admin-donors', AdminDonorsController::class);
     Route::resource('admin-beneficiaries', AdminBeneficiariesController::class);
     Route::resource('admin-programs', AdminProgramsController::class);
+    Route::post('updateProgram', [AdminProgramsController::class, 'updateprogram'])->name('updateprogram');
 
     Route::resource('coord-programs', CoordProgramController::class);
     Route::resource('coord-reports', CoordReportsController::class);

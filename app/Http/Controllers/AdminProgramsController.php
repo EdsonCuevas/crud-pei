@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Program;
+use App\Models\User;
 
 class AdminProgramsController extends Controller
 {
@@ -37,9 +38,34 @@ class AdminProgramsController extends Controller
 
     public function create()
     {
+        $coordinators = User::where('role_id', 2)->get(['id', 'name']);
+
         return Inertia::render('Admin/Programs/Create', [
-            'programas' => Program::all()
+            'programas' => Program::all(),
+            'coordinators' => $coordinators
         ]);
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'title' => 'required|max:100',
+            'description' => 'required|max:255',
+            'image' => 'required|file|mimes:png,jpg',
+        ]);
+
+        // Obtén el ID del usuario logueado
+        $userId = Auth::id();
+
+        // Crea el programa con los datos del request, incluyendo el creator_id
+        $program = Program::create(array_merge($request->all(), ['creator_id' => $userId]));
+        if ($request->hasFile('image')) {
+            $imgName = microtime(true) . '.' . $request->file('image')->getClientOriginalExtension();
+            $request->file('image')->storeAs('public/img', $imgName);
+            $program->image = $imgName;
+            $program->save();
+        }
+        return redirect('admin-programs')->with('success', 'Programa Creado');
     }
 
     public function edit(Program $admin_program)
