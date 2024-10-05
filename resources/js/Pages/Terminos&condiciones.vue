@@ -9,8 +9,8 @@
           :class="[
           'text-lg font-semibold pb-2',
           activeTab === 'privacy'
-            ? 'border-b-2 border-black text-black'
-            : 'text-gray-600 hover:text-[#004481] transition-colors'
+            ? 'border-b-2 border-blue-900 text-blue-900'
+            : 'text-gray-600 hover:text-[#000000] transition-colors'
         ]"
         >
           Política de Privacidad
@@ -20,8 +20,8 @@
           :class="[
           'text-lg font-semibold pb-2',
           activeTab === 'terms'
-            ? 'border-b-2 border-black text-black'
-            : 'text-gray-600 hover:text-[#004481] transition-colors'
+            ? 'border-b-2 border-blue-900 text-blue-900'
+            : 'text-gray-600 hover:text-[#000000] transition-colors'
         ]"
         >
           Términos de Servicio
