@@ -20,7 +20,7 @@ class AdminProgramsController extends Controller
         }
 
         return Inertia::render('Admin/Programs/Index', [
-            'programas' => Program::with(['creator', 'coordinator'])->paginate(2)
+            'programas' => Program::with(['creator', 'coordinator'])->paginate(10)
         ]);
     }
 
@@ -40,10 +40,11 @@ class AdminProgramsController extends Controller
     public function create()
     {
         $coordinators = User::where('role_id', 2)->get(['id', 'name']);
+        $beneficiaries = User::where('role_id', 5)->get(['id', 'name']);
 
         return Inertia::render('Admin/Programs/Create', [
-            'programas' => Program::all(),
-            'coordinators' => $coordinators
+            'coordinators' => $coordinators,
+            'users' => $beneficiaries
         ]);
     }
 
@@ -53,6 +54,7 @@ class AdminProgramsController extends Controller
             'title' => 'required|max:100',
             'description' => 'required|max:255',
             'image' => 'required|file|mimes:png,jpg',
+            'beneficiaries' => 'array'
         ]);
 
         // Obtén el ID del usuario logueado
@@ -66,6 +68,7 @@ class AdminProgramsController extends Controller
             $program->image = $imgName;
             $program->save();
         }
+        $program->users()->sync($request->beneficiaries);
         return redirect('admin-programs')->with('success', 'Programa Creado');
     }
 
@@ -73,13 +76,13 @@ class AdminProgramsController extends Controller
     {
 
         $coordinators = User::where('role_id', 2)->get(['id', 'name']);
+        $beneficiaries = User::where('role_id', 5)->get(['id', 'name']);
 
         return Inertia::render('Admin/Programs/Edit', [
-            'programas' => Program::all(),
             'program' => $admin_program,
-            'creator' => $admin_program->creator,
             'coordinators' => $coordinators,
-            'users' => $admin_program->users
+            'users' => $beneficiaries,
+            'benefsDelPrograma' => $admin_program->users
         ]);
     }
 
@@ -89,6 +92,7 @@ class AdminProgramsController extends Controller
             'title' => 'required|max:100',
             'description' => 'required|max:255',
             'id' => 'required|numeric',
+            'beneficiaries' => 'array'
         ]);
 
         $program = Program::find($request->id);
@@ -105,7 +109,7 @@ class AdminProgramsController extends Controller
             $program->image = $imgName;
             $program->save();
         }
-
+        $program->users()->sync($request->beneficiaries);
         return redirect('admin-programs')->with('success', 'Programa Actualizado');
     }
 
