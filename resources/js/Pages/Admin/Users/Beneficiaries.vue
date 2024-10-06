@@ -233,10 +233,10 @@ const deleteCoordi = () => {
         </div>
         <Modal :show="showModalView" @close="closeModalView">
             <div class="p-6">
-                Los programas de los que esta a cargo:
+                Esta Inscrito a los siguientes programas:
                 <ol>
                     <li class="text-lg font-medium text-gray-900" v-for="b, i in v.programs">
-                        {{ (i + 1) + ') ' + b.name }}
+                        {{ (i + 1) + ') ' + b.title }}
                     </li>
                 </ol>
             </div>
