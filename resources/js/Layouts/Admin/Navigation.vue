@@ -1,13 +1,13 @@
 <template>
   <aside class="z-20 hidden w-64 overflow-y-auto bg-blue-500 md:block flex-shrink-0 border border-blue-700">
     <div class="py-4 text-white">
-      <Link class="ml-6 text-lg font-bold text-gray-100" :href="route('admin-coordinators.index')">
-      Panel Admin
+      <Link class="ml-6 text-lg font-bold text-gray-100" :href="route('home')">
+      Fundación CTI
       </Link>
 
       <ul class="mt-6">
         <li class="relative px-6 py-3">
-          <NavLink :href="route('admin-coordinators.index')" :active="route().current('admin-coordinators.index')">
+          <NavLink>
             <template #icon>
               <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round"
                 stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">

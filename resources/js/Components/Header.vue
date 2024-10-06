@@ -13,7 +13,7 @@
       <div class="flex items-center space-x-6">
         <nav class="hidden md:block">
           <ul class="flex space-x-6">
-            <li><a href="#" class="hover:underline">Inicio</a></li>
+            <li><a href="home" class="hover:underline">Inicio</a></li>
             <li><a href="#" class="hover:underline">Programas</a></li>
             <li><a href="#" class="hover:underline">Sobre Nosotros</a></li>
             <li><a href="#" class="hover:underline">Contacto</a></li>
