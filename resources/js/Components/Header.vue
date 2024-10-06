@@ -19,12 +19,15 @@
             <li><a href="#" class="hover:underline">Contacto</a></li>
           </ul>
         </nav>
-        <button class="flex items-center space-x-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors">
-          <UserIcon class="w-7 h-7"/> 
-        </button>
-        <button class="flex  items-center space-x-2 px-4 py-2 bg-green-500 hover:bg-green-600 text-white p-2 rounded">
+        <button class="flex items-center space-x-2 px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded">
           Quiero donar
         </button>
+        <a href="/dashboard">
+          <button class="flex items-center space-x-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors">
+            <UserIcon class="w-6 h-6"/> 
+          </button>
+        </a>
+        
       </div>
     </div>
   </header>
