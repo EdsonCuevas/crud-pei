@@ -1,7 +1,15 @@
 <template>
-  <header class="bg-white text-blue-900 shadow-md">
-    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-      <div class="text-2xl font-bold">Fundación CTI</div>
+  <header class="bg-white text-blue-900 shadow-md h-20 ">
+  <div class="container mx-auto px-4 py-4 flex justify-between items-center h-full">
+    <div class="flex items-center space-x-3">
+      <div class="text-2xl font-bold">
+      <!-- Imagen con tamaño adaptado al header -->
+      <img src="/images/LOGOCTI.png" alt="Logo Fundación CTI" class="max-h-13 w-auto">
+
+    </div>
+    </div>
+
+
       <div class="flex items-center space-x-6">
         <nav class="hidden md:block">
           <ul class="flex space-x-6">
