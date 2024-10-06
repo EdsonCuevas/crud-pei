@@ -2,12 +2,12 @@
 import Form from './Form.vue';
 
 const props = defineProps({
-    programas:{type:Object},
-    coordinators:{type:Object}
+    coordinators:{type:Object},
+    users:{type:Object}
 });
 
 </script>
 
 <template>
-    <Form :programas="programas" :coordinators="coordinators" />
+    <Form :coordinators="coordinators" :users="users" />
 </template>

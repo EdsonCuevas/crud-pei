@@ -22,7 +22,7 @@ class AdminCoordiController extends Controller
         }
 
         // Filtra los usuarios que tengan el rol 'coordi' y carga sus programas
-        $coordis = User::where('role_id', '2')->with('programs:title')->get();
+        $coordis = User::where('role_id', '2')->get();
         $roles = Role::all();
 
         return Inertia::render('Admin/Users/Coordinators', [

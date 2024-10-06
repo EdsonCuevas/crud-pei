@@ -7,15 +7,15 @@ import PrimaryButton from '@/Components/PrimaryButton.vue';
 import InputError from '@/Components/InputError.vue';
 import InputGroup from '@/Components/InputGroup.vue';
 import {ref} from 'vue';
+import Select2 from 'vue3-select2-component';
 
 import { Type, Text, ImagePlus, UserSearch } from 'lucide-vue-next';
 
 const props = defineProps({
-    programas:{type:Object},
     program:{type:Object},
-    creator:{type:Object},
     coordinators:{type:Object},
-    users:{type:Object}
+    users:{type:Object},
+    benefsDelPrograma:{type:Object}
 });
 
 const form = useForm({
@@ -31,6 +31,11 @@ const srcImg = ref('../../storage/img/example.jpg');
 const msj = ref('');
 const classMsj = ref('hidden');
 
+const options = ref([]);
+props.users.map( (row) => (
+    options.value.push({'id':row.id, 'text':row.name})
+));
+
 if(props.program != null){
     form.id = props.program.id;
     form.title = props.program.title;
@@ -38,6 +43,9 @@ if(props.program != null){
     form.coordi_id = props.program.coordi_id;
     form.image = props.program.image;
     srcImg.value = '../../storage/img/'+props.program.image;
+    props.benefsDelPrograma.map((row) => (
+        form.beneficiaries.push(row.id)
+    ));
 }
 
 const save = () => {
@@ -130,6 +138,11 @@ const showImg = (e) => {
                             </InputGroup>
 
                             <InputError :message="form.errors.image" />
+                            <br>
+                            <span class="mt-2">Beneficiarios:</span>
+                            <Select2 v-model="form.beneficiaries" :options="options" :settings="{multiple:true, width:'100%'}" @change="form.beneficiaries = $event.target.value" />
+                            <InputError :message="form.errors.beneficiaries" />
+
                             <PrimaryButton>Guardar</PrimaryButton>
                         </form>
                     </div>
