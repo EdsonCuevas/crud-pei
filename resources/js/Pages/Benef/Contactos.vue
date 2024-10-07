@@ -1,7 +1,6 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/Benef/AuthenticatedLayout.vue';
-import { Head, useForm } from '@inertiajs/vue3';
-import { ref } from 'vue';
+import { Head } from '@inertiajs/vue3';
 
 const props = defineProps({
     contactos: {
@@ -14,7 +13,7 @@ const props = defineProps({
 </script>
 
 <template>
-    <Head title="Contacts" />
+    <Head title="Contactos" />
     
     <AuthenticatedLayout>
         <template #header>
@@ -46,10 +45,7 @@ const props = defineProps({
                                 {{ contacto.phone }}
                             </td>
                             <td class="px-4 py-3 text-sm">
-                                {{ contacto.role }}
-                            </td>
-                            <td class="px-4 py-3 text-sm">
-
+                                {{ contacto.role.role }}
                             </td>
                         </tr>
                     </tbody>

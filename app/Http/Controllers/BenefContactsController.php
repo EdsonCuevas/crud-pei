@@ -17,7 +17,8 @@ class BenefContactsController extends Controller
             return redirect()->route('401')->with('error', 'No tienes acceso a esta página.');
         }
 
-        $contacts = User::where('role', 'volunt')->get();
+        $contacts = User::whereIn('role_id', [2, 3])->with('role')->get();
+
 
         return Inertia::render('Benef/Contactos', [
             'contactos' => $contacts
