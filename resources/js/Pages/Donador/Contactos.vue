@@ -61,8 +61,9 @@ const deleteContacto = (contactoId) => {
 
     <AuthenticatedLayout>
         <template #header>
-            <h1 class="text-xl font-semibold leading-tight">Contactos</h1>
-            <DarkButton @click="form.reset(), title = 'Crear Contacto'">Crear Contacto</DarkButton>
+            CONTACTOS
+            <br>
+            <br>
         </template>
 
         <div :class="classMsj" class="bg-green-500 text-white text-center py-2 px-4 rounded mb-4">
@@ -99,18 +100,5 @@ const deleteContacto = (contactoId) => {
             </div>
         </div>
 
-        <div class="mt-4">
-            <form @submit.prevent="save">
-                <InputGroup label="Nombre" for="nombre" v-model="form.nombre" />
-                <InputError :message="form.errors.nombre" class="mt-2" />
-                <InputGroup label="Email" for="email" v-model="form.email" />
-                <InputError :message="form.errors.email" class="mt-2" />
-                <InputGroup label="Teléfono" for="telefono" v-model="form.telefono" />
-                <InputError :message="form.errors.telefono" class="mt-2" />
-                <InputGroup label="Dirección" for="direccion" v-model="form.direccion" />
-                <InputError :message="form.errors.direccion" class="mt-2" />
-                <PrimaryButton>{{ title }}</PrimaryButton>
-            </form>
-        </div>
     </AuthenticatedLayout>
 </template>
