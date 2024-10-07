@@ -15,7 +15,6 @@
           <ul class="flex space-x-6">
             <li><a href="home" class="hover:underline">Inicio</a></li>
             <li><a href="programs" class="hover:underline">Programas</a></li>
-            <li><a href="#" class="hover:underline">Sobre Nosotros</a></li>
             <li><a href="contact" class="hover:underline">Contacto</a></li>
           </ul>
         </nav>

@@ -19,6 +19,7 @@
           <div>
             <h3 class="text-lg font-bold mb-4">Contacto</h3>
             <p>Email: cti@support.com</p>
+            <br>
             <p>Teléfono: 3131410000</p>
           </div>
         </div>
