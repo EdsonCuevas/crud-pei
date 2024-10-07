@@ -50,7 +50,9 @@ Route::get('/home', function () {
 Route::get('/donation', function () {
     return Inertia::render('DonationForm');
 })->name('donation');
-
+Route::get('/contact', function () {
+    return Inertia::render('Contact');
+})->name('contact');
 Route::get('/terms-conditions', function () {
     return Inertia::render('Terminos&condiciones');
 })->name('terminos.condiciones');
