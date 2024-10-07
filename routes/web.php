@@ -51,6 +51,9 @@ Route::get('/terms-conditions', function () {
     return Inertia::render('Terminos&condiciones');
 })->name('terminos.condiciones');
 
+Route::get('/donation-form', function () {
+    return Inertia::render('DonationForm');
+})->name('donation');
 
 Route::get('/', function () {
     return redirect('/home');

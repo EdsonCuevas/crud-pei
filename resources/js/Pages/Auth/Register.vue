@@ -1,5 +1,6 @@
 <script setup>
 import GuestLayout from '@/Layouts/GuestLayout.vue';
+import Checkbox from '@/Components/Checkbox.vue';
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
@@ -37,12 +38,12 @@ const submit = () => {
 			<div class="flex items-center justify-center p-6 sm:p-12 md:w-1/2">
 				<div class="w-full">
 					<h1 class="mb-4 text-xl font-semibold text-gray-700">
-						Create account
+						Crear Cuenta
 					</h1>
 
 					<form @submit.prevent="submit">
 						<div>
-							<InputLabel for="name" value="Name" />
+							<InputLabel for="name" value="Nombre" />
 							<TextInput id="name" type="text" class="block w-full mt-1" v-model="form.name" required
 								autofocus autocomplete="name" />
 							<InputError class="mt-2" :message="form.errors.name" />
@@ -56,29 +57,29 @@ const submit = () => {
 						</div>
 
 						<div class="mt-4">
-							<InputLabel for="phone" value="Phone" />
+							<InputLabel for="phone" value="Telefono" />
 							<TextInput id="phone" type="tel" class="block w-full mt-1" v-model="form.phone" required autocomplete="tel" />
 							<InputError class="mt-2" :message="form.errors.phone" />
 						</div>
 
 						<div class="mt-4">
-							<InputLabel for="password" value="Password" />
+							<InputLabel for="password" value="Contraseña" />
 							<TextInput id="password" type="password" class="block w-full mt-1" v-model="form.password"
 								required autocomplete="new-password" />
 							<InputError class="mt-2" :message="form.errors.password" />
 						</div>
 
 						<div class="mt-4">
-							<InputLabel for="password_confirmation" value="Confirm Password" />
+							<InputLabel for="password_confirmation" value="Confirmar Contraseña" />
 							<TextInput id="password_confirmation" type="password" class="block w-full mt-1"
 								v-model="form.password_confirmation" required autocomplete="new-password" />
 							<InputError class="mt-2" :message="form.errors.password_confirmation" />
 						</div>
 
 						<div class="mt-4">
-							<InputLabel for="role" value="Role" />
+							<InputLabel for="role" value="Rol" />
 							<select id="role" class="block w-full mt-1" v-model.number="form.role" required>
-								<option value="" disabled>Select a role</option>
+								<option value="" disabled>Selecciona un rol</option>
 								<option value="2">Coordinador</option>
 								<option value="3">Voluntario</option>
 								<option value="4">Donador</option>
@@ -87,14 +88,20 @@ const submit = () => {
 							<InputError class="mt-2" :message="form.errors.role" />
 						</div>
 
+						<div class="block mt-4">
+							<label class="flex items-center">
+								<Checkbox name="terms" required />
+								<span class="ml-2 text-sm text-gray-600">Acepto <a class="text-blue-600" href="terms-conditions">Terminos y Condiciones</a></span> </label>
+						</div>
+
 						<div class="flex items-center justify-end mt-4">
 							<Link :href="route('login')" class="text-sm text-gray-600 underline  hover:text-gray-900">
-							Already registered?
+							Ya tienes cuenta?
 							</Link>
 
 							<PrimaryButton class="ml-4" :class="{ 'opacity-25': form.processing }"
 								:disabled="form.processing">
-								Register
+								Registrarse
 							</PrimaryButton>
 						</div>
 					</form>

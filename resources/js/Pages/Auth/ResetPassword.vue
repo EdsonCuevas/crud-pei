@@ -42,7 +42,7 @@ const submit = () => {
 			<div class="flex items-center justify-center p-6 sm:p-12 md:w-1/2">
 				<div class="w-full">
 					<h1 class="mb-4 text-xl font-semibold text-gray-700">
-						Forgot password
+						Olvide Mi Contraseña
 					</h1>
 					
 					<form @submit.prevent="submit">
@@ -53,20 +53,20 @@ const submit = () => {
 						</div>
 						
 						<div class="mt-4">
-							<InputLabel for="password" value="Password" />
+							<InputLabel for="password" value="Contraseña" />
 							<TextInput id="password" type="password" class="mt-1 block w-full" v-model="form.password" required autocomplete="new-password" />
 							<InputError class="mt-2" :message="form.errors.password" />
 						</div>
 						
 						<div class="mt-4">
-							<InputLabel for="password_confirmation" value="Confirm Password" />
+							<InputLabel for="password_confirmation" value="Confirmar Contraseña" />
 							<TextInput id="password_confirmation" type="password" class="mt-1 block w-full" v-model="form.password_confirmation" required autocomplete="new-password" />
 							<InputError class="mt-2" :message="form.errors.password_confirmation" />
 						</div>
 						
 						<div class="flex items-center justify-end mt-4">
 							<PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-								Reset Password
+								Resetear Contraseña
 							</PrimaryButton>
 						</div>
 					</form>
