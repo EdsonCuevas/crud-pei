@@ -66,7 +66,7 @@ const closeModalFormBlue = () => showModalFormBlue.value = false;
                         <td class="px-4 py-3 text-sm">{{ programa.title }}</td>
                         <td class="px-4 py-3 text-sm">{{ new Date(programa.created_at).toLocaleString() }}</td>
                         <td class="px-4 py-3 text-sm">{{ new Date(programa.updated_at).toLocaleString() }}</td>
-                        <td class="px-4 py-3 text-sm">{{programa.creator.name}}</td>
+                        <td class="px-4 py-3 text-sm">{{ programa.creator ? (programa.creator.name ? programa.creator.name : '') : '' }}</td>
 
                         <td class="px-4 py-3 text-sm">
                             <WarningButton @click="openModalFormWarning(programa)">

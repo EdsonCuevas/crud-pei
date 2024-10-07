@@ -65,7 +65,7 @@ const closeModalView = () => {
 									{{ programa.title }}
 								</td>
 								<td class="px-4 py-3 text-sm">
-									{{ programa.coordinator.name }}
+									{{ programa.coordinator ? (programa.coordinator.name ? programa.coordinator.name : '') : '' }}
 								</td>
                                 <td class="px-4 py-3 text-sm">
                                     <SecondaryButton @click="openModalView(programa)">
