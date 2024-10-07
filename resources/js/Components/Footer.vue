@@ -11,9 +11,9 @@
           <div>
             <h3 class="text-lg font-bold mb-4">Enlaces Rápidos</h3>
             <ul class="space-y-2">
-              <li><a href="/home" class="hover:underline">Inicio</a></li>
-              <li><a href="#" class="hover:underline">Programas</a></li>
-              <li><a href="#" class="hover:underline">Contacto</a></li>
+              <li><a href="home" class="hover:underline">Inicio</a></li>
+              <li><a href="programs" class="hover:underline">Programas</a></li>
+              <li><a href="contact" class="hover:underline">Contacto</a></li>
             </ul>
           </div>
           <div>
