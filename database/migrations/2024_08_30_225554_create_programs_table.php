@@ -17,9 +17,9 @@ return new class extends Migration
             $table->string('description')->nullable();
             $table->string('image', 100)->nullable();
             $table->unsignedBigInteger('creator_id')->nullable();
-            $table->unsignedBigInteger('coordi_id');
-            $table->foreign('creator_id')->references('id')->on('users');
-            $table->foreign('coordi_id')->references('id')->on('users');
+            $table->unsignedBigInteger('coordi_id')->nullable();;
+            $table->foreign('creator_id')->references('id')->on('users')->onDelete('set null')->onUpdate('cascade');
+            $table->foreign('coordi_id')->references('id')->on('users')->onDelete('set null')->onUpdate('cascade');
             $table->timestamps();
         });
     }

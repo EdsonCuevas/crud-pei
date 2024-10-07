@@ -115,10 +115,10 @@ const ok = (m) => {
                                 {{ programa.title }}
                             </td>
                             <td class="px-4 py-3 text-sm">
-                                {{ programa.creator.name }}
+                                {{ programa.creator ? (programa.creator.name ? programa.creator.name : '') : '' }}
                             </td>
 							<td class="px-4 py-3 text-sm">
-                                {{ programa.coordinator.name }}
+                                {{ programa.coordinator ? (programa.coordinator.name ? programa.coordinator.name : '') : '' }}
                             </td>
                             <td class="px-4 py-3 text-sm">
                                 {{ new Date(programa.created_at).toLocaleString() }}

@@ -28,11 +28,11 @@ const props = defineProps({
                       </div>
                       <div class="flex items-center space-x-2 text-sm text-gray-500">
                           <UserIcon class="h-4 w-4" />
-                          <span><strong>Creado por:</strong> {{ creator.name }}</span>
+                          <span><strong>Creado por:</strong> {{ creator ? (creator.name ? creator.name : '') : '' }}</span>
                       </div>
                       <div class="flex items-center space-x-2 text-sm text-gray-500">
                           <UserIcon class="h-4 w-4" />
-                          <span><strong>Coordinador:</strong> {{ coordinator.name }}</span>
+                          <span><strong>Coordinador:</strong> {{ coordinator ? (coordinator.name ? coordinator.name : '') : '' }}</span>
                       </div>
                       <div class="flex items-center space-x-2 text-sm text-gray-500">
                           <CalendarIcon class="h-4 w-4" />
