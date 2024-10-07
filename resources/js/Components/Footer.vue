@@ -5,11 +5,13 @@
           <div>
             <h3 class="text-lg font-bold mb-4">Fundación CTI</h3>
             <p>Trabajando por un futuro mejor a través del conocimiento y la innovación.</p>
+            <br>
+            <a href="/terms-conditions" class="hover:underline"><p>Politicas de Privacidad</p></a>
           </div>
           <div>
             <h3 class="text-lg font-bold mb-4">Enlaces Rápidos</h3>
             <ul class="space-y-2">
-              <li><a href="#" class="hover:underline">Inicio</a></li>
+              <li><a href="/home" class="hover:underline">Inicio</a></li>
               <li><a href="#" class="hover:underline">Programas</a></li>
               <li><a href="#" class="hover:underline">Contacto</a></li>
             </ul>
@@ -23,6 +25,7 @@
         <div class="mt-8 pt-8 border-t border-gray-700 text-center">
           <p>&copy; {{ new Date().getFullYear() }} Fundación CTI. Todos los derechos reservados.</p>
         </div>
+        
       </div>
     </footer>
   </template>
