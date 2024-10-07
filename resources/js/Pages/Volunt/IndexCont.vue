@@ -27,7 +27,6 @@ const props = defineProps({
                             <th class="px-4 py-3">Telefono</th>
                             <th class="px-4 py-3">Correo</th>
                             <th class="px-4 py-3">Rol</th>
-                            <th class="px-4 py-3">Estado</th>
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y">
@@ -45,9 +44,7 @@ const props = defineProps({
 									{{ user.email }}
 								</td>
 								<td class="px-4 py-3 text-sm">
-                                    {{user.role }}
-                                </td>
-                                <td class="px-4 py-3 text-sm">
+                                    {{user.role.role }}
                                 </td>
 							</tr>
                     </tbody>

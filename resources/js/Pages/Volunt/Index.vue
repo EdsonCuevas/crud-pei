@@ -41,14 +41,15 @@ const props = defineProps({
 									{{ program.id }}
 								</td>
 								<td class="px-4 py-3 text-sm">
-									{{ program.name }}
+									{{ program.title }}
 								</td>
 								<td class="px-4 py-3 text-sm">
                                     {{ new Date(program.created_at).toLocaleString() }}
                                 </td>
                                 <td class="px-4 py-3 text-sm">
                                     {{ new Date(program.updated_at).toLocaleString() }}
-                                </td><td class="px-4 py-3 text-sm">
+                                </td>
+                                <td class="px-4 py-3 text-sm">
                                     
                                 </td>
                                 <td class="px-4 py-3 text-sm">
