@@ -12,7 +12,7 @@
             <h1 class="text-5xl font-bold mb-6">Impulsando el conocimiento y la innovación</h1>
             <p class="text-xl mb-8">Descubre cómo estamos transformando vidas a través de la ciencia, la cultura y la educación.</p>
             <button class="text-white border-white hover:bg-white hover:text-blue-800 border p-2 rounded">
-              Explorar proyectos
+              Explorar programas
             </button>
           </div>
         </section>
@@ -78,8 +78,8 @@
                 :hover="{ scale: 1.05 }"
                 class="bg-white shadow-md rounded-lg p-4"
               >
-                <img :src="'https://via.placeholder.com/400x200?text=Noticia+' + i" :alt="'Noticia ' + i" class="w-full h-40 object-cover mb-4 rounded-md">
-                <h3 class="text-xl font-bold mb-2">{{ 'Título de la noticia ' + i }}</h3>
+                <img :src="'https://via.placeholder.com/400x200?text=Noticia+' + i" :alt="'Programa ' + i" class="w-full h-40 object-cover mb-4 rounded-md">
+                <h3 class="text-xl font-bold mb-2">{{ 'Título del programa ' + i }}</h3>
                 <p>Descripción.</p>
               </div>
             </div>
