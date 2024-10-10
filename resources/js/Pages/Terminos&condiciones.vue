@@ -13,7 +13,7 @@
             : 'text-gray-600 hover:text-[#000000] transition-colors'
         ]"
         >
-          Política de Privacidad
+        Privacy Policy
         </button>
         <button
           @click="activeTab = 'terms'"
@@ -24,7 +24,7 @@
             : 'text-gray-600 hover:text-[#000000] transition-colors'
         ]"
         >
-          Términos de Servicio
+        Terms of Service
         </button>
       </div>
 
@@ -32,208 +32,210 @@
       <div class="bg-white text-black max-w-5xl mx-auto rounded-lg shadow-md">
   <div class="p-6">
     <div v-if="activeTab === 'privacy'">
-      <h2 class="text-2xl font-bold mb-4">Política de Privacidad</h2>
+      <h2 class="text-2xl font-bold mb-4">Privacy Policy</h2>
       <p class="mb-4">
-        La Fundación CTI, Asociación Civil, con domicilio en Av. Universidad No. 333, Colonia Las Víboras, Colima, Colima, C.P. 28040; edificio frente a Rectoría, segunda planta,
-        está comprometida con la protección de la privacidad y los datos personales de las personas que interactúan con nosotros, ya sean donantes, beneficiarios o cualquier tercero relacionado.
-        Esta política tiene como objetivo informar sobre cómo la Fundación CTI recopila, utiliza, protege y, en su caso, comparte los datos personales que recaba de los usuarios.
+        Fundación CTI, Asociación Civil, with address at Av. Universidad No. 333, Colonia Las Víboras, Colima, Colima, C.P. 28040; building in front of Rectoría, second floor,is committed to protecting the privacy and personal data of the people who interact with us, whether they are donors, beneficiaries or any related third party.The purpose of this policy is to provide information on how the CTI Foundation collects, uses, protects and, where appropriate, shares the personal data it collects from users.
       </p>
       
       <p class="mb-4">
-        <strong>1. Datos que se recopilan</strong><br>
-        La Fundación CTI podrá recopilar diversos tipos de datos personales, entre los que se incluyen, pero no se limitan a:
+        <strong>1. Data to be collected</strong><br>
+        The CTI Foundation may collect various types of personal data, including, but not limited to:
       </p>
       <ul class="mb-4 list-disc list-inside">
-        <li><strong>Datos de identificación:</strong> Nombre completo, dirección, correo electrónico, número de teléfono.</li>
-        <li><strong>Datos financieros:</strong> Información de cuentas bancarias o tarjetas de crédito para la gestión de donativos.</li>
-        <li><strong>Datos fiscales:</strong> Registro Federal de Contribuyentes (RFC) y otros datos necesarios para la emisión de Comprobantes Fiscales Digitales por Internet (CFDI).</li>
-        <li><strong>Datos de navegación:</strong> Información obtenida de su interacción con nuestros sitios web a través de cookies u otras tecnologías.</li>
+        <li><strong>Identification data:</strong> Full name, address, e-mail, phone number.</li>
+        <li><strong>Financial information:</strong>Bank account or credit card information for the management of donations.</li>
+        <li><strong>Fiscal data:</strong> Federal Taxpayers Registry (RFC) and other data necessary for the issuance of Digital Tax Receipts via Internet (CFDI).</li>
+        <li><strong>Navigation data:</strong> Information obtained from your interaction with our websites through cookies or other technologies.</li>
       </ul>
 
       <p class="mb-4">
-        <strong>2. Finalidad del tratamiento de datos</strong><br>
-        Los datos personales recabados serán utilizados exclusivamente para los siguientes fines:
+        <strong>2. Purpose of data processing</strong><br>
+        The personal data collected will be used exclusively for the following purposes:
       </p>
       <ul class="mb-4 list-disc list-inside">
-        <li><strong>Gestión y administración de donativos:</strong> Incluye el procesamiento de donaciones, la emisión de CFDIs y el seguimiento de donativos recurrentes.</li>
-        <li><strong>Cumplimiento de obligaciones legales y fiscales:</strong> Emitir y reportar información ante las autoridades fiscales correspondientes.</li>
-        <li><strong>Comunicación:</strong> Mantener informados a los donantes sobre actividades, programas, convocatorias, reportes anuales y otras acciones relevantes de la Fundación CTI.</li>
-        <li><strong>Mejora de servicios:</strong> Analizar y evaluar el uso de nuestros servicios para mejorar la experiencia de los usuarios en nuestras plataformas.</li>
+        <li><strong>Management and administration of donations:</strong> Includes processing of donations, issuance of CFDIs and tracking of recurring donations.</li>
+        <li><strong>Compliance with legal and tax obligations:</strong> Issue and report information to the corresponding tax authorities.</li>
+        <li><strong>Communication:</strong> Keep donors informed about activities, programs, calls for proposals, annual reports and other relevant actions of the CTI Foundation.</li>
+        <li><strong>Improvement of services:</strong> Analyze and evaluate the use of our services to improve the user experience on our platforms.</li>
       </ul>
 
       <p class="mb-4">
-        <strong>3. Protección de datos personales</strong><br>
-        La Fundación CTI adopta todas las medidas de seguridad físicas, técnicas y administrativas necesarias para proteger los datos personales contra pérdida, mal uso, alteración, acceso no autorizado y robo. Asimismo, solo el personal autorizado tendrá acceso a los datos personales, quienes han sido capacitados para manejar esta información de manera confidencial.
+        <strong>3. Protection of personal data</strong><br>
+        CTI Foundation adopts all physical, technical and administrative security measures necessary to protect personal data against loss, misuse, alteration, unauthorized access and theft. 
+        Also, only authorized personnel will have access to personal data, who have been trained to handle this information confidentially.
       </p>
-
       <p class="mb-4">
-        <strong>4. Compartición de datos</strong><br>
-        La Fundación CTI no compartirá ni transferirá los datos personales a terceros, salvo en los siguientes casos:
+        <strong>4. Data Sharing</strong><br>
+        The CTI Foundation will not share or transfer personal data to third parties, except in the following cases:
       </p>
       <ul class="mb-4 list-disc list-inside">
-        <li><strong>Autoridades fiscales:</strong> Cuando sea necesario para cumplir con las obligaciones legales relacionadas con los donativos.</li>
-        <li><strong>Proveedores de servicios:</strong> Cuando trabajemos con terceros para facilitar la gestión de donaciones o el envío de comunicaciones, siempre que dichos proveedores asuman un compromiso de confidencialidad y cumplan con la legislación vigente en materia de protección de datos.</li>
+        <li><strong>Fiscal authorities:</strong> When necessary to comply with legal obligations related to donations.</li>
+        <li><strong>Service providers:</strong> When we work with third parties to facilitate the management of donations or the sending of communications, provided that such suppliers assume a commitment to confidentiality and comply with current legislation on data protection.</li>
       </ul>
 
       <p class="mb-4">
-        <strong>5. Derechos del titular de los datos</strong><br>
-        Los titulares de los datos personales tienen derecho a:
+        <strong>5. Rights of the owner of the data</strong><br>
+        The holders of personal data have the right to:
       </p>
       <ul class="mb-4 list-disc list-inside">
-        <li>Acceder a sus datos personales en posesión de la Fundación CTI.</li>
-        <li>Rectificar sus datos en caso de ser incorrectos o desactualizados.</li>
-        <li>Cancelar sus datos cuando consideren que no son necesarios para los fines mencionados.</li>
-        <li>Oponerse al tratamiento de sus datos para finalidades específicas.</li>
+        <li>Access to your personal data in possession of the CTI Foundation.</li>
+        <li>Rectify your data in case they are incorrect or outdated.</li>
+        <li>Cancel your data when they consider that they are not necessary for the above mentioned purposes.</li>
+        <li>Oppose the processing of your data for specific purposes.</li>
       </ul>
       <p class="mb-4">
-        Para ejercer cualquiera de estos derechos, los titulares podrán enviar una solicitud al correo electrónico cti@support.com, incluyendo su nombre completo, la relación que mantiene con la Fundación CTI y el derecho que desean ejercer. La Fundación responderá a dicha solicitud en un plazo de 20 días hábiles, conforme a lo establecido por la Ley Federal de Protección de Datos Personales en Posesión de los Particulares.
+        To exercise any of these rights, holders may send a request to cti@support.com, including their full name, the relationship they have with Fundación CTI and the right they wish to exercise.
+         The Foundation will respond to such request within 20 working days, in accordance with the provisions of the Federal Law for the Protection of Personal Data in Possession of Individuals.
       </p>
 
       <p class="mb-4">
-        <strong>6. Uso de cookies y tecnologías similares</strong><br>
-        La Fundación CTI utiliza cookies y otras tecnologías similares en su sitio web para mejorar la experiencia de los usuarios y analizar el tráfico. Los usuarios pueden ajustar la configuración de su navegador para limitar o desactivar el uso de cookies, aunque esto podría afectar algunas funcionalidades del sitio.
+        <strong>6. Use of cookies and similar technologies</strong><br>
+        The CTI Foundation uses cookies and other similar technologies on its website to enhance the user experience and analyze traffic. Users can adjust their browser settings to limit or disable the use of cookies, although this may affect some functionality of the site.
       </p>
 
       <p class="mb-4">
-        <strong>7. Modificaciones a la Política de Privacidad</strong><br>
-        La Fundación CTI se reserva el derecho de actualizar esta Política de Privacidad en cualquier momento. Cualquier cambio será notificado a través de nuestra página web . Recomendamos a los usuarios revisar periódicamente esta política para estar informados sobre cómo protegemos su información.
+        <strong>7. Modifications to the Privacy Policy</strong><br>
+        CTI Foundation reserves the right to update this Privacy Policy at any time. Any changes will be notified through our website. We encourage users to periodically review this policy to stay informed about how we protect your information.
       </p>
 
       <p class="mb-4">
-        <strong>8. Contacto</strong><br>
-        Si tiene alguna duda o comentario respecto a esta Política de Privacidad, puede ponerse en contacto con nosotros a través del correo electrónico cti@support.com o al número de teléfono 3131410000.
+        <strong>8. Contact</strong><br>
+        If you have any questions or comments regarding this Privacy Policy, you may contact us by e-mail at cti@support.com or by telephone at 3131410000.
       </p>
 
       <p class="mb-4">
-        <strong>Vigencia de la Política de Privacidad</strong><br>
-        Esta Política de Privacidad está vigente desde su publicación y será aplicable a los datos recabados desde esa fecha.
+        <strong>Validity of the Privacy Policy</strong><br>
+        This Privacy Policy is effective as of its publication and will be applicable to data collected as of that date.
       </p>
     </div>
 
     <!-- Terminos de servicio -->
 <div v-if="activeTab === 'terms'">
-  <h2 class="text-2xl font-bold mb-4">Términos de Servicio</h2>
- 
-  <p class="mb-4">
-    <strong>1. Aceptación de los Términos</strong><br />
-    Al participar como voluntario, becario, donador, coordinador o en cualquier otro programa de la Fundación CTI, el Usuario acepta estos Términos, los cuales pueden ser modificados en cualquier momento. Cualquier cambio será notificado a través de la página web oficial de la Fundación  <a href="#">http://crud-pei.test/terminos-condiciones.</a>
-    , y el uso continuo de los servicios implica la aceptación de dichos cambios.
-  </p>
+  <h2 class="text-2xl font-bold mb-4">Terms of Service</h2>
 
-  <p class="mb-4">
-    <strong>2. Definiciones</strong><br />
-    - <strong>Usuario:</strong> Toda persona que participa en los programas de la Fundación CTI, ya sea como voluntario, becario, donador o coordinador.<br />
-    - <strong>Donataria:</strong> La Fundación CTI, legalmente constituida conforme a las leyes mexicanas y autorizada por la Secretaría de Hacienda y Crédito Público (SHCP) para recibir donativos deducibles de impuestos.<br />
-    - <strong>Donativo:</strong> Aportación en dinero o especie realizada por el Usuario en calidad de donador, destinada a apoyar los fines sociales de la Fundación CTI.<br />
-    - <strong>Voluntario:</strong> Persona que ofrece su tiempo y habilidades de manera voluntaria para colaborar en actividades y proyectos de la Fundación.<br />
-    - <strong>Becario:</strong> Persona que recibe apoyo económico o académico a través de becas otorgadas por la Fundación CTI.<br />
-    - <strong>Coordinador:</strong> Persona encargada de la gestión y organización de los programas, proyectos y actividades de la Fundación CTI.
-  </p>
+<p class="mb-4">
+  <strong>1. Acceptance of the Terms</strong><br />
+  By participating as a volunteer, scholar, donor, coordinator, or in any other program of the CTI Foundation, the User agrees to these Terms, which may be modified at any time. Any changes will be notified through the Foundation's official website at 
+  <a href="#">http://crud-pei.test/terms-conditions.</a>, and the continued use of the services implies acceptance of such changes.
+</p>
 
-  <p class="mb-4">
-    <strong>3. Servicios y Programas Ofrecidos</strong><br />
-    La Fundación CTI ofrece una variedad de programas dirigidos a diferentes beneficiarios, incluyendo pero no limitándose a:
-  </p>
+<p class="mb-4">
+  <strong>2. Definitions</strong><br />
+  - <strong>User:</strong> Any person participating in the programs of the CTI Foundation, whether as a volunteer, scholar, donor, or coordinator.<br />
+  - <strong>Donee:</strong> The CTI Foundation, legally constituted under Mexican law and authorized by the Ministry of Finance and Public Credit (SHCP) to receive tax-deductible donations.<br />
+  - <strong>Donation:</strong> A contribution in money or kind made by the User as a donor to support the social goals of the CTI Foundation.<br />
+  - <strong>Volunteer:</strong> A person who voluntarily offers their time and skills to collaborate in the Foundation's activities and projects.<br />
+  - <strong>Scholar:</strong> A person who receives financial or academic support through scholarships granted by the CTI Foundation.<br />
+  - <strong>Coordinator:</strong> A person responsible for the management and organization of the Foundation's programs, projects, and activities.
+</p>
 
-  <ul class="mb-4 list-disc list-inside">
-    <li><strong>Voluntariado:</strong> Los voluntarios apoyan en actividades sociales, educativas y culturales, conforme a los objetivos de la Fundación.</li>
-    <li><strong>Becas:</strong> La Fundación otorga becas a estudiantes o profesionales que cumplan con los criterios establecidos, con el objetivo de fomentar el desarrollo académico y personal.</li>
-    <li><strong>Donaciones:</strong> Los donadores contribuyen con recursos económicos o en especie para apoyar los proyectos de la Fundación.</li>
-    <li><strong>Coordinadores:</strong> Los coordinadores son responsables de la supervisión y gestión de los programas y el equipo de voluntarios, becarios y donadores.</li>
-  </ul>
+<p class="mb-4">
+  <strong>3. Services and Programs Offered</strong><br />
+  The CTI Foundation offers a variety of programs aimed at different beneficiaries, including but not limited to:
+</p>
 
-  <p class="mb-4">
-    <strong>4. Derechos y Obligaciones del Usuario</strong><br />
-    <strong>Voluntarios:</strong>
-  </p>
+<ul class="mb-4 list-disc list-inside">
+  <li><strong>Volunteering:</strong> Volunteers support social, educational, and cultural activities according to the Foundation's objectives.</li>
+  <li><strong>Scholarships:</strong> The Foundation grants scholarships to students or professionals who meet the established criteria, aiming to promote academic and personal development.</li>
+  <li><strong>Donations:</strong> Donors contribute economic resources or in-kind donations to support the Foundation's projects.</li>
+  <li><strong>Coordinators:</strong> Coordinators are responsible for overseeing and managing the programs and teams of volunteers, scholars, and donors.</li>
+</ul>
 
-  <ul class="mb-4 list-disc list-inside">
-    <li><strong>Participación:</strong> El voluntario acepta participar en las actividades asignadas, respetando las reglas y políticas de la Fundación.</li>
-    <li><strong>Compromiso:</strong> Se espera que el voluntario asuma su compromiso de tiempo y trabajo con responsabilidad y ética, y que notifique con antelación si no puede cumplir con alguna actividad asignada.</li>
-    <li><strong>Seguridad y respeto:</strong> La Fundación garantiza un ambiente seguro para los voluntarios y espera que el respeto mutuo prevalezca en todas las interacciones.</li>
-  </ul>
+<p class="mb-4">
+  <strong>4. User Rights and Obligations</strong><br />
+  <strong>Volunteers:</strong>
+</p>
 
-  <p class="mb-4">
-    <strong>Becarios:</strong>
-  </p>
-  <ul class="mb-4 list-disc list-inside">
-    <li><strong>Cumplimiento de requisitos:</strong> Los becarios deben cumplir con los requisitos académicos y personales establecidos en la convocatoria de becas.</li>
-    <li><strong>Informes periódicos:</strong> Los becarios están obligados a presentar informes de avance, de acuerdo con las directrices de la Fundación.</li>
-    <li><strong>Uso de la beca:</strong> La beca debe ser utilizada para los fines acordados, y cualquier mal uso de los fondos puede resultar en la suspensión de la misma.</li>
-  </ul>
+<ul class="mb-4 list-disc list-inside">
+  <li><strong>Participation:</strong> The volunteer agrees to participate in assigned activities, adhering to the Foundation's rules and policies.</li>
+  <li><strong>Commitment:</strong> The volunteer is expected to fulfill their time and work commitments responsibly and ethically and to notify in advance if they are unable to complete an assigned activity.</li>
+  <li><strong>Safety and Respect:</strong> The Foundation guarantees a safe environment for volunteers and expects mutual respect to prevail in all interactions.</li>
+</ul>
 
-  <p class="mb-4">
-    <strong>Donadores:</strong>
-  </p>
-  <ul class="mb-4 list-disc list-inside">
-    <li><strong>Realización de donativos:</strong> Los donadores pueden realizar sus aportaciones a través del portal de la Fundación o mediante transferencias bancarias.</li>
-    <li><strong>CFDI:</strong> Los donadores recibirán un Comprobante Fiscal Digital por Internet (CFDI) al proporcionar su información fiscal, según lo estipulado en la sección 5.</li>
-    <li><strong>Derecho a información:</strong> Los donadores tienen derecho a recibir información periódica sobre el uso de los fondos donados y el impacto de sus contribuciones.</li>
-  </ul>
+<p class="mb-4">
+  <strong>Scholars:</strong>
+</p>
 
-  <p class="mb-4">
-    <strong>Coordinadores:</strong>
-  </p>
-  <ul class="mb-4 list-disc list-inside">
-    <li><strong>Supervisión:</strong> Los coordinadores tienen la responsabilidad de gestionar y supervisar a los equipos de voluntarios y becarios, asegurando el cumplimiento de los objetivos de cada proyecto.</li>
-    <li><strong>Reportes:</strong> Los coordinadores deberán entregar informes sobre el avance y resultados de los proyectos y programas bajo su cargo.</li>
-  </ul>
+<ul class="mb-4 list-disc list-inside">
+  <li><strong>Requirement Compliance:</strong> Scholars must meet the academic and personal requirements established in the scholarship call.</li>
+  <li><strong>Periodic Reports:</strong> Scholars are required to submit progress reports in accordance with the Foundation's guidelines.</li>
+  <li><strong>Scholarship Use:</strong> The scholarship must be used for the agreed-upon purposes, and any misuse of funds may result in suspension of the scholarship.</li>
+</ul>
 
-  <p class="mb-4">
-    <strong>5. Donaciones y Comprobantes Fiscales</strong><br />
-    Los donativos realizados a la Fundación CTI estarán sujetos a los siguientes lineamientos:
-  </p>
+<p class="mb-4">
+  <strong>Donors:</strong>
+</p>
 
-  <ul class="mb-4 list-disc list-inside">
-    <li><strong>Donación a través del portal:</strong> Al realizar un donativo en línea, el Usuario acepta estos Términos y condiciones al confirmar la transacción.</li>
-    <li><strong>Donación mediante transferencia SPEI:</strong> Al realizar una transferencia bancaria, el Usuario acepta estos Términos.</li>
-    <li><strong>CFDI:</strong> La Fundación emitirá un Comprobante Fiscal Digital por Internet (CFDI) por cada donativo, el cual estará disponible en la sección de "Recibos Deducibles" del portal dentro de las 24 a 48 horas posteriores a la donación.</li>
-  </ul>
+<ul class="mb-4 list-disc list-inside">
+  <li><strong>Making Donations:</strong> Donors can make their contributions through the Foundation's portal or via bank transfers.</li>
+  <li><strong>CFDI:</strong> Donors will receive an Internet Digital Fiscal Receipt (CFDI) upon providing their tax information, as stipulated in section 5.</li>
+  <li><strong>Right to Information:</strong> Donors have the right to receive periodic information about the use of donated funds and the impact of their contributions.</li>
+</ul>
 
-  <p class="mb-4">
-    <strong>6. Protección de Datos Personales</strong><br />
-    La Fundación CTI se compromete a proteger los datos personales de todos sus usuarios (voluntarios, becarios, donadores y coordinadores) conforme a la Política de Privacidad y la Ley Federal de Protección de Datos Personales en Posesión de los Particulares. Para más detalles, consulte la Política de Privacidad en 
-    <a href="#">http://crud-pei.test/terminos-condiciones.</a>
-  </p>
+<p class="mb-4">
+  <strong>Coordinators:</strong>
+</p>
 
-  <p class="mb-4">
-    <strong>7. Modificación de los Servicios</strong><br />
-    La Fundación CTI se reserva el derecho de modificar, suspender o descontinuar cualquier servicio o programa, ya sea de manera temporal o permanente, sin previo aviso.
-  </p>
+<ul class="mb-4 list-disc list-inside">
+  <li><strong>Supervision:</strong> Coordinators are responsible for managing and supervising the teams of volunteers and scholars, ensuring the achievement of project objectives.</li>
+  <li><strong>Reports:</strong> Coordinators must submit reports on the progress and results of the projects and programs under their charge.</li>
+</ul>
 
-  <p class="mb-4">
-    <strong>8. Limitaciones de Responsabilidad</strong><br />
-    La Fundación CTI no será responsable por:
-  </p>
+<p class="mb-4">
+  <strong>5. Donations and Tax Receipts</strong><br />
+  Donations made to the CTI Foundation are subject to the following guidelines:
+</p>
 
-  <ul class="mb-4 list-disc list-inside">
-    <li>Pérdidas o daños derivados de interrupciones en el servicio, errores en la operación del sitio web o problemas técnicos.</li>
-    <li>Pérdidas o daños derivados del uso indebido de los servicios o información por parte del Usuario o terceros.</li>
-  </ul>
+<ul class="mb-4 list-disc list-inside">
+  <li><strong>Donation through the portal:</strong> By making an online donation, the User agrees to these Terms and Conditions by confirming the transaction.</li>
+  <li><strong>Donation via SPEI transfer:</strong> By making a bank transfer, the User agrees to these Terms.</li>
+  <li><strong>CFDI:</strong> The Foundation will issue an Internet Digital Fiscal Receipt (CFDI) for each donation, which will be available in the "Deductible Receipts" section of the portal within 24 to 48 hours after the donation.</li>
+</ul>
 
-  <p class="mb-4">
-    El Usuario acepta que el uso de los servicios de la Fundación CTI es bajo su propio riesgo.
-  </p>
+<p class="mb-4">
+  <strong>6. Personal Data Protection</strong><br />
+  The CTI Foundation is committed to protecting the personal data of all its users (volunteers, scholars, donors, and coordinators) in accordance with the Privacy Policy and the Federal Law on Protection of Personal Data Held by Private Parties. For more details, please refer to the Privacy Policy at 
+  <a href="#">http://crud-pei.test/terms-conditions.</a>
+</p>
 
-  <p class="mb-4">
-    <strong>9. Terminación de la Relación</strong><br />
-    La Fundación CTI se reserva el derecho de suspender o terminar la relación con cualquier voluntario, becario, donador o coordinador que incumpla estos Términos, sin necesidad de previo aviso.
-  </p>
+<p class="mb-4">
+  <strong>7. Modification of Services</strong><br />
+  The CTI Foundation reserves the right to modify, suspend, or discontinue any service or program, either temporarily or permanently, without prior notice.
+</p>
 
-  <p class="mb-4">
-    <strong>10. Ley Aplicable y Jurisdicción</strong><br />
-    Estos Términos se rigen por las leyes aplicables en México. En caso de controversia, el Usuario acepta someterse a la jurisdicción de los tribunales competentes de la Ciudad de Colima.
-  </p>
+<p class="mb-4">
+  <strong>8. Limitation of Liability</strong><br />
+  The CTI Foundation will not be responsible for:
+</p>
 
-  <p class="mb-4">
-    <strong>11. Contacto</strong><br />
-    Para cualquier duda o aclaración relacionada con estos Términos de Servicio, el Usuario puede ponerse en contacto con la Fundación CTI a través del correo electrónico cti@support.com o al número 3131410000.
-  </p>
+<ul class="mb-4 list-disc list-inside">
+  <li>Losses or damages resulting from service interruptions, website operation errors, or technical issues.</li>
+  <li>Losses or damages resulting from misuse of services or information by the User or third parties.</li>
+</ul>
 
-  <p class="mb-4">
-    <strong>Vigencia de los Términos de Servicio</strong><br />
-    Estos Términos de Servicio entran en vigor desde la fecha de su publicación y serán aplicables a todas las interacciones, donativos y participaciones en los programas de la Fundación CTI a partir de esa fecha.
-  </p>
+<p class="mb-4">
+  The User agrees that the use of CTI Foundation services is at their own risk.
+</p>
+
+<p class="mb-4">
+  <strong>9. Termination of Relationship</strong><br />
+  The CTI Foundation reserves the right to suspend or terminate the relationship with any volunteer, scholar, donor, or coordinator who violates these Terms, without prior notice.
+</p>
+
+<p class="mb-4">
+  <strong>10. Governing Law and Jurisdiction</strong><br />
+  These Terms are governed by the applicable laws of Mexico. In case of dispute, the User agrees to submit to the jurisdiction of the competent courts of the City of Colima.
+</p>
+
+<p class="mb-4">
+  <strong>11. Contact</strong><br />
+  For any questions or clarifications related to these Terms of Service, the User may contact the CTI Foundation via email at cti@support.com or at the number 3131410000.
+</p>
+
+<p class="mb-4">
+  <strong>Validity of the Terms of Service</strong><br />
+  These Terms of Service come into effect from the date of their publication and will apply to all interactions, donations, and participation in CTI Foundation programs from that date onward.
+</p>
     </div>
     </div>
     </div>

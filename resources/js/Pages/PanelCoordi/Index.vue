@@ -48,17 +48,17 @@ const closeModalFormBlue = () => showModalFormBlue.value = false;
 
 <template>
     <AuthenticatedLayout>
-        <template #header>Programas</template>
+        <template #header>Programs</template>
 
         <div class="w-full overflow-hidden rounded-lg border shadow-md bg-white">
             <table class="w-full whitespace-no-wrap">
                 <thead>
                     <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b bg-gray-50">
-                        <th class="px-4 py-3">Título</th>
-                        <th class="px-4 py-3">Fecha de Creación</th>
-                        <th class="px-4 py-3">Fecha de Modificación</th>
-                        <th class="px-4 py-3">Asignador por:</th>
-                        <th class="px-4 py-3">Acciones</th>
+                        <th class="px-4 py-3">Title</th>
+                        <th class="px-4 py-3">Date of Creation</th>
+                        <th class="px-4 py-3">Modification Date</th>
+                        <th class="px-4 py-3">Assigner by:</th>
+                        <th class="px-4 py-3">Actions</th>
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y">
@@ -108,9 +108,9 @@ const closeModalFormBlue = () => showModalFormBlue.value = false;
         <!-- Modal de programa-->
         <Modal :show="showModalFormWarning" @close="closeModalFormWarning">
             <div class="p-6">
-                <h2 class="text-lg font-medium text-gray-900">Programa</h2>
+                <h2 class="text-lg font-medium text-gray-900">Programs</h2>
                 <div class="mt-6 mb-6 space-y-6 max-w-xl">
-                    <InputGroup :text="'Titulo'" :required="'required'" v-model="formWarningButton.title">
+                    <InputGroup :text="'Title'" :required="'required'" v-model="formWarningButton.title">
                     <svg 
                             xmlns="http://www.w3.org/2000/svg"
                             width="24" 
@@ -127,7 +127,7 @@ const closeModalFormBlue = () => showModalFormBlue.value = false;
                     </svg>
                     </InputGroup>
 
-                    <InputGroup text="Descripción" required v-model="formWarningButton.description">
+                    <InputGroup text="Description" required v-model="formWarningButton.description">
                     <svg 
                             xmlns="http://www.w3.org/2000/svg" 
                             width="24" height="24" 
@@ -146,7 +146,7 @@ const closeModalFormBlue = () => showModalFormBlue.value = false;
                             <polyline points="10 9 9 9 8 9"/>
                     </svg>
                     </InputGroup>
-                <InputGroup type="text" text="Fecha de Creación" required v-model="formWarningButton.created_at">
+                <InputGroup type="text" text="Date of Creation" required v-model="formWarningButton.created_at">
                 <svg 
                         xmlns="http://www.w3.org/2000/svg" 
                         width="24" 
@@ -166,7 +166,7 @@ const closeModalFormBlue = () => showModalFormBlue.value = false;
                 </svg>
                 </InputGroup>
 
-                <InputGroup text="Fecha de Modificación" required v-model="formWarningButton.updated_at">
+                <InputGroup text="Modification Date" required v-model="formWarningButton.updated_at">
                     <svg 
                             xmlns="http://www.w3.org/2000/svg"
                             width="24"
@@ -187,8 +187,8 @@ const closeModalFormBlue = () => showModalFormBlue.value = false;
                 </InputGroup>
                 </div>
                 <div class="flex justify-end space-x-2">
-                    <SecondaryButton @click="closeModalFormWarning">Cancelar</SecondaryButton>
-                    <PrimaryButton @click="saveWarningButton">Guardar</PrimaryButton>
+                    <SecondaryButton @click="closeModalFormWarning">Cancel</SecondaryButton>
+                    <PrimaryButton @click="saveWarningButton">Save</PrimaryButton>
                 </div>
             </div>
         </Modal>
@@ -196,9 +196,9 @@ const closeModalFormBlue = () => showModalFormBlue.value = false;
         <!-- Modal boton azul programas--> 
         <Modal :show="showModalFormBlue" @close="closeModalFormBlue">
             <div class="p-6">
-                <h2 class="text-lg font-medium text-gray-900">Crear Programa</h2>
+                <h2 class="text-lg font-medium text-gray-900">Create Program</h2>
                 <div class="mt-6 mb-6 space-y-6 max-w-xl">
-                    <InputGroup text="Título" required v-model="formBlueButton.title">
+                    <InputGroup text="Title" required v-model="formBlueButton.title">
                         <svg 
                                 xmlns="http://www.w3.org/2000/svg" 
                                 fill="none" 
@@ -215,7 +215,7 @@ const closeModalFormBlue = () => showModalFormBlue.value = false;
                                 0 0 0 6.75 5.25v6.75A2.25 2.25 0 0 0 9 14.25Z" />
                         </svg>
                     </InputGroup>
-                    <InputGroup text="Descripción" required v-model="formBlueButton.description">
+                    <InputGroup text="Description" required v-model="formBlueButton.description">
                         <svg 
                                 xmlns="http://www.w3.org/2000/svg" 
                                 fill="none" 
@@ -232,7 +232,7 @@ const closeModalFormBlue = () => showModalFormBlue.value = false;
                                 1 0 1.5H13.5a.75.75 0 0 1 0-1.5Z" />
                         </svg>
                     </InputGroup>
-                    <InputGroup text="Fecha de Creación" required v-model="formBlueButton.created_at">
+                    <InputGroup text="Date of Creation" required v-model="formBlueButton.created_at">
                         <svg 
                                 xmlns="http://www.w3.org/2000/svg" 
                                 fill="none" viewBox="0 0 24 24" 
@@ -246,7 +246,7 @@ const closeModalFormBlue = () => showModalFormBlue.value = false;
                                 d="M4.5 6.75H19.5m-15 4.5h10.5M4.5 16.5H19.5m-6-9.75h1.5a.75.75 0 0 1 0 1.5H13.5a.75.75 0 0 1 0-1.5Z" />
                         </svg>
                     </InputGroup>
-                    <InputGroup text="Fecha de Modificación" required v-model="formBlueButton.updated_at">
+                    <InputGroup text="Modification Date" required v-model="formBlueButton.updated_at">
                         <svg 
                                 xmlns="http://www.w3.org/2000/svg" 
                                 fill="none" 
@@ -263,8 +263,8 @@ const closeModalFormBlue = () => showModalFormBlue.value = false;
                     </InputGroup>
                 </div>
                 <div class="flex justify-end space-x-2">
-                    <SecondaryButton @click="closeModalFormBlue">Cancelar</SecondaryButton>
-                    <PrimaryButton @click="saveBlueButton">Guardar</PrimaryButton>
+                    <SecondaryButton @click="closeModalFormBlue">Cancel</SecondaryButton>
+                    <PrimaryButton @click="saveBlueButton">Save</PrimaryButton>
                 </div>
             </div>
         </Modal>

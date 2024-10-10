@@ -11,8 +11,8 @@ import { Head } from '@inertiajs/vue3';
                 <h2 class="font-extrabold text-9xl text-gray-600 dark:text-gray-1000">
                     <span class="sr-only">Error</span>401
                 </h2>
-                <p class="text-2xl md:text-3xl dark:text-gray-500">No tienes autorización para ver esta página</p>
-                <a href="home" class="px-8 py-4 text-xl font-semibold rounded bg-blue-500 text-gray-50 hover:text-gray-200">Volver al inicio</a>
+                <p class="text-2xl md:text-3xl dark:text-gray-500">You are not authorized to view this page</p>
+                <a href="home" class="px-8 py-4 text-xl font-semibold rounded bg-blue-500 text-gray-50 hover:text-gray-200">Back to home</a>
             </div>
         </div>
     </section>

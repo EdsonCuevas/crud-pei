@@ -28,11 +28,11 @@ const props = defineProps({
                     <thead>
                         <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b bg-gray-50">
                             <th class="px-4 py-3">#</th>
-                            <th class="px-4 py-3">Nombre</th>
-                            <th class="px-4 py-3">Fecha de asignación</th>
-                            <th class="px-4 py-3">Fecha de modificación</th>
-                            <th class="px-4 py-3">Cordinador</th>
-                            <th class="px-4 py-3">Tareas</th>
+                            <th class="px-4 py-3">Name</th>
+                            <th class="px-4 py-3">Assignment date</th>
+                            <th class="px-4 py-3">Date of modification</th>
+                            <th class="px-4 py-3">Coordinator</th>
+                            <th class="px-4 py-3">Tasks</th>
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y">
@@ -69,11 +69,11 @@ const props = defineProps({
             <div class="p-6">
                 <h2 class="text-lg font-medium text-gray-900">{{ title }}</h2>
                 <div class="mt-6 mb-6 space-y-6 max-w-xl">
-                    <InputGroup :text="'Nombre'" :required="'required'" v-model="form.name" :type="'text'">
+                    <InputGroup :text="'Name'" :required="'required'" v-model="form.name" :type="'text'">
                     </InputGroup>
                     <InputError class="mt-1" :message="form.errors.name"></InputError>
 
-                    <InputGroup :text="'Email'" :required="'required'" v-model="form.email" :type="'text'">
+                    <InputGroup :text="'E-mail'" :required="'required'" v-model="form.email" :type="'text'">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
                         </svg>
@@ -87,7 +87,7 @@ const props = defineProps({
                     </InputGroup>
                     <InputError class="mt-1" :message="form.errors.password"></InputError>
 
-                    <InputGroup :text="'Telefono'" :required="'required'" v-model="form.phone">
+                    <InputGroup :text="'Phone'" :required="'required'" v-model="form.phone">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 0 0 6 3.75v16.5a2.25 2.25 0 0 0 2.25 2.25h7.5A2.25 2.25 0 0 0 18 20.25V3.75a2.25 2.25 0 0 0-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" />
                         </svg>
@@ -97,7 +97,7 @@ const props = defineProps({
                 </div>
             </div>
             <div class="m-6 flex justify-between">
-                <PrimaryButton @click="save">Guardar</PrimaryButton>
+                <PrimaryButton @click="save">Save</PrimaryButton>
                 <SecondaryButton @click="closeModalForm">Cancel</SecondaryButton>
             </div>
         </Modal>

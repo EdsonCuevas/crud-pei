@@ -40,7 +40,7 @@ const closeModalDel = () => {
 
 const deleteProgram = () => {
 	form.delete(route('admin-programs.destroy', form.id),{
-		onSuccess: () => {ok('Programa Eliminado')}
+		onSuccess: () => {ok('Program eliminated')}
 	});
 }
 
@@ -84,7 +84,7 @@ const ok = (m) => {
 
             <div class="px-4 py-2 mx-3">
                 <div class="mx-3">
-                    <span class="font-semibold text-green-500">Exito</span>
+                    <span class="font-semibold text-green-500">Success</span>
                     <p class="text-sm text-gray-600">{{ msj }}</p>
                 </div>
             </div>
@@ -97,13 +97,13 @@ const ok = (m) => {
                         <tr
                             class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b bg-gray-50">
                             <th class="px-4 py-3">#</th>
-                            <th class="px-4 py-3">Titulo</th>
-                            <th class="px-4 py-3">Creador</th>
-                            <th class="px-4 py-3">Coordinador</th>
-                            <th class="px-4 py-3">Fecha de Creacion</th>
-                            <th class="px-4 py-3">Detalles</th>
-                            <th class="px-4 py-3">Editar</th>
-                            <th class="px-4 py-3">Eliminar</th>
+                            <th class="px-4 py-3">Title</th>
+                            <th class="px-4 py-3">Creator</th>
+                            <th class="px-4 py-3">Coordinator</th>
+                            <th class="px-4 py-3">Date of Creation</th>
+                            <th class="px-4 py-3">Details</th>
+                            <th class="px-4 py-3">Edit</th>
+                            <th class="px-4 py-3">Delete</th>
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y">
@@ -170,13 +170,13 @@ const ok = (m) => {
         <Modal :show="showModalDel" @close="closeModalDel">
             <div class="p-6">
                 <p class="text-2xl text-gray-500">
-                    Seguro quieres eliminar el programa
+                    Surely you want to delete the program
                     <span class="text-2xl font-medium text-gray-900">{{ form.title }}</span>
                     ?
                 </p>
             </div>
             <div class="m-6 flex justify-between">
-                <PrimaryButton @click="deleteProgram" class="bg-red-500 hover:bg-red-700">Eliminar</PrimaryButton>
+                <PrimaryButton @click="deleteProgram" class="bg-red-500 hover:bg-red-700">Delete</PrimaryButton>
                 <SecondaryButton @click="closeModalDel">Cancel</SecondaryButton>
             </div>
         </Modal>

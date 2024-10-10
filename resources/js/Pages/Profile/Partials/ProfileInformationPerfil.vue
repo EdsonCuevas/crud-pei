@@ -25,24 +25,24 @@ const form = useForm({
 <template>
     <section>
         <header>
-            <h2 class="text-lg font-medium text-gray-900">Información Personal</h2>
+            <h2 class="text-lg font-medium text-gray-900">Personal Information</h2>
 
             <p class="mt-1 text-sm text-gray-600">
-                Actualice la información del perfil y la dirección de correo electrónico de su cuenta.           </p>
+                Update the profile information and email address of your account.           </p>
         </header>
 
         <form @submit.prevent="form.patch(route('profile.update'))" class="mt-6 space-y-6">
             
             <!-- Subir imagen -->
             <div>
-                <InputLabel for="image" value="Imagen" />
+                <InputLabel for="image" value="Image" />
                     <p class="mt-1 block w-full">{{ form.image }}</p>
                 <InputError class="mt-2" :message="form.errors.image" />
             </div>            
             
             <!-- Nombre -->
             <div>
-                <InputLabel for="name" value="Nombre" />
+                <InputLabel for="name" value="Name" />
 
                     <p class="mt-1 block w-full">{{ form.name }}</p>
 
@@ -51,14 +51,14 @@ const form = useForm({
 
             <!-- Email -->
             <div>
-                <InputLabel for="email" value="Correo Electronico" />
+                <InputLabel for="email" value="E-mail" />
                     <p class="mt-1 block w-full">{{ form.email }}</p>
                 <InputError class="mt-2" :message="form.errors.email" />
             </div>
 
             <!-- Numero de telefono -->
             <div>
-                <InputLabel for="telnum" value="Número de teléfono" />
+                <InputLabel for="telnum" value="Phone Number" />
                     <p class="mt-1 block w-full">{{ form.phone }}</p>
                 <InputError class="mt-2" :message="form.errors.phone" />
             </div>

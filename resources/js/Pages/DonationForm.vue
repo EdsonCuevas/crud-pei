@@ -4,7 +4,7 @@
       <div class="w-full max-w-2xl   bg-white rounded-lg shadow-xl overflow-hidden">
         <div class="p-6">
           <h1 class="text-2xl font-bold text-[#004481] mb-5 text-center">
-            Estás a un paso de apoyar el sueño de miles de estudiantes
+            You are one step away from supporting the dream of thousands of students.
           </h1>
           
           <div class="flex space-x-2 mb-6">
@@ -15,8 +15,8 @@
                 donationType === 'single' ? 'bg-[#004481] text-white' : 'bg-white text-[#004481] border border-[#004481]'
               ]"
             >
-              Donación única
-            </button>
+            Single donation
+             </button>
             <button
               @click="donationType = 'monthly'"
               :class="[
@@ -24,12 +24,12 @@
                 donationType === 'monthly' ? 'bg-[#004481] text-white' : 'bg-white text-[#004481] border border-[#004481]'
               ]"
             >
-              Donación mensual
+            Monthly donation
             </button>
           </div>
           
           <div class="mb-6">
-            <h3 class="text-sm font-semibold text-[#004481] mb-2">Selecciona el monto de tu aportación</h3>
+            <h3 class="text-sm font-semibold text-[#004481] mb-2">Select your contribution amount</h3>
             <div class="grid grid-cols-3 gap-2 mb-2">
               <button
                 v-for="amount in ['$350', '$500', '$750']"
@@ -41,49 +41,49 @@
             </div>
             <input
               type="text"
-              placeholder="Otra cantidad"
+              placeholder="Other amount"
               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#004481]"
             />
           </div>
           
           <div class="mb-6">
-            <h3 class="text-sm font-semibold text-[#004481] mb-2">Completa tus datos personales</h3>
+            <h3 class="text-sm font-semibold text-[#004481] mb-2">Fill in your personal data</h3>
             <div class="space-y-2">
               <input
                 type="text"
-                placeholder="Nombre(s)"
+                placeholder="Name(s)"
                 class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#004481]"
               />
               <input
                 type="text"
-                placeholder="Apellido Paterno"
+                placeholder="Paternal Last Name"
                 class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#004481]"
               />
               <input
                 type="text"
-                placeholder="Apellido Materno"
+                placeholder="Maternal Last Name"
                 class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#004481]"
               />
               <input
                 type="email"
-                placeholder="Correo electrónico"
+                placeholder="E-mail"
                 class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#004481]"
               />
               <input
                 type="tel"
-                placeholder="Teléfono"
+                placeholder="Phone"
                 class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#004481]"
               />
             </div>
           </div>
           
           <div class="text-xs text-center text-gray-500 mb-4">
-            Donativo seguro.<br />
-            Tus datos quedarán cifrados
+            Secure donation.<br />
+            Your data will be encrypted
           </div>
           
           <button class="w-full py-3 bg-[#1973B8] text-white rounded-md hover:bg-[#004481] transition-colors duration-200">
-            Continuar
+            Continue
           </button>
         </div>
       </div>

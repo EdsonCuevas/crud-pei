@@ -42,31 +42,31 @@ const submit = () => {
 			<div class="flex items-center justify-center p-6 sm:p-12 md:w-1/2">
 				<div class="w-full">
 					<h1 class="mb-4 text-xl font-semibold text-gray-700">
-						Olvide Mi Contraseña
+						Forgot Password
 					</h1>
 					
 					<form @submit.prevent="submit">
 						<div>
-							<InputLabel for="email" value="Email" />
+							<InputLabel for="email" value="E-mail" />
 							<TextInput id="email" type="email" class="mt-1 block w-full" v-model="form.email" required autofocus autocomplete="username" />
 							<InputError class="mt-2" :message="form.errors.email" />
 						</div>
 						
 						<div class="mt-4">
-							<InputLabel for="password" value="Contraseña" />
+							<InputLabel for="password" value="Password" />
 							<TextInput id="password" type="password" class="mt-1 block w-full" v-model="form.password" required autocomplete="new-password" />
 							<InputError class="mt-2" :message="form.errors.password" />
 						</div>
 						
 						<div class="mt-4">
-							<InputLabel for="password_confirmation" value="Confirmar Contraseña" />
+							<InputLabel for="password_confirmation" value="Confirm your Password" />
 							<TextInput id="password_confirmation" type="password" class="mt-1 block w-full" v-model="form.password_confirmation" required autocomplete="new-password" />
 							<InputError class="mt-2" :message="form.errors.password_confirmation" />
 						</div>
 						
 						<div class="flex items-center justify-end mt-4">
 							<PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-								Resetear Contraseña
+								Reset Password
 							</PrimaryButton>
 						</div>
 					</form>

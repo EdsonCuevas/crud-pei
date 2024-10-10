@@ -51,9 +51,9 @@ const openModalForm = (op, a) => {
     showModalForm.value = true;
     operation.value = op;
     if (op === 1) {
-        title.value = 'Crear Voluntario';
+        title.value = 'Create Volunteer';
     } else {
-        title.value = 'Editar Voluntario';
+        title.value = 'Edit Volunteer';
         form.name = a.name;
         form.email = a.email;
         form.password = '';
@@ -82,11 +82,11 @@ const closeModalDel = () => {
 const save = () => {
     if (operation.value === 1) {
         form.post(route('voluntarios.store'), {
-            onSuccess: () => ok('Voluntario Creado'),
+            onSuccess: () => ok('Volunteer Created'),
         });
     } else {
         form.put(route('voluntarios.update', v.value.id), {
-            onSuccess: () => ok('Voluntario Actualizado'),
+            onSuccess: () => ok('Update Volunteer'),
         });
     }
 };
@@ -108,7 +108,7 @@ const ok = (m) => {
 
     <AuthenticatedLayout>
         <template #header>
-            Donadores
+            Donors
             <br>
             <br>
             <a href="/donation">
@@ -120,7 +120,7 @@ const ok = (m) => {
                         <circle cx="16" cy="9" r="2.9"/>
                         <circle cx="6" cy="5" r="3"/>
                     </svg>
-                    <span>NUEVA DONACION</span>
+                    <span>New Donation</span>
                 </DarkButton>
             </a>
         </template>
@@ -132,10 +132,10 @@ const ok = (m) => {
                     <thead>
                         <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b bg-gray-50">
                             <th class="px-4 py-3">#</th>
-                            <th class="px-4 py-3">Titulo</th>
-                            <th class="px-4 py-3">Fecha de Realizada</th>
-                            <th class="px-4 py-3">Destino</th>
-                            <th class="px-4 py-3">Valor</th>
+                            <th class="px-4 py-3">Title</th>
+                            <th class="px-4 py-3">Date Performed</th>
+                            <th class="px-4 py-3">Destination:</th>
+                            <th class="px-4 py-3">Value:</th>
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y">
@@ -180,18 +180,18 @@ const ok = (m) => {
     </AuthenticatedLayout>
 
     <Modal :show="showModalView" @close="closeModalView">
-        <template #title>Voluntario: {{ v.name }}</template>
+        <template #title>Volunteer: {{ v.name }}</template>
         <template #content>
             <div>
-                <p><strong>Teléfono:</strong> {{ v.phone }}</p>
-                <p><strong>Programas:</strong></p>
+                <p><strong>Phone:</strong> {{ v.phone }}</p>
+                <p><strong>Programs:</strong></p>
                 <ul>
                     <li v-for="program in v.programs" :key="program.id">{{ program.name }}</li>
                 </ul>
             </div>
         </template>
         <template #footer>
-            <SecondaryButton @click="closeModalView">Cerrar</SecondaryButton>
+            <SecondaryButton @click="closeModalView">Close</SecondaryButton>
         </template>
     </Modal>
 
@@ -199,30 +199,30 @@ const ok = (m) => {
         <template #title>{{ title }}</template>
         <template #content>
             <form @submit.prevent="save">
-                <InputGroup label="Nombre" for="name" :value="form.name" v-model="form.name" />
+                <InputGroup label="Name" for="name" :value="form.name" v-model="form.name" />
                 <InputError :message="form.errors.name" class="mt-2" />
-                <InputGroup label="Email" for="email" :value="form.email" v-model="form.email" />
+                <InputGroup label="E-mail" for="email" :value="form.email" v-model="form.email" />
                 <InputError :message="form.errors.email" class="mt-2" />
-                <InputGroup label="Teléfono" for="phone" :value="form.phone" v-model="form.phone" />
+                <InputGroup label="Phone" for="phone" :value="form.phone" v-model="form.phone" />
                 <InputError :message="form.errors.phone" class="mt-2" />
-                <InputGroup label="Contraseña" for="password" :value="form.password" v-model="form.password" />
+                <InputGroup label="Password" for="password" :value="form.password" v-model="form.password" />
                 <InputError :message="form.errors.password" class="mt-2" />
             </form>
         </template>
         <template #footer>
-            <SecondaryButton @click="closeModalForm">Cancelar</SecondaryButton>
-            <PrimaryButton @click="save">Guardar</PrimaryButton>
+            <SecondaryButton @click="closeModalForm">Cancel</SecondaryButton>
+            <PrimaryButton @click="save">Save</PrimaryButton>
         </template>
     </Modal>
 
     <Modal :show="showModalDel" @close="closeModalDel">
-        <template #title>Eliminar Voluntario</template>
+        <template #title>Delete Volunteer</template>
         <template #content>
-            <p>¿Estás seguro de que deseas eliminar este voluntario?</p>
+            <p>Are you sure you want to remove this volunteer?</p>
         </template>
         <template #footer>
-            <SecondaryButton @click="closeModalDel">Cancelar</SecondaryButton>
-            <DangerButton @click="deleteVoluntario">Eliminar</DangerButton>
+            <SecondaryButton @click="closeModalDel">Cancel</SecondaryButton>
+            <DangerButton @click="deleteVoluntario">Delete</DangerButton>
         </template>
     </Modal>
 

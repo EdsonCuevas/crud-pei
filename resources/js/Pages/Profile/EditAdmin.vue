@@ -21,7 +21,7 @@ defineProps({
 
 	<AuthenticatedLayout>
 		<template #header>
-			Configurar Perfil
+			Profile
 		</template>
 
 		<div class="sm:px-6 md:px-0 lg:px-0 space-y-6">

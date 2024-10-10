@@ -44,7 +44,7 @@ const closeModalView = () => {
 	
 	<AuthenticatedLayout>
 		<template #header>
-			Recursos
+			Resources
             <br>
             <br>
 		</template>
@@ -54,9 +54,9 @@ const closeModalView = () => {
                 <table class="w-full whitespace-no-wrap">
                     <thead>
                         <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b bg-gray-50">
-                            <th class="px-4 py-3">Programa</th>
-                            <th class="px-4 py-3">Administrado por</th>
-                            <th class="px-4 py-3">Detalles</th>
+                            <th class="px-4 py-3">Program</th>
+                            <th class="px-4 py-3">Administered by</th>
+                            <th class="px-4 py-3">Details</th>
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y">
@@ -92,7 +92,7 @@ const closeModalView = () => {
                  class="mt-4 w-full h-[500px] rounded-lg">
             </div>
             <div class="m-6 flex justify-end">
-                <SecondaryButton @click="closeModalView">Cerrar</SecondaryButton>
+                <SecondaryButton @click="closeModalView">Close</SecondaryButton>
             </div>
         </Modal>
 	</AuthenticatedLayout>

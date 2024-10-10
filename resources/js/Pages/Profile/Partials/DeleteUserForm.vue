@@ -40,23 +40,23 @@ const closeModal = () => {
 <template>
     <section class="space-y-6">
         <header>
-            <h2 class="text-lg font-medium text-gray-900">Eliminar Cuenta</h2>
+            <h2 class="text-lg font-medium text-gray-900">Delete Account</h2>
 
             <p class="mt-1 text-sm text-gray-600">
-                Una vez que se elimine su cuenta, todos sus recursos y datos se eliminarán permanentemente. Antes de eliminar su cuenta, descargue cualquier dato o información que desee conservar.
+                Once your account is deleted, all of your resources and data will be permanently deleted. Before deleting your account, download any data or information you wish to keep.
             </p>
         </header>
 
-        <DangerButton @click="confirmUserDeletion">Eliminar Cuenta</DangerButton>
+        <DangerButton @click="confirmUserDeletion">Delete Account</DangerButton>
 
         <Modal :show="confirmingUserDeletion" @close="closeModal">
             <div class="p-6">
                 <h2 class="text-lg font-medium text-gray-900">
-                    ¿Estás seguro de que quieres eliminar tu cuenta?
+                    Are you sure you want to delete your account?
                 </h2>
 
                 <p class="mt-1 text-sm text-gray-600">
-                    Una vez que se elimine su cuenta, todos sus recursos y datos se eliminarán permanentemente. Ingrese su contraseña para confirmar que desea eliminar permanentemente su cuenta.
+                    Once your account is deleted, all your resources and data will be permanently deleted. Enter your password to confirm that you wish to permanently delete your account.
                 </p>
 
                 <div class="mt-6">
@@ -68,7 +68,7 @@ const closeModal = () => {
                         v-model="form.password"
                         type="password"
                         class="mt-1 block w-3/4"
-                        placeholder="Contraseña"
+                        placeholder="Password"
                         @keyup.enter="deleteUser"
                     />
 
@@ -76,7 +76,7 @@ const closeModal = () => {
                 </div>
 
                 <div class="mt-6 flex justify-end">
-                    <SecondaryButton @click="closeModal"> Cancelar </SecondaryButton>
+                    <SecondaryButton @click="closeModal"> Cancel </SecondaryButton>
 
                     <DangerButton
                         class="ms-3"
@@ -84,7 +84,7 @@ const closeModal = () => {
                         :disabled="form.processing"
                         @click="deleteUser"
                     >
-                        Eliminar Cuenta
+                        Delete Account
                     </DangerButton>
                 </div>
             </div>

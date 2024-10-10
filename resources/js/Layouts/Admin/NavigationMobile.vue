@@ -41,7 +41,7 @@
                     d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z">
                   </path>
                 </svg>
-                <span class="ml-4">Usuarios</span>
+                <span class="ml-4">Users</span>
               </span>
               <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
                 <path fill-rule="evenodd"
@@ -56,28 +56,28 @@
               :class="{'text-gray-900': route().current('admin-coordinators.index')}"
               class="px-2 py-1 transition-colors duration-150 hover:text-gray-900">
               <ResponsiveNavLink :href="route('admin-coordinators.index')" :active="route().current('admin-coordinators.index')">
-                Coordinadores
+                Coordinators
               </ResponsiveNavLink>
             </li>
               <li
               :class="{'text-gray-900': route().current('admin-volunteers.index')}"
               class="px-2 py-1 transition-colors duration-150 hover:text-gray-900">
               <ResponsiveNavLink :href="route('admin-volunteers.index')" :active="route().current('admin-volunteers.index')">
-                Voluntarios
+                Volunteers
               </ResponsiveNavLink>
             </li>
               <li
               :class="{'text-gray-900': route().current('admin-donors.index')}"
               class="px-2 py-1 transition-colors duration-150 hover:text-gray-900">
               <ResponsiveNavLink :href="route('admin-donors.index')" :active="route().current('admin-donors.index')">
-                Donadores
+                Donors
               </ResponsiveNavLink>
             </li>
             <li
               :class="{'text-gray-900': route().current('admin-beneficiaries.index')}"
               class="px-2 py-1 transition-colors duration-150 hover:text-gray-900">
               <ResponsiveNavLink :href="route('admin-beneficiaries.index')" :active="route().current('admin-beneficiaries.index')">
-                Beneficiarios
+                Beneficiaries
               </ResponsiveNavLink>
             </li>
             </ul>
@@ -93,7 +93,7 @@
                   </path>
                 </svg>
               </template>
-              Programas
+              Programs
             </ResponsiveNavLink>
           </li>
 

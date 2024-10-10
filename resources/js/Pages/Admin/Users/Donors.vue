@@ -56,10 +56,10 @@ const openModalForm = (op, a) => {
     operation.value = op;
     form.clearErrors();
     if (op === 1) {
-        title.value = 'Crear Donador';
+        title.value = 'Create Donor';
     }
     else {
-        title.value = 'Editar Donador';
+        title.value = 'Edit Donor';
         form.name = a.name;
         form.email = a.email;
         form.password = '';
@@ -95,11 +95,11 @@ const save = () => {
 
     if (operation.value === 1) {
         form.post(route('admin-donors.store'), {
-            onSuccess: () => ok('Donador Creado'),
+            onSuccess: () => ok('Donor Create'),
         });
     } else {
         form.put(route('admin-donors.update', v.value.id), {
-            onSuccess: () => ok('Donador Actualizado'),
+            onSuccess: () => ok('Update Donor'),
         });
     }
 };
@@ -120,7 +120,7 @@ const ok = (m) => {
 const deleteCoordi = () => {
 
     form.delete(route('admin-donors.destroy', v.value.id), {
-        onSuccess: () => { ok('Donador Elimiando') }
+        onSuccess: () => { ok('Delete Donor') }
     })
 }
 
@@ -132,7 +132,7 @@ const deleteCoordi = () => {
 
     <AuthenticatedLayout>
         <template #header>
-            Donadores
+            Donors
             <br>
             <br>
             <DarkButton @click="openModalForm(1)">
@@ -155,7 +155,7 @@ const deleteCoordi = () => {
 
             <div class="px-4 py-2 -mx-3">
                 <div class="mx-3">
-                    <span class="font-semibold text-green-500">Exito</span>
+                    <span class="font-semibold text-green-500">Success</span>
                     <p class="text-sm text-gray-600">{{ msj }}</p>
                 </div>
             </div>
@@ -168,14 +168,14 @@ const deleteCoordi = () => {
                         <tr
                             class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b bg-gray-50">
                             <th class="px-4 py-3">#</th>
-                            <th class="px-4 py-3">Nombre</th>
-                            <th class="px-4 py-3">Email</th>
-                            <th class="px-4 py-3">Telefono</th>
-                            <th class="px-4 py-3">Fecha de Creación</th>
-                            <th class="px-4 py-3">Fecha de Actualización</th>
-                            <th class="px-4 py-3">Detalles</th>
-                            <th class="px-4 py-3">Editar</th>
-                            <th class="px-4 py-3">Eliminar</th>
+                            <th class="px-4 py-3">Name</th>
+                            <th class="px-4 py-3">E-mail</th>
+                            <th class="px-4 py-3">Phone</th>
+                            <th class="px-4 py-3">Date of Creation</th>
+                            <th class="px-4 py-3">Date of Update</th>
+                            <th class="px-4 py-3">Detail</th>
+                            <th class="px-4 py-3">Edit</th>
+                            <th class="px-4 py-3">Delete</th>
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y">
@@ -234,7 +234,7 @@ const deleteCoordi = () => {
         </div>
         <Modal :show="showModalView" @close="closeModalView">
             <div class="p-6">
-                Los programas de los que esta a cargo:
+                The programs you are in charge of:
                 <ol>
                     <li class="text-lg font-medium text-gray-900" v-for="b, i in v.programs">
                         {{ (i + 1) + ') ' + b.name }}
@@ -250,7 +250,7 @@ const deleteCoordi = () => {
             <div class="p-6">
                 <h2 class="text-lg font-medium text-gray-900">{{ title }}</h2>
                 <div class="mt-6 mb-6 space-y-6 max-w-xl">
-                    <InputGroup :text="'Nombre'" :required="'required'" v-model="form.name" :type="'text'">
+                    <InputGroup :text="'Name'" :required="'required'" v-model="form.name" :type="'text'">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="size-6">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -259,7 +259,7 @@ const deleteCoordi = () => {
                     </InputGroup>
                     <InputError class="mt-1" :message="form.errors.name"></InputError>
 
-                    <InputGroup :text="'Email'" :required="'required'" v-model="form.email" :type="'email'">
+                    <InputGroup :text="'E-mail'" :required="'required'" v-model="form.email" :type="'email'">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="size-6">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -284,7 +284,7 @@ const deleteCoordi = () => {
                     </SelectInput>
                     <InputError class="mt-1" :message="form.errors.role_id"></InputError>
 
-                    <InputGroup :text="'Telefono'" :required="'required'" v-model="form.phone">
+                    <InputGroup :text="'Phone'" :required="'required'" v-model="form.phone">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="size-6">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -296,7 +296,7 @@ const deleteCoordi = () => {
                 </div>
             </div>
             <div class="m-6 flex justify-between">
-                <PrimaryButton @click="save">Guardar</PrimaryButton>
+                <PrimaryButton @click="save">Save</PrimaryButton>
                 <SecondaryButton @click="closeModalForm">Cancel</SecondaryButton>
             </div>
         </Modal>
@@ -304,13 +304,13 @@ const deleteCoordi = () => {
         <Modal :show="showModalDel" @close="closeModalDel">
             <div class="p-6">
                 <p class="text-2xl text-gray-500">
-                    Seguro quieres eliminar al donador
+                    Surely you want to eliminate the donor
                     <span class="text-2xl font-medium text-gray-900">{{ v.name }}</span>
                     ?
                 </p>
             </div>
             <div class="m-6 flex justify-between">
-                <PrimaryButton @click="deleteCoordi" class="bg-red-500 hover:bg-red-700">Eliminar</PrimaryButton>
+                <PrimaryButton @click="deleteCoordi" class="bg-red-500 hover:bg-red-700">Delete</PrimaryButton>
                 <SecondaryButton @click="closeModalDel">Cancel</SecondaryButton>
             </div>
         </Modal>

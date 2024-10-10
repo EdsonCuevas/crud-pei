@@ -13,7 +13,7 @@
       class="fixed inset-y-0 z-20 flex-shrink-0 w-64 mt-16 overflow-y-auto bg-blue-500 md:hidden">
       <div class="py-4 text-white">
         <Link class="ml-6 text-lg font-bold" :href="route('volunt-programas.index')">
-        Panel Voluntario
+        Fundación CTI
         </Link>
 
         <ul class="mt-6">

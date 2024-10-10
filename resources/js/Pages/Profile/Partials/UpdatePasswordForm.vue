@@ -36,15 +36,15 @@ const updatePassword = () => {
 <template>
     <section>
         <header>
-            <h2 class="text-lg font-medium text-gray-900">Actualizar Contraseña</h2>
+            <h2 class="text-lg font-medium text-gray-900">Update Password</h2>
 
             <p class="mt-1 text-sm text-gray-600">
-                Asegúrese de que su cuenta utilice una contraseña larga y aleatoria para mantenerse segura.            </p>
+                Make sure your account uses a long, random password to keep it secure.            </p>
         </header>
 
         <form @submit.prevent="updatePassword" class="mt-6 space-y-6">
             <div>
-                <InputLabel for="current_password" value="Contraseña Actual" />
+                <InputLabel for="current_password" value="Actual Password" />
 
                 <TextInput
                     id="current_password"
@@ -59,7 +59,7 @@ const updatePassword = () => {
             </div>
 
             <div>
-                <InputLabel for="password" value="Nueva Contraseña" />
+                <InputLabel for="password" value="New Password" />
 
                 <TextInput
                     id="password"
@@ -74,7 +74,7 @@ const updatePassword = () => {
             </div>
 
             <div>
-                <InputLabel for="password_confirmation" value="Confirmar Nueva Contraseña" />
+                <InputLabel for="password_confirmation" value="Confirm your new password" />
 
                 <TextInput
                     id="password_confirmation"
@@ -88,7 +88,7 @@ const updatePassword = () => {
             </div>
 
             <div class="flex items-center gap-4">
-                <PrimaryButton :disabled="form.processing">Guardar</PrimaryButton>
+                <PrimaryButton :disabled="form.processing">Save</PrimaryButton>
 
                 <Transition
                     enter-active-class="transition ease-in-out"
@@ -96,7 +96,7 @@ const updatePassword = () => {
                     leave-active-class="transition ease-in-out"
                     leave-to-class="opacity-0"
                 >
-                    <p v-if="form.recentlySuccessful" class="text-sm text-gray-600">Guardado con éxito.</p>
+                    <p v-if="form.recentlySuccessful" class="text-sm text-gray-600">Successfully saved.</p>
                 </Transition>
             </div>
         </form>

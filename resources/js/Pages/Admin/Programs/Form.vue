@@ -23,7 +23,7 @@ const form = useForm({
 });
 
 const title_form = ref(
-    (props.program == null) ? 'Crear Programa' : 'Editar Programa'
+    (props.program == null) ? 'Create Program' : 'Edit Program'
 );
 const req = ref('required');
 const srcImg = ref('../../storage/img/example.jpg');
@@ -51,7 +51,7 @@ if(props.program != null){
 const save = () => {
     if(props.program == null){
         form.post(route('admin-programs.store'),{
-            onSuccess: () => {ok('Programa Creado')}
+            onSuccess: () => {ok('Program Created')}
         });
     }
     else {
@@ -82,7 +82,7 @@ const showImg = (e) => {
             <div class="container mx-auto">
                 <div class="bg-blue-500 text-white p-6">
                     <h2 class="text-3xl font-semibold">{{ title_form }}</h2>
-                    <p class="text-blue-100">Programa de apoyo educativo</p>
+                    <p class="text-blue-100">Education support program</p>
                 </div>
 
                 <div class="inline-flex overflow-hidden mb-4 w-full bg-white rounded-lg shadow-md" :class="classMsj">
@@ -96,7 +96,7 @@ const showImg = (e) => {
 
                     <div class="px-4 py-2 mx-3">
                         <div class="mx-3">
-                            <span class="font-semibold text-green-500">Exito</span>
+                            <span class="font-semibold text-green-500">Success</span>
                             <p class="text-sm text-gray-600">{{ msj }}</p>
                         </div>
                     </div>
@@ -105,12 +105,12 @@ const showImg = (e) => {
                 <div class="p-6 grid md:grid-cols-2 gap-6">
                     <div class="space-y-4">
                         <form class="mt-6 mb-6 space-y-6 max-w-xl" @submit.prevent="save">
-                            <InputGroup :text="'Titulo Del Programa'" :required="'required'" v-model="form.title">
+                            <InputGroup :text="'Program Title'" :required="'required'" v-model="form.title">
                                 <Type />
                             </InputGroup>
                             <InputError :message="form.errors.title" />
 
-                            <InputGroup :text="'Descripción'" :required="'required'" v-model="form.description">
+                            <InputGroup :text="'Description'" :required="'required'" v-model="form.description">
                                 <Text />
                             </InputGroup>
                             <InputError :message="form.errors.description" />
@@ -118,7 +118,7 @@ const showImg = (e) => {
                             <div class="relative text-gray-500 focus-within:text-blue-500">
                                 <select class="rounded block w-full pl-10 mt-1 text-sm text-black focus:border-blue-400 focus:outline-none focus:shadow-outline-purple form-input" 
                                 :required="'required'" v-model="form.coordi_id">
-                                <option disabled value="">Coordinador Encargado</option>
+                                <option disabled value="">Coordinator in charge</option>
                                     <option v-for="coordi in coordinators" :key="coordi.id" :value="coordi.id">
                                         {{ coordi.name }}
                                     </option>
@@ -129,21 +129,21 @@ const showImg = (e) => {
                             </div>
                             <InputError :message="form.errors.coordi_id" />
 
-                            <InputGroup v-if="props.program == null" @change="showImg($event)" :text="'Imagen'" :required="'required'" :type="'file'" :accept="'image/*'">
+                            <InputGroup v-if="props.program == null" @change="showImg($event)" :text="'Image'" :required="'required'" :type="'file'" :accept="'image/*'">
                                 <ImagePlus />
                             </InputGroup>
                             
-                            <InputGroup v-else :text="'Imagen'" @change="showImg($event)" :type="'file'" :accept="'image/*'">
+                            <InputGroup v-else :text="'Image'" @change="showImg($event)" :type="'file'" :accept="'image/*'">
                                 <ImagePlus />
                             </InputGroup>
 
                             <InputError :message="form.errors.image" />
                             <br>
-                            <span class="mt-2">Beneficiarios:</span>
+                            <span class="mt-2">Beneficiaries:</span>
                             <Select2 v-model="form.beneficiaries" :options="options" :settings="{multiple:true, width:'100%'}" @change="form.beneficiaries = $event.target.value" />
                             <InputError :message="form.errors.beneficiaries" />
 
-                            <PrimaryButton>Guardar</PrimaryButton>
+                            <PrimaryButton>Save</PrimaryButton>
                         </form>
                     </div>
                     <div class="win-w-0 p-4 rounded-lg shadow-xs">

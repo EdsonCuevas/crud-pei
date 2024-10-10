@@ -37,7 +37,7 @@ const submit = () => {
 			<div class="flex items-center justify-center p-6 sm:p-12 md:w-1/2">
 				<div class="w-full">
 					<h1 class="mb-4 font-semibold text-gray-700">
-						¿Ha olvidado su contraseña? No se preocupe. Indíquenos su dirección de correo electrónico y le enviaremos un enlace para restablecer la contraseña.
+						Forgot your password, don't worry. Tell us your email address and we will send you a link to reset your password.
 					</h1>
 					
 					<div v-if="status" class="mb-4 text-sm font-medium text-green-600">
@@ -46,14 +46,14 @@ const submit = () => {
 					
 					<form @submit.prevent="submit">
 						<div>
-							<InputLabel for="email" value="Email" />
+							<InputLabel for="email" value="E-mail" />
 							<TextInput id="email" type="email" class="block w-full mt-1" v-model="form.email" required autofocus autocomplete="username" />
 							<InputError class="mt-2" :message="form.errors.email" />
 						</div>
 						
 						<div class="flex items-center justify-end mt-4">
 							<PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-								Enviar Email
+								Send E-mail
 							</PrimaryButton>
 						</div>
 					</form>

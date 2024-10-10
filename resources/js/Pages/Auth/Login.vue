@@ -47,13 +47,13 @@ const submit = () => {
 					
 					<form @submit.prevent="submit">
 						<div class="mt-4">
-							<InputLabel for="email" value="Correo electronico" />
+							<InputLabel for="email" value="E-mail" />
 							<TextInput id="email" type="email" class="block w-full mt-1" v-model="form.email" required autofocus autocomplete="username" />
 							<InputError class="mt-2" :message="form.errors.email" />
 						</div>
 						
 						<div class="mt-4">
-							<InputLabel for="password" value="Contraseña" />
+							<InputLabel for="password" value="Password" />
 							<TextInput id="password" type="password" class="block w-full mt-1" v-model="form.password" required autocomplete="current-password" />
 							<InputError class="mt-2" :message="form.errors.password" />
 						</div>
@@ -61,21 +61,21 @@ const submit = () => {
 						<div class="block mt-4">
 							<label class="flex items-center">
 								<Checkbox name="remember" v-model:checked="form.remember" />
-								<span class="ml-2 text-sm text-gray-600">Recuerdame</span> </label>
+								<span class="ml-2 text-sm text-gray-600">Remember me</span> </label>
 						</div>
 						
 						<div class="flex items-center justify-end mt-4">
-							<Link :href="route('register')" class="text-sm  text-gray-600 underline hover:text-gray-900 mr-10">
-								Registrarse
+							<Link :href="route('register')" class="text-sm text-gray-600 underline hover:text-gray-900 mr-10">
+								Sign up
 							</Link> 
-							<Link v-if="canResetPassword" :href="route('password.request')" class="text-sm text-gray-600 underline  hover:text-gray-900">
-								¿Olvidaste tu contraseña?
+							<Link v-if="canResetPassword" :href="route('password.request')" class="text-sm text-gray-600 underline mr-10 hover:text-gray-900">
+								Forgot your password?
 							</Link>
 							<!-- Link que redirige a la página de registro --> 
 							
 							
 							<PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-								Iniciar Sesión
+								Login
 							</PrimaryButton>
 						</div>
 					</form>

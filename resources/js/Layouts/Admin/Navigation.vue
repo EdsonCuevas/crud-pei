@@ -30,7 +30,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round"
                   d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z" />
               </svg>
-              <span class="ml-3">Usuarios</span>
+              <span class="ml-3">Users</span>
             </span>
             <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd"
@@ -47,7 +47,7 @@
               :class="{'text-gray-900': route().current('admin-coordinators.index')}"
               class="px-2 py-1 transition-colors duration-150 hover:text-gray-900">
               <NavLink :href="route('admin-coordinators.index')" :active="route().current('admin-coordinators.index')">
-                Coordinadores
+                Coordinators
               </NavLink>
             </li>
 
@@ -55,7 +55,7 @@
               :class="{'text-gray-900': route().current('admin-volunteers.index')}"
               class="px-2 py-1 transition-colors duration-150 hover:text-gray-900">
               <NavLink :href="route('admin-volunteers.index')" :active="route().current('admin-volunteers.index')">
-                Voluntarios
+                Volunteers
               </NavLink>
             </li>
 
@@ -63,7 +63,7 @@
               :class="{'text-gray-900': route().current('admin-donors.index')}"
               class="px-2 py-1 transition-colors duration-150 hover:text-gray-900">
               <NavLink :href="route('admin-donors.index')" :active="route().current('admin-donors.index')">
-                Donadores
+                Donors
               </NavLink>
             </li>
 
@@ -71,7 +71,7 @@
               :class="{'text-gray-900': route().current('admin-beneficiaries.index')}"
               class="px-2 py-1 transition-colors duration-150 hover:text-gray-900">
               <NavLink :href="route('admin-beneficiaries.index')" :active="route().current('admin-beneficiaries.index')">
-                Beneficiarios
+                Beneficiaries
               </NavLink>
             </li>
 
@@ -88,7 +88,7 @@
                 </path>
               </svg>
             </template>
-            <span class="ml-4">Programas</span>
+            <span class="ml-4">Programs</span>
           </NavLink>
         </li>
 

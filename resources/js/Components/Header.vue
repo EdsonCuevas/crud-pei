@@ -13,14 +13,14 @@
       <div class="flex items-center space-x-6">
         <nav class="hidden md:block">
           <ul class="flex space-x-6">
-            <li><a href="home" class="hover:underline">Inicio</a></li>
-            <li><a href="programs" class="hover:underline">Programas</a></li>
-            <li><a href="contact" class="hover:underline">Contacto</a></li>
+            <li><a href="home" class="hover:underline">Home</a></li>
+            <li><a href="programs" class="hover:underline">Programs</a></li>
+            <li><a href="contact" class="hover:underline">Contact us</a></li>
           </ul>
         </nav>
         <a href="/donation">
           <button class="flex items-center space-x-2 px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded">
-          Quiero donar
+            Donate
           </button>
         </a>
         

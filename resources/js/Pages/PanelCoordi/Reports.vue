@@ -74,7 +74,7 @@ const closeModalForm = () => {
     <AuthenticatedLayout>
         <template #header>
             <div class="flex items-center">
-                <span class="text-lg font-semibold">Reportes</span>
+                <span class="text-lg font-semibold">Reports</span>
                 <button
                     class="ml-4 w-10 h-10 flex items-center justify-center bg-blue-500 text-white rounded-full hover:bg-blue-600"
                     @click="openModalForm">
@@ -121,10 +121,10 @@ const closeModalForm = () => {
                     <thead>
                         <tr
                             class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b bg-gray-50">
-                            <th class="px-4 py-3">Titulo</th>
-                            <th class="px-4 py-3">Fecha de Envio</th>
-                            <th class="px-4 py-3">Para:</th>
-                            <th class="px-4 py-3">Acciones</th>
+                            <th class="px-4 py-3">Title</th>
+                            <th class="px-4 py-3">Date of Shipment</th>
+                            <th class="px-4 py-3">To:</th>
+                            <th class="px-4 py-3">Actions</th>
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y">
@@ -202,7 +202,7 @@ const closeModalForm = () => {
             <div class="p-6">
                 <h2 class="text-lg font-medium text-gray-900">{{ title }}</h2>
                 <div class="mt-6 mb-6 space-y-6 max-w-xl">
-                    <InputGroup :text="'Titulo'" :required="'required'" v-model="form.name" :type="'text'">
+                    <InputGroup :text="'Title'" :required="'required'" v-model="form.name" :type="'text'">
                     <svg 
                             xmlns="http://www.w3.org/2000/svg" 
                             fill="none" 
@@ -220,7 +220,7 @@ const closeModalForm = () => {
                     </InputGroup>
                     <InputError class="mt-1" :message="form.errors.name"></InputError>
 
-                    <InputGroup :text="'Fecha de envio'" :required="'required'" v-model="form.email" :type="'email'">
+                    <InputGroup :text="'Date of shipment'" :required="'required'" v-model="form.email" :type="'email'">
                     <svg 
                         xmlns="http://www.w3.org/2000/svg" 
                         fill="none" 
@@ -240,7 +240,7 @@ const closeModalForm = () => {
                 </div>
             </div>
             <div class="m-6 flex justify-between">
-                <PrimaryButton @click="save">Guardar</PrimaryButton>
+                <PrimaryButton @click="save">Save</PrimaryButton>
                 <SecondaryButton @click="closeModalForm">Cancel</SecondaryButton>
             </div>
         </Modal>

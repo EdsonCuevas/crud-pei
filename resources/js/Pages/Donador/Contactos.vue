@@ -23,7 +23,7 @@ const form = useForm({
     direccion: ''
 });
 
-const title = ref('Crear Contacto');
+const title = ref('Create Contact');
 const msj = ref('');
 const classMsj = ref('hidden');
 
@@ -31,7 +31,7 @@ const save = () => {
     if (form.id) {
         form.put(route('contactos.update', form.id), {
             onSuccess: () => {
-                msj.value = 'Contacto Actualizado';
+                msj.value = 'Updated Contact';
                 classMsj.value = 'block';
                 form.reset();
             }
@@ -39,7 +39,7 @@ const save = () => {
     } else {
         form.post(route('contactos.store'), {
             onSuccess: () => {
-                msj.value = 'Contacto Creado';
+                msj.value = 'Contact Created';
                 classMsj.value = 'block';
                 form.reset();
             }
@@ -50,7 +50,7 @@ const save = () => {
 const deleteContacto = (contactoId) => {
     Inertia.delete(route('contactos.destroy', contactoId), {
         onSuccess: () => {
-            msj.value = 'Contacto Eliminado';
+            msj.value = 'Contact Deleted';
             classMsj.value = 'block';
         }
     });
@@ -61,7 +61,7 @@ const deleteContacto = (contactoId) => {
 
     <AuthenticatedLayout>
         <template #header>
-            CONTACTOS
+            Contacts
             <br>
             <br>
         </template>
@@ -76,11 +76,11 @@ const deleteContacto = (contactoId) => {
                     <thead>
                         <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b bg-gray-50">
                             <th class="px-4 py-3">#</th>
-                            <th class="px-4 py-3">Nombre</th>
-                            <th class="px-4 py-3">Email</th>
-                            <th class="px-4 py-3">Teléfono</th>
-                            <th class="px-4 py-3">Dirección</th>
-                            <th class="px-4 py-3">Acciones</th>
+                            <th class="px-4 py-3">Name</th>
+                            <th class="px-4 py-3">E-mail</th>
+                            <th class="px-4 py-3">Phone</th>
+                            <th class="px-4 py-3">Address</th>
+                            <th class="px-4 py-3">Actions</th>
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y">
@@ -91,8 +91,8 @@ const deleteContacto = (contactoId) => {
                             <td class="px-4 py-3 text-sm">{{ contacto.telefono }}</td>
                             <td class="px-4 py-3 text-sm">{{ contacto.direccion }}</td>
                             <td class="px-4 py-3 text-sm">
-                                <SecondaryButton @click="form.id = contacto.id, form.nombre = contacto.nombre, form.email = contacto.email, form.telefono = contacto.telefono, form.direccion = contacto.direccion, title = 'Editar Contacto'">Editar</SecondaryButton>
-                                <DangerButton @click="deleteContacto(contacto.id)">Eliminar</DangerButton>
+                                <SecondaryButton @click="form.id = contacto.id, form.nombre = contacto.nombre, form.email = contacto.email, form.telefono = contacto.telefono, form.direccion = contacto.direccion, title = 'Editar Contacto'">Edit</SecondaryButton>
+                                <DangerButton @click="deleteContacto(contacto.id)">Delete</DangerButton>
                             </td>
                         </tr>
                     </tbody>

@@ -41,7 +41,7 @@
                     d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z">
                   </path>
                 </svg>
-                <span class="ml-4">Usuarios</span>
+                <span class="ml-4">Users</span>
               </span>
               <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
                 <path fill-rule="evenodd"
@@ -55,7 +55,7 @@
               <li class="px-2 py-1 transition-colors duration-150 hover:text-gray-800">
                 <ResponsiveNavLink :href="route('coord-programs.index')"
                   :active="route().current('coord-programs.index')">
-                  Programas
+                  Programs
                 </ResponsiveNavLink>
               </li>
             </ul>
@@ -71,7 +71,7 @@
                   </path>
                 </svg>
               </template>
-              Reportes
+              Reports
             </ResponsiveNavLink>
           </li>
 

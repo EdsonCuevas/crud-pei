@@ -23,10 +23,10 @@ const props = defineProps({
                     <thead>
                         <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b bg-gray-50">
                             <th class="px-4 py-3">#</th>
-                            <th class="px-4 py-3">Nombre</th>
-                            <th class="px-4 py-3">Telefono</th>
-                            <th class="px-4 py-3">Correo</th>
-                            <th class="px-4 py-3">Rol</th>
+                            <th class="px-4 py-3">Name</th>
+                            <th class="px-4 py-3">Phone</th>
+                            <th class="px-4 py-3">E-mail</th>
+                            <th class="px-4 py-3">Role</th>
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y">

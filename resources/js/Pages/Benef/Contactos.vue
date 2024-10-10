@@ -17,7 +17,7 @@ const props = defineProps({
     
     <AuthenticatedLayout>
         <template #header>
-            Contactos
+            Contacts
             <br>
             <br>
         </template>
@@ -27,10 +27,10 @@ const props = defineProps({
                 <table class="w-full whitespace-no-wrap">
                     <thead>
                         <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b bg-gray-50">
-                            <th class="px-4 py-3">Nombre</th>
-                            <th class="px-4 py-3">Email</th>
-                            <th class="px-4 py-3">Telefono</th>
-                            <th class="px-4 py-3">Cargo</th>
+                            <th class="px-4 py-3">Name</th>
+                            <th class="px-4 py-3">E-mail</th>
+                            <th class="px-4 py-3">Phone</th>
+                            <th class="px-4 py-3">Charge</th>
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y">
