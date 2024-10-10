@@ -47,6 +47,10 @@ Route::get('/home', function () {
     return Inertia::render('HomePage');
 })->name('home');
 
+Route::get('/details-donation', function () {
+    return Inertia::render('Donador/Detailsdonation');
+})->name('details-donation');
+
 Route::get('/contact', function () {
     return Inertia::render('Contact');
 })->name('contact');
