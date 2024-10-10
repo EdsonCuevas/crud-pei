@@ -47,10 +47,6 @@ Route::get('/home', function () {
     return Inertia::render('HomePage');
 })->name('home');
 
-Route::get('/donation', function () {
-    return Inertia::render('DonationForm');
-})->name('donation');
-
 Route::get('/contact', function () {
     return Inertia::render('Contact');
 })->name('contact');
@@ -89,6 +85,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('volunt-contactos', VoluntContactController::class);
 
     Route::resource('donor-donations', DonorDonacionesController::class);
+
     Route::resource('donor-contacts', DonorContactosController::class);
     Route::resource('donor-informes', DonorInformesController::class);
 
