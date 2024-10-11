@@ -1,3 +1,14 @@
+<script setup>
+import Footer from '@/Components/Footer.vue';
+import Header from '@/Components/Header.vue';
+
+const props = defineProps({
+    programas:{type:Object}
+});
+
+</script>
+
+
 <template>
   <div class="flex flex-col min-h-screen">
     <!-- Header -->
