@@ -82,7 +82,7 @@ const enviarPorEmail = () => {
                 <p class="text-sm text-gray-600">{{ convertirNumero(props.donacion.value) }}MXN</p>
               </div>
               <div>
-                <p class="font-semibold text-[#004481]">Proyecto o causa apoyada:</p>
+                <p class="font-semibold text-[#004481]">Programa o causa apoyada:</p>
                 <p>{{ props.donacion.proram.title }}</p>
               </div>
               <div>
