@@ -90,9 +90,9 @@ const props = defineProps({
               <!-- Mostrar la imagen del programa -->
               <img :src="'storage/img/' + program.image" :alt="'Imagen de ' + program.title" class="w-full h-40 object-cover mb-4 rounded-md">
               <!-- Mostrar el título del programa -->
-              <h3 class="text-xl font-bold mb-2">{{ program.title }}</h3>
+              <h3 class="text-xl font-bold overflow-hidden overflow-ellipsis mb-2">{{ program.title }}</h3>
               <!-- Mostrar la descripción del programa -->
-              <p>{{ program.description }}</p>
+              <p class="text-sm text-gray-700 overflow-hidden overflow-ellipsis h-24">{{ program.description }}</p>
             </div>
           </div>
         </div>
