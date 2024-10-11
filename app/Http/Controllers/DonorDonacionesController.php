@@ -46,6 +46,8 @@ class DonorDonacionesController extends Controller
     {
         $donor_donation->load(['proram']);
 
-        return Inertia::render('Donador/Donaciones/View');
+        return Inertia::render('Donador/Donaciones/View', [
+            'donacion'=>$donor_donation
+        ]);
     }
 }
