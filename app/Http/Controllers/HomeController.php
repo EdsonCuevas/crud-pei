@@ -9,12 +9,12 @@ use App\Models\Program;
 class HomeController extends Controller
 {
 
-    public function index() {
-        $programas = Program::orderBy('created_at', 'desc')->take(3)->get();
+    public function index()
+    {
+        $programas = Program::orderBy('created_at', 'desc')->take(6)->get();
 
         return Inertia::render('HomePage', [
             'programas' => $programas
         ]);
     }
-
 }

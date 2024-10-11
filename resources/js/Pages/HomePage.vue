@@ -3,7 +3,7 @@ import Footer from '@/Components/Footer.vue';
 import Header from '@/Components/Header.vue';
 
 const props = defineProps({
-    programas:{type:Object}
+  programas: { type: Object }
 });
 
 </script>
@@ -33,38 +33,29 @@ const props = defineProps({
           <h2 class="text-4xl font-bold mb-12 text-center">Our Areas of Activity</h2>
           <div class="grid grid-cols-1 md:grid-cols-3 gap-16">
             <!-- Tarjeta 1 -->
-            <div
-              v-motion
-              :initial="{ opacity: 0, y: 30 }"
-              :enter="{ opacity: 1, y: 0, transition: { delay: 0 } }"
+            <div v-motion :initial="{ opacity: 0, y: 30 }" :enter="{ opacity: 1, y: 0, transition: { delay: 0 } }"
               :hover="{ scale: 1.05 }"
-              class="bg-white shadow-lg rounded-lg p-10 transition-transform duration-300 hover:scale-110 hover:bg-gray-300"
-            >
-              <img src="https://th.bing.com/th/id/OIP.0LEiZH0IjiXl_xQ6bbx7aQHaD9?rs=1&pid=ImgDetMain" alt="Ciencia y Tecnología" class="w-full h-64 object-cover mb-8 rounded-md">
+              class="bg-white shadow-lg rounded-lg p-10 transition-transform duration-300 hover:scale-110 hover:bg-gray-300">
+              <img src="https://th.bing.com/th/id/OIP.0LEiZH0IjiXl_xQ6bbx7aQHaD9?rs=1&pid=ImgDetMain"
+                alt="Ciencia y Tecnología" class="w-full h-64 object-cover mb-8 rounded-md">
               <h3 class="text-3xl font-bold mb-6">Science and Technology</h3>
               <p>We support scientific research and technological development to address global challenges.</p>
             </div>
             <!-- Tarjeta 2 -->
-            <div
-              v-motion
-              :initial="{ opacity: 0, y: 30 }"
-              :enter="{ opacity: 1, y: 0, transition: { delay: 0.1 } }"
+            <div v-motion :initial="{ opacity: 0, y: 30 }" :enter="{ opacity: 1, y: 0, transition: { delay: 0.1 } }"
               :hover="{ scale: 1.05 }"
-              class="bg-white shadow-lg rounded-lg p-10 transition-transform duration-300 hover:scale-110 hover:bg-gray-300"
-            >
-              <img src="https://live.staticflickr.com/5082/5373580138_61a2ec8c0e_b.jpg" alt="Cultura" class="w-full h-64 object-cover mb-8 rounded-md">
+              class="bg-white shadow-lg rounded-lg p-10 transition-transform duration-300 hover:scale-110 hover:bg-gray-300">
+              <img src="https://live.staticflickr.com/5082/5373580138_61a2ec8c0e_b.jpg" alt="Cultura"
+                class="w-full h-64 object-cover mb-8 rounded-md">
               <h3 class="text-3xl font-bold mb-6">Culture</h3>
               <p>We promote artistic creation and the dissemination of cultural knowledge in all its forms.</p>
             </div>
             <!-- Tarjeta 3 -->
-            <div
-              v-motion
-              :initial="{ opacity: 0, y: 30 }"
-              :enter="{ opacity: 1, y: 0, transition: { delay: 0.2 } }"
+            <div v-motion :initial="{ opacity: 0, y: 30 }" :enter="{ opacity: 1, y: 0, transition: { delay: 0.2 } }"
               :hover="{ scale: 1.05 }"
-              class="bg-white shadow-lg rounded-lg p-10 transition-transform duration-300 hover:scale-110 hover:bg-gray-300"
-            >
-              <img src="https://economipedia.com/wp-content/uploads/Fundacion.jpg" alt="Educación" class="w-full h-64 object-cover mb-8 rounded-md">
+              class="bg-white shadow-lg rounded-lg p-10 transition-transform duration-300 hover:scale-110 hover:bg-gray-300">
+              <img src="https://economipedia.com/wp-content/uploads/Fundacion.jpg" alt="Educación"
+                class="w-full h-64 object-cover mb-8 rounded-md">
               <h3 class="text-3xl font-bold mb-6">Education</h3>
               <p>We promote innovative educational programs to train the leaders of the future.</p>
             </div>
@@ -78,20 +69,14 @@ const props = defineProps({
           <h2 class="text-4xl font-bold mb-12 text-center">Latest Programs</h2>
           <div class="relative overflow-hidden">
             <div class="carousel flex items-center space-x-10 animate-scroll">
-              <div
-                v-for="(i, index) in 12"
-                :key="i"
-                v-motion
-                :initial="{ opacity: 0, y: 30 }"
-                :enter="{ opacity: 1, y: 0, transition: { delay: (index % 3) * 0.1 } }"
-                :hover="{ scale: 1.1 }"
-                @mouseover="pauseCarousel"
-                @mouseleave="resumeCarousel"
-                class="bg-white shadow-lg rounded-lg p-10 min-w-[500px] transition-transform duration-300 hover:scale-110 hover:bg-gray-300"
-              >
-                <img :src="'https://th.bing.com/th/id/OIP.8vuk9oG3oMnhc3JmyjMWVQHaDd?rs=1&pid=ImgDetMain text=News+' + ((index % 3) + 1)" :alt="'Programa ' + ((index % 3) + 1)" class="w-full h-64 object-cover mb-8 rounded-md">
-                <h3 class="text-3xl font-bold mb-6">{{ 'Program title ' + ((index % 3) + 1) }}</h3>
-                <p>Description.</p>
+              <div v-for="(i, index) in props.programas" :key="i" v-motion :initial="{ opacity: 0, y: 30 }"
+                :enter="{ opacity: 1, y: 0, transition: { delay: (index % 3) * 0.1 } }" :hover="{ scale: 1.1 }"
+                @mouseover="pauseCarousel" @mouseleave="resumeCarousel"
+                class="bg-white shadow-lg rounded-lg p-10 min-w-[500px] transition-transform duration-300 hover:scale-110 hover:bg-gray-300">
+                <img :src="'storage/img/' + i.image" :alt="'Programa ' + i.title"
+                  class="w-full h-64 object-cover mb-8 rounded-md">
+                <h3 class="text-3xl font-bold mb-6">{{ i.title }}</h3>
+                <p>{{ i.description }}</p>
               </div>
             </div>
           </div>
@@ -103,8 +88,10 @@ const props = defineProps({
         <div class="container mx-auto px-6 text-center">
           <h2 class="text-4xl font-bold mb-10">Our Mission</h2>
           <p class="text-2xl max-w-4xl mx-auto mb-10">
-            At the CTI Foundation, we are dedicated to advancing knowledge, research and innovation to build a better future for all. 
-             We work in collaboration with leading institutions and experts around the world to make a positive impact on society.
+            At the CTI Foundation, we are dedicated to advancing knowledge, research and innovation to build a better
+            future for all.
+            We work in collaboration with leading institutions and experts around the world to make a positive impact on
+            society.
           </p>
           <button class="mt-10 border-white border text-white px-6 py-3 rounded hover:bg-white hover:text-blue-800">
             Learn more about us
@@ -112,7 +99,7 @@ const props = defineProps({
         </div>
       </section>
     </main>
-    
+
     <!-- Footer -->
     <Footer />
   </div>
@@ -123,7 +110,7 @@ import Footer from '@/Components/Footer.vue';
 import Header from '@/Components/Header.vue';
 
 export default {
-  components:{
+  components: {
     Header,
     Footer,
   },
@@ -162,8 +149,13 @@ export default {
 
 <style scoped>
 @keyframes scroll {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(calc(-500px * 6 - 50px * 6)); }
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(calc(-500px * 6 - 50px * 6));
+  }
 }
 
 .animate-scroll {
