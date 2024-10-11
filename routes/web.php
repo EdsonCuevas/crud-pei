@@ -45,9 +45,9 @@ use Inertia\Inertia;
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-Route::get('/donation', function () {
-    return Inertia::render('DonationForm');
-})->name('donation');
+Route::get('/details-donation', function () {
+    return Inertia::render('Donador/Detailsdonation');
+})->name('details-donation');
 
 Route::get('/contact', function () {
     return Inertia::render('Contact');
@@ -87,6 +87,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('volunt-contactos', VoluntContactController::class);
 
     Route::resource('donor-donations', DonorDonacionesController::class);
+
     Route::resource('donor-contacts', DonorContactosController::class);
     Route::resource('donor-informes', DonorInformesController::class);
 

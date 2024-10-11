@@ -18,11 +18,6 @@
             <li><a href="contact" class="hover:underline">Contact us</a></li>
           </ul>
         </nav>
-        <a href="/donation">
-          <button class="flex items-center space-x-2 px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded">
-            Donate
-          </button>
-        </a>
         
         <a href="/dashboard">
           <button class="flex items-center space-x-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors">
