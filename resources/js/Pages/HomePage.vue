@@ -69,10 +69,10 @@ const props = defineProps({
           <h2 class="text-4xl font-bold mb-12 text-center">Latest Programs</h2>
           <div class="relative overflow-hidden">
             <div class="carousel flex items-center space-x-10 animate-scroll">
-              <div v-for="(i, index) in props.programas" :key="i" v-motion :initial="{ opacity: 0, y: 30 }"
+              <div v-for="(i, index) in props.programas" :key="index" v-motion :initial="{ opacity: 0, y: 30 }"
                 :enter="{ opacity: 1, y: 0, transition: { delay: (index % 3) * 0.1 } }" :hover="{ scale: 1.1 }"
                 @mouseover="pauseCarousel" @mouseleave="resumeCarousel"
-                class="bg-white shadow-lg rounded-lg p-10 min-w-[500px] transition-transform duration-300 hover:scale-110 hover:bg-gray-300">
+                class="bg-white shadow-lg rounded-lg p-10 max-w-[500px] transition-transform duration-300 hover:scale-110 hover:bg-gray-300">
                 <img :src="'storage/img/' + i.image" :alt="'Programa ' + i.title"
                   class="w-full h-64 object-cover mb-8 rounded-md">
                 <h3 class="text-3xl font-bold mb-6">{{ i.title }}</h3>
