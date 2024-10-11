@@ -17,7 +17,7 @@ const props = defineProps({
 
 const donacion = ref({
   fechaHora: '2023-05-15 14:30:22',
-  numeroTransaccion: 'DON-2023051501',
+  numeroTransaccion: 'DON-' + props.donacion.id,
   nombreDonante: 'Juan Pérez',
   metodoPago: 'Tarjeta de Crédito',
   cantidad: 1000.00,
@@ -31,8 +31,8 @@ const donacion = ref({
   },
   frecuencia: 'Donación única',
   estado: 'Exitosa',
-  mensajeAgradecimiento: 'Gracias por su generosa donación. Su apoyo hace posible nuestro trabajo y marca la diferencia en la vida de muchos niños.',
-  informacionContacto: 'Fundación CTI, Av. Universidad No. 333, Colonia Las Víboras, Colima, Colima, C.P. 28040 | support@cti.com | +52 313 141 0000',
+  mensajeAgradecimiento: 'Gracias por su generosa donación. Su apoyo hace posible nuestro trabajo y marca la diferencia en la vida de muchos jovenes.',
+  informacionContacto: 'Fundación CTI, Av. Universidad No. 333, Colonia Las Víboras, Colima, C.P. 28040 | support@cti.com | +52 313 141 0000',
   datosFiscales: 'RFC: BBA830831LJ2',
   codigoQR: 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://fundacion.bbva.mx/donacion/DON-2023051501'
 })
@@ -66,7 +66,7 @@ const enviarPorEmail = () => {
             <div class="space-y-4">
               <div>
                 <p class="font-semibold text-[#004481]">Fecha y hora de la donación:</p>
-                <p>{{ props.donacion.created_at }}</p>
+                <p>{{ new Date(props.donacion.created_at).toLocaleString() }}</p>
               </div>
               <div>
                 <p class="font-semibold text-[#004481]">Nombre del donante:</p>
@@ -83,11 +83,11 @@ const enviarPorEmail = () => {
               </div>
               <div>
                 <p class="font-semibold text-[#004481]">Proyecto o causa apoyada:</p>
-                <p>{{ props.donacion.concept }}</p>
+                <p>{{ props.donacion.proram.title }}</p>
               </div>
               <div>
-                <p class="font-semibold text-[#004481]">Frecuencia de la donación:</p>
-                <p>{{ donacion.frecuencia }}</p>
+                <p class="font-semibold text-[#004481]">Concepto:</p>
+                <p>{{ props.donacion.concept }}</p>
               </div>
             </div>
 
