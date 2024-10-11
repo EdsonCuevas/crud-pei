@@ -1,5 +1,38 @@
+<script setup>
+
+import { ref } from 'vue'
+import AuthenticatedLayout from '@/Layouts/Donors/AuthenticatedLayout.vue';
+import { Head } from '@inertiajs/vue3';
+  
+const donationType = ref('single')
+
+import { reactive } from 'vue'
+  
+  const paymentDetails = reactive({
+    title: 'App Eventifica - Mayo',
+    amount: '199,00',
+    paymentMethod: 'Tarjeta de crédito de MasterCard x-1234',
+    paymentNote: 'Verá "App Eventifica - Mayo" en el estado de cuenta de su tarjeta.',
+    vendorName: 'Eventifica',
+    vendorWebsite: 'https://www.eventifica.com',
+    vendorEmail: 'pagos@eventifica.com',
+    exchangeRate: '$ 9.170,51 UYU = $ 199,00 USD',
+    exchangeRateUnit: '1 UYU = 0,0217 USD',
+    transactionId: 'XXXXXXXXXXX035530W',
+    paymentFormatId: 'P-XXXX285',
+    purchaseAmount: '14,99',
+    totalAmount: '14,99'
+  })
+  
+  const printDetails = () => {
+    console.log('Printing details...')
+  }
+</script>
+
 <template>
-    <div class="min-h-screen bg-gray-100 flex items-center justify-center p-4">
+    <AuthenticatedLayout>
+    <Head title="Donation" />
+    <div class="min-h-screen flex items-center justify-center p-4">
       <div class="w-full max-w-2xl bg-white shadow-lg rounded-lg overflow-hidden">
         <div class="bg-[#004481] text-white p-4 flex justify-between items-center">
           <div class="flex items-center space-x-2">
@@ -87,28 +120,5 @@
         </div>
       </div>
     </div>
-  </template>
-  
-  <script setup>
-  import { reactive } from 'vue'
-  
-  const paymentDetails = reactive({
-    title: 'App Eventifica - Mayo',
-    amount: '199,00',
-    paymentMethod: 'Tarjeta de crédito de MasterCard x-1234',
-    paymentNote: 'Verá "App Eventifica - Mayo" en el estado de cuenta de su tarjeta.',
-    vendorName: 'Eventifica',
-    vendorWebsite: 'https://www.eventifica.com',
-    vendorEmail: 'pagos@eventifica.com',
-    exchangeRate: '$ 9.170,51 UYU = $ 199,00 USD',
-    exchangeRateUnit: '1 UYU = 0,0217 USD',
-    transactionId: 'XXXXXXXXXXX035530W',
-    paymentFormatId: 'P-XXXX285',
-    purchaseAmount: '14,99',
-    totalAmount: '14,99'
-  })
-  
-  const printDetails = () => {
-    console.log('Printing details...')
-  }
-  </script>
+    </AuthenticatedLayout>
+</template>

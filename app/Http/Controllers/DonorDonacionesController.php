@@ -26,7 +26,7 @@ class DonorDonacionesController extends Controller
             ->with('proram')
             ->get();
 
-        return Inertia::render('Donador/Donaciones', [
+        return Inertia::render('Donador/Donaciones/Index', [
             'donaciones' => $donaciones
         ]);
     }
@@ -39,6 +39,13 @@ class DonorDonacionesController extends Controller
             return redirect()->route('401')->with('error', 'No tienes acceso a esta página.');
         }
 
-        return Inertia::render('Donador/Donate');
+        return Inertia::render('Donador/Donaciones/Create');
+    }
+
+    public function show(Donation $donor_donation)
+    {
+        $donor_donation->load(['proram']);
+
+        return Inertia::render('Donador/Donaciones/View');
     }
 }
