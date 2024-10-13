@@ -1,10 +1,25 @@
 <script setup>
 import Footer from '@/Components/Footer.vue';
 import Header from '@/Components/Header.vue';
+import Modal from '@/Components/Modal.vue';
+import SecondaryButton from '@/Components/SecondaryButton.vue';
+import { ref } from 'vue';
 
 const props = defineProps({
   programas: { type: Object }
 });
+
+// Estado reactivo
+const showModal = ref(false); // Controla la visibilidad del modal
+const selectedProgram = ref(null); // Guarda los detalles del programa seleccionado
+// Métodos
+function openModal(program) {
+  selectedProgram.value = program; // Almacena el programa seleccionado
+  showModal.value = true; // Muestra el modal
+}
+function closeModal() {
+  showModal.value = false; // Oculta el modal
+}
 
 </script>
 
@@ -69,14 +84,16 @@ const props = defineProps({
           <h2 class="text-4xl font-bold mb-12 text-center">Latest Programs</h2>
           <div class="relative overflow-hidden">
             <div class="carousel flex items-center space-x-10 animate-scroll">
-              <div v-for="(i, index) in props.programas" :key="index" v-motion :initial="{ opacity: 0, y: 30 }"
+              <div v-for="(program, index) in props.programas" :key="index" v-motion :initial="{ opacity: 0, y: 30 }"
                 :enter="{ opacity: 1, y: 0, transition: { delay: (index % 3) * 0.1 } }" :hover="{ scale: 1.1 }"
                 @mouseover="pauseCarousel" @mouseleave="resumeCarousel"
                 class="bg-white shadow-lg rounded-lg p-10 max-w-[500px] transition-transform duration-300 hover:scale-110 hover:bg-gray-300">
-                <img :src="'storage/img/' + i.image" :alt="'Programa ' + i.title"
-                  class="w-full h-64 object-cover mb-8 rounded-md">
-                <h3 class="text-3xl font-bold mb-6">{{ i.title }}</h3>
-                <p>{{ i.description }}</p>
+                <a href="javascript:void(0)" @click="openModal(program)">
+                  <img :src="'storage/img/' + program.image" :alt="'Programa ' + program.title"
+                    class="w-full h-64 object-cover mb-8 rounded-md">
+                  <h3 class="text-3xl font-bold mb-6">{{ program.title }}</h3>
+                  <p>{{ program.description }}</p>
+                </a>
               </div>
             </div>
           </div>
@@ -98,6 +115,21 @@ const props = defineProps({
           </button>
         </div>
       </section>
+
+      <Modal :show="showModal" @close="closeModal">
+          <div class="p-6">
+            <h2 class="font-bold text-xl text-gray-800 mt-4 mb-4 break-words text-left">{{ selectedProgram.title }}</h2>
+            <!-- Imagen centrada -->
+            <img :src="'storage/img/' + selectedProgram.image" alt="Program Image" class="max-w-md h-auto object-cover rounded-lg mb-4 mx-auto">
+
+            <p class="text-gray-600 text-sm leading-relaxed mb-6 text-justify" style="word-wrap: break-word;">
+              {{ selectedProgram.description }}
+            </p>
+          </div>
+          <div class="m-6 flex justify-end">
+              <SecondaryButton @click="closeModal">Close</SecondaryButton>
+          </div>
+      </Modal>
     </main>
 
     <!-- Footer -->
