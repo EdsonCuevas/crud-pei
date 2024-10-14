@@ -4,9 +4,9 @@ import { ref } from 'vue'
 import AuthenticatedLayout from '@/Layouts/Donors/AuthenticatedLayout.vue';
 import { Head } from '@inertiajs/vue3';
 
-const donationType = ref('single')
-
 import numeroALetras from '@/Utils/numeroALetras';
+
+import { Printer, FileText  } from 'lucide-vue-next'
 
 import { reactive } from 'vue'
 const props = defineProps({
@@ -116,14 +116,14 @@ const Imprimir = () => {
             </div>
             <div class="flex justify-between mt-6">
               <button @click="Imprimir"
-                class="bg-[#004481] text-white px-6 py-2 rounded-md hover:bg-[#003366] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#004481] transition duration-300">
-                Imprimir
+                  class="bg-[#004481] text-white px-4 py-2 rounded-md hover:bg-[#003366] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#004481] transition duration-300 flex items-center space-x-2">
+                  <Printer class="w-6 h-6" />
+                  <span>Imprimir</span>
               </button>
-              <button>
-                <a href="https://www.sat.gob.mx/personas/declaraciones" class="bg-green-500 text-white px-6 py-2 rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition duration-300" target="_blank">
-                  Declaración
+                <a href="https://www.sat.gob.mx/personas/declaraciones" class="bg-green-500 text-white px-6 py-2 rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition duration-300 flex items-center space-x-2" target="_blank">
+                  <FileText />
+                  <span>Declaración</span>
                 </a>
-              </button>
             </div>
           </div>
         </div>
