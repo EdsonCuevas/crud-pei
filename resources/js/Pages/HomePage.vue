@@ -79,26 +79,79 @@ function closeModal() {
       </section>
 
       <!-- Section 3: Latest Programs Carousel -->
-      <section class="py-20">
-        <div class="container mx-auto px-6">
-          <h2 class="text-4xl font-bold mb-12 text-center">Latest Programs</h2>
+      <section class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6 relative">
+          <h2 class="text-4xl font-bold mb-12 text-center text-gray-800">Latest Programs</h2>
+
+          <!-- Relieve en los lados del carrusel -->
           <div class="relative overflow-hidden">
-            <div class="carousel flex items-center space-x-10 animate-scroll">
-              <div v-for="(program, index) in props.programas" :key="index" v-motion :initial="{ opacity: 0, y: 30 }"
-                :enter="{ opacity: 1, y: 0, transition: { delay: (index % 3) * 0.1 } }" :hover="{ scale: 1.1 }"
-                @mouseover="pauseCarousel" @mouseleave="resumeCarousel"
-                class="bg-white shadow-lg rounded-lg p-10 max-w-[500px] transition-transform duration-300 hover:scale-110 hover:bg-gray-300">
+            <!-- Relieve/fade en los bordes -->
+            <div class="fade-effect-left absolute left-0 top-0 h-full w-20 bg-gradient-to-r from-gray-50 to-transparent pointer-events-none"></div>
+            <div class="fade-effect-right absolute right-0 top-0 h-full w-20 bg-gradient-to-l from-gray-50 to-transparent pointer-events-none"></div>
+
+            <!-- Carrusel con animación infinita -->
+            <div class="carousel flex items-center space-x-10 animate-scroll" @mouseover="pauseCarousel" @mouseleave="resumeCarousel">
+              <!-- Duplicamos los programas para la ilusión de infinito -->
+              <div v-for="(program, index) in [...props.programas, ...props.programas]" :key="index" 
+                v-motion :initial="{ opacity: 0, y: 30 }"
+                :enter="{ opacity: 1, y: 0, transition: { delay: (index % 3) * 0.1 } }"
+                @mouseover="pauseCarousel" 
+                @mouseleave="resumeCarousel"
+                class="bg-white shadow-lg rounded-lg p-8 max-w-[450px] w-full h-[500px] overflow-hidden transition-transform duration-300 hover:scale-105 hover:bg-gray-200 cursor-pointer">
+
+                <!-- Contenido de la tarjeta del programa -->
                 <a href="javascript:void(0)" @click="openModal(program)">
-                  <img :src="'storage/img/' + program.image" :alt="'Programa ' + program.title"
-                    class="w-full h-64 object-cover mb-8 rounded-md">
-                  <h3 class="text-3xl font-bold mb-6">{{ program.title }}</h3>
-                  <p>{{ program.description }}</p>
+                  <img :src="'storage/img/' + program.image" 
+                      :alt="'Program Image: ' + program.title"
+                      class="w-full h-56 object-cover mb-6 rounded-lg">
+                  <h3 class="text-2xl font-semibold mb-4 text-gray-700">{{ program.title }}</h3>
+                  <p class="text-gray-600 line-clamp-3 mb-4">{{ program.description }}</p>
                 </a>
+                
+                <!-- Botón azul de "Más información" -->
+                <div class="text-center">
+                  <button @click="openModal(program)"
+                          class="bg-gradient-to-r from-blue-500 to-blue-600 text-white font-bold py-2 px-6 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105">
+                    Más información
+                  </button>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
+
+      <!-- Modal para la información detallada del programa -->
+      <Modal :show="showModal" @close="closeModal">
+        <div class="p-6 relative bg-white rounded-lg shadow-lg transition-all duration-300 transform scale-100">
+          <!-- Botón para cerrar modal -->
+          <button @click="closeModal" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-300 rounded-full transition-all">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+
+          <!-- Detalles del programa -->
+          <h2 class="font-extrabold text-2xl text-gray-800 mt-4 mb-2 text-left break-words">
+            {{ selectedProgram.title }}
+          </h2>
+          <img :src="'storage/img/' + selectedProgram.image"
+              :alt="selectedProgram.title + ' Image'"
+              class="w-full max-w-md h-auto object-cover rounded-lg mb-4 mx-auto shadow-md transition-all duration-200 transform hover:scale-105"> <br>
+          <p class="text-gray-600 text-base leading-relaxed mb-6 text-justify break-words">
+            {{ selectedProgram.description }}
+          </p>
+
+
+          <!-- Botón de "Inscribirse" -->
+          <div class="flex justify-end">
+            <button @click="subscribeToProgram(selectedProgram)"
+                    class="bg-gradient-to-r from-blue-500 to-blue-600 text-white font-bold py-2 px-6 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105">
+              Inscribirse
+            </button>
+          </div>
+        </div>
+      </Modal>
 
       <!-- Section 4: Misión -->
       <section class="py-20 bg-blue-900 text-white fade-on-scroll">
@@ -115,21 +168,6 @@ function closeModal() {
           </button>
         </div>
       </section>
-
-      <Modal :show="showModal" @close="closeModal">
-          <div class="p-6">
-            <h2 class="font-bold text-xl text-gray-800 mt-4 mb-4 break-words text-left">{{ selectedProgram.title }}</h2>
-            <!-- Imagen centrada -->
-            <img :src="'storage/img/' + selectedProgram.image" alt="Program Image" class="max-w-md h-auto object-cover rounded-lg mb-4 mx-auto">
-
-            <p class="text-gray-600 text-sm leading-relaxed mb-6 text-justify" style="word-wrap: break-word;">
-              {{ selectedProgram.description }}
-            </p>
-          </div>
-          <div class="m-6 flex justify-end">
-              <SecondaryButton @click="closeModal">Close</SecondaryButton>
-          </div>
-      </Modal>
     </main>
 
     <!-- Footer -->
@@ -201,4 +239,35 @@ export default {
   transition: opacity 0.5s ease-out;
   opacity: 1;
 }
+h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #4a5568;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis; /* Si el texto es muy largo, agrega "..." */
+}
+
+
+h2 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  color: #4a5568;
+  overflow-wrap: break-word; /* Las palabras largas se partirán en varias líneas */
+}
+h2 {
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+p {
+  font-size: 1rem;
+  color: #718096;
+  line-height: 1.75rem;
+  text-align: justify;
+  overflow-wrap: break-word;}
+
+
+
 </style>
