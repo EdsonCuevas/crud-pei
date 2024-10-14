@@ -117,7 +117,7 @@ const Imprimir = () => {
             <div class="flex justify-between mt-6">
               <button @click="Imprimir"
                 class="bg-[#004481] text-white px-6 py-2 rounded-md hover:bg-[#003366] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#004481] transition duration-300">
-                Descargar PDF
+                Imprimir
               </button>
               <button>
                 <a href="https://www.sat.gob.mx/personas/declaraciones" class="bg-green-500 text-white px-6 py-2 rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition duration-300" target="_blank">
