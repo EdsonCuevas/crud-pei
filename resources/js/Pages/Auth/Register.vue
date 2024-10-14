@@ -13,6 +13,7 @@ const form = useForm({
 	password: '',
 	phone: '',
 	password_confirmation: '',
+	rfc: '',
 	role: '',
 	terms: false,
 });
@@ -60,6 +61,12 @@ const submit = () => {
 							<InputLabel for="phone" value="Phone" />
 							<TextInput id="phone" type="tel" class="block w-full mt-1" v-model="form.phone" required autocomplete="tel" />
 							<InputError class="mt-2" :message="form.errors.phone" />
+						</div>
+
+						<div class="mt-4">
+							<InputLabel for="rfc" value="RFC" />
+							<TextInput id="rfc" type="text" class="block w-full mt-1" v-model="form.rfc" required autocomplete="rfc" />
+							<InputError class="mt-2" :message="form.errors.rfc" />
 						</div>
 
 						<div class="mt-4">
