@@ -32,7 +32,7 @@ const validateNumberInput = (event) => {
           </h1>
 
           <div class="mb-6">
-            <label class="text-sm font-semibold text-[#004481] mb-2">Transaction number</label>
+            <label class="text-sm font-semibold text-[#004481] mb-2">Donation concept</label>
             <div class="grid grid-cols-3 gap-2 mb-2"></div>
 
             <!-- Este input tendrá su propia variable para no interferir con el de abajo -->
@@ -40,7 +40,7 @@ const validateNumberInput = (event) => {
               id="transactionNumber"
               type="text"
               v-model="transactionNumber"
-              placeholder="Bank reference"
+              placeholder="Concept"
               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#004481]"
             />
           </div>
