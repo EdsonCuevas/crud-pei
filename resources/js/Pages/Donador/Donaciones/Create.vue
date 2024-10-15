@@ -32,6 +32,20 @@ const validateNumberInput = (event) => {
           </h1>
 
           <div class="mb-6">
+            <label class="text-sm font-semibold text-[#004481] mb-2">Transaction number</label>
+            <div class="grid grid-cols-3 gap-2 mb-2"></div>
+
+            <!-- Este input tendrá su propia variable para no interferir con el de abajo -->
+            <input
+              id="transactionNumber"
+              type="text"
+              v-model="transactionNumber"
+              placeholder="Bank reference"
+              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#004481]"
+            />
+          </div>
+
+          <div class="mb-6">
             <h3 class="text-sm font-semibold text-[#004481] mb-2">Select your contribution amount</h3>
             <div class="grid grid-cols-3 gap-2 mb-2">
               <button
@@ -56,6 +70,7 @@ const validateNumberInput = (event) => {
               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#004481]"
             />
           </div>
+
 
           <!-- Aquí agregamos el combobox que selecciona los programas de las donaciones -->
           <div class="mt-4">
