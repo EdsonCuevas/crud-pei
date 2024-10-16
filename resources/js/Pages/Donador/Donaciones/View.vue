@@ -4,9 +4,9 @@ import { ref } from 'vue'
 import AuthenticatedLayout from '@/Layouts/Donors/AuthenticatedLayout.vue';
 import { Head } from '@inertiajs/vue3';
 
-const donationType = ref('single')
-
 import numeroALetras from '@/Utils/numeroALetras';
+
+import { Printer, FileText  } from 'lucide-vue-next'
 
 import { reactive } from 'vue'
 const props = defineProps({
@@ -42,20 +42,16 @@ const convertirNumero = (numero) => {
   return numeroALetras(numero, { plural: 'PESOS', singular: 'PESO' });
 };
 
-const descargarPDF = () => {
+const Imprimir = () => {
   // Aquí iría la lógica para generar y descargar el PDF
-  console.log('Descargando PDF...')
+  window.print();
 }
 
-const enviarPorEmail = () => {
-  // Aquí iría la lógica para enviar el recibo por email
-  console.log('Enviando recibo por email...')
-}
 </script>
 
 <template>
   <AuthenticatedLayout>
-    <div class="min-h-screen bg-gray-100 flex items-center justify-center p-4">
+    <div class="flex items-center justify-center p-4">
       <div class="w-full max-w-4xl bg-white shadow-lg rounded-lg overflow-hidden">
         <div class="bg-[#004481] text-white p-6">
           <h1 class="text-3xl font-bold text-center">Recibo de Donación</h1>
@@ -85,10 +81,6 @@ const enviarPorEmail = () => {
                 <p class="font-semibold text-[#004481]">Programa o causa apoyada:</p>
                 <p>{{ props.donacion.proram.title }}</p>
               </div>
-              <div>
-                <p class="font-semibold text-[#004481]">Concepto:</p>
-                <p>{{ props.donacion.concept }}</p>
-              </div>
             </div>
 
             <!-- Columna derecha -->
@@ -102,20 +94,16 @@ const enviarPorEmail = () => {
                 <p class="text-green-600 font-bold">{{ donacion.estado }}</p>
               </div>
               <div>
-                <p class="font-semibold text-[#004481]">Desglose de la donación:</p>
-                <ul class="list-disc list-inside pl-4">
-                  <li v-for="(porcentaje, concepto) in donacion.desglose" :key="concepto">
-                    {{ concepto }}: {{ porcentaje }}%
-                  </li>
-                </ul>
-              </div>
-              <div>
                 <p class="font-semibold text-[#004481]">Información de contacto:</p>
                 <p class="text-sm">{{ donacion.informacionContacto }}</p>
               </div>
               <div v-if="donacion.datosFiscales">
                 <p class="font-semibold text-[#004481]">Datos fiscales:</p>
                 <p>{{ donacion.datosFiscales }}</p>
+              </div>
+              <div>
+                <p class="font-semibold text-[#004481]">Concepto:</p>
+                <p>{{ props.donacion.concept }}</p>
               </div>
             </div>
           </div>
@@ -126,18 +114,16 @@ const enviarPorEmail = () => {
               <p class="font-semibold text-[#004481]">Mensaje de agradecimiento:</p>
               <p class="italic text-gray-700 bg-gray-100 p-3 rounded-lg">{{ donacion.mensajeAgradecimiento }}</p>
             </div>
-            <div class="flex justify-center">
-              <img :src="donacion.codigoQR" alt="Código QR de la donación" class="w-32 h-32">
-            </div>
             <div class="flex justify-between mt-6">
-              <button @click="descargarPDF"
-                class="bg-[#004481] text-white px-6 py-2 rounded-md hover:bg-[#003366] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#004481] transition duration-300">
-                Descargar PDF
+              <button @click="Imprimir"
+                  class="bg-[#004481] text-white px-4 py-2 rounded-md hover:bg-[#003366] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#004481] transition duration-300 flex items-center space-x-2">
+                  <Printer class="w-6 h-6" />
+                  <span>Imprimir</span>
               </button>
-              <button @click="enviarPorEmail"
-                class="bg-green-500 text-white px-6 py-2 rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition duration-300">
-                Enviar por Email
-              </button>
+                <a href="https://www.sat.gob.mx/personas/declaraciones" class="bg-green-500 text-white px-6 py-2 rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition duration-300 flex items-center space-x-2" target="_blank">
+                  <FileText />
+                  <span>Declaración</span>
+                </a>
             </div>
           </div>
         </div>
