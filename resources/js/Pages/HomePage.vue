@@ -69,39 +69,6 @@ onBeforeUnmount(() => {
         </div>
       </section>
 
-      <!-- Section 2: Áreas de Actuación -->
-      <section class="py-20 bg-gray-100">
-        <div class="container mx-auto px-6">
-          <h2 class="text-4xl font-bold mb-12 text-center">Our Areas of Activity</h2>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-16">
-            <!-- Tarjeta 1 -->
-            <div v-motion :initial="{ opacity: 0, y: 30 }" :enter="{ opacity: 1, y: 0 }" :hover="{ scale: 1.05 }"
-              class="bg-white shadow-lg rounded-lg p-10 transition-transform duration-300 hover:scale-110 hover:bg-gray-300">
-              <img src="https://th.bing.com/th/id/OIP.0LEiZH0IjiXl_xQ6bbx7aQHaD9?rs=1&pid=ImgDetMain"
-                alt="Ciencia y Tecnología" class="w-full h-64 object-cover mb-8 rounded-md">
-              <h3 class="text-3xl font-bold mb-6">Science and Technology</h3>
-              <p>We support scientific research and technological development to address global challenges.</p>
-            </div>
-            <!-- Tarjeta 2 -->
-            <div v-motion :initial="{ opacity: 0, y: 30 }" :enter="{ opacity: 1, y: 0 }" :hover="{ scale: 1.05 }"
-              class="bg-white shadow-lg rounded-lg p-10 transition-transform duration-300 hover:scale-110 hover:bg-gray-300">
-              <img src="https://live.staticflickr.com/5082/5373580138_61a2ec8c0e_b.jpg" alt="Cultura"
-                class="w-full h-64 object-cover mb-8 rounded-md">
-              <h3 class="text-3xl font-bold mb-6">Culture</h3>
-              <p>We promote artistic creation and the dissemination of cultural knowledge in all its forms.</p>
-            </div>
-            <!-- Tarjeta 3 -->
-            <div v-motion :initial="{ opacity: 0, y: 30 }" :enter="{ opacity: 1, y: 0 }" :hover="{ scale: 1.05 }"
-              class="bg-white shadow-lg rounded-lg p-10 transition-transform duration-300 hover:scale-110 hover:bg-gray-300">
-              <img src="https://economipedia.com/wp-content/uploads/Fundacion.jpg" alt="Educación"
-                class="w-full h-64 object-cover mb-8 rounded-md">
-              <h3 class="text-3xl font-bold mb-6">Education</h3>
-              <p>We promote innovative educational programs to train the leaders of the future.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
       <!-- Section 3: Latest Programs Carousel -->
       <section class="py-20 bg-gray-50">
         <div class="container mx-auto px-6 relative">
@@ -143,6 +110,39 @@ onBeforeUnmount(() => {
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+            <!-- Section 2: Áreas de Actuación -->
+            <section class="py-20 bg-gray-100">
+        <div class="container mx-auto px-6">
+          <h2 class="text-4xl font-bold mb-12 text-center">Our Areas of Activity</h2>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-16">
+            <!-- Tarjeta 1 -->
+            <div v-motion :initial="{ opacity: 0, y: 30 }" :enter="{ opacity: 1, y: 0 }" :hover="{ scale: 1.05 }"
+              class="bg-white shadow-lg rounded-lg p-10 transition-transform duration-300 hover:scale-110 hover:bg-gray-300">
+              <img src="https://th.bing.com/th/id/OIP.0LEiZH0IjiXl_xQ6bbx7aQHaD9?rs=1&pid=ImgDetMain"
+                alt="Ciencia y Tecnología" class="w-full h-64 object-cover mb-8 rounded-md">
+              <h3 class="text-3xl font-bold mb-6">Science and Technology</h3>
+              <p>We support scientific research and technological development to address global challenges.</p>
+            </div>
+            <!-- Tarjeta 2 -->
+            <div v-motion :initial="{ opacity: 0, y: 30 }" :enter="{ opacity: 1, y: 0 }" :hover="{ scale: 1.05 }"
+              class="bg-white shadow-lg rounded-lg p-10 transition-transform duration-300 hover:scale-110 hover:bg-gray-300">
+              <img src="https://live.staticflickr.com/5082/5373580138_61a2ec8c0e_b.jpg" alt="Cultura"
+                class="w-full h-64 object-cover mb-8 rounded-md">
+              <h3 class="text-3xl font-bold mb-6">Culture</h3>
+              <p>We promote artistic creation and the dissemination of cultural knowledge in all its forms.</p>
+            </div>
+            <!-- Tarjeta 3 -->
+            <div v-motion :initial="{ opacity: 0, y: 30 }" :enter="{ opacity: 1, y: 0 }" :hover="{ scale: 1.05 }"
+              class="bg-white shadow-lg rounded-lg p-10 transition-transform duration-300 hover:scale-110 hover:bg-gray-300">
+              <img src="https://economipedia.com/wp-content/uploads/Fundacion.jpg" alt="Educación"
+                class="w-full h-64 object-cover mb-8 rounded-md">
+              <h3 class="text-3xl font-bold mb-6">Education</h3>
+              <p>We promote innovative educational programs to train the leaders of the future.</p>
             </div>
           </div>
         </div>
@@ -240,7 +240,6 @@ h3 {
   font-size: 1.5rem;
   font-weight: 600;
   margin-bottom: 1rem;
-  color: #4a5568;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -250,14 +249,12 @@ h2 {
   font-size: 1.5rem;
   font-weight: 800;
   margin-bottom: 1rem;
-  color: #4a5568;
   word-break: break-word;
   overflow-wrap: break-word;
 }
 
 p {
   font-size: 1rem;
-  color: #718096;
   line-height: 1.75rem;
   text-align: justify;
   overflow-wrap: break-word;
