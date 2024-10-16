@@ -56,24 +56,50 @@ onBeforeUnmount(() => {
     <!-- Header -->
     <Header />
 
-    <!-- Main Content -->
     <main class="flex-grow">
-      <!-- Section 1: Intro -->
-      <section class="bg-blue-800 text-white py-20">
-        <div class="container mx-auto px-4">
-          <h1 class="text-5xl font-bold mb-6">Boosting knowledge and innovation</h1>
-          <p class="text-xl mb-8">Discover how we are transforming lives through science, culture and education.</p>
-          <button class="text-white border-white hover:bg-white hover:text-blue-800 border p-2 rounded">
-            Browse programs
-          </button>
-        </div>
-      </section>
+          <!-- Section 1: Intro -->
+          <section class="bg-blue-800 text-white py-20">
+            <div class="container mx-auto px-4">
+              <!-- Usamos <transition> para animar el h1 -->
+              <transition
+                name="bounce"
+                appear
+              >
+                <h1 class="text-5xl font-bold mb-6">Boosting knowledge and innovation</h1>
+              </transition>
+              <transition
+              name="bounce"
+              appear
+              >
+              <h2 class="text-xl mb-8">
+                Discover how we are transforming lives through science, culture and education.
+              </h2>
+            </transition>
+            
+
+            <transition
+            name= "bounce"
+            appear
+            >
+              <button class="text-white border-white hover:bg-white hover:text-blue-800 border p-2 rounded">
+                Browse programs
+              </button>
+            </transition>
+          </div>
+            </section>
+
 
       <!-- Section 3: Latest Programs Carousel -->
       <section class="py-20 bg-gray-50">
         <div class="container mx-auto px-6 relative">
-          <h2 class="text-4xl font-bold mb-12 text-center text-gray-800">Latest Programs</h2>
-
+          <transition
+          name="slide-up"
+          appear
+        >
+          <h2 class="text-4xl font-bold mb-12 text-center text-gray-800">
+            Latest Programs
+          </h2>
+        </transition>
           <!-- Relieve en los lados del carrusel -->
           <div class="relative overflow-hidden">
             <!-- Relieve/fade en los bordes -->
@@ -264,5 +290,67 @@ p {
 .fade-on-scroll {
   transition: opacity 0.5s ease-out;
   opacity: 1;
+}
+.bounce-enter-active {
+    animation: bounceIn 1s ease;
+  }
+  .bounce-leave-active {
+    animation: bounceOut 1s ease;
+  }
+  
+  @keyframes bounceIn {
+    0% {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+    50% {
+      transform: translateX(20%);
+      opacity: 0.5;
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes bounceOut {
+    0% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    100% {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+  }
+  .slide-up-enter-active {
+  animation: slideUp .5s ease-out;
+}
+.slide-up-leave-active {
+  animation: slideDown 1ms ease-out;
+}
+
+/* Definimos la animación de aparecer desde abajo */
+@keyframes slideUp {
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Opción de animación al salir, si es necesario */
+@keyframes slideDown {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
 }
 </style>
