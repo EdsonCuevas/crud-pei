@@ -4,28 +4,31 @@ import AuthenticatedLayout from '@/Layouts/Donors/AuthenticatedLayout.vue';
 import { Head } from '@inertiajs/vue3';
 import { router } from '@inertiajs/vue3'; // Asegúrate de tener esta importación
 
-
 const selectedAmount = ref('');
 const transactionNumber = ref('');
 const selectedProgramId = ref(''); // Para el ID del programa seleccionado
+const errorMessage = ref(''); // Para manejar mensajes de error
 
-// Definimos el prop 'donaciones' que será un array de donaciones
 const props = defineProps({
   programas: {
     type: Array,
   },
 });
 
-// Función para validar que solo se ingresen números
 const validateNumberInput = (event) => {
-  const value = event.target.value;
-  // Remover cualquier carácter que no sea número
-  const sanitizedValue = value.replace(/[^0-9]/g, '');
-  selectedAmount.value = sanitizedValue; // Actualiza el valor con solo números
+  let value = event.target.value;
+
+  if (value.startsWith('0')) {
+    errorMessage.value = '';
+    value = ''; // Borrar el valor si comienza con 0
+  } else {
+    errorMessage.value = ''; // Limpiar el mensaje de error si el número es válido
+  }
+
+  selectedAmount.value = value; 
 };
 
 const submitDonation = () => {
-  // Enviamos los datos al controlador usando la ruta resource
   router.post('/donor-donations', {
     amount: selectedAmount.value,
     transaction_number: transactionNumber.value,
@@ -69,6 +72,7 @@ const submitDonation = () => {
                   {{ amount }}
                 </button>
               </div>
+              
               <input
                 v-model="selectedAmount"
                 type="number"
@@ -76,6 +80,9 @@ const submitDonation = () => {
                 @input="validateNumberInput"
                 class="w-full px-3 py-2 border border-gray-300 rounded-md"
               />
+
+              <!-- Mostrar un mensaje de error si el valor no es válido -->
+              <p v-if="errorMessage" class="text-red-500 text-sm">{{ errorMessage }}</p>
             </div>
 
             <div class="mt-4">
@@ -91,14 +98,12 @@ const submitDonation = () => {
             <button type="submit" class="w-full py-3 bg-blue-500 text-white rounded-md hover:bg-[#004481]">
               Continue
             </button>
-          </form>  <br />
+          </form>
+          <br>
 
           <div class="text-xs text-center text-gray-500 mb-4">
             Secure donation.<br />
             Your data will be encrypted
-
-            <br />
-
           </div>
         </div>
       </div>
