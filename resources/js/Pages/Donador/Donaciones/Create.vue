@@ -2,8 +2,12 @@
 import { ref } from 'vue';
 import AuthenticatedLayout from '@/Layouts/Donors/AuthenticatedLayout.vue';
 import { Head } from '@inertiajs/vue3';
+import { router } from '@inertiajs/vue3'; // Asegúrate de tener esta importación
 
-const selectedAmount = ref(''); // Para almacenar el monto seleccionado
+
+const selectedAmount = ref('');
+const transactionNumber = ref('');
+const selectedProgramId = ref(''); // Para el ID del programa seleccionado
 
 // Definimos el prop 'donaciones' que será un array de donaciones
 const props = defineProps({
@@ -19,6 +23,15 @@ const validateNumberInput = (event) => {
   const sanitizedValue = value.replace(/[^0-9]/g, '');
   selectedAmount.value = sanitizedValue; // Actualiza el valor con solo números
 };
+
+const submitDonation = () => {
+  // Enviamos los datos al controlador usando la ruta resource
+  router.post('/donor-donations', {
+    amount: selectedAmount.value,
+    transaction_number: transactionNumber.value,
+    program_id: selectedProgramId.value,
+  });
+};
 </script>
 
 <template>
@@ -31,61 +44,54 @@ const validateNumberInput = (event) => {
             Donation
           </h1>
 
-          <div class="mb-6">
-            <label class="text-sm font-semibold text-[#004481] mb-2">Donation concept</label>
-            <div class="grid grid-cols-3 gap-2 mb-2"></div>
-
-            <!-- Este input tendrá su propia variable para no interferir con el de abajo -->
-            <input
-              id="transactionNumber"
-              type="text"
-              v-model="transactionNumber"
-              placeholder="Concept"
-              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#004481]"
-            />
-          </div>
-
-          <div class="mb-6">
-            <h3 class="text-sm font-semibold text-[#004481] mb-2">Select your contribution amount</h3>
-            <div class="grid grid-cols-3 gap-2 mb-2">
-              <button
-                v-for="amount in ['$100', '$500', '$1000']"
-                :key="amount"
-                @click="selectedAmount = amount.replace('$', '')"
-                :class="[ 
-                  'py-2 px-4 border border-[#004481] text-[#004481] rounded-md transition-colors duration-200',
-                  selectedAmount === amount.replace('$', '') ? 'bg-blue-500 text-white' : 'hover:bg-blue-500 hover:text-white'
-                ]"
-              >
-                {{ amount }}
-              </button>
+          <form @submit.prevent="submitDonation">
+            <!-- Aquí están los campos que ya tienes definidos -->
+            <div class="mb-6">
+              <label class="text-sm font-semibold text-[#004481] mb-2">Donation concept</label>
+              <input
+                id="transactionNumber"
+                type="text"
+                v-model="transactionNumber"
+                placeholder="Concept"
+                class="w-full px-3 py-2 border border-gray-300 rounded-md"
+              />
             </div>
 
-            <!-- El input refleja el valor seleccionado o manualmente introducido -->
-            <input
-              v-model="selectedAmount"
-              type="text"
-              placeholder="Other amount"
-              @input="validateNumberInput"
-              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#004481]"
-            />
-          </div>
+            <div class="mb-6">
+              <h3 class="text-sm font-semibold text-[#004481] mb-2">Select your contribution amount</h3>
+              <div class="grid grid-cols-3 gap-2 mb-2">
+                <button
+                  v-for="amount in ['$100', '$500', '$1000']"
+                  :key="amount"
+                  @click="selectedAmount = amount.replace('$', '')"
+                  :class="['py-2 px-4 border border-[#004481]', selectedAmount === amount.replace('$', '') ? 'bg-blue-500 text-white' : 'hover:bg-blue-500 hover:text-white']"
+                >
+                  {{ amount }}
+                </button>
+              </div>
+              <input
+                v-model="selectedAmount"
+                type="number"
+                placeholder="Other amount"
+                @input="validateNumberInput"
+                class="w-full px-3 py-2 border border-gray-300 rounded-md"
+              />
+            </div>
 
-
-          <!-- Aquí agregamos el combobox que selecciona los programas de las donaciones -->
-          <div class="mt-4">
-            <label class="block text-sm font-semibold text-[#004481] mb-2">Select a program</label>
-
-            <select id="donacion"
-              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#004481]"
-            >
-              <option disabled value="">Select a program</option>
-
-              <option v-for="programa in programas" :key="programa.id" class="text-gray-700">
-                {{ programa.title }}
-              </option>
-            </select>
-          </div>  <br />
+            <div class="mt-4">
+              <label class="block text-sm font-semibold text-[#004481] mb-2">Select a program</label>
+              <select v-model="selectedProgramId" class="w-full px-3 py-2 border border-gray-300 rounded-md">
+                <option disabled value="">Select a program</option>
+                <option v-for="programa in programas" :key="programa.id" :value="programa.id">
+                  {{ programa.title }}
+                </option>
+              </select>
+            </div>
+            
+            <button type="submit" class="w-full py-3 bg-blue-500 text-white rounded-md hover:bg-[#004481]">
+              Continue
+            </button>
+          </form>  <br />
 
           <div class="text-xs text-center text-gray-500 mb-4">
             <br />

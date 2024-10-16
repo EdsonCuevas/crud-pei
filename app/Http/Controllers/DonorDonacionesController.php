@@ -48,6 +48,27 @@ class DonorDonacionesController extends Controller
         ]);
     }
 
+    public function store(Request $request)
+    {
+        $request->validate([
+            'amount' => 'required|numeric',
+            'transaction_number' => 'required|string',
+            'program_id' => 'required|exists:programs,id',
+        ]);
+
+        $userId = Auth::id();
+
+        // Crear la donación
+        Donation::create([
+            'value' => $request->input('amount'),
+            'concept' => $request->input('transaction_number'),
+            'programs_id' => $request->input('program_id'),
+            'users_id' => $userId, // Suponiendo que tienes una relación con el usuario
+        ]);
+
+        return redirect()->route('donor-donations.index')->with('success', 'Donation created successfully.');
+    }
+
     public function show(Donation $donor_donation)
     {
         $donor_donation->load(['proram', 'user']);
