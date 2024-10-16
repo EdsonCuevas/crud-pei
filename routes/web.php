@@ -1,5 +1,6 @@
 <?php
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProgramsController;
 // Controladores para el panel Administrador
 use App\Http\Controllers\AdminBeneficiariesController;
 use App\Http\Controllers\AdminCoordiController;
@@ -44,6 +45,8 @@ use Inertia\Inertia;
 */
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/programs', [ProgramsController::class, 'index'])->name('programs');
+
 
 Route::get('/details-donation', function () {
     return Inertia::render('Donador/Detailsdonation');
