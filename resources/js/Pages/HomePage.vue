@@ -91,15 +91,15 @@ onBeforeUnmount(() => {
 
 
       <!-- Section 3: Latest Programs Carousel -->
-      <section class="py-20 bg-gray-50">
+      <section class="py-20 bg-white">
         <div class="container mx-auto px-6 relative">
           <transition
           name="slide-up"
           appear
         >
-          <h2 class="text-4xl font-bold mb-12 text-center text-gray-800">
-            Latest Programs
-          </h2>
+        <h2 class="text-4xl bg-white font-bold mb-12 text-center text-gray-800" style="letter-spacing: 0.1em;">
+          Latest Programs
+        </h2>
         </transition>
           <!-- Relieve en los lados del carrusel -->
           <div class="relative overflow-hidden">
@@ -112,14 +112,14 @@ onBeforeUnmount(() => {
             </div>
 
             <!-- Carrusel con animación infinita -->
-            <div class="carousel flex items-center"
+            <div class="carousel bg-white pt-12 py-6 flex items-center"
                  @mouseover="isHovered = true" @mouseleave="isHovered = false">
               <!-- Animación del scroll -->
-              <div class="animate-scroll flex items-center"
+              <div class="animate-scroll p-5 flex items-center"
                    :style="{ animationPlayState: (showModal || isHovered) ? 'paused' : 'running' }">
                 <!-- Duplicamos los programas para la ilusión de infinito -->
                 <div v-for="(program, index) in duplicatedPrograms" :key="index"
-                  class="bg-white shadow-lg rounded-lg p-8 max-w-[450px] w-[500px] h-[500px] overflow-hidden transition-transform duration-300 hover:scale-105 hover:bg-gray-200 cursor-pointer mr-10">
+                  class="bg-white shadow-lg rounded-[30px] p-8 max-w-[450px] w-[500px] h-[500px] overflow-hidden transition-transform duration-300 hover:scale-105 hover:bg-gray-200 cursor-pointer mr-10">
                   <!-- Contenido de la tarjeta del programa -->
                   <a href="javascript:void(0)" @click="openModal(program)">
                     <img :src="'storage/img/' + program.image"
@@ -142,8 +142,8 @@ onBeforeUnmount(() => {
         </div>
       </section>
 
-            <!-- Section 2: Áreas de Actuación -->
-            <section class="py-20 bg-gray-100">
+      <!-- Section 2: Áreas de Actuación -->
+      <section class="py-20 bg-gray-100">
         <div class="container mx-auto px-6">
           <h2 class="text-4xl font-bold mb-12 text-center">Our Areas of Activity</h2>
           <div class="grid grid-cols-1 md:grid-cols-3 gap-16">
@@ -262,6 +262,26 @@ onBeforeUnmount(() => {
 .fade-effect-left,
 .fade-effect-right {
   pointer-events: none;
+}
+
+.carousel::before,
+.carousel::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 15%; /* Ajusta según la intensidad del sombreado */
+  height: 100%;
+  z-index: 2; /* Asegúrate de que esté por encima del carrusel */
+  pointer-events: none; /* Para que no interfiera con los clics */
+}
+.carousel::before {
+  left: 0;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0) 100%);
+}
+
+.carousel::after {
+  right: 0;
+  background: linear-gradient(to left, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0) 100%);
 }
 
 /* Estilos para los títulos y textos */
