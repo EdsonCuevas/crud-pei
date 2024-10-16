@@ -92,7 +92,7 @@ onBeforeUnmount(() => {
                    :style="{ animationPlayState: (showModal || isHovered) ? 'paused' : 'running' }">
                 <!-- Duplicamos los programas para la ilusión de infinito -->
                 <div v-for="(program, index) in duplicatedPrograms" :key="index"
-                  class="bg-white shadow-lg rounded-lg p-8 max-w-[450px] w-full h-[500px] overflow-hidden transition-transform duration-300 hover:scale-105 hover:bg-gray-200 cursor-pointer mr-10">
+                  class="bg-white shadow-lg rounded-lg p-8 max-w-[450px] w-[500px] h-[500px] overflow-hidden transition-transform duration-300 hover:scale-105 hover:bg-gray-200 cursor-pointer mr-10">
                   <!-- Contenido de la tarjeta del programa -->
                   <a href="javascript:void(0)" @click="openModal(program)">
                     <img :src="'storage/img/' + program.image"
