@@ -81,7 +81,8 @@ onBeforeUnmount(() => {
             name= "bounce"
             appear
             >
-              <button class="text-white border-white hover:bg-white hover:text-blue-800 border p-2 rounded">
+              <button class="text-white border-white hover:bg-white hover:text-blue-800 border p-2 rounded"
+                onclick="window.location.href='programs';">
                 Browse programs
               </button>
             </transition>
@@ -219,9 +220,11 @@ onBeforeUnmount(() => {
             society.
           </p>
           <button
-            class="mt-10 border-white border text-white px-6 py-3 rounded hover:bg-white hover:text-blue-800">
-            Learn more about us
+          class="mt-10 border-white border text-white px-6 py-3 rounded hover:bg-white hover:text-blue-800"
+          onclick="window.location.href='about';">
+          Learn more About us
           </button>
+
         </div>
       </section>
     </main>

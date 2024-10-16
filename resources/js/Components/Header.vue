@@ -4,8 +4,12 @@
     <div class="flex items-center space-x-3">
       <div class="text-2xl font-bold">
       <!-- Imagen con tamaño adaptado al header -->
-      <img src="/images/LOGOCTI.png" alt="Logo Fundación CTI" class="max-h-13 w-auto">
-
+      <img 
+        src="/images/LOGOCTI.png" 
+        alt="Logo Fundación CTI" 
+        class="max-h-13 w-auto" 
+        style="cursor: pointer;" 
+        onclick="window.location.href='/home';">
     </div>
     </div>
 

@@ -52,6 +52,10 @@ Route::get('/details-donation', function () {
     return Inertia::render('Donador/Detailsdonation');
 })->name('details-donation');
 
+Route::get('/about', function () {
+    return Inertia::render('About');
+})->name('about');
+
 Route::get('/contact', function () {
     return Inertia::render('Contact');
 })->name('contact');
@@ -65,8 +69,9 @@ Route::get('/', function () {
 });
 
 
+
 Route::middleware('auth')->group(function () {
-    Route::get('/about', fn() => Inertia::render('About'))->name('about');
+    
 
     Route::get('401', fn() => inertia::render('401'))->name('401');
 
