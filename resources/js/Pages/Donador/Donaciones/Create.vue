@@ -87,24 +87,19 @@ const submitDonation = () => {
                 </option>
               </select>
             </div>
-            
+            <br>
             <button type="submit" class="w-full py-3 bg-blue-500 text-white rounded-md hover:bg-[#004481]">
               Continue
             </button>
           </form>  <br />
 
           <div class="text-xs text-center text-gray-500 mb-4">
-            <br />
             Secure donation.<br />
             Your data will be encrypted
 
             <br />
 
           </div>
-
-          <button class="w-full py-3 bg-blue-500 text-white rounded-md hover:bg-[#004481] transition-colors duration-200">
-            Continue
-          </button>
         </div>
       </div>
     </div>
