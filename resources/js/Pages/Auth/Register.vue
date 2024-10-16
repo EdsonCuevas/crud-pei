@@ -14,6 +14,7 @@ const form = useForm({
 	phone: '',
 	password_confirmation: '',
 	rfc: '',
+	birthdate: '',
 	role: '',
 	terms: false,
 });
@@ -65,8 +66,14 @@ const submit = () => {
 
 						<div class="mt-4">
 							<InputLabel for="rfc" value="RFC" />
-							<TextInput id="rfc" type="text" class="block w-full mt-1" v-model="form.rfc" required autocomplete="rfc" />
+							<TextInput id="rfc" type="text" class="block w-full mt-1" v-model="form.rfc"  />
 							<InputError class="mt-2" :message="form.errors.rfc" />
+						</div>
+
+						<div class="mt-4">
+							<InputLabel for="birthdate" value="Birthdate" />
+							<TextInput id="birthdate" type="date" class="block w-full mt-1" v-model="form.birthdate" required autocomplete="birthdate"min="1900-01-01" :max="maxDate"/>
+							<InputError class="mt-2" :message="form.errors.birthdate" />
 						</div>
 
 						<div class="mt-4">
@@ -117,3 +124,29 @@ const submit = () => {
 		</div>
 	</GuestLayout>
 </template>
+
+
+<script>
+export default {
+    data() {
+        return {
+            form: {
+                birthdate: '',
+                errors: {
+                    birthdate: '',
+                },
+            },
+            maxDate: this.getCurrentDate(),
+        };
+    },
+    methods: {
+        getCurrentDate() {
+            const today = new Date();
+            const year = today.getFullYear();
+            const month = String(today.getMonth() + 1).padStart(2, '0'); // Meses en JavaScript son 0-11
+            const day = String(today.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`; // Formato YYYY-MM-DD
+        },
+    },
+};
+</script>

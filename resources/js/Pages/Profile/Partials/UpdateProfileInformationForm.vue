@@ -22,6 +22,7 @@ const form = useForm({
     email: user.email,
     phone: user.phone,
     rfc: user.rfc,
+    birthdate: user.birthdate,
 });
 </script>
 
@@ -98,12 +99,26 @@ const form = useForm({
                     type="text"
                     class="mt-1 block w-full"
                     v-model="form.rfc"
-                    required
-                    autofocus
-                    autocomplete="rfc"
                 />
 
                 <InputError class="mt-2" :message="form.errors.rfc" />
+            </div>
+
+            <div>
+                <InputLabel for="birthdate" value="Birthdate" />
+
+                <TextInput
+                    id="birthdate"
+                    type="date"
+                    class="mt-1 block w-full"
+                    v-model="form.birthdate"
+                    required
+                    autofocus
+                    autocomplete="birthdate"
+                    min="1900-01-01" :max="maxDate"
+                />
+
+                <InputError class="mt-2" :message="form.errors.birthdate" />
             </div>
 
             <div v-if="mustVerifyEmail && user.email_verified_at === null">
@@ -142,3 +157,29 @@ const form = useForm({
         </form>
     </section>
 </template>
+
+
+<script>
+export default {
+    data() {
+        return {
+            form: {
+                birthdate: '',
+                errors: {
+                    birthdate: '',
+                },
+            },
+            maxDate: this.getCurrentDate(),
+        };
+    },
+    methods: {
+        getCurrentDate() {
+            const today = new Date();
+            const year = today.getFullYear();
+            const month = String(today.getMonth() + 1).padStart(2, '0'); // Meses en JavaScript son 0-11
+            const day = String(today.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`; // Formato YYYY-MM-DD
+        },
+    },
+};
+</script>

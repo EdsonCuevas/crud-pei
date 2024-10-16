@@ -35,7 +35,8 @@ class RegisteredUserController extends Controller
             'email' => 'required|string|lowercase|email|max:255|unique:' . User::class,
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'phone' =>  ['required', 'digits_between:1,15'],
-            'rfc' => 'required|string|max:12|min:12|unique:' . User::class,
+            'birthdate' => 'required|date|before_or_equal:' . now()->toDateString(),
+            
         ]);
 
         $user = User::create([ #creaciones del usuario 
@@ -45,6 +46,7 @@ class RegisteredUserController extends Controller
             'phone' => $request->phone,
             'rfc'=> $request->rfc,
             'role_id' => $request->role,
+            'birthdate' => $request->birthdate,
         ]);
 
         event(new Registered($user));
