@@ -6,6 +6,7 @@ use App\Models\User;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 use App\Models\Donation;
+use App\Models\Program;
 use Illuminate\Support\Facades\Auth;
 
 class DonorDonacionesController extends Controller
@@ -39,7 +40,12 @@ class DonorDonacionesController extends Controller
             return redirect()->route('401')->with('error', 'No tienes acceso a esta página.');
         }
 
-        return Inertia::render('Donador/Donaciones/Create');
+
+        $programas = Program::all();
+
+        return Inertia::render('Donador/Donaciones/Create', [
+            'programas' => $programas
+        ]);
     }
 
     public function show(Donation $donor_donation)
