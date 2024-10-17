@@ -2,20 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use app/Http/Controllers/UsersExportController;
+use App\Http\Controllers\UsersExportController; 
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Http\Request;
 
 class ExportController extends Controller
 {
-    public function index ()
+    public function index()
     {
         return view('export');
     }
-    public function export ()
+
+    public function export()
     {
-        return Excel::download(new UsersExport, 'users.xlsx');
+        return Excel::download(new UsersExportController(), 'program_user.xlsx');
     }
-        
-    
 }
