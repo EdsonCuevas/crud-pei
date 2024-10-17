@@ -52,7 +52,7 @@ class AdminProgramsController extends Controller
     {
         $request->validate([
             'title' => 'required|max:100',
-            'description' => 'required|max:255',
+            'description' => 'required',
             'image' => 'required|file|mimes:png,jpg',
             'beneficiaries' => 'array'
         ]);
