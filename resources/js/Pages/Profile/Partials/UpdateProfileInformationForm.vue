@@ -21,6 +21,8 @@ const form = useForm({
     name: user.name,
     email: user.email,
     phone: user.phone,
+    rfc: user.rfc,
+    birthdate: user.birthdate,
 });
 </script>
 
@@ -89,6 +91,36 @@ const form = useForm({
                 <InputError class="mt-2" :message="form.errors.phone" />
             </div>
 
+            <div>
+                <InputLabel for="rfc" value="RFC" />
+
+                <TextInput
+                    id="rfc"
+                    type="text"
+                    class="mt-1 block w-full"
+                    v-model="form.rfc"
+                />
+
+                <InputError class="mt-2" :message="form.errors.rfc" />
+            </div>
+
+            <div>
+                <InputLabel for="birthdate" value="Birthdate" />
+
+                <TextInput
+                    id="birthdate"
+                    type="date"
+                    class="mt-1 block w-full"
+                    v-model="form.birthdate"
+                    required
+                    autofocus
+                    autocomplete="birthdate"
+                    min="1900-01-01" :max="maxDate"
+                />
+
+                <InputError class="mt-2" :message="form.errors.birthdate" />
+            </div>
+
             <div v-if="mustVerifyEmail && user.email_verified_at === null">
                 <p class="text-sm mt-2 text-gray-800">
                     Your email address is unverified.
@@ -125,3 +157,29 @@ const form = useForm({
         </form>
     </section>
 </template>
+
+
+<script>
+export default {
+    data() {
+        return {
+            form: {
+                birthdate: '',
+                errors: {
+                    birthdate: '',
+                },
+            },
+            maxDate: this.getCurrentDate(),
+        };
+    },
+    methods: {
+        getCurrentDate() {
+            const today = new Date();
+            const year = today.getFullYear();
+            const month = String(today.getMonth() + 1).padStart(2, '0'); // Meses en JavaScript son 0-11
+            const day = String(today.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`; // Formato YYYY-MM-DD
+        },
+    },
+};
+</script>
