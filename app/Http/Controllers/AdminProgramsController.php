@@ -8,6 +8,7 @@ use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Program;
 use App\Models\User;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class AdminProgramsController extends Controller
 {
@@ -22,6 +23,12 @@ class AdminProgramsController extends Controller
         return Inertia::render('Admin/Programs/Index', [
             'programas' => Program::with(['creator', 'coordinator'])->paginate(10)
         ]);
+    }
+
+    public function pdf(){
+        $adminprogram = Program::all();
+        $pdf = Pdf::loadView('programpdf', compact('adminprogram'));
+        return $pdf->stream();
     }
 
     public function show(Program $admin_program)
