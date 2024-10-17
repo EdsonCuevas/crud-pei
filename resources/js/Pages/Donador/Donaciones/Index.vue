@@ -5,7 +5,7 @@ import NavLink from '@/Components/NavLink.vue';
 import Modal from '@/Components/Modal.vue';
 import SecondaryButton from '@/Components/SecondaryButton.vue';
 import DarkButton from '@/Components/DarkButton.vue';
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 
 const props = defineProps({
     donaciones: {
@@ -19,7 +19,7 @@ const title = ref('');
 const operation = ref(1);
 const msj = ref('');
 const classMsj = ref('hidden');
-
+const searchQuery = ref(''); // Estado para el término de búsqueda
 
 const ok = (m) => {
     if (operation.value == 2) {
@@ -30,18 +30,26 @@ const ok = (m) => {
     msj.value = m;
     classMsj.value = 'block';
 };
+const filteredDonations = computed(() => {
+    return props.donaciones.filter(donacion => {
+        const query = searchQuery.value.toLowerCase();
+        const formattedDate = new Date(donacion.created_at).toLocaleString().toLowerCase(); // Convertimos la fecha a cadena legible
+        return donacion.concept.toLowerCase().includes(query) ||
+               donacion.value.toString().includes(query) ||
+               donacion.proram.title.toLowerCase().includes(query) ||
+               formattedDate.includes(query);  // Añadimos la fecha como parte de la búsqueda
+    });
+});
 
 </script>
 
 <template>
-
     <Head title="Donadores" />
 
     <AuthenticatedLayout>
         <template #header>
             Donations
-            <br>
-            <br>
+            <br><br>
             <NavLink :href="route('donor-donations.create')">
                 <DarkButton class="flex items-center space-x-2">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -59,6 +67,16 @@ const ok = (m) => {
             </NavLink>
         </template>
 
+        <!-- Buscador -->
+        <div class="mb-6 ">
+            <input 
+                v-model="searchQuery" 
+                type="text" 
+                placeholder="Search by #, concept, value, destination, or date..." 
+                class="px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                style="width: 500px;" 
+            />
+        </div>
 
         <div class="w-full overflow-hidden rounded-lg border shadow-md">
             <div class="w-full overflow-x-auto bg-white">
@@ -75,7 +93,7 @@ const ok = (m) => {
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y">
-                        <tr v-for="(donacion, index) in donaciones" :key="donacion.id" class="text-gray-700">
+                        <tr v-for="(donacion, index) in filteredDonations" :key="donacion.id" class="text-gray-700">
                             <td class="px-4 py-3 text-sm">{{ index + 1 }}</td> <!-- Incremental number -->
                             <td class="px-4 py-3 text-sm">{{ donacion.concept }}</td>
                             <td class="px-4 py-3 text-sm">${{ donacion.value }}</td>
