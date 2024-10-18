@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Inertia\Response;
+use Mckenziearts\Notify\Facades\LaravelNotify;
+
 
 class AuthenticatedSessionController extends Controller
 {
@@ -18,6 +20,7 @@ class AuthenticatedSessionController extends Controller
      */
     public function create(): Response
     {
+
         return Inertia::render('Auth/Login', [
             'canResetPassword' => Route::has('password.request'),
             'status' => session('status'),
@@ -29,13 +32,18 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
+
         // Autenticar al usuario
         $request->authenticate();
 
         // Regenerar la sesión
         $request->session()->regenerate();
+        
+
+        notify()->success('¡Has iniciado sesión correctamente!');
 
         return redirect('dashboard');
+
     }
 
     /**
@@ -44,6 +52,7 @@ class AuthenticatedSessionController extends Controller
     public function destroy(Request $request): RedirectResponse
     {
         Auth::guard('web')->logout();
+
 
         $request->session()->invalidate();
 

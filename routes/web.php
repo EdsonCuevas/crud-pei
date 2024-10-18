@@ -45,6 +45,7 @@ use Inertia\Inertia;
 */
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+
 Route::get('/programs', [ProgramsController::class, 'index'])->name('programs');
 
 
@@ -61,10 +62,12 @@ Route::get('/contact', function () {
 })->name('contact');
 
 Route::get('/terms-conditions', function () {
+    
     return Inertia::render('Terminos&condiciones');
 })->name('terminos.condiciones');
 
 Route::get('/', function () {
+    
     return redirect('/home');
 });
 
