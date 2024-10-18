@@ -122,6 +122,10 @@ const deleteCoordi = () => {
         onSuccess: () => { ok('Delete Coordinator') }
     })
 }
+const exportUsers = () => {
+    window.location.href = '/export/2'; 
+}
+
 
 </script>
 
@@ -134,13 +138,22 @@ const deleteCoordi = () => {
             Coordinators
             <br>
             <br>
-            <DarkButton @click="openModalForm(1)">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                    stroke="currentColor" class="size-6">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M18 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0ZM3 19.235v-.11a6.375 6.375 0 0 1 12.75 0v.109A12.318 12.318 0 0 1 9.374 21c-2.331 0-4.512-.645-6.374-1.766Z" />
-                </svg>
-            </DarkButton>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <!-- Primer botón -->
+                <DarkButton @click="openModalForm(1)">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M18 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0ZM3 19.235v-.11a6.375 6.375 0 0 1 12.75 0v.109A12.318 12.318 0 0 1 9.374 21c-2.331 0-4.512-.645-6.374-1.766Z" />
+                    </svg>
+                </DarkButton>
+
+                <!-- Nuevo botón con ícono en .png para descargar el Excel -->
+                <button @click="exportUsers" style="background-color: white; border: 2px solid green; padding: 10px; border-radius: 8px;">
+                    <img src="storage/img/EXLG.png" style="width: 24px; height: 24px;">
+                </button>
+
+            </div>
         </template>
 
         <div class="inline-flex overflow-hidden mb-4 w-full bg-white rounded-lg shadow-md" :class="classMsj">
@@ -317,3 +330,12 @@ const deleteCoordi = () => {
         </Modal>
     </AuthenticatedLayout>
 </template>
+<script>
+export default {
+    methods: {
+        exportUsers() {
+            window.location.href = '/export';
+        }
+    }
+}
+</script>

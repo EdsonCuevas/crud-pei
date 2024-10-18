@@ -11,6 +11,7 @@ use App\Http\Controllers\AdminProgramsController;
 // Controladores para el panel Coordinador
 use App\Http\Controllers\CoordProgramController;
 use App\Http\Controllers\CoordReportsController;
+use App\Http\Controllers\ExportController;
 
 // Controladores para el panel Voluntario
 use App\Http\Controllers\VoluntProgramsController;
@@ -46,6 +47,9 @@ use Inertia\Inertia;
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/programs', [ProgramsController::class, 'index'])->name('programs');
+Route::get('/', [ExportController::class, 'index'])->name('index');
+Route::get('/export/{roleId}', [ExportController::class, 'export'])->name('export');
+
 
 //Ruta PDF 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
