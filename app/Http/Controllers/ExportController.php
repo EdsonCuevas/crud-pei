@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\UsersExportController;
 use Maatwebsite\Excel\Facades\Excel;
-use Illuminate\Http\Request;
 
 class ExportController extends Controller
 {

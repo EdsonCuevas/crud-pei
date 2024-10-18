@@ -1,4 +1,5 @@
 <?php
+
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProgramsController;
 // Controladores para el panel Administrador
@@ -34,6 +35,8 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
+use App\Http\Controllers\ProgramsExportController;
+use Maatwebsite\Excel\Facades\Excel;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -49,6 +52,10 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/programs', [ProgramsController::class, 'index'])->name('programs');
 Route::get('/', [ExportController::class, 'index'])->name('index');
 Route::get('/export/{roleId}', [ExportController::class, 'export'])->name('export');
+
+Route::get('/export-programs', function () {
+    return Excel::download(new ProgramsExportController, 'programs.xlsx');
+});
 
 
 //Ruta PDF 
@@ -78,7 +85,7 @@ Route::get('/', function () {
 
 
 Route::middleware('auth')->group(function () {
-    
+
 
     Route::get('401', fn() => inertia::render('401'))->name('401');
 
@@ -95,7 +102,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('admin-programs', AdminProgramsController::class);
     Route::get('admin-programs-pdf', [AdminProgramsController::class, 'pdf']);
     Route::post('updateProgram', [AdminProgramsController::class, 'updateprogram'])->name('updateprogram');
-    
+
 
     Route::resource('coord-programs', CoordProgramController::class);
     Route::resource('coord-reports', CoordReportsController::class);
