@@ -47,6 +47,9 @@ use Inertia\Inertia;
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/programs', [ProgramsController::class, 'index'])->name('programs');
 
+//Ruta PDF 
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+
 
 Route::get('/details-donation', function () {
     return Inertia::render('Donador/Detailsdonation');
@@ -86,7 +89,9 @@ Route::middleware('auth')->group(function () {
     Route::resource('admin-donors', AdminDonorsController::class);
     Route::resource('admin-beneficiaries', AdminBeneficiariesController::class);
     Route::resource('admin-programs', AdminProgramsController::class);
+    Route::get('admin-programs-pdf', [AdminProgramsController::class, 'pdf']);
     Route::post('updateProgram', [AdminProgramsController::class, 'updateprogram'])->name('updateprogram');
+    
 
     Route::resource('coord-programs', CoordProgramController::class);
     Route::resource('coord-reports', CoordReportsController::class);
