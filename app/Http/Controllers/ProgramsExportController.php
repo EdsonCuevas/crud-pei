@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\DB;
+use App\Models\Program;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithStyles;
@@ -12,27 +12,27 @@ class ProgramsExportController implements FromCollection, WithHeadings, WithStyl
 {
     public function collection()
     {
-        return DB::table('programs')
-            ->join('users as creators', 'programs.creator_id', '=', 'creators.id')
-            ->join('users as coordinators', 'programs.coordi_id', '=', 'coordinators.id')
-            ->select(
-                'programs.title',
-                'programs.description',
-                'creators.name as creator_name',  // Nombre del creador
-                'coordinators.name as coordinator_name',  // Nombre del coordinador
-                'programs.created_at',
-                'programs.updated_at'
-            )
-            ->get();
+        return Program::with(['creator', 'coordinator', 'users'])  // Cargar las relaciones
+            ->get()
+            ->map(function ($program) {
+                return [
+                    'title' => $program->title,
+                    'creator_name' => $program->creator ? $program->creator->name : 'N/A',
+                    'coordinator_name' => $program->coordinator ? $program->coordinator->name : 'N/A',
+                    'users' => $program->users->pluck('name')->join(', '),  // Listar los nombres de los usuarios
+                    'created_at' => $program->created_at,
+                    'updated_at' => $program->updated_at,
+                ];
+            });
     }
 
     public function headings(): array
     {
         return [
             'Program Title',
-            'Description',
             'Creator',
             'Coordinator',
+            'Beneficiaries',  // Columna para los usuarios
             'Created At',
             'Updated At',
         ];
@@ -41,7 +41,7 @@ class ProgramsExportController implements FromCollection, WithHeadings, WithStyl
     public function styles(Worksheet $sheet)
     {
         return [
-            1 => ['font' => ['bold' => true]], 
+            1 => ['font' => ['bold' => true]],
         ];
     }
 }
