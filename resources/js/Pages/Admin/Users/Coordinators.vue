@@ -122,6 +122,9 @@ const deleteCoordi = () => {
         onSuccess: () => { ok('Delete Coordinator') }
     })
 }
+const exportUsers = () => {
+    window.location.href = '/export/2'; 
+}
 
 
 </script>
@@ -149,6 +152,7 @@ const deleteCoordi = () => {
                 <button @click="exportUsers" style="background-color: white; border: 2px solid green; padding: 10px; border-radius: 8px;">
                     <img src="storage/img/EXLG.png" style="width: 24px; height: 24px;">
                 </button>
+
             </div>
         </template>
 

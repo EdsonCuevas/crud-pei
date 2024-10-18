@@ -7,31 +7,40 @@ use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithStyles;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
+use Illuminate\Http\Request;
 
 class UsersExportController implements FromCollection, WithHeadings, WithStyles
 {
+    protected $roleId;
+
+    public function __construct($roleId)
+    {
+        $this->roleId = $roleId;
+    }
+
     public function collection()
     {
-        return DB::table('program_user')
-            ->join('programs', 'program_user.program_id', '=', 'programs.id')
+        return DB::table('users')
+            ->join('roles', 'users.role_id', '=', 'roles.id')
             ->select(
-                'program_user.id',
-                'program_user.user_id',
-                'programs.title as program_title',
-                'programs.description as program_description',
-                'program_user.created_at',
-                'program_user.updated_at'
+                'roles.role as role_name',
+                'users.name',
+                'users.email',
+                'users.phone',
+                'users.created_at',
+                'users.updated_at'
             )
+            ->where('users.role_id', $this->roleId)
             ->get();
     }
 
     public function headings(): array
     {
         return [
-            'ID',
-            'User ID',
-            'Program Title',
-            'Program Description',
+            'Role',
+            'Name',
+            'Email',
+            'Phone',
             'Created At',
             'Updated At',
         ];
@@ -40,7 +49,7 @@ class UsersExportController implements FromCollection, WithHeadings, WithStyles
     public function styles(Worksheet $sheet)
     {
         return [
-            1 => ['font' => ['bold' => true]],
+            1 => ['font' => ['bold' => true]], 
         ];
     }
 }

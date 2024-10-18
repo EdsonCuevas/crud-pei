@@ -48,7 +48,7 @@ use Inertia\Inertia;
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/programs', [ProgramsController::class, 'index'])->name('programs');
 Route::get('/', [ExportController::class, 'index'])->name('index');
-Route::get('/export', [ExportController::class, 'export'])->name('export');
+Route::get('/export/{roleId}', [ExportController::class, 'export'])->name('export');
 
 
 
