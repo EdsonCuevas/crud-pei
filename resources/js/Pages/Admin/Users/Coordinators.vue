@@ -11,6 +11,7 @@ import InputGroup from '@/Components/InputGroup.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import SelectInput from '@/Components/SelectInput.vue';
 import { ref } from 'vue';
+import Swal from 'sweetalert2';
 
 // En los props van las variables que se reciben desde el controlador
 const props = defineProps({
@@ -119,9 +120,16 @@ const ok = (m) => {
 
 const deleteCoordi = () => {
     form.delete(route('admin-coordinators.destroy', v.value.id), {
-        onSuccess: () => { ok('Delete Coordinator') }
-    })
-}
+        onSuccess: () => {
+            Swal.fire('Deleted!', 'Coordinator deleted successfully!', 'success');
+            ok('Delete Coordinator');
+        },
+        onError: () => {
+            Swal.fire('Error', 'There was an error deleting the coordinator', 'error');
+        }
+    });
+};
+
 const exportUsers = () => {
     window.location.href = '/export/2'; 
 }
