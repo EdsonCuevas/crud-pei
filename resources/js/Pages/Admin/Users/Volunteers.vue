@@ -10,6 +10,7 @@ import DarkButton from '@/Components/DarkButton.vue';
 import InputGroup from '@/Components/InputGroup.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import SelectInput from '@/Components/SelectInput.vue';
+import getEdad from '@/Utils/getEdad.js';
 import { ref } from 'vue';
 
 // En los props van las variables que se reciben desde el controlador
@@ -25,6 +26,8 @@ const form = useForm({
     name: '',
     email: '',
     phone: '',
+    birthdate: '',
+    rfc: '',
     password: '',
     role_id:'',
 });
@@ -33,6 +36,8 @@ const v = ref({
     id: '',
     name: '',
     phone: '',
+    birthdate: '',
+    rfc: '',
     password: '',
     programs: []
 });
@@ -65,6 +70,8 @@ const openModalForm = (op, a) => {
         form.password = '';
         form.role_id = a.role_id;
         form.phone = a.phone;
+        form.birthdate = a.birthdate;
+        form.rfc = a.rfc;
         v.value.id = a.id;
     }
 }
@@ -131,7 +138,7 @@ const exportUsers = () => {
 
 <template>
 
-    <Head title="Voluntarios" />
+    <Head title="Volunteers" />
 
     <AuthenticatedLayout>
         <template #header>
@@ -182,8 +189,8 @@ const exportUsers = () => {
                             <th class="px-4 py-3">Name</th>
                             <th class="px-4 py-3">E-mail</th>
                             <th class="px-4 py-3">Phone</th>
-                            <th class="px-4 py-3">Date of Creation</th>
-                            <th class="px-4 py-3">Date of Update</th>
+                            <th class="px-4 py-3">RFC</th>
+                            <th class="px-4 py-3">Age</th>
                             <th class="px-4 py-3">Detail</th>
                             <th class="px-4 py-3">Edit</th>
                             <th class="px-4 py-3">Delete</th>
@@ -204,10 +211,10 @@ const exportUsers = () => {
                                 {{ voluntario.phone }}
                             </td>
                             <td class="px-4 py-3 text-sm">
-                                {{ new Date(voluntario.created_at).toLocaleString() }}
+                                {{ voluntario.rfc }}
                             </td>
                             <td class="px-4 py-3 text-sm">
-                                {{ new Date(voluntario.updated_at).toLocaleString() }}
+                                {{ getEdad(voluntario.birthdate) }}
                             </td>
                             <td class="px-4 py-3 text-sm">
                                 <SecondaryButton @click="openModalView(voluntario)">
@@ -289,8 +296,10 @@ const exportUsers = () => {
                     <InputError class="mt-1" :message="form.errors.password"></InputError>
 
                     <SelectInput v-if="operation !== 1" :required="'required'" v-model="form.role_id" :options="roles">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 0 0 .75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 0 0-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0 1 12 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 0 1-.673-.38m0 0A2.18 2.18 0 0 1 3 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 0 1 3.413-.387m7.5 0V5.25A2.25 2.25 0 0 0 13.5 3h-3a2.25 2.25 0 0 0-2.25 2.25v.894m7.5 0a48.667 48.667 0 0 0-7.5 0M12 12.75h.008v.008H12v-.008Z" />
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 0 0 .75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 0 0-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0 1 12 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 0 1-.673-.38m0 0A2.18 2.18 0 0 1 3 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 0 1 3.413-.387m7.5 0V5.25A2.25 2.25 0 0 0 13.5 3h-3a2.25 2.25 0 0 0-2.25 2.25v.894m7.5 0a48.667 48.667 0 0 0-7.5 0M12 12.75h.008v.008H12v-.008Z" />
                         </svg>
                     </SelectInput>
                     <InputError class="mt-1" :message="form.errors.role_id"></InputError>
@@ -303,6 +312,20 @@ const exportUsers = () => {
                         </svg>
                     </InputGroup>
                     <InputError class="mt-1" :message="form.errors.phone"></InputError>
+
+                    <InputGroup :text="'Fecha de Usuario'" v-model="form.birthdate" :type="'date'">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 8.25v-1.5m0 1.5c-1.355 0-2.697.056-4.024.166C6.845 8.51 6 9.473 6 10.608v2.513m6-4.871c1.355 0 2.697.056 4.024.166C17.155 8.51 18 9.473 18 10.608v2.513M15 8.25v-1.5m-6 1.5v-1.5m12 9.75-1.5.75a3.354 3.354 0 0 1-3 0 3.354 3.354 0 0 0-3 0 3.354 3.354 0 0 1-3 0 3.354 3.354 0 0 0-3 0 3.354 3.354 0 0 1-3 0L3 16.5m15-3.379a48.474 48.474 0 0 0-6-.371c-2.032 0-4.034.126-6 .371m12 0c.39.049.777.102 1.163.16 1.07.16 1.837 1.094 1.837 2.175v5.169c0 .621-.504 1.125-1.125 1.125H4.125A1.125 1.125 0 0 1 3 20.625v-5.17c0-1.08.768-2.014 1.837-2.174A47.78 47.78 0 0 1 6 13.12M12.265 3.11a.375.375 0 1 1-.53 0L12 2.845l.265.265Zm-3 0a.375.375 0 1 1-.53 0L9 2.845l.265.265Zm6 0a.375.375 0 1 1-.53 0L15 2.845l.265.265Z" />
+                        </svg>
+                    </InputGroup>
+                    <InputError class="mt-1" :message="form.errors.birthdate"></InputError>
+
+                    <InputGroup :text="'RFC'" v-model="form.rfc">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v17.25m0 0c-1.472 0-2.882.265-4.185.75M12 20.25c1.472 0 2.882.265 4.185.75M18.75 4.97A48.416 48.416 0 0 0 12 4.5c-2.291 0-4.545.16-6.75.47m13.5 0c1.01.143 2.01.317 3 .52m-3-.52 2.62 10.726c.122.499-.106 1.028-.589 1.202a5.988 5.988 0 0 1-2.031.352 5.988 5.988 0 0 1-2.031-.352c-.483-.174-.711-.703-.59-1.202L18.75 4.971Zm-16.5.52c.99-.203 1.99-.377 3-.52m0 0 2.62 10.726c.122.499-.106 1.028-.589 1.202a5.989 5.989 0 0 1-2.031.352 5.989 5.989 0 0 1-2.031-.352c-.483-.174-.711-.703-.59-1.202L5.25 4.971Z" />
+                        </svg>
+                    </InputGroup>
+                    <InputError class="mt-1" :message="form.errors.rfc"></InputError>
 
                 </div>
             </div>
