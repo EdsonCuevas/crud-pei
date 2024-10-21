@@ -37,24 +37,14 @@ class AdminVolunteersController extends Controller
             'email' => 'required|email|max:60',
             'password' => 'required|min:8',
             'phone' => ['required', 'digits_between:1,15'],
-        ], [
-            'name.required' => 'El nombre es obligatorio.',
-            'name.max' => 'El nombre no puede tener más de 60 caracteres.',
-
-            'email.required' => 'El correo electrónico es obligatorio.',
-            'email.email' => 'El correo electrónico debe ser una dirección válida.',
-            'email.max' => 'El correo electrónico no puede tener más de 60 caracteres.',
-
-            'password.required' => 'La contraseña es obligatoria.',
-            'password.min' => 'La contraseña debe tener al menos 8 caracteres.',
-
-            'phone.required' => 'El número de teléfono es obligatorio.',
-            'phone.digits_between' => 'El número de teléfono debe tener entre 1 y 15 dígitos.',
+            'birthdate' => 'required|date',
+            'rfc' => 'required|max:12',
         ]);
 
         $volunteer = new User($request->except('password'));
         $volunteer->role_id = '3';
         $volunteer->password = Hash::make($request->password);
+        $volunteer->birthdate = $request->birthdate;
         $volunteer->save();
         return redirect('admin-volunteers');
     }
@@ -67,18 +57,8 @@ class AdminVolunteersController extends Controller
             'phone' => ['required', 'digits_between:1,15'],
             'role_id' => 'required',
             'password' => 'nullable|min:8',
-        ], [
-            'name.required' => 'El nombre es obligatorio.',
-            'name.max' => 'El nombre no puede tener más de 60 caracteres.',
-
-            'email.required' => 'El correo electrónico es obligatorio.',
-            'email.email' => 'El correo electrónico debe ser una dirección válida.',
-            'email.max' => 'El correo electrónico no puede tener más de 60 caracteres.',
-
-            'phone.required' => 'El número de teléfono es obligatorio.',
-            'phone.digits_between' => 'El número de teléfono debe tener entre 1 y 15 dígitos.',
-
-            'password.min' => 'La contraseña debe tener al menos 8 caracteres.',
+            'birthdate' => 'required|date',
+            'rfc' => 'required|max:12',
         ]);
 
         // Solo encripta la contraseña si fue proporcionada
@@ -89,6 +69,9 @@ class AdminVolunteersController extends Controller
         }
 
         $admin_volunteer->update($request->all());
+        $admin_volunteer->birthdate = $request->birthdate; // Actualiza la fecha
+        $admin_volunteer->save();
+
         return redirect('admin-volunteers');
     }
 

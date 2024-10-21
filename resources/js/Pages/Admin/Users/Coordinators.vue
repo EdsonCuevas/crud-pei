@@ -10,6 +10,7 @@ import DarkButton from '@/Components/DarkButton.vue';
 import InputGroup from '@/Components/InputGroup.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import SelectInput from '@/Components/SelectInput.vue';
+import getEdad from '@/Utils/getEdad.js';
 import { ref } from 'vue';
 
 // En los props van las variables que se reciben desde el controlador
@@ -25,7 +26,7 @@ const form = useForm({
     name: '',
     email: '',
     phone: '',
-    date: '',
+    birthdate: '',
     rfc: '',
     password: '',
     role_id: '',
@@ -36,7 +37,7 @@ const v = ref({
     name: '',
     phone: '',
     rfc: '',
-    date: '',
+    birthdate: '',
     password: '',
     programs: []
 });
@@ -69,7 +70,7 @@ const openModalForm = (op, a) => {
         form.password = '';
         form.role_id = a.role_id;
         form.phone = a.phone;
-        form.date = a.birthdate;
+        form.birthdate = a.birthdate;
         form.rfc = a.rfc;
         v.value.id = a.id;
     }
@@ -187,10 +188,10 @@ const exportUsers = () => {
                             class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b bg-gray-50">
                             <th class="px-4 py-3">#</th>
                             <th class="px-4 py-3">Name</th>
-                            <th class="px-4 py-3">E-mail</th>
+                            <th class="px-4 py-3">Email</th>
                             <th class="px-4 py-3">Phone</th>
-                            <th class="px-4 py-3">Date of Creation</th>
-                            <th class="px-4 py-3">Date of Update</th>
+                            <th class="px-4 py-3">RFC</th>
+                            <th class="px-4 py-3">Age</th>
                             <th class="px-4 py-3">Detail</th>
                             <th class="px-4 py-3">Edit</th>
                             <th class="px-4 py-3">Delete</th>
@@ -211,10 +212,10 @@ const exportUsers = () => {
                                 {{ coordi.phone }}
                             </td>
                             <td class="px-4 py-3 text-sm">
-                                {{ new Date(coordi.created_at).toLocaleString() }}
+                                {{ coordi.rfc }}
                             </td>
                             <td class="px-4 py-3 text-sm">
-                                {{ new Date(coordi.updated_at).toLocaleString() }}
+                                {{ getEdad(coordi.birthdate) }}
                             </td>
                             <td class="px-4 py-3 text-sm">
                                 <SecondaryButton @click="openModalView(coordi)">
@@ -313,12 +314,12 @@ const exportUsers = () => {
                     </InputGroup>
                     <InputError class="mt-1" :message="form.errors.phone"></InputError>
 
-                    <InputGroup :text="'Fecha de Usuario'" v-model="form.date" :type="'date'">
+                    <InputGroup :text="'Fecha de Usuario'" v-model="form.birthdate" :type="'date'">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 8.25v-1.5m0 1.5c-1.355 0-2.697.056-4.024.166C6.845 8.51 6 9.473 6 10.608v2.513m6-4.871c1.355 0 2.697.056 4.024.166C17.155 8.51 18 9.473 18 10.608v2.513M15 8.25v-1.5m-6 1.5v-1.5m12 9.75-1.5.75a3.354 3.354 0 0 1-3 0 3.354 3.354 0 0 0-3 0 3.354 3.354 0 0 1-3 0 3.354 3.354 0 0 0-3 0 3.354 3.354 0 0 1-3 0L3 16.5m15-3.379a48.474 48.474 0 0 0-6-.371c-2.032 0-4.034.126-6 .371m12 0c.39.049.777.102 1.163.16 1.07.16 1.837 1.094 1.837 2.175v5.169c0 .621-.504 1.125-1.125 1.125H4.125A1.125 1.125 0 0 1 3 20.625v-5.17c0-1.08.768-2.014 1.837-2.174A47.78 47.78 0 0 1 6 13.12M12.265 3.11a.375.375 0 1 1-.53 0L12 2.845l.265.265Zm-3 0a.375.375 0 1 1-.53 0L9 2.845l.265.265Zm6 0a.375.375 0 1 1-.53 0L15 2.845l.265.265Z" />
                         </svg>
                     </InputGroup>
-                    <InputError class="mt-1" :message="form.errors.date"></InputError>
+                    <InputError class="mt-1" :message="form.errors.birthdate"></InputError>
 
                     <InputGroup :text="'RFC'" v-model="form.rfc">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">

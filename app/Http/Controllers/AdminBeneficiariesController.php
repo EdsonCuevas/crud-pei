@@ -37,24 +37,13 @@ class AdminBeneficiariesController extends Controller
             'email' => 'required|email|max:60',
             'password' => 'required|min:8',
             'phone' => ['required', 'digits_between:1,15'],
-        ], [
-            'name.required' => 'El nombre es obligatorio.',
-            'name.max' => 'El nombre no puede tener más de 60 caracteres.',
-
-            'email.required' => 'El correo electrónico es obligatorio.',
-            'email.email' => 'El correo electrónico debe ser una dirección válida.',
-            'email.max' => 'El correo electrónico no puede tener más de 60 caracteres.',
-
-            'password.required' => 'La contraseña es obligatoria.',
-            'password.min' => 'La contraseña debe tener al menos 8 caracteres.',
-
-            'phone.required' => 'El número de teléfono es obligatorio.',
-            'phone.digits_between' => 'El número de teléfono debe tener entre 1 y 15 dígitos.',
+            'birthdate' => 'required|date',
         ]);
 
         $benef = new User($request->except('password'));
         $benef->role_id = '5';
         $benef->password = Hash::make($request->password);
+        $benef->birthdate = $request->birthdate;
         $benef->save();
         return redirect('admin-beneficiaries');
     }
@@ -67,18 +56,7 @@ class AdminBeneficiariesController extends Controller
             'phone' => ['required', 'digits_between:1,15'],
             'role_id' => 'required',
             'password' => 'nullable|min:8',
-        ], [
-            'name.required' => 'El nombre es obligatorio.',
-            'name.max' => 'El nombre no puede tener más de 60 caracteres.',
-
-            'email.required' => 'El correo electrónico es obligatorio.',
-            'email.email' => 'El correo electrónico debe ser una dirección válida.',
-            'email.max' => 'El correo electrónico no puede tener más de 60 caracteres.',
-
-            'phone.required' => 'El número de teléfono es obligatorio.',
-            'phone.digits_between' => 'El número de teléfono debe tener entre 1 y 15 dígitos.',
-
-            'password.min' => 'La contraseña debe tener al menos 8 caracteres.',
+            'birthdate' => 'required|date',
         ]);
 
         // Solo encripta la contraseña si fue proporcionada
@@ -89,6 +67,8 @@ class AdminBeneficiariesController extends Controller
         }
 
         $admin_beneficiary->update($request->all());
+        $admin_beneficiary->birthdate = $request->birthdate; // Actualiza la fecha
+        $admin_beneficiary->save();
         return redirect('admin-beneficiaries');
     }
 
