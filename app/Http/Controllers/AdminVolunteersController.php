@@ -37,7 +37,7 @@ class AdminVolunteersController extends Controller
             'email' => 'required|email|max:60',
             'password' => 'required|min:8',
             'phone' => ['required', 'digits_between:1,15'],
-            'birthdate' => 'required|date',
+            'birthdate' => ['required', 'date', 'before_or_equal:' . now()->format('Y-m-d'), 'after_or_equal:1900-01-01'],
             'rfc' => 'required|max:12',
         ]);
 
@@ -57,7 +57,7 @@ class AdminVolunteersController extends Controller
             'phone' => ['required', 'digits_between:1,15'],
             'role_id' => 'required',
             'password' => 'nullable|min:8',
-            'birthdate' => 'required|date',
+            'birthdate' => ['required', 'date', 'before_or_equal:' . now()->format('Y-m-d'), 'after_or_equal:1900-01-01'],
             'rfc' => 'required|max:12',
         ]);
 
