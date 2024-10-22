@@ -20,6 +20,7 @@
     "dependencies": {
         "@vueuse/motion": "^2.2.5",
         "lucide-vue-next": "^0.447.0",
+        "vue-sweetalert2": "^5.0.11",
         "vue3-select2-component": "^0.1.7"
     }
 }

@@ -234,6 +234,8 @@ onBeforeUnmount(() => {
   </div>
 </template>
 
+
+
 <style scoped>
 .carousel {
   overflow: hidden;
