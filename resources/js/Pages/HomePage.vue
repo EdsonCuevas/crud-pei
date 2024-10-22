@@ -86,7 +86,6 @@ onBeforeUnmount(() => {
                 Browse programs
               </button>
             </transition>
-            <button @click="showAlert">Hello world</button>
           </div>
             </section>
 
@@ -235,20 +234,7 @@ onBeforeUnmount(() => {
   </div>
 </template>
 
-<script>
-export default {
-  methods: {
-    showAlert() {
-      this.$swal({
-        title: '¡Hola!',
-        text: 'Esto es una alerta con SweetAlert2',
-        icon: 'success',
-        confirmButtonText: 'Ok'
-      });
-    }
-  }
-}
-</script>
+
 
 <style scoped>
 .carousel {
