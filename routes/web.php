@@ -5,6 +5,7 @@ use App\Http\Controllers\ProgramsController;
 // Controladores para el panel Administrador
 use App\Http\Controllers\AdminBeneficiariesController;
 use App\Http\Controllers\AdminCoordiController;
+use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\AdminDonorsController;
 use App\Http\Controllers\AdminVolunteersController;
 use App\Http\Controllers\AdminProgramsController;
@@ -95,6 +96,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+    Route::resource('admin-dashboard', AdminDashboardController::class);
     Route::resource('admin-coordinators', AdminCoordiController::class);
     Route::resource('admin-volunteers', AdminVolunteersController::class);
     Route::resource('admin-donors', AdminDonorsController::class);
