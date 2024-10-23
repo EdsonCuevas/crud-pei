@@ -23,6 +23,7 @@ const props = defineProps({
         type: Object
     }
 });
+
 const form = useForm({
     name: '',
     email: '',
@@ -30,7 +31,7 @@ const form = useForm({
     birthdate: '',
     rfc: '',
     password: '',
-    role_id: '',
+    role_id: ''
 });
 
 const v = ref({
@@ -45,26 +46,23 @@ const v = ref({
 
 const showModalView = ref(false);
 const showModalForm = ref(false);
-const showModalDel = ref(false);
 const title = ref('');
 const operation = ref(1);
-const msj = ref('');
-const classMsj = ref('hidden');
 
 const openModalView = (a) => {
     v.value.name = a.name;
     v.value.phone = a.phone;
     v.value.programs = a.programs;
     showModalView.value = true;
-}
+};
+
 const openModalForm = (op, a) => {
     showModalForm.value = true;
     operation.value = op;
     form.clearErrors();
     if (op === 1) {
         title.value = 'Create Coordinator';
-    }
-    else {
+    } else {
         title.value = 'Edit Coordinator';
         form.name = a.name;
         form.email = a.email;
@@ -75,77 +73,85 @@ const openModalForm = (op, a) => {
         form.rfc = a.rfc;
         v.value.id = a.id;
     }
-}
-const openModalDel = (a) => {
-    showModalDel.value = true;
-
-    v.value.id = a.id;
-    v.value.name = a.name;
-}
+};
 
 const closeModalView = () => {
     showModalView.value = false;
-}
+};
 const closeModalForm = () => {
     showModalForm.value = false;
     form.reset();
-}
-const closeModalDel = () => {
-    showModalDel.value = false;
-}
+};
 
 const save = () => {
-
-    // Elimina la contraseña del formulario si está vacía
     if (!form.password) {
         delete form.password;
     }
 
     if (operation.value === 1) {
         form.post(route('admin-coordinators.store'), {
-            onSuccess: () => ok('Coordinator Create'),
+            onSuccess: () => {
+                Swal.fire({
+                    title: 'Created!',
+                    text: 'Coordinator created successfully!',
+                    icon: 'success',
+                    timer: 1500,
+                    showConfirmButton: false
+                });
+                closeModalForm();
+            },
         });
     } else {
         form.put(route('admin-coordinators.update', v.value.id), {
-            onSuccess: () => ok('Update Coordinator'),
+            onSuccess: () => {
+                Swal.fire({
+                    title: 'Updated!',
+                    text: 'Coordinator updated successfully!',
+                    icon: 'success',
+                    timer: 1500,
+                    showConfirmButton: false
+                });
+                closeModalForm();
+            },
         });
     }
 };
 
-const ok = (m) => {
-    if (operation.value == 2) {
-        closeModalForm();
-    }
-    closeModalDel();
-    form.reset();
-    msj.value = m;
-    classMsj.value = 'block';
-    setTimeout(() => {
-        classMsj.value = 'hidden';
-    }, 7000)
-}
-
-const deleteCoordi = () => {
-    form.delete(route('admin-coordinators.destroy', v.value.id), {
-        onSuccess: () => {
-            Swal.fire('Deleted!', 'Coordinator deleted successfully!', 'success');
-            ok('Delete Coordinator');
-        },
-        onError: () => {
-            Swal.fire('Error', 'There was an error deleting the coordinator', 'error');
+const deleteCoordi = (coordinator) => {
+    Swal.fire({
+        title: 'Are you sure?',
+        text: `You won't be able to revert this! Deleting Coordinator: ${coordinator.name}`,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+        
+        
+    }).then((result) => {
+        if (result.isConfirmed) {
+            form.delete(route('admin-coordinators.destroy', coordinator.id), {
+                onSuccess: () => {
+                Swal.fire({
+                    title: 'Delete',
+                    text: 'Coordinator delete successfully!',
+                    icon: 'success',
+                    timer: 1500,
+                    showConfirmButton: false
+                });
+                closeModalForm();
+            },
+            });
         }
     });
 };
 
 const exportUsers = () => {
-    window.location.href = '/export/2'; 
-}
-
-
+    window.location.href = '/export/2';
+};
 </script>
 
 <template>
-
     <Head title="Coordinators" />
 
     <AuthenticatedLayout>
@@ -154,7 +160,6 @@ const exportUsers = () => {
             <br>
             <br>
             <div style="display: flex; justify-content: space-between; align-items: center;">
-                <!-- Primer botón -->
                 <DarkButton @click="openModalForm(1)">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="size-6">
@@ -163,37 +168,17 @@ const exportUsers = () => {
                     </svg>
                 </DarkButton>
 
-                <!-- Nuevo botón con ícono en .png para descargar el Excel -->
                 <button @click="exportUsers" style="background-color: white; border: 2px solid green; padding: 10px; border-radius: 8px;">
                     <img src="storage/img/EXLG.png" style="width: 24px; height: 24px;">
                 </button>
-
             </div>
         </template>
 
-        <div class="inline-flex overflow-hidden mb-4 w-full bg-white rounded-lg shadow-md" :class="classMsj">
-            <div class="flex justify-center items-center w-12 bg-green-500">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                    stroke="currentColor" class="size-6">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                </svg>
-            </div>
-
-            <div class="px-4 py-2 -mx-3">
-                <div class="mx-3">
-                    <span class="font-semibold text-green-500">Exito</span>
-                    <p class="text-sm text-gray-600">{{ msj }}</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="w-full overflow-hidden rounded-lg border shadow-md ">
+        <div class="w-full overflow-hidden rounded-lg border shadow-md">
             <div class="w-full overflow-x-auto bg-white">
                 <table class="w-full whitespace-no-wrap">
                     <thead>
-                        <tr
-                            class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b bg-gray-50">
+                        <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b bg-gray-50">
                             <th class="px-4 py-3">#</th>
                             <th class="px-4 py-3">Name</th>
                             <th class="px-4 py-3">Email</th>
@@ -246,7 +231,7 @@ const exportUsers = () => {
                                 </WarningButton>
                             </td>
                             <td class="px-4 py-3 text-sm">
-                                <DangerButton @click="openModalDel(coordi)">
+                                <DangerButton @click="deleteCoordi(coordi)">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="1.5" stroke="currentColor" class="size-6">
                                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -259,6 +244,7 @@ const exportUsers = () => {
                 </table>
             </div>
         </div>
+
         <Modal :show="showModalView" @close="closeModalView">
             <div class="p-6">
                 He is coordinator of the following programs:
@@ -343,28 +329,5 @@ const exportUsers = () => {
                 <SecondaryButton @click="closeModalForm">Cancel</SecondaryButton>
             </div>
         </Modal>
-
-        <Modal :show="showModalDel" @close="closeModalDel">
-            <div class="p-6">
-                <p class="text-2xl text-gray-500">
-                    Surely you want to eliminate the coordinator
-                    <span class="text-2xl font-medium text-gray-900">{{ v.name }}</span>
-                    ?
-                </p>
-            </div>
-            <div class="m-6 flex justify-between">
-                <PrimaryButton @click="deleteCoordi" class="bg-red-500 hover:bg-red-700">Delete</PrimaryButton>
-                <SecondaryButton @click="closeModalDel">Cancel</SecondaryButton>
-            </div>
-        </Modal>
     </AuthenticatedLayout>
 </template>
-<script>
-export default {
-    methods: {
-        exportUsers() {
-            window.location.href = '/export';
-        }
-    }
-}
-</script>

@@ -6,20 +6,21 @@ import DarkButton from '@/Components/DarkButton.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import InputError from '@/Components/InputError.vue';
 import InputGroup from '@/Components/InputGroup.vue';
-import {ref} from 'vue';
+import { ref } from 'vue';
 import Select2 from 'vue3-select2-component';
+import Swal from 'sweetalert2';
 
 import { Type, Text, ImagePlus, UserSearch } from 'lucide-vue-next';
 
 const props = defineProps({
-    program:{type:Object},
-    coordinators:{type:Object},
-    users:{type:Object},
-    benefsDelPrograma:{type:Object}
+    program: { type: Object },
+    coordinators: { type: Object },
+    users: { type: Object },
+    benefsDelPrograma: { type: Object }
 });
 
 const form = useForm({
-    id:'', title:'', description:'', image:'', creator_id:'', coordi_id:'', beneficiaries:[],
+    id: '', title: '', description: '', image: '', creator_id: '', coordi_id: '', beneficiaries: [],
 });
 
 const title_form = ref(
@@ -28,51 +29,73 @@ const title_form = ref(
 const req = ref('required');
 const srcImg = ref('../../storage/img/example.jpg');
 
-const msj = ref('');
-const classMsj = ref('hidden');
-
 const options = ref([]);
-props.users.map( (row) => (
-    options.value.push({'id':row.id, 'text':row.name})
+props.users.map((row) => (
+    options.value.push({ 'id': row.id, 'text': row.name })
 ));
 
-if(props.program != null){
+if (props.program != null) {
     form.id = props.program.id;
     form.title = props.program.title;
     form.description = props.program.description;
     form.coordi_id = props.program.coordi_id;
     form.image = props.program.image;
-    srcImg.value = '../../storage/img/'+props.program.image;
+    srcImg.value = '../../storage/img/' + props.program.image;
     props.benefsDelPrograma.map((row) => (
         form.beneficiaries.push(row.id)
     ));
 }
 
 const save = () => {
-    if(props.program == null){
-        form.post(route('admin-programs.store'),{
-            onSuccess: () => {ok('Program Created')}
+    if (props.program == null) {
+        form.post(route('admin-programs.store'), {
+            onSuccess: () => {
+                Swal.fire({
+                    title: 'Created!',
+                    text: 'Program created successfully!',
+                    icon: 'success',
+                    timer: 2000,
+                    showConfirmButton: false
+                });
+            },
+            onError: () => {
+                Swal.fire({
+                    title: 'Error',
+                    text: 'There was an error creating the program',
+                    icon: 'error',
+                    timer: 2000,
+                    showConfirmButton: false
+                });
+            }
+        });
+    } else {
+        form.post(route('updateprogram', form.id), {
+            onSuccess: () => {
+                Swal.fire({
+                    title: 'Updated!',
+                    text: 'Program updated successfully!',
+                    icon: 'success',
+                    timer: 2000,
+                    showConfirmButton: false
+                });
+            },
+            onError: () => {
+                Swal.fire({
+                    title: 'Error',
+                    text: 'There was an error updating the program',
+                    icon: 'error',
+                    timer: 2000,
+                    showConfirmButton: false
+                });
+            }
         });
     }
-    else {
-        form.post(route('updateprogram'))
-    }
-}
-
-const ok = (m) => {
-    form.reset();
-    msj.value = m;
-    classMsj.value = 'block';
-    setTimeout(() => {
-        classMsj.value = 'hidden';
-    }, 7000)
-}
+};
 
 const showImg = (e) => {
     form.image = e.target.files[0];
     srcImg.value = URL.createObjectURL(e.target.files[0]);
-
-}
+};
 </script>
 
 <template>
@@ -83,23 +106,6 @@ const showImg = (e) => {
                 <div class="bg-blue-500 text-white p-6">
                     <h2 class="text-3xl font-semibold">{{ title_form }}</h2>
                     <p class="text-blue-100">Education support program</p>
-                </div>
-
-                <div class="inline-flex overflow-hidden mb-4 w-full bg-white rounded-lg shadow-md" :class="classMsj">
-                    <div class="flex justify-center items-center w-12 bg-green-500">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                            stroke="currentColor" class="size-6">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                        </svg>
-                    </div>
-
-                    <div class="px-4 py-2 mx-3">
-                        <div class="mx-3">
-                            <span class="font-semibold text-green-500">Success</span>
-                            <p class="text-sm text-gray-600">{{ msj }}</p>
-                        </div>
-                    </div>
                 </div>
 
                 <div class="p-6 grid md:grid-cols-2 gap-6">

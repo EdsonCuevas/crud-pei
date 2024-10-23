@@ -2,18 +2,18 @@
 import AuthenticatedLayout from '@/Layouts/Admin/AuthenticatedLayout.vue';
 import { Head, useForm } from '@inertiajs/vue3';
 import DangerButton from '@/Components/DangerButton.vue';
-import InputError from '@/Components/InputError.vue';
-import Modal from '@/Components/Modal.vue';
-import SecondaryButton from '@/Components/SecondaryButton.vue';
 import WarningButton from '@/Components/WarningButton.vue';
 import DarkButton from '@/Components/DarkButton.vue';
 import InputGroup from '@/Components/InputGroup.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
+import SecondaryButton from '@/Components/SecondaryButton.vue';
+import Modal from '@/Components/Modal.vue';
 import SelectInput from '@/Components/SelectInput.vue';
 import getEdad from '@/Utils/getEdad.js';
 import { ref } from 'vue';
+import Swal from 'sweetalert2';
 
-// En los props van las variables que se reciben desde el controlador
+// Props que se reciben desde el controlador
 const props = defineProps({
     voluntarios: {
         type: Array
@@ -22,6 +22,7 @@ const props = defineProps({
         type: Object
     }
 });
+
 const form = useForm({
     name: '',
     email: '',
@@ -29,7 +30,7 @@ const form = useForm({
     birthdate: '',
     rfc: '',
     password: '',
-    role_id:'',
+    role_id: ''
 });
 
 const v = ref({
@@ -38,32 +39,21 @@ const v = ref({
     phone: '',
     birthdate: '',
     rfc: '',
-    password: '',
-    programs: []
+    password: ''
 });
 
-const showModalView = ref(false);
 const showModalForm = ref(false);
-const showModalDel = ref(false);
 const title = ref('');
 const operation = ref(1);
-const msj = ref('');
-const classMsj = ref('hidden');
 
-const openModalView = (a) => {
-    v.value.name = a.name;
-    v.value.phone = a.phone;
-    v.value.programs = a.programs;
-    showModalView.value = true;
-}
 const openModalForm = (op, a) => {
     showModalForm.value = true;
     operation.value = op;
     form.clearErrors();
     if (op === 1) {
         title.value = 'Create Volunteer';
-    }
-    else {
+        form.reset();
+    } else {
         title.value = 'Edit Volunteer';
         form.name = a.name;
         form.email = a.email;
@@ -74,79 +64,85 @@ const openModalForm = (op, a) => {
         form.rfc = a.rfc;
         v.value.id = a.id;
     }
-}
-const openModalDel = (a) => {
-    showModalDel.value = true;
+};
 
-    v.value.id = a.id;
-    v.value.name = a.name;
-}
-
-const closeModalView = () => {
-    showModalView.value = false;
-}
 const closeModalForm = () => {
     showModalForm.value = false;
     form.reset();
-}
-const closeModalDel = () => {
-    showModalDel.value = false;
-}
+};
 
 const save = () => {
-
-    // Elimina la contraseña del formulario si está vacía
-    if (!form.password) {
-        delete form.password;
-    }
+    if (!form.password) delete form.password;
 
     if (operation.value === 1) {
         form.post(route('admin-volunteers.store'), {
-            onSuccess: () => ok('Volunteer Created'),
+            onSuccess: () => {
+                Swal.fire({
+                    title: 'Created!',
+                    text: 'Volunteer created successfully!',
+                    icon: 'success',
+                    timer: 1500,
+                    showConfirmButton: false
+                });
+                closeModalForm();
+            },
         });
     } else {
         form.put(route('admin-volunteers.update', v.value.id), {
-            onSuccess: () => ok('Update Volunteer'),
+            onSuccess: () => {
+                Swal.fire({
+                    title: 'Updated!',
+                    text: 'Volunteer updated successfully!',
+                    icon: 'success',
+                    timer: 1500,
+                    showConfirmButton: false
+                });
+                closeModalForm();
+            },
         });
     }
 };
 
-const ok = (m) => {
-    if (operation.value == 2) {
-        closeModalForm();
-    }
-    closeModalDel();
-    form.reset();
-    msj.value = m;
-    classMsj.value = 'block';
-    setTimeout(() => {
-        classMsj.value = 'hidden';
-    }, 7000)
-}
+const deleteVolunteer = (voluntario) => {
+    Swal.fire({
+        title: 'Are you sure?',
+        text: `You won't be able to revert this! Deleting Volunteer: ${voluntario.name}`,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, delete it!',
+        cancelButtonText: 'Cancel',
+        preConfirm: () => {
+            form.delete(route('admin-volunteers.destroy', voluntario.id), {
+                onSuccess: () => {
+                Swal.fire({
+                    title: 'Delete',
+                    text: 'Volunteer delete successfully!',
+                    icon: 'success',
+                    timer: 1500,
+                    showConfirmButton: false
+                });
+                closeModalForm();
+            },
+            });
+        }
+    });
+};
 
-const deleteCoordi = () => {
-    form.delete(route('admin-volunteers.destroy', v.value.id), {
-        onSuccess: () => { ok('Delete Volunteer') }
-    })
-}
-const exportUsers = () => {
-    window.location.href = '/export/3'; 
-}
-
-
+const exportVolunteers = () => {
+    window.location.href = '/export/3';
+};
 </script>
 
 <template>
 
     <Head title="Volunteers" />
-
     <AuthenticatedLayout>
         <template #header>
             Volunteers
             <br>
             <br>
             <div style="display: flex; justify-content: space-between; align-items: center;">
-                <!-- Primer botón -->
+                <!-- Botón para crear voluntario -->
                 <DarkButton @click="openModalForm(1)">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="size-6">
@@ -155,78 +151,37 @@ const exportUsers = () => {
                     </svg>
                 </DarkButton>
 
-                <!-- Nuevo botón con ícono en .png para descargar el Excel -->
-                <button @click="exportUsers" style="background-color: white; border: 2px solid green; padding: 10px; border-radius: 8px;">
+                <!-- Botón para exportar a Excel -->
+                <button @click="exportVolunteers" style="background-color: white; border: 2px solid green; padding: 10px; border-radius: 8px;">
                     <img src="storage/img/EXLG.png" style="width: 24px; height: 24px;">
                 </button>
             </div>
         </template>
 
-        <div class="inline-flex overflow-hidden mb-4 w-full bg-white rounded-lg shadow-md" :class="classMsj">
-            <div class="flex justify-center items-center w-12 bg-green-500">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                    stroke="currentColor" class="size-6">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                </svg>
-            </div>
-
-            <div class="px-4 py-2 -mx-3">
-                <div class="mx-3">
-                    <span class="font-semibold text-green-500">Success</span>
-                    <p class="text-sm text-gray-600">{{ msj }}</p>
-                </div>
-            </div>
-        </div>
-
+        <!-- Tabla de voluntarios -->
         <div class="w-full overflow-hidden rounded-lg border shadow-md ">
             <div class="w-full overflow-x-auto bg-white">
                 <table class="w-full whitespace-no-wrap">
                     <thead>
-                        <tr
-                            class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b bg-gray-50">
+                        <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b bg-gray-50">
                             <th class="px-4 py-3">#</th>
                             <th class="px-4 py-3">Name</th>
-                            <th class="px-4 py-3">E-mail</th>
+                            <th class="px-4 py-3">Email</th>
                             <th class="px-4 py-3">Phone</th>
                             <th class="px-4 py-3">RFC</th>
                             <th class="px-4 py-3">Age</th>
-                            <th class="px-4 py-3">Detail</th>
                             <th class="px-4 py-3">Edit</th>
                             <th class="px-4 py-3">Delete</th>
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y">
                         <tr v-for="voluntario in voluntarios" :key="voluntario.id" class="text-gray-700">
-                            <td class="px-4 py-3 text-sm">
-                                {{ voluntario.id }}
-                            </td>
-                            <td class="px-4 py-3 text-sm">
-                                {{ voluntario.name }}
-                            </td>
-                            <td class="px-4 py-3 text-sm">
-                                {{ voluntario.email }}
-                            </td>
-                            <td class="px-4 py-3 text-sm">
-                                {{ voluntario.phone }}
-                            </td>
-                            <td class="px-4 py-3 text-sm">
-                                {{ voluntario.rfc }}
-                            </td>
-                            <td class="px-4 py-3 text-sm">
-                                {{ getEdad(voluntario.birthdate) }}
-                            </td>
-                            <td class="px-4 py-3 text-sm">
-                                <SecondaryButton @click="openModalView(voluntario)">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                        stroke-width="1.5" stroke="currentColor" class="size-6">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                                    </svg>
-                                </SecondaryButton>
-                            </td>
+                            <td class="px-4 py-3 text-sm">{{ voluntario.id }}</td>
+                            <td class="px-4 py-3 text-sm">{{ voluntario.name }}</td>
+                            <td class="px-4 py-3 text-sm">{{ voluntario.email }}</td>
+                            <td class="px-4 py-3 text-sm">{{ voluntario.phone }}</td>
+                            <td class="px-4 py-3 text-sm">{{ voluntario.rfc }}</td>
+                            <td class="px-4 py-3 text-sm">{{ getEdad(voluntario.birthdate) }}</td>
                             <td class="px-4 py-3 text-sm">
                                 <WarningButton @click="openModalForm(2, voluntario)">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -237,7 +192,7 @@ const exportUsers = () => {
                                 </WarningButton>
                             </td>
                             <td class="px-4 py-3 text-sm">
-                                <DangerButton @click="openModalDel(voluntario)">
+                                <DangerButton @click="deleteVolunteer(voluntario)">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="1.5" stroke="currentColor" class="size-6">
                                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -250,23 +205,12 @@ const exportUsers = () => {
                 </table>
             </div>
         </div>
-        <Modal :show="showModalView" @close="closeModalView">
-            <div class="p-6">
-                The programs you are in charge of:
-                <ol>
-                    <li class="text-lg font-medium text-gray-900" v-for="b, i in v.programs">
-                        {{ (i + 1) + ') ' + b.name }}
-                    </li>
-                </ol>
-            </div>
-            <div class="m-6 flex justify-end">
-                <SecondaryButton @click="closeModalView">Cancel</SecondaryButton>
-            </div>
-        </Modal>
 
+        <!-- Modal para Crear/Editar -->
         <Modal :show="showModalForm" @close="closeModalForm">
             <div class="p-6">
-                <h2 class="text-lg font-medium text-gray-900">{{ title }}</h2>
+
+            <h2 class="text-lg font-medium text-gray-900">{{ title }}</h2>
                 <div class="mt-6 mb-6 space-y-6 max-w-xl">
                     <InputGroup :text="'Name'" :required="'required'" v-model="form.name" :type="'text'">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -329,24 +273,12 @@ const exportUsers = () => {
 
                 </div>
             </div>
+
             <div class="m-6 flex justify-between">
                 <PrimaryButton @click="save">Save</PrimaryButton>
                 <SecondaryButton @click="closeModalForm">Cancel</SecondaryButton>
             </div>
         </Modal>
-
-        <Modal :show="showModalDel" @close="closeModalDel">
-            <div class="p-6">
-                <p class="text-2xl text-gray-500">
-                    Surely you want to eliminate the volunteer
-                    <span class="text-2xl font-medium text-gray-900">{{ v.name }}</span>
-                    ?
-                </p>
-            </div>
-            <div class="m-6 flex justify-between">
-                <PrimaryButton @click="deleteCoordi" class="bg-red-500 hover:bg-red-700">Delete</PrimaryButton>
-                <SecondaryButton @click="closeModalDel">Cancel</SecondaryButton>
-            </div>
-        </Modal>
     </AuthenticatedLayout>
+
 </template>

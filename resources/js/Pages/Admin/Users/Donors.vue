@@ -12,8 +12,8 @@ import PrimaryButton from '@/Components/PrimaryButton.vue';
 import SelectInput from '@/Components/SelectInput.vue';
 import getEdad from '@/Utils/getEdad.js';
 import { ref } from 'vue';
+import Swal from 'sweetalert2';
 
-// En los props van las variables que se reciben desde el controlador
 const props = defineProps({
     donadores: {
         type: Array
@@ -22,6 +22,7 @@ const props = defineProps({
         type: Object
     }
 });
+
 const form = useForm({
     name: '',
     email: '',
@@ -47,23 +48,21 @@ const showModalForm = ref(false);
 const showModalDel = ref(false);
 const title = ref('');
 const operation = ref(1);
-const msj = ref('');
-const classMsj = ref('hidden');
 
 const openModalView = (a) => {
     v.value.name = a.name;
     v.value.phone = a.phone;
     v.value.programs = a.programs;
     showModalView.value = true;
-}
+};
+
 const openModalForm = (op, a) => {
     showModalForm.value = true;
     operation.value = op;
     form.clearErrors();
     if (op === 1) {
         title.value = 'Create Donor';
-    }
-    else {
+    } else {
         title.value = 'Edit Donor';
         form.name = a.name;
         form.email = a.email;
@@ -74,70 +73,98 @@ const openModalForm = (op, a) => {
         form.rfc = a.rfc;
         v.value.id = a.id;
     }
-}
-const openModalDel = (a) => {
-    showModalDel.value = true;
+};
 
+const openModalDel = (a) => {
     v.value.id = a.id;
     v.value.name = a.name;
-}
+
+    deleteCoordi();
+};
 
 const closeModalView = () => {
     showModalView.value = false;
-}
+};
 const closeModalForm = () => {
     showModalForm.value = false;
     form.reset();
-}
-const closeModalDel = () => {
-    showModalDel.value = false;
-}
+};
 
 const save = () => {
-
-    // Elimina la contraseña del formulario si está vacía
     if (!form.password) {
         delete form.password;
     }
 
     if (operation.value === 1) {
         form.post(route('admin-donors.store'), {
-            onSuccess: () => ok('Donor Create'),
+            onSuccess: () => {
+                Swal.fire({
+                    title: 'Created!',
+                    text: 'Donor created successfully!',
+                    icon: 'success',
+                    timer: 1500,
+                    showConfirmButton: false
+                });
+                closeModalForm();
+            },
+            onError: () => {
+                Swal.fire('Error!', 'There was an error creating the donor.', 'error');
+            },
         });
     } else {
         form.put(route('admin-donors.update', v.value.id), {
-            onSuccess: () => ok('Update Donor'),
+            onSuccess: () => {
+                Swal.fire({
+                    title: 'Updated!',
+                    text: 'Donor updated successfully!',
+                    icon: 'success',
+                    timer: 1500,
+                    showConfirmButton: false
+                });
+                closeModalForm();
+            },
+            onError: () => {
+                Swal.fire('Error!', 'There was an error updating the donor.', 'error');
+            },
         });
     }
 };
 
-const ok = (m) => {
-    if (operation.value == 2) {
-        closeModalForm();
-    }
-    closeModalDel();
-    form.reset();
-    msj.value = m;
-    classMsj.value = 'block';
-    setTimeout(() => {
-        classMsj.value = 'hidden';
-    }, 7000)
-}
-
 const deleteCoordi = () => {
+    Swal.fire({
+        title: 'Are you sure?',
+        text: `You won't be able to revert this! Deleting Donor: ${v.value.name}`,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+        
+        
+    }).then((result) => {
+        if (result.isConfirmed) {
+            form.delete(route('admin-donors.destroy', v.value.id), {
+                onSuccess: () => {
+                Swal.fire({
+                    title: 'Delete',
+                    text: 'Donor delete successfully!',
+                    icon: 'success',
+                    timer: 1500,
+                    showConfirmButton: false
+                });
+                closeModalForm();
+            },
+            });
+        }
+    });
+};
 
-    form.delete(route('admin-donors.destroy', v.value.id), {
-        onSuccess: () => { ok('Delete Donor') }
-    })
-}
 const exportUsers = () => {
-    window.location.href = '/export/4'; 
-}
-
+    window.location.href = '/export/4';
+};
 </script>
 
 <template>
-
     <Head title="Donadores" />
 
     <AuthenticatedLayout>
@@ -162,29 +189,11 @@ const exportUsers = () => {
             </div>
         </template>
 
-        <div class="inline-flex overflow-hidden mb-4 w-full bg-white rounded-lg shadow-md" :class="classMsj">
-            <div class="flex justify-center items-center w-12 bg-green-500">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                    stroke="currentColor" class="size-6">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                </svg>
-            </div>
-
-            <div class="px-4 py-2 -mx-3">
-                <div class="mx-3">
-                    <span class="font-semibold text-green-500">Success</span>
-                    <p class="text-sm text-gray-600">{{ msj }}</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="w-full overflow-hidden rounded-lg border shadow-md ">
+        <div class="w-full overflow-hidden rounded-lg border shadow-md">
             <div class="w-full overflow-x-auto bg-white">
                 <table class="w-full whitespace-no-wrap">
                     <thead>
-                        <tr
-                            class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b bg-gray-50">
+                        <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b bg-gray-50">
                             <th class="px-4 py-3">#</th>
                             <th class="px-4 py-3">Name</th>
                             <th class="px-4 py-3">E-mail</th>
@@ -198,24 +207,12 @@ const exportUsers = () => {
                     </thead>
                     <tbody class="bg-white divide-y">
                         <tr v-for="donador in donadores" :key="donador.id" class="text-gray-700">
-                            <td class="px-4 py-3 text-sm">
-                                {{ donador.id }}
-                            </td>
-                            <td class="px-4 py-3 text-sm">
-                                {{ donador.name }}
-                            </td>
-                            <td class="px-4 py-3 text-sm">
-                                {{ donador.email }}
-                            </td>
-                            <td class="px-4 py-3 text-sm">
-                                {{ donador.phone }}
-                            </td>
-                            <td class="px-4 py-3 text-sm">
-                                {{ donador.rfc }}
-                            </td>
-                            <td class="px-4 py-3 text-sm">
-                                {{ getEdad(donador.birthdate) }}
-                            </td>
+                            <td class="px-4 py-3 text-sm">{{ donador.id }}</td>
+                            <td class="px-4 py-3 text-sm">{{ donador.name }}</td>
+                            <td class="px-4 py-3 text-sm">{{ donador.email }}</td>
+                            <td class="px-4 py-3 text-sm">{{ donador.phone }}</td>
+                            <td class="px-4 py-3 text-sm">{{ donador.rfc }}</td>
+                            <td class="px-4 py-3 text-sm">{{ getEdad(donador.birthdate) }}</td>
                             <td class="px-4 py-3 text-sm">
                                 <SecondaryButton @click="openModalView(donador)">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -250,6 +247,7 @@ const exportUsers = () => {
                 </table>
             </div>
         </div>
+
         <Modal :show="showModalView" @close="closeModalView">
             <div class="p-6">
                 The programs you are in charge of:
@@ -332,20 +330,6 @@ const exportUsers = () => {
             <div class="m-6 flex justify-between">
                 <PrimaryButton @click="save">Save</PrimaryButton>
                 <SecondaryButton @click="closeModalForm">Cancel</SecondaryButton>
-            </div>
-        </Modal>
-
-        <Modal :show="showModalDel" @close="closeModalDel">
-            <div class="p-6">
-                <p class="text-2xl text-gray-500">
-                    Surely you want to eliminate the donor
-                    <span class="text-2xl font-medium text-gray-900">{{ v.name }}</span>
-                    ?
-                </p>
-            </div>
-            <div class="m-6 flex justify-between">
-                <PrimaryButton @click="deleteCoordi" class="bg-red-500 hover:bg-red-700">Delete</PrimaryButton>
-                <SecondaryButton @click="closeModalDel">Cancel</SecondaryButton>
             </div>
         </Modal>
     </AuthenticatedLayout>

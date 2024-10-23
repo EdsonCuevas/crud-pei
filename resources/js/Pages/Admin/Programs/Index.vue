@@ -3,12 +3,11 @@ import AuthenticatedLayout from '@/Layouts/Admin/AuthenticatedLayout.vue';
 import { Head, useForm } from '@inertiajs/vue3';
 import NavLink from '@/Components/NavLink.vue';
 import Pagination from '@/Components/Pagination.vue';
-import Modal from '@/Components/Modal.vue';
 import DangerButton from '@/Components/DangerButton.vue';
-import SecondaryButton from '@/Components/SecondaryButton.vue';
 import WarningButton from '@/Components/WarningButton.vue';
 import DarkButton from '@/Components/DarkButton.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
+import Swal from 'sweetalert2'; // Importar SweetAlert
 import { ref } from 'vue';
 
 // En los props van las variables que se reciben desde el controlador
@@ -25,42 +24,57 @@ const exportPrograms = () => {
     window.location.href = '/export-programs';
 }
 
-const form = useForm({id:'', title:'', description:''})
-const showModalDel = ref(false);
-const msj = ref( (props.flash.success != null) ? props.flash.success: '');
+const form = useForm({ id: '', title: '', description: '' });
+const msj = ref((props.flash.success != null) ? props.flash.success : '');
 const classMsj = ref((props.flash.success != null) ? '' : 'hidden');
 
-const openModalDel = (b) => {
-	form.id = b.id;
-	form.title = b.title;
-	form.description = b.description;
+const openDeleteConfirmation = (programa) => {
+    form.id = programa.id;
+    form.title = programa.title;
+    form.description = programa.description;
 
-	showModalDel.value = true;
-}
-
-const closeModalDel = () => {
-	showModalDel.value = false;
+    // Mostrar alerta de confirmación con SweetAlert
+    Swal.fire({
+        title: 'Are you sure?',
+        text: `You are about to delete the program "${programa.title}"`,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Yes, delete it!',
+        cancelButtonText: 'Cancel'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            deleteProgram();
+        }
+    });
 }
 
 const deleteProgram = () => {
-	form.delete(route('admin-programs.destroy', form.id),{
-		onSuccess: () => {ok('Program eliminated')}
-	});
-}
-
-const ok = (m) => {
-    closeModalDel();
-    form.reset();
-    msj.value = m;
-    classMsj.value = 'block';
-    setTimeout(() => {
-        classMsj.value = 'hidden';
-    }, 7000)
+    form.delete(route('admin-programs.destroy', form.id), {
+        onSuccess: () => {
+            Swal.fire({
+                title: 'Deleted!',
+                text: 'The program has been deleted.',
+                icon: 'success',
+                timer: 1500,
+                showConfirmButton: false
+            });
+        },
+        onError: () => {
+            Swal.fire({
+                title: 'Error',
+                text: 'There was an error deleting the program.',
+                icon: 'error',
+                timer: 1500,
+                showConfirmButton: false
+            });
+        }
+    });
 }
 </script>
 
 <template>
-
     <Head title="Programas" />
 
     <AuthenticatedLayout>
@@ -68,51 +82,32 @@ const ok = (m) => {
             Programas
             <br>
             <br>
-        <div class="flex justify-between">
-            <NavLink :href="route('admin-programs.create')">
-                <DarkButton>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m3.75 9v6m3-3H9m1.5-12H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
-                    </svg>
-                </DarkButton>
-            </NavLink>
-            <div class="flex items grid-cols-2 gap-2">
-                <a href="admin-programs-pdf">
-                <button style="background-color: white; border: 2px solid red; padding: 10px; border-radius: 8px;">
-                    <img src="storage/img/pdf.png" style="width: 24px; height: 24px;">
-                </button>
-                </a>
-                <button @click="exportPrograms" style="background-color: white; border: 2px solid green; padding: 10px; border-radius: 8px;">
-                    <img src="storage/img/EXLG.png" style="width: 24px; height: 24px;">
-                </button>
-            </div>
-            
-        </div>
-</template>
-
-        <div class="inline-flex overflow-hidden mb-4 w-full bg-white rounded-lg shadow-md" :class="classMsj">
-            <div class="flex justify-center items-center w-12 bg-green-500">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                    stroke="currentColor" class="size-6">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                </svg>
-            </div>
-
-            <div class="px-4 py-2 mx-3">
-                <div class="mx-3">
-                    <span class="font-semibold text-green-500">Success</span>
-                    <p class="text-sm text-gray-600">{{ msj }}</p>
+            <div class="flex justify-between">
+                <NavLink :href="route('admin-programs.create')">
+                    <DarkButton>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m3.75 9v6m3-3H9m1.5-12H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
+                        </svg>
+                    </DarkButton>
+                </NavLink>
+                <div class="flex items grid-cols-2 gap-2">
+                    <a href="admin-programs-pdf">
+                        <button style="background-color: white; border: 2px solid red; padding: 10px; border-radius: 8px;">
+                            <img src="storage/img/pdf.png" style="width: 24px; height: 24px;">
+                        </button>
+                    </a>
+                    <button @click="exportPrograms" style="background-color: white; border: 2px solid green; padding: 10px; border-radius: 8px;">
+                        <img src="storage/img/EXLG.png" style="width: 24px; height: 24px;">
+                    </button>
                 </div>
             </div>
-        </div>
+        </template>
 
         <div class="w-full overflow-hidden rounded-lg border shadow-md ">
             <div class="w-full overflow-x-auto bg-white">
                 <table class="w-full whitespace-no-wrap">
                     <thead>
-                        <tr
-                            class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b bg-gray-50">
+                        <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b bg-gray-50">
                             <th class="px-4 py-3">#</th>
                             <th class="px-4 py-3">Title</th>
                             <th class="px-4 py-3">Creator</th>
@@ -134,24 +129,23 @@ const ok = (m) => {
                             <td class="px-4 py-3 text-sm">
                                 {{ programa.creator ? (programa.creator.name ? programa.creator.name : '') : '' }}
                             </td>
-							<td class="px-4 py-3 text-sm">
+                            <td class="px-4 py-3 text-sm">
                                 {{ programa.coordinator ? (programa.coordinator.name ? programa.coordinator.name : '') : '' }}
                             </td>
                             <td class="px-4 py-3 text-sm">
                                 {{ new Date(programa.created_at).toLocaleString() }}
                             </td>
-					
                             <td class="px-4 py-3 text-sm">
                                 <NavLink :href="route('admin-programs.show', programa.id)">
-                                    <SecondaryButton>
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                            stroke-width="1.5" stroke="currentColor" class="size-6">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                                        </svg>
-                                    </SecondaryButton>
+                                    <SecondaryButton @click="openModalView(coordi)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor" class="size-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                    </svg>
+                                </SecondaryButton>
                                 </NavLink>
                             </td>
                             <td class="px-4 py-3 text-sm">
@@ -166,7 +160,7 @@ const ok = (m) => {
                                 </NavLink>
                             </td>
                             <td class="px-4 py-3 text-sm">
-                                <DangerButton @click="openModalDel(programa)">
+                                <DangerButton @click="openDeleteConfirmation(programa)">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="1.5" stroke="currentColor" class="size-6">
                                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -178,25 +172,9 @@ const ok = (m) => {
                     </tbody>
                 </table>
             </div>
-			<div
-				class="px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase bg-gray-50 border-t sm:grid-cols-9">
-				<pagination :links="programas.links" />
-			</div>
+            <div class="px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase bg-gray-50 border-t sm:grid-cols-9">
+                <pagination :links="programas.links" />
+            </div>
         </div>
-
-        <Modal :show="showModalDel" @close="closeModalDel">
-            <div class="p-6">
-                <p class="text-2xl text-gray-500">
-                    Surely you want to delete the program
-                    <span class="text-2xl font-medium text-gray-900">{{ form.title }}</span>
-                    ?
-                </p>
-            </div>
-            <div class="m-6 flex justify-between">
-                <PrimaryButton @click="deleteProgram" class="bg-red-500 hover:bg-red-700">Delete</PrimaryButton>
-                <SecondaryButton @click="closeModalDel">Cancel</SecondaryButton>
-            </div>
-        </Modal>
-
     </AuthenticatedLayout>
 </template>
