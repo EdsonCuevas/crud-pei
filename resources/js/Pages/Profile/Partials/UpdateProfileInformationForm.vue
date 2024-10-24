@@ -4,6 +4,7 @@ import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import { Link, useForm, usePage } from '@inertiajs/vue3';
+import  { watch } from 'vue'
 
 defineProps({
     mustVerifyEmail: {
@@ -16,14 +17,20 @@ defineProps({
 
 const user = usePage().props.auth.user;
 
+const formPhoto = useForm({
+    photo: null,  // Campo para la nueva foto
+});
+
 const form = useForm({
-    image: null,
+    id: user.id,
     name: user.name,
     email: user.email,
     phone: user.phone,
     rfc: user.rfc,
     birthdate: user.birthdate,
 });
+
+
 </script>
 
 <template>
@@ -35,19 +42,38 @@ const form = useForm({
                 Update the profile information, email address and phone number of your account.            </p>
         </header>
 
-        <form @submit.prevent="form.patch(route('profile.update'))" class="mt-6 space-y-6">
+
+        <form @submit.prevent="formPhoto.update(route('profile.updatePhoto'))" class="mt-6 space-y-6" enctype="multipart/form-data">
                 <!-- Subir imagen -->
             <div>
-                <InputLabel for="image" value="Updated image" />
+                <InputLabel for="photo" value="Updated image" />
                 <input
-                    id="image"
+                    id="photo"
                     type="file"
                     class="mt-1 block w-full"
-                    @change="(e) => form.image = e.target.files[0]"
+                    @change="(e) => form.photo = e.target.files[0]"
                     accept="image/*"
                 />
-                <InputError class="mt-2" :message="form.errors.image" />
+                <InputError class="mt-2" :message="form.errors.photo" />
+
+                <div class="flex items-center gap-4">
+                <PrimaryButton :disabled="form.processing">Save</PrimaryButton>
+
+                <Transition
+                    enter-active-class="transition ease-in-out"
+                    enter-from-class="opacity-0"
+                    leave-active-class="transition ease-in-out"
+                    leave-to-class="opacity-0"
+                >
+                    <p v-if="form.recentlySuccessful" class="text-sm text-gray-600">Successfully saved.</p>
+                </Transition>
             </div>
+            </div>
+            </form>
+
+                <InputLabel for="name" value="Name" />
+
+        <form @submit.prevent="form.patch(route('profile.update'))" class="mt-6 space-y-6">
             <div>
                 <InputLabel for="name" value="Name" />
 
