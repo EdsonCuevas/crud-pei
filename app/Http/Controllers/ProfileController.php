@@ -105,9 +105,8 @@ class ProfileController extends Controller
     
         // Redirigir al formulario de edición del perfil con un mensaje de éxito
         return Redirect::route('profile.edit')->with('status', 'Photo updated successfully.');
-    
-    
     }
+    
     /**
      * Delete the user's account.
      */
