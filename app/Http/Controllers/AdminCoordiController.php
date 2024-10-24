@@ -80,6 +80,6 @@ class AdminCoordiController extends Controller
     public function destroy(User $admin_coordinator)
     {
         $admin_coordinator->delete();
-        return redirect('admin-coordinators');
+        return redirect('admin-dashboard');
     }
 }
