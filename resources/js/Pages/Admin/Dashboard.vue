@@ -3,41 +3,39 @@ import AuthenticatedLayout from '@/Layouts/Admin/AuthenticatedLayout.vue';
 
 </script>
 <template>
-      <AuthenticatedLayout>
-
-  <div class="financial-dashboard bg-white text-gray-800 p-6 rounded-lg shadow-lg max-w-6xl">
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <div>
-        <h2 class="text-xl font-semibold mb-4 text-gray-800">Income vs Expense</h2>
-        <apexchart
-          type="bar"
-          height="400"
-          :options="chartOptions1"
-          :series="chartOptions1.series"
-        ></apexchart>
+  <AuthenticatedLayout>
+    <div class="financial-dashboard bg-white text-gray-800 p-6 rounded-lg shadow-lg w-full">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <h2 class="text-xl font-semibold mb-4 text-gray-800">Income vs Expense</h2>
+          <apexchart
+            type="bar"
+            height="400"
+            :options="chartOptions1"
+            :series="chartOptions1.series"
+          ></apexchart>
+        </div>
+        <div>
+          <h2 class="text-xl font-semibold mb-4 text-gray-800">Traffic Sources</h2>
+          <apexchart
+            type="bar"
+            height="400"
+            :options="chartOptions2"
+            :series="chartOptions2.series"
+          ></apexchart>
+        </div>
       </div>
-      <div>
-        <h2 class="text-xl font-semibold mb-4 text-gray-800">Traffic Sources</h2>
+      <div class="mt-6">
+        <h2 class="text-xl font-semibold mb-4 text-gray-800">Monthly Revenue</h2>
         <apexchart
-          type="bar"
-          height="400"
-          :options="chartOptions2"
-          :series="chartOptions2.series"
+          type="area"
+          height="300"
+          :options="chartOptions3"
+          :series="chartOptions3.series"
         ></apexchart>
       </div>
     </div>
-    <div class="mt-6">
-      <h2 class="text-xl font-semibold mb-4 text-gray-800">Monthly Revenue</h2>
-      <apexchart
-        type="area"
-        height="300"
-        :options="chartOptions3"
-        :series="chartOptions3.series"
-      ></apexchart>
-    </div>
-  </div>
-</AuthenticatedLayout>
-
+  </AuthenticatedLayout>
 </template>
 
 <script>
