@@ -41,10 +41,21 @@ const v = ref({
     rfc: '',
     password: ''
 });
-
+const showModalView = ref(false);
 const showModalForm = ref(false);
 const title = ref('');
 const operation = ref(1);
+
+const openModalView = (a) => {
+    v.value.name = a.name;
+    v.value.phone = a.phone;
+    v.value.programs = a.programs;
+    showModalView.value = true;
+}
+
+const closeModalView = () => {
+    showModalView.value = false;
+}
 
 const openModalForm = (op, a) => {
     showModalForm.value = true;
@@ -170,6 +181,7 @@ const exportVolunteers = () => {
                             <th class="px-4 py-3">Phone</th>
                             <th class="px-4 py-3">RFC</th>
                             <th class="px-4 py-3">Age</th>
+                            <th class="px-4 py-3">Details</th>
                             <th class="px-4 py-3">Edit</th>
                             <th class="px-4 py-3">Delete</th>
                         </tr>
@@ -182,6 +194,17 @@ const exportVolunteers = () => {
                             <td class="px-4 py-3 text-sm">{{ voluntario.phone }}</td>
                             <td class="px-4 py-3 text-sm">{{ voluntario.rfc }}</td>
                             <td class="px-4 py-3 text-sm">{{ getEdad(voluntario.birthdate) }}</td>
+                            <td class="px-4 py-3 text-sm">
+                                <SecondaryButton @click="openModalView(voluntario)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor" class="size-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                    </svg>
+                                </SecondaryButton>
+                            </td>
                             <td class="px-4 py-3 text-sm">
                                 <WarningButton @click="openModalForm(2, voluntario)">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -205,6 +228,20 @@ const exportVolunteers = () => {
                 </table>
             </div>
         </div>
+
+        <Modal :show="showModalView" @close="closeModalView">
+            <div class="p-6">
+                The programs you are in charge of:
+                <ol>
+                    <li class="text-lg font-medium text-gray-900" v-for="b, i in v.programs">
+                        {{ (i + 1) + ') ' + b.name }}
+                    </li>
+                </ol>
+            </div>
+            <div class="m-6 flex justify-end">
+                <SecondaryButton @click="closeModalView">Cancel</SecondaryButton>
+            </div>
+        </Modal>
 
         <!-- Modal para Crear/Editar -->
         <Modal :show="showModalForm" @close="closeModalForm">
