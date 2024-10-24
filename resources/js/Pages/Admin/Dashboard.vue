@@ -81,6 +81,14 @@ export default {
             },
           },
         },
+        dataLabels: {
+          enabled: true,
+          style: {
+            colors: ['#29292A'],
+            fontSize: '14px',
+            fontWeight: 'bold',
+          },
+        },
         legend: {
           show: true,
           position: "bottom",
