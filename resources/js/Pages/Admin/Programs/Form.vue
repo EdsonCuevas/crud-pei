@@ -26,7 +26,7 @@ const form = useForm({
 const title_form = ref(
     (props.program == null) ? 'Create Program' : 'Edit Program'
 );
-const req = ref('required');
+
 const srcImg = ref('../../storage/img/example.jpg');
 
 const options = ref([]);
