@@ -23,10 +23,8 @@
           </NavLink>
         </li>
 
-        
-
         <li class="relative px-6 py-3">
-          <NavLink :href="route('coord-reports.index')" ::active="route().current('coord-reports.index')">
+          <NavLink :href="route('coord-reports.index')" :active="route().current('coord-reports.index')">
             <template #icon>
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" 
                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
