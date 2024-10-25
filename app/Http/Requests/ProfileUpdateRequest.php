@@ -17,7 +17,6 @@ class ProfileUpdateRequest extends FormRequest
             'phone' => ['required', 'string'],
             'rfc' => ['string', 'size:12', Rule::unique('users')->ignore(Auth::user())],
             'birthdate' => ['required', 'date', 'before_or_equal:' . now()->toDateString(),],
-            'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
         ];
     }
 

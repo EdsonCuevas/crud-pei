@@ -48,7 +48,7 @@ function showImg(event) {
 <template>
     <section>
         <!-- Formulario de imagen separado -->
-        <header class="mt-10">
+        <header>
             <h2 class="text-lg font-medium text-gray-900">Update Profile Image</h2>
             <p class="mt-1 text-sm text-gray-600">Upload a new profile image for your account.</p>
         </header>
