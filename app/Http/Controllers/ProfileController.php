@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Inertia\Response;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
@@ -68,6 +70,32 @@ class ProfileController extends Controller
 
         $request->user()->save();
 
+        return Redirect::route('profile.edit');
+    }
+
+    public function updateImage(Request $request)
+    {
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+        ]);
+
+        $user = Auth::user();
+
+        if ($request->hasFile('image')) {
+
+            // Elimina la imagen anterior si existe
+            if ($user->photo && Storage::exists('public/img/profile/' . $user->photo)) {
+                Storage::delete('public/img/profile/' . $user->photo);
+            }
+
+            $image = $request->image;
+            $imgName = rand() . '_' . $image->getClientOriginalName();
+            $request->file('image')->storeAs('public/img/profile', $imgName);
+            $path = $imgName;
+            $user->photo = $path;
+        }
+
+        $request->user()->save();
         return Redirect::route('profile.edit');
     }
 
