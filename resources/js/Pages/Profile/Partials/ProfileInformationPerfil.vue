@@ -1,78 +1,107 @@
 <script setup>
-import InputError from '@/Components/InputError.vue';
+import { ref } from 'vue';
 import InputLabel from '@/Components/InputLabel.vue';
-import { Link, useForm, usePage } from '@inertiajs/vue3';
-
-defineProps({
-    mustVerifyEmail: {
-        type: Boolean,
-    },
-    status: {
-        type: String,
-    },
-});
+import { usePage } from '@inertiajs/vue3';
 
 const user = usePage().props.auth.user;
 
-const form = useForm({
-    name: user.name,
-    phone: user.phone,
-    email: user.email,
+// Ruta de la imagen
+const srcImg = ref(user.photo ? `../../storage/img/profile/${user.photo}` : '../../storage/img/profile/profile-icon.png');
 
-});
+// Función para manejar la carga de imagen
+function showImg(event) {
+    const file = event.target.files[0];
+    if (file) {
+        srcImg.value = URL.createObjectURL(file);
+    }
+}
 </script>
 
 <template>
-    <section>
-        <header>
-            <h2 class="text-lg font-medium text-gray-900">Personal Information</h2>
-
-            <p class="mt-1 text-sm text-gray-600">
-                Update the profile information and email address of your account.           </p>
-        </header>
-
-        <form @submit.prevent="form.patch(route('profile.update'))" class="mt-6 space-y-6">
-            
-            <!-- Subir imagen -->
-            <div>
-                <InputLabel for="image" value="Image" />
-                    <p class="mt-1 block w-full">{{ form.image }}</p>
-                <InputError class="mt-2" :message="form.errors.image" />
-            </div>            
-            
-            <!-- Nombre -->
-            <div>
-                <InputLabel for="name" value="Name" />
-
-                    <p class="mt-1 block w-full">{{ form.name }}</p>
-
-                <InputError class="mt-2" :message="form.errors.name" />
+    <section class="profile-container p-6 bg-white rounded-lg flex flex-col md:flex-row w-full items-center">
+        <!-- Imagen y nombre del usuario -->
+        <div class="profile-left flex flex-col items-center md:w-1/3 justify-center md:justify-start">
+            <div class="profile-img w-48 h-48 mb-4">
+                <img :src="srcImg" alt="Imagen de perfil" class="w-full h-full object-cover rounded-lg" />
             </div>
-
-            <!-- Email -->
-            <div>
-                <InputLabel for="email" value="E-mail" />
-                    <p class="mt-1 block w-full">{{ form.email }}</p>
-                <InputError class="mt-2" :message="form.errors.email" />
+            <div class="text-center mt-4">
+                <h2 class="text-2xl font-semibold text-gray-800">{{ user.name }}</h2>
+                <p class="text-sm text-gray-600">Usuario</p>
             </div>
+        </div>
 
-            <!-- Numero de telefono -->
-            <div>
-                <InputLabel for="telnum" value="Phone Number" />
-                    <p class="mt-1 block w-full">{{ form.phone }}</p>
-                <InputError class="mt-2" :message="form.errors.phone" />
+        <!-- Información personal -->
+        <div class="profile-right flex-grow p-4 mt-6 md:mt-0 md:ml-6 w-full md:w-2/3">
+            <h3 class="text-xl font-semibold text-gray-800 mb-4">Personal information</h3>
+            <div class="mb-4">
+                <InputLabel value="E-mail:" />
+                <p class="mt-1 text-lg text-gray-700">{{ user.email }}</p>
             </div>
-
-            <div class="flex items-center gap-4">
-
-                <Transition
-                    enter-active-class="transition ease-in-out"
-                    enter-from-class="opacity-0"
-                    leave-active-class="transition ease-in-out"
-                    leave-to-class="opacity-0"
-                >
-                </Transition>
+            <div class="mb-4">
+                <InputLabel value="Teléfono:" />
+                <p class="mt-1 text-lg text-gray-700">{{ user.phone }}</p>
             </div>
-        </form>
+            <div class="mb-4">
+                <InputLabel value="Fecha de Nacimiento:" />
+                <p class="mt-1 text-lg text-gray-700">{{ user.birthdate }}</p>
+            </div>
+            <div class="mb-4">
+                <InputLabel value="RFC:" />
+                <p class="mt-1 text-lg text-gray-700">{{ user.rfc }}</p>
+            </div>
+        </div>
     </section>
 </template>
+
+<style scoped>
+/* Contenedor general */
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%; /* Asegura que ocupe todo el ancho */
+    max-width: 100vw;
+}
+
+/* Sección izquierda (imagen y nombre) */
+.profile-left {
+    display: flex;
+    flex-direction: column; /* Para que el nombre esté debajo de la imagen */
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+/* Imagen de perfil */
+.profile-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px; /* Esquinas ligeramente redondeadas */
+}
+
+/* Sección derecha (información personal) */
+.profile-right {
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Ajustes responsivos */
+@media (min-width: 768px) {
+    .profile-container {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .profile-left {
+        width: 30%; /* Espacio de la imagen y nombre */
+    }
+
+    .profile-right {
+        width: 70%; /* Espacio para la información */
+    }
+}
+</style>
