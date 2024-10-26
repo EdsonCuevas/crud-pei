@@ -9,8 +9,11 @@ use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\AdminDonorsController;
 use App\Http\Controllers\AdminVolunteersController;
 use App\Http\Controllers\AdminProgramsController;
+use App\Http\Controllers\AdminMyInfoController;
+
 
 // Controladores para el panel Coordinador
+use App\Http\Controllers\CoordMyInfoController;
 use App\Http\Controllers\CoordProgramController;
 use App\Http\Controllers\CoordReportsController;
 use App\Http\Controllers\ExportController;
@@ -18,8 +21,11 @@ use App\Http\Controllers\ExportController;
 // Controladores para el panel Voluntario
 use App\Http\Controllers\VoluntProgramsController;
 use App\Http\controllers\VoluntContactController;
+use App\Http\Controllers\VoluntMyInfoController;
+
 
 // Controladores para el panel Donador
+use App\Http\Controllers\DonorMyInfoController;
 use App\Http\Controllers\DonorDonacionesController;
 use App\Http\Controllers\DonorInformesController;
 use App\Http\Controllers\DonorContactosController;
@@ -118,7 +124,17 @@ Route::middleware('auth')->group(function () {
     Route::resource('donor-contacts', DonorContactosController::class);
     Route::resource('donor-informes', DonorInformesController::class);
 
-    Route::resource('benef-myinfo', MyInfoController::class);
+    // Rutas para beneficiarios
+    Route::resource('benef-myinfo', MyInfoController::class)->only(['index']);
+
+    // Rutas para coordinadores
+    Route::resource('coord-myinfo', CoordMyInfoController::class)->only(['index']);
+    Route::resource('admin-myinfo', AdminMyInfoController::class)->only(['index']);
+    Route::resource('donor-myinfo', DonorMyInfoController::class)->only(['index']);
+    Route::resource('volunt-myinfo', VoluntMyInfoController::class)->only(['index']);
+
+
+
     Route::resource('benef-recursos', BenefRecursosController::class);
     Route::resource('benef-contacts', BenefContactsController::class);
 });
