@@ -31,7 +31,7 @@ const imageForm = useForm({
     image: user.photo,
 });
 
-if (user.photo != null) {
+if (user.photo) {
     imageForm.image = user.photo;
     srcImg.value = '../../storage/img/profile/' + user.photo;
 }
@@ -119,7 +119,7 @@ watch(() => form.recentlySuccessful, (newVal) => {
         <form @submit.prevent="form.patch(route('profile.update'))" class="mt-6 space-y-6 w-full max-w-sm">
             <div>
                 <InputLabel for="name" value="Name" />
-                <TextInput id="name" type="text" class="mt-1 block w-full" v-model="form.name" required autofocus
+                <TextInput id="name" type="text" class="mt-1 block w-full" v-model="form.name" required
                     autocomplete="name" />
                 <InputError class="mt-2" :message="form.errors.name" />
             </div>
@@ -147,7 +147,7 @@ watch(() => form.recentlySuccessful, (newVal) => {
             <div>
                 <InputLabel for="birthdate" value="Date of Birth" />
                 <TextInput id="birthdate" type="date" class="mt-1 block w-full" v-model="form.birthdate" required
-                    autofocus autocomplete="birthdate" min="1900-01-01" :max="maxDate" />
+                    autocomplete="birthdate" min="1900-01-01" :max="maxDate" />
                 <InputError class="mt-2" :message="form.errors.birthdate" />
             </div>
 
