@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
@@ -36,6 +36,9 @@ if (user.photo != null) {
     srcImg.value = '../../storage/img/profile/' + user.photo;
 }
 
+const showImageAlert = ref(false);
+const showFormAlert = ref(false);
+
 function showImg(event) {
     const file = event.target.files[0];
     if (file) {
@@ -43,6 +46,25 @@ function showImg(event) {
         imageForm.image = file; // Assign the selected file
     }
 }
+
+// Watchers to trigger the alerts with bounce effect and fade out
+watch(() => imageForm.recentlySuccessful, (newVal) => {
+    if (newVal) {
+        showImageAlert.value = true;
+        setTimeout(() => {
+            showImageAlert.value = false;
+        }, 2000); // Show alert for 2 seconds
+    }
+});
+
+watch(() => form.recentlySuccessful, (newVal) => {
+    if (newVal) {
+        showFormAlert.value = true;
+        setTimeout(() => {
+            showFormAlert.value = false;
+        }, 2000); // Show alert for 2 seconds
+    }
+});
 </script>
 
 <template>
@@ -76,10 +98,11 @@ function showImg(event) {
 
             <div class="flex items-center gap-4">
                 <PrimaryButton :disabled="imageForm.processing">Upload</PrimaryButton>
-                <Transition enter-active-class="transition ease-in-out" enter-from-class="opacity-0"
-                    leave-active-class="transition ease-in-out" leave-to-class="opacity-0">
-                    <p v-if="imageForm.recentlySuccessful" class="text-sm text-gray-600">Image uploaded successfully.</p>
-                </Transition>
+                <transition name="fade-bounce">
+                    <div v-if="showImageAlert" class="mt-2 px-4 py-2 text-green-800 bg-green-200 border border-green-300 rounded-lg shadow-md animate-bounce">
+                        <p>Image uploaded successfully!</p>
+                    </div>
+                </transition>
             </div>
         </form>
         
@@ -130,14 +153,24 @@ function showImg(event) {
 
             <div class="flex items-center gap-4">
                 <PrimaryButton :disabled="form.processing">Save</PrimaryButton>
-                <Transition enter-active-class="transition ease-in-out" enter-from-class="opacity-0"
-                    leave-active-class="transition ease-in-out" leave-to-class="opacity-0">
-                    <p v-if="form.recentlySuccessful" class="text-sm text-gray-600">Saved successfully.</p>
-                </Transition>
+                <transition name="fade-bounce">
+                    <div v-if="showFormAlert" class="mt-2 px-4 py-2 text-green-800 bg-green-200 border border-green-300 rounded-lg shadow-md animate-bounce">
+                        <p>Saved successfully!</p>
+                    </div>
+                </transition>
             </div>
         </form>
     </section>
 </template>
+
+<style>
+.fade-bounce-enter-active, .fade-bounce-leave-active {
+    transition: opacity 1s ease;
+}
+.fade-bounce-enter-from, .fade-bounce-leave-to {
+    opacity: 0;
+}
+</style>
 
 <script>
 export default {
