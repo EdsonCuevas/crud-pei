@@ -136,6 +136,7 @@ Route::middleware('auth')->group(function () {
 
 
     Route::resource('benef-recursos', BenefRecursosController::class);
+    Route::post('/benef-recursos/register', [BenefRecursosController::class, 'registerUserToProgram'])->name('programs.register');
     Route::resource('benef-contacts', BenefContactsController::class);
 });
 
