@@ -13,13 +13,13 @@ class MainController extends Controller
 
         switch ($role) {
             case 1:
-                return redirect('admin-coordinators');
+                return redirect('admin-myinfo');
             case 2:
-                return redirect('coord-programs');
+                return redirect('coord-myinfo');
             case 3:
-                return redirect('volunt-programas');
+                return redirect('volunt-myinfo');
             case 4:
-                return redirect('donor-donations');
+                return redirect('donor-myinfo');
             case 5:
                 return redirect('benef-myinfo');
         }
