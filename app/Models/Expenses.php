@@ -10,19 +10,19 @@ class Expenses extends Model
     use HasFactory;
 
     protected $fillable = [
-        'programs_id',
+        'program_id',
         'value',
         'reason',
-        'users_id',
+        'user_id',
     ];
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'users_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function program()
     {
-        return $this->belongsTo(Program::class, 'programs_id');
+        return $this->belongsTo(Program::class, 'program_id', 'id')->withDefault();
     }
 }

@@ -19,8 +19,11 @@ class VoluntExpensesController extends Controller
             return redirect()->route('401')->with('error', 'No tienes acceso a esta página.');
         }
 
-        // Retrieve all records from the 'programs' table
-        $expenses = Expenses::all();
+        $userId = Auth::id();
+
+        $expenses = Expenses::where('user_id', $userId)
+            ->with('program')
+            ->get();
 
         // Pass the retrieved data to the Inertia view
         return Inertia::render('Volunt/Index', [

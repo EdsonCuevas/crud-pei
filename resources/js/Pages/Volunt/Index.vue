@@ -49,7 +49,7 @@ const props = defineProps({
                                     {{ expense.reason }}
                                 </td>
                                 <td class="px-4 py-3 text-sm">
-                                    {{ expense.program_id }}
+                                    {{ expense.program.title }}
                                 </td>
 								<td class="px-4 py-3 text-sm">
                                     {{ new Date(expense.created_at).toLocaleString() }}
