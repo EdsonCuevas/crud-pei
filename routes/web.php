@@ -19,7 +19,7 @@ use App\Http\Controllers\CoordReportsController;
 use App\Http\Controllers\ExportController;
 
 // Controladores para el panel Voluntario
-use App\Http\Controllers\VoluntProgramsController;
+use App\Http\Controllers\VoluntExpensesController;
 use App\Http\controllers\VoluntContactController;
 use App\Http\Controllers\VoluntMyInfoController;
 
@@ -116,7 +116,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('coord-programs', CoordProgramController::class);
     Route::resource('coord-reports', CoordReportsController::class);
 
-    Route::resource('volunt-programas', VoluntProgramsController::class);
+    Route::resource('volunt-expenses', VoluntExpensesController::class);
     Route::resource('volunt-contactos', VoluntContactController::class);
 
     Route::resource('donor-donations', DonorDonacionesController::class);

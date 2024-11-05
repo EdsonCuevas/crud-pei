@@ -10,50 +10,52 @@ import {ref} from 'vue';
 
 // En los props van las variables que se reciben desde el controlador
 const props = defineProps({
-    programs: {
+    expenses: {
 		type: Array
 	},
 });
 </script>
 
 <template>
-	<Head title="Voluntarios" />
+	<Head title="Expenses" />
 	
 	<AuthenticatedLayout>
 		
-		
+	    <template #header>
+		Expenses
+	    </template>
+
 		<div class="w-full overflow-hidden rounded-lg border shadow-md ">
 			<div class="w-full overflow-x-auto bg-white">
                 <table class="w-full whitespace-no-wrap">
                     <thead>
                         <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b bg-gray-50">
                             <th class="px-4 py-3">#</th>
-                            <th class="px-4 py-3">Name</th>
-                            <th class="px-4 py-3">Assignment date</th>
-                            <th class="px-4 py-3">Date of modification</th>
-                            <th class="px-4 py-3">Coordinator</th>
-                            <th class="px-4 py-3">Tasks</th>
+                            <th class="px-4 py-3">Value</th>
+                            <th class="px-4 py-3">Reason</th>
+                            <th class="px-4 py-3">Origen</th>
+                            <th class="px-4 py-3">Date</th>
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y">
-                        <tr v-for="program in programs" :key="program.id" class="text-gray-700">
+                        <tr v-for="expense in expenses" :key="expense.id" class="text-gray-700">
                                 <td class="px-4 py-3 text-sm">
-									{{ program.id }}
+									{{ expense.id }}
 								</td>
 								<td class="px-4 py-3 text-sm">
-									{{ program.title }}
+									{{ expense.value }}
 								</td>
+                                <td class="px-4 py-3 text-sm">
+                                    {{ expense.reason }}
+                                </td>
+                                <td class="px-4 py-3 text-sm">
+                                    {{ expense.program.title }}
+                                </td>
 								<td class="px-4 py-3 text-sm">
-                                    {{ new Date(program.created_at).toLocaleString() }}
+                                    {{ new Date(expense.created_at).toLocaleString() }}
                                 </td>
                                 <td class="px-4 py-3 text-sm">
-                                    {{ new Date(program.updated_at).toLocaleString() }}
-                                </td>
-                                <td class="px-4 py-3 text-sm">
-                                    
-                                </td>
-                                <td class="px-4 py-3 text-sm">
-                                    <SecondaryButton @click="openModalView(program)">
+                                    <SecondaryButton @click="openModalView(expense)">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
