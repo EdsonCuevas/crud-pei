@@ -19,8 +19,10 @@
     },
     "dependencies": {
         "@vueuse/motion": "^2.2.5",
+        "apexcharts": "^3.54.1",
         "lucide-vue-next": "^0.447.0",
         "vue-sweetalert2": "^5.0.11",
+        "vue3-apexcharts": "^1.7.0",
         "vue3-select2-component": "^0.1.7"
     }
 }
