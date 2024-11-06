@@ -23,11 +23,10 @@
         <li class="relative px-6 py-3">
           <NavLink :href="route('admin-dashboard.index')" :active="route().current('admin-dashboard.index')">
             <template #icon>
-              <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round"
-                stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
-                <path
-                  d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
-                </path>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6a7.5 7.5 0 1 0 7.5 7.5h-7.5V6Z" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 10.5H21A7.5 7.5 0 0 0 13.5 3v7.5Z" />
               </svg>
             </template>
             <span class="ml-4">Dashboard</span>
@@ -56,35 +55,32 @@
             v-show="showingTwoLevelMenu || route().current('admin-coordinators.index') || route().current('admin-volunteers.index') || route().current('admin-donors.index') || route().current('admin-beneficiaries.index')"
             class="p-2 mt-2 space-y-2 overflow-hidden text-sm font-medium text-gray-500 rounded-md shadow-inner bg-gray-50"
             aria-label="submenu">
-            
-            <li
-              :class="{'text-gray-900': route().current('admin-coordinators.index')}"
+
+            <li :class="{ 'text-gray-900': route().current('admin-coordinators.index') }"
               class="px-2 py-1 transition-colors duration-150 hover:text-gray-900">
               <NavLink :href="route('admin-coordinators.index')" :active="route().current('admin-coordinators.index')">
                 Coordinators
               </NavLink>
             </li>
 
-            <li
-              :class="{'text-gray-900': route().current('admin-volunteers.index')}"
+            <li :class="{ 'text-gray-900': route().current('admin-volunteers.index') }"
               class="px-2 py-1 transition-colors duration-150 hover:text-gray-900">
               <NavLink :href="route('admin-volunteers.index')" :active="route().current('admin-volunteers.index')">
                 Volunteers
               </NavLink>
             </li>
 
-            <li
-              :class="{'text-gray-900': route().current('admin-donors.index')}"
+            <li :class="{ 'text-gray-900': route().current('admin-donors.index') }"
               class="px-2 py-1 transition-colors duration-150 hover:text-gray-900">
               <NavLink :href="route('admin-donors.index')" :active="route().current('admin-donors.index')">
                 Donors
               </NavLink>
             </li>
 
-            <li
-              :class="{'text-gray-900': route().current('admin-beneficiaries.index')}"
+            <li :class="{ 'text-gray-900': route().current('admin-beneficiaries.index') }"
               class="px-2 py-1 transition-colors duration-150 hover:text-gray-900">
-              <NavLink :href="route('admin-beneficiaries.index')" :active="route().current('admin-beneficiaries.index')">
+              <NavLink :href="route('admin-beneficiaries.index')"
+                :active="route().current('admin-beneficiaries.index')">
                 Beneficiaries
               </NavLink>
             </li>

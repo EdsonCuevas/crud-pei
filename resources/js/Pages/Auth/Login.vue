@@ -10,15 +10,15 @@ import Swal from 'sweetalert2'; // Importa SweetAlert2
 
 // Definimos el Toast usando Swal.mixin
 const Toast = Swal.mixin({
-  toast: true,
-  position: 'top-end',
-  showConfirmButton: false,
-  timer: 3000,
-  timerProgressBar: true,
-  didOpen: (toast) => {
-    toast.onmouseenter = Swal.stopTimer;
-    toast.onmouseleave = Swal.resumeTimer;
-  }
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+        toast.onmouseenter = Swal.stopTimer;
+        toast.onmouseleave = Swal.resumeTimer;
+    }
 });
 
 defineProps({
@@ -44,10 +44,8 @@ const submit = () => {
             // Mostrar SweetAlert2 Toast si el login es exitoso
             Toast.fire({
                 icon: 'success',
-                title: 'Signed in successfully'
-            }).then(() => {
-                // Redirigir al dashboard después de cerrar el Toast
-                window.location.href = '/dashboard';
+                title: 'Signed in successfully',
+                timer: 2000
             });
         },
         onError: () => {
@@ -60,11 +58,13 @@ const submit = () => {
 
 <template>
     <GuestLayout>
+
         <Head title="Log in" />
 
         <div class="flex flex-col overflow-y-auto md:flex-row">
             <div class="h-32 md:h-auto md:w-1/2">
-                <img aria-hidden="true" class="object-cover w-full h-full" src="/images/login-office.jpeg" alt="Office" />
+                <img aria-hidden="true" class="object-cover w-full h-full" src="/images/login-office.jpeg"
+                    alt="Office" />
             </div>
             <div class="flex items-center justify-center p-6 sm:p-12 md:w-1/2">
                 <div class="w-full">
@@ -77,13 +77,15 @@ const submit = () => {
                     <form @submit.prevent="submit">
                         <div class="mt-4">
                             <InputLabel for="email" value="E-mail" />
-                            <TextInput id="email" type="email" class="block w-full mt-1" v-model="form.email" required autofocus autocomplete="username" />
+                            <TextInput id="email" type="email" class="block w-full mt-1" v-model="form.email" required
+                                autofocus autocomplete="username" />
                             <InputError class="mt-2" :message="form.errors.email" />
                         </div>
 
                         <div class="mt-4">
                             <InputLabel for="password" value="Password" />
-                            <TextInput id="password" type="password" class="block w-full mt-1" v-model="form.password" required autocomplete="current-password" />
+                            <TextInput id="password" type="password" class="block w-full mt-1" v-model="form.password"
+                                required autocomplete="current-password" />
                             <InputError class="mt-2" :message="form.errors.password" />
                         </div>
 
@@ -95,11 +97,13 @@ const submit = () => {
                         </div>
 
                         <div class="flex items-center justify-end mt-4">
-                            <Link :href="route('register')" class="text-sm text-gray-600 underline hover:text-gray-900 mr-10">
-                                Sign up
+                            <Link :href="route('register')"
+                                class="text-sm text-gray-600 underline hover:text-gray-900 mr-10">
+                            Sign up
                             </Link>
-                            <Link v-if="canResetPassword" :href="route('password.request')" class="text-sm text-gray-600 underline mr-10 hover:text-gray-900">
-                                Forgot your password?
+                            <Link v-if="canResetPassword" :href="route('password.request')"
+                                class="text-sm text-gray-600 underline mr-10 hover:text-gray-900">
+                            Forgot your password?
                             </Link>
 
                             <!-- Botón de Login -->
