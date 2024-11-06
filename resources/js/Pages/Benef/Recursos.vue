@@ -1,6 +1,6 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/Benef/AuthenticatedLayout.vue';
-import { Head, router  } from '@inertiajs/vue3';
+import { Head, router } from '@inertiajs/vue3';
 import Modal from '@/Components/Modal.vue';
 import SecondaryButton from '@/Components/SecondaryButton.vue';
 import { ref } from 'vue';
@@ -39,27 +39,39 @@ const closeModalView = () => {
 }
 
 const registerUserToProgram = (programId) => {
-    router.post(route('programs.register'), { program_id: programId }, {
-        onSuccess: () => {
-            Swal.fire({
-                    title: 'Registered!',
-                    text: 'Your registration has been successful!',
-                    icon: 'success',
-                    timer: 1500,
-                    showConfirmButton: false
-                });
-        },
-        onError: (errors) => {
-            // Verifica si hay un error específico en el campo 'program'
-            if (errors.program) {
-                Swal.fire({
-                    title: 'Error!',
-                    text: 'You can not register again', // Muestra el mensaje de error específico
-                    icon: 'error',
-                    timer: 1500,
-                    showConfirmButton: false
-                });
-            }
+    Swal.fire({
+        title: "Are you sure you want to register?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, register!"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            router.post(route('programs.register'), { program_id: programId }, {
+                onSuccess: () => {
+                    Swal.fire({
+                        title: 'Registered!',
+                        text: 'Your registration has been successful!',
+                        icon: 'success',
+                        timer: 1500,
+                        showConfirmButton: false
+                    });
+                },
+                onError: (errors) => {
+                    // Verifica si hay un error específico en el campo 'program'
+                    if (errors.program) {
+                        Swal.fire({
+                            title: 'Error!',
+                            text: 'You can not register again', // Muestra el mensaje de error específico
+                            icon: 'error',
+                            timer: 1500,
+                            showConfirmButton: false
+                        });
+                    }
+                }
+            });
         }
     });
 };
@@ -111,7 +123,8 @@ const registerUserToProgram = (programId) => {
                                 </SecondaryButton>
                             </td>
                             <td class="px-4 py-3 text-sm">
-                                <SecondaryButton :disabled="props.userPrograms.includes(programa.id)" @click="registerUserToProgram(programa.id)">
+                                <SecondaryButton :disabled="props.userPrograms.includes(programa.id)"
+                                    @click="registerUserToProgram(programa.id)">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="1.5" stroke="currentColor" class="size-6">
                                         <path stroke-linecap="round" stroke-linejoin="round"
