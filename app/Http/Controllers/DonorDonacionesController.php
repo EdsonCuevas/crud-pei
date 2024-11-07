@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 use App\Models\Donation;
@@ -59,15 +58,18 @@ class DonorDonacionesController extends Controller
         $userId = Auth::id();
 
         // Crear la donación
-        Donation::create([
+        $donation = Donation::create([
             'value' => $request->input('amount'),
             'concept' => $request->input('transaction_number'),
             'programs_id' => $request->input('program_id'),
             'users_id' => $userId, // Suponiendo que tienes una relación con el usuario
         ]);
 
-        return redirect()->route('donor-donations.index')->with('success', 'Donation created successfully.');
+        // Redirigir a la página de la última donación creada
+        return redirect()->route('donor-donations.show', $donation->id)
+            ->with('success', 'Donation created successfully.');
     }
+
 
     public function show(Donation $donor_donation)
     {

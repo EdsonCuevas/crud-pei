@@ -13,9 +13,6 @@ const props = defineProps({
     },
 });
 
-import { Receipt } from 'lucide-vue-next';
-
-const title = ref('');
 const operation = ref(1);
 const msj = ref('');
 const classMsj = ref('hidden');
@@ -93,8 +90,8 @@ const filteredDonations = computed(() => {
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y">
-                        <tr v-for="(donacion, index) in filteredDonations" :key="donacion.id" class="text-gray-700">
-                            <td class="px-4 py-3 text-sm">{{ index + 1 }}</td> <!-- Incremental number -->
+                        <tr v-for="(donacion, index) in filteredDonations.reverse()" :key="donacion.id" class="text-gray-700">
+                            <td class="px-4 py-3 text-sm">{{ filteredDonations.length - index }}</td> <!-- Número invertido -->
                             <td class="px-4 py-3 text-sm">{{ donacion.concept }}</td>
                             <td class="px-4 py-3 text-sm">${{ donacion.value }}</td>
                             <td class="px-4 py-3 text-sm">{{ donacion.proram.title }}</td>

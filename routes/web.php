@@ -103,6 +103,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/profile', [ProfileController::class, 'updateImage'])->name('profile.updateImage');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+    // Rutas para admin
     Route::resource('admin-dashboard', AdminDashboardController::class);
     Route::resource('admin-coordinators', AdminCoordiController::class);
     Route::resource('admin-volunteers', AdminVolunteersController::class);
@@ -112,17 +113,17 @@ Route::middleware('auth')->group(function () {
     Route::get('admin-programs-pdf', [AdminProgramsController::class, 'pdf']);
     Route::post('updateProgram', [AdminProgramsController::class, 'updateprogram'])->name('updateprogram');
 
-
+    // Rutas para coordinadores
     Route::resource('coord-programs', CoordProgramController::class);
     Route::resource('coord-reports', CoordReportsController::class);
 
+    // Rutas para voluntarios
     Route::resource('volunt-expenses', VoluntExpensesController::class);
     Route::resource('volunt-contactos', VoluntContactController::class);
 
+    // Rutas para donadores
     Route::resource('donor-donations', DonorDonacionesController::class);
-
     Route::resource('donor-contacts', DonorContactosController::class);
-    Route::resource('donor-informes', DonorInformesController::class);
 
     // Rutas para beneficiarios
     Route::resource('benef-myinfo', MyInfoController::class)->only(['index']);

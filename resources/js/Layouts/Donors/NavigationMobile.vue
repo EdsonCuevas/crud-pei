@@ -12,12 +12,12 @@
     <aside v-show="$page.props.showingMobileMenu"
       class="fixed inset-y-0 z-20 flex-shrink-0 w-64 mt-16 overflow-y-auto bg-blue-500 md:hidden">
       <div class="py-4 text-white">
-        <Link class="ml-6 text-lg font-bold" :href="route('coord-programs.index')">
-        Panel Admin
+        <Link class="ml-6 text-lg font-bold" :href="route('home')">
+        Fundación CTI
         </Link>
         <ul class="mt-6">
           <li class="relative px-6 py-3">
-            <ResponsiveNavLink :href="route('coord-programs.index')" :active="route().current('coord-programs.index')">
+            <ResponsiveNavLink :href="route('donor-myinfo.index')" :active="route().current('donor-myinfo.index')">
               <template #icon>
                 <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round"
                   stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
@@ -26,56 +26,32 @@
                   </path>
                 </svg>
               </template>
-              Dashboard
+              My data
             </ResponsiveNavLink>
           </li>
 
           <li class="relative px-6 py-3">
-            <button @click="showingTwoLevelMenu = !showingTwoLevelMenu"
-              class="inline-flex items-center justify-between w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800"
-              aria-haspopup="true">
-              <span class="inline-flex items-center">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z">
-                  </path>
+            <ResponsiveNavLink :href="route('donor-donations.index')" :active="route().current('donor-donations.index')">
+              <template #icon>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                 </svg>
-                <span class="ml-4">Usuarios</span>
-              </span>
-              <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd"
-                  d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                  clip-rule="evenodd"></path>
-              </svg>
-            </button>
-            <ul v-show="showingTwoLevelMenu || route().current('coord-programs.index')"
-              class="p-2 mt-2 space-y-2 overflow-hidden text-sm font-medium text-gray-500 rounded-md shadow-inner bg-gray-50"
-              aria-label="submenu">
-              <li class="px-2 py-1 transition-colors duration-150 hover:text-gray-800">
-                <ResponsiveNavLink :href="route('coord-programs.index')"
-                  :active="route().current('coord-programs.index')">
-                  Programas
-                </ResponsiveNavLink>
-              </li>
-            </ul>
+              </template>
+              Donations
+            </ResponsiveNavLink>
           </li>
 
           <li class="relative px-6 py-3">
-            <ResponsiveNavLink :href="route('coord-programs.index')" :active="route().current('coord-programs.index')">
+            <ResponsiveNavLink :href="route('donor-contacts.index')" :active="route().current('donor-contacts.index')">
               <template #icon>
                 <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round"
                   stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
-                  <path
-                    d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z">
-                  </path>
-                </svg>
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z"></path>
+              </svg>
               </template>
-              Reportes
+              Contacts
             </ResponsiveNavLink>
           </li>
-
-
 
         </ul>
       </div>
