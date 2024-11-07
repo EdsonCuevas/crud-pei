@@ -1,13 +1,15 @@
 <script setup>
 import { ref } from 'vue';
 import AuthenticatedLayout from '@/Layouts/Donors/AuthenticatedLayout.vue';
-import { Head } from '@inertiajs/vue3';
-import { router } from '@inertiajs/vue3'; // Asegúrate de tener esta importación
+import { Head, router } from '@inertiajs/vue3';
+import Modal from '@/Components/Modal.vue';
+import Card from '@/Components/Card.vue';
 
-const selectedAmount = ref('');
+const selectedAmount = ref(null); // Cambia el valor inicial a null
 const transactionNumber = ref('');
-const selectedProgramId = ref(''); // Para el ID del programa seleccionado
-const errorMessage = ref(''); // Para manejar mensajes de error
+const selectedProgramId = ref('');
+const errorMessage = ref('');
+const showModal = ref(false);
 
 const props = defineProps({
   programas: {
@@ -20,12 +22,25 @@ const validateNumberInput = (event) => {
 
   if (value.startsWith('0')) {
     errorMessage.value = '';
-    value = ''; // Borrar el valor si comienza con 0
+    value = '';
   } else {
-    errorMessage.value = ''; // Limpiar el mensaje de error si el número es válido
+    errorMessage.value = '';
   }
 
-  selectedAmount.value = value; 
+  selectedAmount.value = value;
+};
+
+const openModal = () => {
+  if (!selectedAmount.value || !transactionNumber.value || !selectedProgramId.value) {
+    errorMessage.value = "Please fill in all fields before continuing.";
+  } else {
+    errorMessage.value = '';
+    showModal.value = true;
+  }
+};
+
+const closeModal = () => {
+  showModal.value = false;
 };
 
 const submitDonation = () => {
@@ -34,6 +49,7 @@ const submitDonation = () => {
     transaction_number: transactionNumber.value,
     program_id: selectedProgramId.value,
   });
+  closeModal();
 };
 </script>
 
@@ -47,8 +63,7 @@ const submitDonation = () => {
             Donation
           </h1>
 
-          <form @submit.prevent="submitDonation">
-            <!-- Aquí están los campos que ya tienes definidos -->
+          <div>
             <div class="mb-6">
               <label class="text-sm font-semibold text-[#004481] mb-2">Donation concept</label>
               <input
@@ -66,23 +81,20 @@ const submitDonation = () => {
                 <button
                   v-for="amount in ['$100', '$500', '$1000']"
                   :key="amount"
-                  @click="selectedAmount = amount.replace('$', '')"
-                  :class="['py-2 px-4 border border-[#004481]', selectedAmount === amount.replace('$', '') ? 'bg-blue-500 text-white' : 'hover:bg-blue-500 hover:text-white']"
+                  @click="selectedAmount = parseInt(amount.replace('$', ''))"
+                  :class="['py-2 px-4 border border-[#004481]', selectedAmount === parseInt(amount.replace('$', '')) ? 'bg-blue-500 text-white' : 'hover:bg-blue-500 hover:text-white']"
                 >
                   {{ amount }}
                 </button>
               </div>
-              
+
               <input
-                v-model="selectedAmount"
+                v-model.number="selectedAmount"
                 type="number"
                 placeholder="Other amount"
                 @input="validateNumberInput"
                 class="w-full px-3 py-2 border border-gray-300 rounded-md"
               />
-
-              <!-- Mostrar un mensaje de error si el valor no es válido -->
-              <p v-if="errorMessage" class="text-red-500 text-sm">{{ errorMessage }}</p>
             </div>
 
             <div class="mt-4">
@@ -95,12 +107,19 @@ const submitDonation = () => {
               </select>
             </div>
             <br>
-            <button type="submit" class="w-full py-3 bg-blue-500 text-white rounded-md hover:bg-[#004481]">
+            <p v-if="errorMessage" class="text-red-500 text-sm">{{ errorMessage }}</p>
+            <br>
+            <button @click="openModal" class="w-full py-3 bg-blue-500 text-white rounded-md hover:bg-[#004481]">
               Continue
             </button>
-          </form>
-          <br>
+          </div>
 
+          <!-- Modal para Confirmar la Donación -->
+          <Modal :show="showModal" @close="closeModal" maxWidth="2xl" closeable>
+            <Card :submitDonation="submitDonation" />
+          </Modal>
+
+          <br>
           <div class="text-xs text-center text-gray-500 mb-4">
             Secure donation.<br />
             Your data will be encrypted
