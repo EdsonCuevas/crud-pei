@@ -6,14 +6,32 @@ import Modal from '@/Components/Modal.vue';
 import SecondaryButton from '@/Components/SecondaryButton.vue';
 import InputGroup from '@/Components/InputGroup.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
-import {ref} from 'vue';
-
+import { ref, computed } from 'vue';
 // En los props van las variables que se reciben desde el controlador
 const props = defineProps({
     expenses: {
 		type: Array
 	},
 });
+const searchQuery = ref("");
+
+// Computed para filtrar contactos según la búsqueda
+const filteredExpenses = computed(() => {
+    if (!searchQuery.value) {
+        return props.expenses; // Cambiar 'contactos' por 'expenses'
+    }
+    return props.expenses.filter(expense => { // Cambiar 'contacto' por 'expense'
+        const searchLower = searchQuery.value.toLowerCase();
+        return (
+            (expense.id && String(expense.id).toLowerCase().includes(searchLower)) || 
+            (expense.value && String(expense.value).toLowerCase().includes(searchLower)) ||
+            (expense.reason && expense.reason.toLowerCase().includes(searchLower)) ||
+            (expense.program.title && expense.program.title.toLowerCase().includes(searchLower)) || 
+            (expense.created_at && expense.created_at.toLowerCase().includes(searchLower))
+        );
+    });
+});
+
 </script>
 
 <template>
@@ -24,7 +42,15 @@ const props = defineProps({
 	    <template #header>
 		Expenses
 	    </template>
-
+        <div class="mb-6">
+            <input 
+                v-model="searchQuery" 
+                type="text" 
+                placeholder="Search by #, value, reason, origen or date..." 
+                class="px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none" 
+                style="width: 500px;" 
+            />
+        </div>
 		<div class="w-full overflow-hidden rounded-lg border shadow-md ">
 			<div class="w-full overflow-x-auto bg-white">
                 <table class="w-full whitespace-no-wrap">
@@ -38,7 +64,7 @@ const props = defineProps({
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y">
-                        <tr v-for="expense in expenses" :key="expense.id" class="text-gray-700">
+                        <tr v-for="expense in filteredExpenses" :key="expense.id" class="text-gray-700">
                                 <td class="px-4 py-3 text-sm">
 									{{ expense.id }}
 								</td>

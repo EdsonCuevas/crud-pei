@@ -2,14 +2,9 @@
 import AuthenticatedLayout from '@/Layouts/Donors/AuthenticatedLayout.vue';
 import { Head, useForm } from '@inertiajs/vue3';
 import DangerButton from '@/Components/DangerButton.vue';
-import InputError from '@/Components/InputError.vue';
-import Modal from '@/Components/Modal.vue';
 import SecondaryButton from '@/Components/SecondaryButton.vue';
-import WarningButton from '@/Components/WarningButton.vue';
 import DarkButton from '@/Components/DarkButton.vue';
-import InputGroup from '@/Components/InputGroup.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 const props = defineProps({
     informes: {
         type: Array
@@ -54,6 +49,25 @@ const deleteInforme = (informeId) => {
         }
     });
 };
+
+// Variable para almacenar la consulta de búsqueda
+const searchQuery = ref("");
+
+// Computed para filtrar programas según la búsqueda
+const filteredInformes = computed(() => {
+    if (!searchQuery.value) {
+        return props.informes;
+    }
+    return props.informe.filter(programa => {
+        const searchLower = searchQuery.value.toLowerCase();
+        return (
+            (informe.id && informe.id.toLowerCase().includes(searchLower)) || 
+            (informe.titulo && informe.titulo.toLowerCase().includes(searchLower)) || 
+            (informe.descripcion && informe.descripcion.toLowerCase().includes(searchLower)) || 
+            (informe.fecha && informe.fecha.toLowerCase().includes(searchLower)) 
+        );
+    });
+});
 </script>
 <template>
     <Head title="Informes" />
@@ -74,6 +88,16 @@ const deleteInforme = (informeId) => {
             </DarkButton>
         </template>
 
+        <div class="mb-6 ">
+            <input 
+                v-model="searchQuery" 
+                type="text" 
+                placeholder="Search by #, tittle, description or date..." 
+                class="px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                style="width: 500px;" 
+            />
+        </div>
+
         <div :class="classMsj" class="bg-green-500 text-white text-center py-2 px-4 rounded mb-4">
             {{ msj }}
         </div>
@@ -91,7 +115,7 @@ const deleteInforme = (informeId) => {
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y">
-                        <tr v-for="informe in informes" :key="informe.id" class="text-gray-700">
+                        <tr v-for="informe in filteredInformes" :key="informe.id" class="text-gray-700">
                             <td class="px-4 py-3 text-sm">{{ informe.id }}</td>
                             <td class="px-4 py-3 text-sm">{{ informe.titulo }}</td>
                             <td class="px-4 py-3 text-sm">{{ informe.descripcion }}</td>

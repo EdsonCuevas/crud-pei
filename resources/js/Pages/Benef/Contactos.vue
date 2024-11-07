@@ -1,6 +1,7 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/Benef/AuthenticatedLayout.vue';
 import { Head } from '@inertiajs/vue3';
+import { ref, computed } from 'vue';
 
 const props = defineProps({
     contactos: {
@@ -8,8 +9,24 @@ const props = defineProps({
     }
 });
 
+// Variable para almacenar la consulta de búsqueda
+const searchQuery = ref("");
 
-
+// Computed para filtrar contactos según la búsqueda
+const filteredContactos = computed(() => {
+    if (!searchQuery.value) {
+        return props.contactos; // Si no hay búsqueda, mostrar todos los contactos
+    }
+    return props.contactos.filter(contacto => {
+        const searchLower = searchQuery.value.toLowerCase();
+        return (
+            (contacto.name && contacto.name.toLowerCase().includes(searchLower)) ||
+            (contacto.email && contacto.email.toLowerCase().includes(searchLower)) ||
+            (contacto.phone && contacto.phone.toLowerCase().includes(searchLower)) ||
+            (contacto.role && contacto.role.role.toLowerCase().includes(searchLower))
+        );
+    });
+});
 </script>
 
 <template>
@@ -21,6 +38,16 @@ const props = defineProps({
             <br>
             <br>
         </template>
+        
+        <div class="mb-6">
+            <input 
+                v-model="searchQuery" 
+                type="text" 
+                placeholder="Search by name, e-mail, phone or charge..." 
+                class="px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none" 
+                style="width: 500px;" 
+            />
+        </div>
         
         <div class="w-full overflow-hidden rounded-lg border shadow-md ">
             <div class="w-full overflow-x-auto bg-white">
@@ -34,7 +61,7 @@ const props = defineProps({
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y">
-                        <tr v-for="contacto in contactos" :key="contacto.id" class="text-gray-700">
+                        <tr v-for="contacto in filteredContactos" :key="contacto.id" class="text-gray-700">
                             <td class="px-4 py-3 text-sm">
                                 {{ contacto.name }}
                             </td>
@@ -52,8 +79,5 @@ const props = defineProps({
                 </table>
             </div>
         </div>
-        
-        
-        
     </AuthenticatedLayout>
 </template>
