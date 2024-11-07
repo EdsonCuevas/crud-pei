@@ -4,6 +4,7 @@ import AuthenticatedLayout from '@/Layouts/Donors/AuthenticatedLayout.vue';
 import { Head, router } from '@inertiajs/vue3';
 import Modal from '@/Components/Modal.vue';
 import Card from '@/Components/Card.vue';
+import Swal from 'sweetalert2';
 
 const selectedAmount = ref(null); // Cambia el valor inicial a null
 const transactionNumber = ref('');
@@ -49,7 +50,15 @@ const submitDonation = () => {
     transaction_number: transactionNumber.value,
     program_id: selectedProgramId.value,
   });
+  Swal.fire({
+    title: 'Success!',
+    text: 'Donation has been successfully completed!',
+    icon: 'success',
+    timer: 2000,
+    showConfirmButton: false
+});
   closeModal();
+
 };
 </script>
 
