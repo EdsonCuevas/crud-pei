@@ -122,7 +122,6 @@ Route::middleware('auth')->group(function () {
     Route::resource('donor-donations', DonorDonacionesController::class);
 
     Route::resource('donor-contacts', DonorContactosController::class);
-    Route::resource('donor-informes', DonorInformesController::class);
 
     // Rutas para beneficiarios
     Route::resource('benef-myinfo', MyInfoController::class)->only(['index']);
