@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 use App\Models\Donation;
@@ -25,7 +24,8 @@ class DonorDonacionesController extends Controller
 
         $donaciones = Donation::where('users_id', $userId)
             ->with('proram')
-            ->get();
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
 
         return Inertia::render('Donador/Donaciones/Index', [
             'donaciones' => $donaciones
