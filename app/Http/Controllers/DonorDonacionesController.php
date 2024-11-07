@@ -24,8 +24,7 @@ class DonorDonacionesController extends Controller
 
         $donaciones = Donation::where('users_id', $userId)
             ->with('proram')
-            ->orderBy('created_at', 'desc')
-            ->paginate(10);
+            ->get();
 
         return Inertia::render('Donador/Donaciones/Index', [
             'donaciones' => $donaciones

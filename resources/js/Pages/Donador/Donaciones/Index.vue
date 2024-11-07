@@ -5,7 +5,6 @@ import NavLink from '@/Components/NavLink.vue';
 import Modal from '@/Components/Modal.vue';
 import SecondaryButton from '@/Components/SecondaryButton.vue';
 import DarkButton from '@/Components/DarkButton.vue';
-import Pagination from '@/Components/Pagination.vue';
 import { ref, computed } from 'vue';
 
 const props = defineProps({
@@ -29,17 +28,14 @@ const ok = (m) => {
     classMsj.value = 'block';
 };
 const filteredDonations = computed(() => {
-    if (Array.isArray(props.donaciones.data)) {
-        return props.donaciones.data.filter(donacion => {
-            const query = searchQuery.value.toLowerCase();
-            const formattedDate = new Date(donacion.created_at).toLocaleString().toLowerCase();
-            return donacion.concept.toLowerCase().includes(query) ||
-                   donacion.value.toString().includes(query) ||
-                   donacion.proram.title.toLowerCase().includes(query) ||
-                   formattedDate.includes(query);
-        });
-    }
-    return []; // Si no es un array, devuelve un array vacío
+    return props.donaciones.filter(donacion => {
+        const query = searchQuery.value.toLowerCase();
+        const formattedDate = new Date(donacion.created_at).toLocaleString().toLowerCase(); // Convertimos la fecha a cadena legible
+        return donacion.concept.toLowerCase().includes(query) ||
+               donacion.value.toString().includes(query) ||
+               donacion.proram.title.toLowerCase().includes(query) ||
+               formattedDate.includes(query);  // Añadimos la fecha como parte de la búsqueda
+    });
 });
 
 </script>
@@ -85,6 +81,7 @@ const filteredDonations = computed(() => {
                     <thead>
                         <tr
                             class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b bg-gray-50">
+                            <th class="px-4 py-3">#</th>
                             <th class="px-4 py-3">Concept</th>
                             <th class="px-4 py-3">Value</th>
                             <th class="px-4 py-3">Destination</th>
@@ -93,7 +90,8 @@ const filteredDonations = computed(() => {
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y">
-                        <tr v-for="(donacion) in filteredDonations" :key="donacion.id" class="text-gray-700">
+                        <tr v-for="(donacion, index) in filteredDonations.reverse()" :key="donacion.id" class="text-gray-700">
+                            <td class="px-4 py-3 text-sm">{{ filteredDonations.length - index }}</td> <!-- Número invertido -->
                             <td class="px-4 py-3 text-sm">{{ donacion.concept }}</td>
                             <td class="px-4 py-3 text-sm">${{ donacion.value }}</td>
                             <td class="px-4 py-3 text-sm">{{ donacion.proram.title }}</td>
@@ -112,9 +110,6 @@ const filteredDonations = computed(() => {
                         </tr>
                     </tbody>
                 </table>
-            </div>
-            <div class="px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase bg-gray-50 border-t sm:grid-cols-9">
-                <Pagination :links="donaciones.links" />
             </div>
         </div>
     </AuthenticatedLayout>
