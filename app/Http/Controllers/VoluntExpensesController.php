@@ -22,7 +22,8 @@ class VoluntExpensesController extends Controller
         $userId = Auth::id();
 
         $expenses = Expenses::where('user_id', $userId)
-            ->with('program')
+            ->with(relations: 'program')
+            ->with(relations: 'user')
             ->get();
 
         // Pass the retrieved data to the Inertia view
