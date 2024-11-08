@@ -3,6 +3,10 @@ import Footer from '@/Components/Footer.vue';
 import Header from '@/Components/Header.vue';
 import Modal from '@/Components/Modal.vue';
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
+import { router } from '@inertiajs/vue3';
+import Swal from 'sweetalert2';
+
+
 
 const props = defineProps({
   programas: { type: Object }
@@ -18,6 +22,55 @@ const duplicatedPrograms = computed(() => {
   const programs = props.programas.slice(0, 6);
   return [...programs, ...programs];
 });
+
+const registerUserToProgram = (programId) => {
+  Swal.fire({
+        title: "¿Estás seguro de que deseas inscribirte?",
+        text: "¡No podrás revertir esto!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Sí, inscribirme"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Llamar a la ruta de inscripción en el controlador HomeController
+            router.post(route('inscripcion'), { program_id: programId }, {
+                onSuccess: () => {
+                    Swal.fire({
+                        title: 'Inscrito!',
+                        text: '¡Tu inscripción ha sido exitosa!',
+                        icon: 'success',
+                        timer: 1500,
+                        showConfirmButton: false
+                    }).then(() => {
+                    });
+                },
+                onError: (errors) => {
+          let errorMessage = 'Hubo un error al inscribirte.';
+          
+          // Mostrar mensaje específico si el error es por estar ya inscrito
+          if (errors.already_registered) {
+            errorMessage = 'Ya estás inscrito en este programa.';
+          } else if (errors.error) {
+            errorMessage = 'Debes iniciar sesión como beneficiario para inscribirte.';
+          }
+
+          Swal.fire({
+            title: 'Error!',
+            text: errorMessage,
+            icon: 'error',
+            timer: 1500,
+            showConfirmButton: false
+                      });
+
+                }
+            });
+        }
+    });
+};
+
+
 
 // Métodos
 function openModal(program) {
@@ -113,10 +166,10 @@ onBeforeUnmount(() => {
 
             <!-- Carrusel con animación infinita -->
             <div class="carousel bg-white pt-12 py-6 flex items-center"
-                 @mouseover="isHovered = true" @mouseleave="isHovered = false">
+                  @mouseover="isHovered = true" @mouseleave="isHovered = false">
               <!-- Animación del scroll -->
               <div class="animate-scroll p-5 flex items-center"
-                   :style="{ animationPlayState: (showModal || isHovered) ? 'paused' : 'running' }">
+                    :style="{ animationPlayState: (showModal || isHovered) ? 'paused' : 'running' }">
                 <!-- Duplicamos los programas para la ilusión de infinito -->
                 <div v-for="(program, index) in duplicatedPrograms" :key="index"
                   class="bg-white shadow-lg rounded-[30px] p-8 max-w-[450px] w-[500px] h-[500px] overflow-hidden transition-transform duration-300 hover:scale-105 hover:bg-gray-200 cursor-pointer mr-10">
@@ -201,7 +254,7 @@ onBeforeUnmount(() => {
 
           <!-- Botón de "Inscribirse" -->
           <div class="flex justify-end">
-            <button @click="subscribeToProgram(selectedProgram)"
+            <button @click="registerUserToProgram(selectedProgram.id)"
               class="bg-gradient-to-r from-blue-500 to-blue-600 text-white font-bold py-2 px-6 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105">
               Inscribirse
             </button>

@@ -127,6 +127,10 @@ Route::middleware('auth')->group(function () {
 
     // Rutas para beneficiarios
     Route::resource('benef-myinfo', MyInfoController::class)->only(['index']);
+    Route::post('inscripcion', [HomeController::class, 'inscripcion'])->name('inscripcion');
+
+
+
 
     // Rutas para coordinadores
     Route::resource('coord-myinfo', CoordMyInfoController::class)->only(['index']);
