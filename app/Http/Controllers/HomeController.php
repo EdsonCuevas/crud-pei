@@ -18,7 +18,7 @@ class HomeController extends Controller
             'programas' => $programas
         ]);
     }
-    
+
 
     public function inscripcion(Request $request)
     {
@@ -26,7 +26,7 @@ class HomeController extends Controller
 
         // Verifica si el usuario no está autenticado o si no es beneficiario
         if (!$user || $user->role->id !== 5) {
-            return redirect()->back()->withErrors(['error' => 'Ya estás registrado en este programa.']);
+            return redirect()->back()->withErrors(['error_auth' => 'Necesitas iniciar sesion como beneficiario.']);
         }
 
         // Buscar el recurso (programa) por ID
@@ -41,6 +41,6 @@ class HomeController extends Controller
         $user->programs()->attach($program->id);
 
         // Mensaje de éxito
-    return redirect()->back()->with('success', '¡Tu inscripción ha sido exitosa!');
+        return redirect()->back()->with('success', '¡Tu inscripción ha sido exitosa!');
     }
 }

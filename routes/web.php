@@ -56,18 +56,15 @@ use Maatwebsite\Excel\Facades\Excel;
 */
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::post('home-inscripcion', [HomeController::class, 'inscripcion'])->name('inscripcion');
+
 Route::get('/programs', [ProgramsController::class, 'index'])->name('programs');
 Route::get('/', [ExportController::class, 'index'])->name('index');
-Route::get('/export/{roleId}', [ExportController::class, 'export'])->name('export');
 
+Route::get('/export/{roleId}', [ExportController::class, 'export'])->name('export');
 Route::get('/export-programs', function () {
     return Excel::download(new ProgramsExportController, 'programs.xlsx');
 });
-
-
-//Ruta PDF 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
-
 
 Route::get('/details-donation', function () {
     return Inertia::render('Donador/Detailsdonation');
@@ -127,10 +124,6 @@ Route::middleware('auth')->group(function () {
 
     // Rutas para beneficiarios
     Route::resource('benef-myinfo', MyInfoController::class)->only(['index']);
-    Route::post('inscripcion', [HomeController::class, 'inscripcion'])->name('inscripcion');
-
-
-
 
     // Rutas para coordinadores
     Route::resource('coord-myinfo', CoordMyInfoController::class)->only(['index']);
