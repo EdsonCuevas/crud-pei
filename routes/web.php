@@ -16,6 +16,8 @@ use App\Http\Controllers\AdminMyInfoController;
 use App\Http\Controllers\CoordMyInfoController;
 use App\Http\Controllers\CoordProgramController;
 use App\Http\Controllers\CoordReportsController;
+use App\Http\Controllers\CoordPeticionesController;
+
 use App\Http\Controllers\ExportController;
 
 // Controladores para el panel Voluntario
@@ -116,6 +118,8 @@ Route::middleware('auth')->group(function () {
     // Rutas para coordinadores
     Route::resource('coord-programs', CoordProgramController::class);
     Route::resource('coord-reports', CoordReportsController::class);
+    Route::resource('coord-peticiones', CoordPeticionesController::class);
+
 
     // Rutas para voluntarios
     Route::resource('volunt-expenses', VoluntExpensesController::class);
