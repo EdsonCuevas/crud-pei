@@ -3,6 +3,10 @@ import Footer from '@/Components/Footer.vue';
 import Header from '@/Components/Header.vue';
 import Modal from '@/Components/Modal.vue';
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
+import { router } from '@inertiajs/vue3';
+import Swal from 'sweetalert2';
+
+
 
 const props = defineProps({
   programas: { type: Object }
@@ -18,6 +22,50 @@ const duplicatedPrograms = computed(() => {
   const programs = props.programas.slice(0, 6);
   return [...programs, ...programs];
 });
+
+const registerUserToProgram = (programId) => {
+  Swal.fire({
+    title: "¿Estás seguro de que deseas inscribirte?",
+    text: "¡No podrás revertir esto!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Sí, inscribirme"
+  }).then((result) => {
+    if (result.isConfirmed) {
+      // Llamar a la ruta de inscripción en el controlador HomeController
+      router.post(route('inscripcion'), { program_id: programId }, {
+        onSuccess: () => {
+          Swal.fire({
+            title: 'Inscrito!',
+            text: '¡Tu inscripción ha sido exitosa!',
+            icon: 'success',
+            timer: 1500,
+            showConfirmButton: false
+          });
+        },
+        onError: (errors) => {
+          let errorMessage = '';
+          // Mostrar mensaje específico si el error es por estar ya inscrito
+          if (errors.error_auth) {
+            errorMessage = 'Necesitas iniciar sesion como beneficiario.';
+          }
+          else if (errors.already_registered) {
+            errorMessage = 'Ya estás inscrito en este programa.';
+          }
+          Swal.fire({
+            title: 'Error!',
+            text: errorMessage,
+            icon: 'error',
+            timer: 2000,
+            showConfirmButton: false
+          });
+        }
+      });
+    }
+  });
+};
 
 // Métodos
 function openModal(program) {
@@ -57,50 +105,38 @@ onBeforeUnmount(() => {
     <Header />
 
     <main class="flex-grow">
-          <!-- Section 1: Intro -->
-          <section class="bg-blue-800 text-white py-20">
-            <div class="container mx-auto px-4">
-              <!-- Usamos <transition> para animar el h1 -->
-              <transition
-                name="bounce"
-                appear
-              >
-                <h1 class="text-5xl font-bold mb-6">Boosting knowledge and innovation</h1>
-              </transition>
-              <transition
-              name="bounce"
-              appear
-              >
-              <h2 class="text-xl mb-8">
-                Discover how we are transforming lives through science, culture and education.
-              </h2>
-            </transition>
-            
+      <!-- Section 1: Intro -->
+      <section class="bg-blue-800 text-white py-20">
+        <div class="container mx-auto px-4">
+          <!-- Usamos <transition> para animar el h1 -->
+          <transition name="bounce" appear>
+            <h1 class="text-5xl font-bold mb-6">Boosting knowledge and innovation</h1>
+          </transition>
+          <transition name="bounce" appear>
+            <h2 class="text-xl mb-8">
+              Discover how we are transforming lives through science, culture and education.
+            </h2>
+          </transition>
 
-            <transition
-            name= "bounce"
-            appear
-            >
-              <button class="text-white border-white hover:bg-white hover:text-blue-800 border p-2 rounded"
-                onclick="window.location.href='programs';">
-                Browse programs
-              </button>
-            </transition>
-          </div>
-            </section>
+
+          <transition name="bounce" appear>
+            <button class="text-white border-white hover:bg-white hover:text-blue-800 border p-2 rounded"
+              onclick="window.location.href='programs';">
+              Browse programs
+            </button>
+          </transition>
+        </div>
+      </section>
 
 
       <!-- Section 3: Latest Programs Carousel -->
       <section class="py-20 bg-white">
         <div class="container mx-auto px-6 relative">
-          <transition
-          name="slide-up"
-          appear
-        >
-        <h2 class="text-4xl bg-white font-bold mb-12 text-center text-gray-800" style="letter-spacing: 0.1em;">
-          Latest Programs
-        </h2>
-        </transition>
+          <transition name="slide-up" appear>
+            <h2 class="text-4xl bg-white font-bold mb-12 text-center text-gray-800" style="letter-spacing: 0.1em;">
+              Latest Programs
+            </h2>
+          </transition>
           <!-- Relieve en los lados del carrusel -->
           <div class="relative overflow-hidden">
             <!-- Relieve/fade en los bordes -->
@@ -112,18 +148,17 @@ onBeforeUnmount(() => {
             </div>
 
             <!-- Carrusel con animación infinita -->
-            <div class="carousel bg-white pt-12 py-6 flex items-center"
-                 @mouseover="isHovered = true" @mouseleave="isHovered = false">
+            <div class="carousel bg-white pt-12 py-6 flex items-center" @mouseover="isHovered = true"
+              @mouseleave="isHovered = false">
               <!-- Animación del scroll -->
               <div class="animate-scroll p-5 flex items-center"
-                   :style="{ animationPlayState: (showModal || isHovered) ? 'paused' : 'running' }">
+                :style="{ animationPlayState: (showModal || isHovered) ? 'paused' : 'running' }">
                 <!-- Duplicamos los programas para la ilusión de infinito -->
                 <div v-for="(program, index) in duplicatedPrograms" :key="index"
                   class="bg-white shadow-lg rounded-[30px] p-8 max-w-[450px] w-[500px] h-[500px] overflow-hidden transition-transform duration-300 hover:scale-105 hover:bg-gray-200 cursor-pointer mr-10">
                   <!-- Contenido de la tarjeta del programa -->
                   <a href="javascript:void(0)" @click="openModal(program)">
-                    <img :src="'storage/img/' + program.image"
-                      :alt="'Program Image: ' + program.title"
+                    <img :src="'storage/img/' + program.image" :alt="'Program Image: ' + program.title"
                       class="w-full h-56 object-cover mb-6 rounded-lg">
                     <h3 class="text-2xl font-semibold mb-4 text-gray-700">{{ program.title }}</h3>
                     <p class="text-gray-600 line-clamp-3 mb-4">{{ program.description }}</p>
@@ -181,10 +216,9 @@ onBeforeUnmount(() => {
           <!-- Botón para cerrar modal -->
           <button @click="closeModal"
             class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-300 rounded-full transition-all">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
-              viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round"
-                stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
 
@@ -192,16 +226,16 @@ onBeforeUnmount(() => {
           <h2 class="font-extrabold text-2xl text-gray-800 mt-4 mb-2 text-left break-words">
             {{ selectedProgram.title }}
           </h2>
-          <img :src="'storage/img/' + selectedProgram.image"
-            :alt="selectedProgram.title + ' Image'"
-            class="w-full max-w-md h-auto object-cover rounded-lg mb-4 mx-auto shadow-md transition-all duration-200 transform hover:scale-105"> <br>
+          <img :src="'storage/img/' + selectedProgram.image" :alt="selectedProgram.title + ' Image'"
+            class="w-full max-w-md h-auto object-cover rounded-lg mb-4 mx-auto shadow-md transition-all duration-200 transform hover:scale-105">
+          <br>
           <p class="text-gray-600 text-base leading-relaxed mb-6 text-justify break-words">
             {{ selectedProgram.description }}
           </p>
 
           <!-- Botón de "Inscribirse" -->
           <div class="flex justify-end">
-            <button @click="subscribeToProgram(selectedProgram)"
+            <button @click="registerUserToProgram(selectedProgram.id)"
               class="bg-gradient-to-r from-blue-500 to-blue-600 text-white font-bold py-2 px-6 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105">
               Inscribirse
             </button>
@@ -219,10 +253,9 @@ onBeforeUnmount(() => {
             We work in collaboration with leading institutions and experts around the world to make a positive impact on
             society.
           </p>
-          <button
-          class="mt-10 border-white border text-white px-6 py-3 rounded hover:bg-white hover:text-blue-800"
-          onclick="window.location.href='about';">
-          Learn more About us
+          <button class="mt-10 border-white border text-white px-6 py-3 rounded hover:bg-white hover:text-blue-800"
+            onclick="window.location.href='about';">
+            Learn more About us
           </button>
 
         </div>
@@ -250,14 +283,16 @@ onBeforeUnmount(() => {
   0% {
     transform: translateX(0);
   }
+
   100% {
     transform: translateX(-50%);
   }
 }
 
 /* Ajustar los espacios entre tarjetas */
-.animate-scroll > div {
-  margin-right: 2.5rem; /* Equivalente a Tailwind's space-x-10 */
+.animate-scroll>div {
+  margin-right: 2.5rem;
+  /* Equivalente a Tailwind's space-x-10 */
 }
 
 /* Efecto de desvanecimiento en los bordes del carrusel */
@@ -271,11 +306,15 @@ onBeforeUnmount(() => {
   content: '';
   position: absolute;
   top: 0;
-  width: 15%; /* Ajusta según la intensidad del sombreado */
+  width: 15%;
+  /* Ajusta según la intensidad del sombreado */
   height: 100%;
-  z-index: 2; /* Asegúrate de que esté por encima del carrusel */
-  pointer-events: none; /* Para que no interfiera con los clics */
+  z-index: 2;
+  /* Asegúrate de que esté por encima del carrusel */
+  pointer-events: none;
+  /* Para que no interfiera con los clics */
 }
+
 .carousel::before {
   left: 0;
   background: linear-gradient(to right, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0) 100%);
@@ -316,41 +355,48 @@ p {
   transition: opacity 0.5s ease-out;
   opacity: 1;
 }
+
 .bounce-enter-active {
-    animation: bounceIn 1s ease;
+  animation: bounceIn 1s ease;
+}
+
+.bounce-leave-active {
+  animation: bounceOut 1s ease;
+}
+
+@keyframes bounceIn {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
   }
-  .bounce-leave-active {
-    animation: bounceOut 1s ease;
+
+  50% {
+    transform: translateX(20%);
+    opacity: 0.5;
   }
-  
-  @keyframes bounceIn {
-    0% {
-      transform: translateX(-100%);
-      opacity: 0;
-    }
-    50% {
-      transform: translateX(20%);
-      opacity: 0.5;
-    }
-    100% {
-      transform: translateX(0);
-      opacity: 1;
-    }
+
+  100% {
+    transform: translateX(0);
+    opacity: 1;
   }
-  
-  @keyframes bounceOut {
-    0% {
-      transform: translateX(0);
-      opacity: 1;
-    }
-    100% {
-      transform: translateX(100%);
-      opacity: 0;
-    }
+}
+
+@keyframes bounceOut {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
   }
-  .slide-up-enter-active {
+
+  100% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+.slide-up-enter-active {
   animation: slideUp .5s ease-out;
 }
+
 .slide-up-leave-active {
   animation: slideDown 1ms ease-out;
 }
@@ -361,6 +407,7 @@ p {
     transform: translateY(100%);
     opacity: 0;
   }
+
   100% {
     transform: translateY(0);
     opacity: 1;
@@ -373,6 +420,7 @@ p {
     transform: translateY(0);
     opacity: 1;
   }
+
   100% {
     transform: translateY(100%);
     opacity: 0;
