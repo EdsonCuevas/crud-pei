@@ -1,6 +1,6 @@
 <script setup>
 import { useForm } from '@inertiajs/vue3';
-import { usePage } from '@inertiajs/vue3';
+import Swal from 'sweetalert2'; // Importar SweetAlert2
 
 const props = defineProps({
     programs: {
@@ -21,6 +21,13 @@ const handleSubmit = () => {
         onSuccess: () => {
             form.reset();
             closeModal2();
+            Swal.fire({
+                    title: 'Éxito!',
+                    text: 'Se ha realizado el gasto correctamente!',
+                    icon: 'success',
+                    timer: 1500,
+                    showConfirmButton: false
+                });
         }
     });
 };
