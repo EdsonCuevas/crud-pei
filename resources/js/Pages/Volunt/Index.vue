@@ -13,6 +13,9 @@ const props = defineProps({
     expenses: {
         type: Array,
     },
+    programs: {
+        type: Array,
+    },
 });
 
 const showModal = ref(false);
@@ -128,7 +131,7 @@ const closeModal = () => {
                                 </Modal>
 
                                 <Modal :show="isOpen" @close="closeModal2" maxWidth="lg">
-                                    <RegistrarGastos />
+                                    <RegistrarGastos :programs="props.programs" />
                                 </Modal>
                             </td>
                         </tr>
