@@ -37,20 +37,6 @@
           </NavLink>
         </li>
 
-        
-
-        <li class="relative px-6 py-3">
-          <NavLink :href="route('coord-reports.index')" ::active="route().current('coord-reports.index')">
-            <template #icon>
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" 
-                stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round" 
-                d="M4 12h2v8H4v-8zm4-2h2v10H8V10zm4-4h2v14h-2V6zm4-6h2v20h-2V0z" />
-              </svg>
-            </template>
-            <span class="ml-3">Reports</span>
-          </NavLink>
-        </li>
         <li class="relative px-6 py-3">
           <NavLink :href="route('coord-peticiones.index')" ::active="route().current('coord-peticiones.index')">
             <template #icon>
