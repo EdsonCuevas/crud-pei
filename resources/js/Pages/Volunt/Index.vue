@@ -7,6 +7,7 @@ import SecondaryButton from '@/Components/SecondaryButton.vue';
 import InputGroup from '@/Components/InputGroup.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import Gastos from '@/Components/Gastos.vue';
+import RegistrarGastos from '@/Components/RegistrarGastos.vue';
 
 import {ref} from 'vue';
 
@@ -17,12 +18,20 @@ const props = defineProps({
 	},
 });
 const showModal = ref(false);
+const isOpen = ref(false)
 
 const selectedExpense = ref(null);  // Almacenamos el gasto seleccionado
+
+const openModal = () => {
+  isOpen.value = true
+}
 
 const openModalView = (expense) => {
   showModal.value = true;
   selectedExpense.value = expense; // Asignamos el gasto seleccionado
+};
+const closeModal2 = () => {
+  isOpen.value = false;
 };
 
 const closeModal = () => {
@@ -35,11 +44,29 @@ const closeModal = () => {
 	<Head title="Expenses" />
 	
 	<AuthenticatedLayout>
-		
+        <button 
+    @click="openModal"
+    class="w-20 bg-gradient-to-r  py-2 from-[#004481] to-[#1464A5] text-white font-bold rounded transition-all duration-500 transform hover:scale-105 hover:shadow-lg hover:from-[#1464A5] hover:to-[#004481] flex justify-center items-center"
+>
+  <svg xmlns="http://www.w3.org/2000/svg" 
+    width="24" height="24"  
+    viewBox="0 0 24 24" 
+    fill="none" 
+    stroke="currentColor" 
+    stroke-width="2" 
+    stroke-linecap="round" 
+    stroke-linejoin="round" 
+    class="lucide lucide-ticket-plus"
+  >
+    <path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/>
+    <path d="M9 12h6"/>
+    <path d="M12 9v6"/>
+  </svg>
+</button>
 	    <template #header>
 		Expenses
 	    </template>
-
+        
 		<div class="w-full overflow-hidden rounded-lg border shadow-md ">
 			<div class="w-full overflow-x-auto bg-white">
                 <table class="w-full whitespace-no-wrap">
@@ -91,6 +118,10 @@ const closeModal = () => {
                             <Modal :show="showModal" @close="closeModal" maxWidth="lg">
                                 <Gastos :expense="selectedExpense"/>
                             </Modal>
+
+                            <Modal :show="isOpen" @close="closeModal2" maxWidth="lg">
+                                <RegistrarGastos/>
+                            </Modal>
                                 </td>
 							</tr>
                     </tbody>
@@ -99,3 +130,5 @@ const closeModal = () => {
 		</div>  
 	</AuthenticatedLayout>
 </template>
+
+
