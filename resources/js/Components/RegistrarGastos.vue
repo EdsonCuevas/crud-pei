@@ -87,8 +87,7 @@
   const form = reactive({
     value: '',
     reason: '',
-    origin: '',
-    date: ''
+    origin: ''
   })
   const closeModal2 = () => {
   const event = new KeyboardEvent('keydown', {
