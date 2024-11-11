@@ -30,7 +30,8 @@ class User extends Authenticatable
 
     public function programs(): BelongsToMany
     {
-        return $this->belongsToMany(Program::class);
+        return $this->belongsToMany(Program::class)
+            ->withPivot('approved');
     }
     public function role(): BelongsTo
     {

@@ -15,7 +15,8 @@ use App\Http\Controllers\AdminMyInfoController;
 // Controladores para el panel Coordinador
 use App\Http\Controllers\CoordMyInfoController;
 use App\Http\Controllers\CoordProgramController;
-use App\Http\Controllers\CoordReportsController;
+use App\Http\Controllers\CoordPeticionesController;
+
 use App\Http\Controllers\ExportController;
 
 // Controladores para el panel Voluntario
@@ -27,7 +28,6 @@ use App\Http\Controllers\VoluntMyInfoController;
 // Controladores para el panel Donador
 use App\Http\Controllers\DonorMyInfoController;
 use App\Http\Controllers\DonorDonacionesController;
-use App\Http\Controllers\DonorInformesController;
 use App\Http\Controllers\DonorContactosController;
 
 // Controladores para el panel Beneficiario
@@ -112,7 +112,8 @@ Route::middleware('auth')->group(function () {
 
     // Rutas para coordinadores
     Route::resource('coord-programs', CoordProgramController::class);
-    Route::resource('coord-reports', CoordReportsController::class);
+    Route::resource('coord-peticiones', CoordPeticionesController::class);
+
 
     // Rutas para voluntarios
     Route::resource('volunt-expenses', VoluntExpensesController::class);
@@ -132,10 +133,11 @@ Route::middleware('auth')->group(function () {
     Route::resource('volunt-myinfo', VoluntMyInfoController::class)->only(['index']);
 
 
-
+    Route::post('/coordpeticiones/accept', [CoordPeticionesController::class, 'acceptRequest'])->name('coordpeticiones.accept');
     Route::resource('benef-recursos', BenefRecursosController::class);
     Route::post('/benef-recursos/register', [BenefRecursosController::class, 'registerUserToProgram'])->name('programs.register');
     Route::resource('benef-contacts', BenefContactsController::class);
 });
+
 
 require __DIR__ . '/auth.php';

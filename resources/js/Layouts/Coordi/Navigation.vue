@@ -37,18 +37,12 @@
           </NavLink>
         </li>
 
-        
-
         <li class="relative px-6 py-3">
-          <NavLink :href="route('coord-reports.index')" ::active="route().current('coord-reports.index')">
+          <NavLink :href="route('coord-peticiones.index')" ::active="route().current('coord-peticiones.index')">
             <template #icon>
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" 
-                stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round" 
-                d="M4 12h2v8H4v-8zm4-2h2v10H8V10zm4-4h2v14h-2V6zm4-6h2v20h-2V0z" />
-              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-symlink"><path d="m10 18 3-3-3-3"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M4 11V4a2 2 0 0 1 2-2h9l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h7"/></svg>
             </template>
-            <span class="ml-3">Reports</span>
+            <span class="ml-3">Requests</span>
           </NavLink>
         </li>
 
