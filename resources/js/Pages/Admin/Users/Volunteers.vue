@@ -10,7 +10,7 @@ import SecondaryButton from '@/Components/SecondaryButton.vue';
 import Modal from '@/Components/Modal.vue';
 import SelectInput from '@/Components/SelectInput.vue';
 import getEdad from '@/Utils/getEdad.js';
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import Swal from 'sweetalert2';
 
 // Props que se reciben desde el controlador
@@ -142,6 +142,24 @@ const deleteVolunteer = (voluntario) => {
 const exportVolunteers = () => {
     window.location.href = '/export/3';
 };
+
+const searchQuery = ref("");
+const filteredVoluntarios = computed(() => {
+    if (!searchQuery.value) {
+        return props.voluntarios; 
+    }
+    return props.voluntarios.filter(voluntario => {
+        const searchLower = searchQuery.value.toLowerCase();
+        return (
+            (voluntario.id && String(voluntario.id).toLowerCase().includes(searchLower)) || 
+            (voluntario.name && String(voluntario.name).toLowerCase().includes(searchLower)) ||
+            (voluntario.birthdate && voluntario.birthdate.toLowerCase().includes(searchLower)) ||
+            (voluntario.email && voluntario.email.toLowerCase().includes(searchLower)) || 
+            (voluntario.phone && voluntario.phone.toLowerCase().includes(searchLower)) || 
+            (voluntario.rfc && voluntario.rfc.toLowerCase().includes(searchLower))
+        );
+    });
+});
 </script>
 
 <template>
@@ -168,7 +186,15 @@ const exportVolunteers = () => {
                 </button>
             </div>
         </template>
-
+        <div class="mb-6">
+            <input 
+                v-model="searchQuery" 
+                type="text" 
+                placeholder="Search by #, name, email, phone, rfc or age..." 
+                class="px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none" 
+                style="width: 500px;" 
+            />
+        </div>
         <!-- Tabla de voluntarios -->
         <div class="w-full overflow-hidden rounded-lg border shadow-md ">
             <div class="w-full overflow-x-auto bg-white">
@@ -187,7 +213,7 @@ const exportVolunteers = () => {
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y">
-                        <tr v-for="voluntario in voluntarios" :key="voluntario.id" class="text-gray-700">
+                        <tr v-for="voluntario in filteredVoluntarios" :key="voluntario.id" class="text-gray-700">
                             <td class="px-4 py-3 text-sm">{{ voluntario.id }}</td>
                             <td class="px-4 py-3 text-sm">{{ voluntario.name }}</td>
                             <td class="px-4 py-3 text-sm">{{ voluntario.email }}</td>

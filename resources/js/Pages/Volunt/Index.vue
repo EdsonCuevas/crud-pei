@@ -13,9 +13,9 @@ const props = defineProps({
 		type: Array
 	},
 });
+
 const searchQuery = ref("");
 
-// Computed para filtrar contactos según la búsqueda
 const filteredExpenses = computed(() => {
     if (!searchQuery.value) {
         return props.expenses; // Cambiar 'contactos' por 'expenses'

@@ -11,7 +11,7 @@ import InputGroup from '@/Components/InputGroup.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import SelectInput from '@/Components/SelectInput.vue';
 import getEdad from '@/Utils/getEdad.js';
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import Swal from 'sweetalert2'; // Importar SweetAlert2
 
 // En los props van las variables que se reciben desde el controlador
@@ -156,6 +156,23 @@ const exportUsers = () => {
     window.location.href = '/export/5';
 }
 
+const searchQuery = ref("");
+const filteredBeneficiarios = computed(() => {
+    if (!searchQuery.value) {
+        return props.beneficiarios;
+    }
+    return props.beneficiarios.filter(beneficiario => {
+    const searchLower = searchQuery.value.toLowerCase();
+        return (
+            (beneficiario.id && String(beneficiario.id).toLowerCase().includes(searchLower)) || 
+            (beneficiario.name && String(beneficiario.name).toLowerCase().includes(searchLower)) ||
+            (beneficiario.email && beneficiario.email.toLowerCase().includes(searchLower)) ||
+            (beneficiario.phone && beneficiario.phone.toLowerCase().includes(searchLower)) || 
+            (beneficiario.birthdate && beneficiario.birthdate.toLowerCase().includes(searchLower)) 
+        );
+    });
+});
+
 </script>
 
 <template>
@@ -180,7 +197,15 @@ const exportUsers = () => {
                 </button>
             </div>
         </template>
-
+        <div class="mb-6">
+            <input 
+                v-model="searchQuery" 
+                type="text" 
+                placeholder="Search by #, name, email, phone or age..." 
+                class="px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none" 
+                style="width: 500px;" 
+            />
+        </div>
         <!-- Tabla de beneficiarios -->
         <div class="w-full overflow-hidden rounded-lg border shadow-md ">
             <div class="w-full overflow-x-auto bg-white">
@@ -198,7 +223,7 @@ const exportUsers = () => {
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y">
-                        <tr v-for="beneficiario in beneficiarios" :key="beneficiario.id" class="text-gray-700">
+                        <tr v-for="beneficiario in filteredBeneficiarios" :key="beneficiario.id" class="text-gray-700">
                             <td class="px-4 py-3 text-sm">{{ beneficiario.id }}</td>
                             <td class="px-4 py-3 text-sm">{{ beneficiario.name }}</td>
                             <td class="px-4 py-3 text-sm">{{ beneficiario.email }}</td>

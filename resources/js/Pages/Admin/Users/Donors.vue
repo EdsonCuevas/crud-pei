@@ -11,7 +11,7 @@ import InputGroup from '@/Components/InputGroup.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import SelectInput from '@/Components/SelectInput.vue';
 import getEdad from '@/Utils/getEdad.js';
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import Swal from 'sweetalert2';
 
 const props = defineProps({
@@ -162,6 +162,25 @@ const deleteCoordi = () => {
 const exportUsers = () => {
     window.location.href = '/export/4';
 };
+
+const searchQuery = ref("");
+// Computed property para los voluntarios filtrados
+const filteredDonador = computed(() => {
+    if (!searchQuery.value) {
+        return props.donadores;
+    }
+    return props.donadores.filter(donador => {
+        const searchLower = searchQuery.value.toLowerCase();
+        return (
+            (donador.id && String(donador.id).toLowerCase().includes(searchLower)) ||
+            (donador.name && donador.name.toLowerCase().includes(searchLower)) ||
+            (donador.email && donador.email.toLowerCase().includes(searchLower)) ||
+            (donador.phone && donador.phone.toLowerCase().includes(searchLower)) ||
+            (donador.rfc && donador.rfc.toLowerCase().includes(searchLower)) ||
+            (donador.birthdate && donador.birthdate.toLowerCase().includes(searchLower))
+        );
+    }); 
+});
 </script>
 
 <template>
@@ -188,6 +207,16 @@ const exportUsers = () => {
                 </button>
             </div>
         </template>
+        <div class="mb-6">
+            <input 
+                v-model="searchQuery" 
+                type="text" 
+                placeholder="Search by #, name, email, phone, rfc or age..." 
+                class="px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none" 
+                style="width: 500px;" 
+                @keydown.enter="triggerSearch"
+            />
+        </div>
 
         <div class="w-full overflow-hidden rounded-lg border shadow-md">
             <div class="w-full overflow-x-auto bg-white">
@@ -206,7 +235,7 @@ const exportUsers = () => {
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y">
-                        <tr v-for="donador in donadores" :key="donador.id" class="text-gray-700">
+                        <tr v-for="donador in filteredDonador" :key="donador.id" class="text-gray-700">
                             <td class="px-4 py-3 text-sm">{{ donador.id }}</td>
                             <td class="px-4 py-3 text-sm">{{ donador.name }}</td>
                             <td class="px-4 py-3 text-sm">{{ donador.email }}</td>
