@@ -62,6 +62,10 @@ const filteredProgams = computed(() => {
     });
 });
 
+const noResultsFound = computed(() => {
+    return filteredProgams.value.length === 0 && searchQuery.value !== '';
+});
+
 
 </script>
 
@@ -77,6 +81,10 @@ const filteredProgams = computed(() => {
                 style="width: 500px;" 
             />
         </div>
+        <div v-if="noResultsFound" class="mt-2 text-red-500 text-sm">
+            No results found for "{{ searchQuery }}".
+        </div>
+        <br>
         <div class="w-full overflow-hidden rounded-lg border shadow-md bg-white">
             <table class="w-full whitespace-no-wrap">
                 <thead>
