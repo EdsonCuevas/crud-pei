@@ -20,19 +20,16 @@
               <p class="text-gray-800 font-medium">  {{ new Date(props.expense.created_at).toLocaleString() }}
             </p>
             </div>
-            
-            <div class="space-y-2">
-              <label class="text-sm font-medium text-blue-700">Proviene de</label>
-              <p class="text-gray-800 font-medium">{{ props.expense.program.title }}</p>
-            </div>
-          </div>
-          <div class="grid grid-cols-2 gap-6">
 
-          <!-- Concept Section -->
+            <!-- Concept Section -->
           <div class="space-y-2">
             <label class="text-sm font-medium text-blue-700">Motivo</label>
             <p class="text-gray-800 font-medium">{{ props.expense.reason }}</p>
           </div>
+            
+          </div>
+          <div class="grid grid-cols-2 gap-6">
+
 
           <!-- Concept Section -->
           <div class="space-y-2">

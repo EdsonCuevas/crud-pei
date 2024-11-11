@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Expenses;
-use App\Models\Program;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
@@ -21,24 +20,19 @@ class VoluntExpensesController extends Controller
 
         $userId = Auth::id();
 
-        $programs = Program::all();
-
         $expenses = Expenses::where('user_id', $userId)
-            ->with(relations: 'program')
             ->with(relations: 'user')
             ->get();
 
         // Pass the retrieved data to the Inertia view
         return Inertia::render('Volunt/Index', [
-            'expenses' => $expenses,
-            'programs' => $programs
+            'expenses' => $expenses
         ]);
     }
 
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'program_id' => 'required|exists:programs,id',
             'value' => 'required|numeric|min:0',
             'reason' => 'required|string|max:255'
         ]);

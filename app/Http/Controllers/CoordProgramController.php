@@ -27,7 +27,7 @@ class CoordProgramController extends Controller
             ->with(['users', 'creator'])
             ->get();
 
-        return Inertia::render("PanelCoordi/Index", [
+        return Inertia::render("Coordi/Index", [
             "Programas" => $programs,
         ]);
     }

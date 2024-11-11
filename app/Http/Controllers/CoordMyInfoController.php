@@ -17,6 +17,6 @@ class CoordMyInfoController extends Controller
             return redirect()->route('401')->with('error', 'No tienes acceso a esta página.');
         }
 
-        return Inertia::render('PanelCoordi/MyInfo');
+        return Inertia::render('Coordi/MyInfo');
     }
 }

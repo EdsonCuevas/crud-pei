@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('expenses', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('program_id')->constrained('programs')->onUpdate('cascade')->onDelete('set null');
             $table->integer('value');
             $table->string('reason');
             $table->foreignId('user_id')->constrained('users')->onUpdate('cascade')->onDelete('set null');

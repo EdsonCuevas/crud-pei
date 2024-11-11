@@ -26,7 +26,7 @@ class CoordPeticionesController extends Controller
         }])->get();
 
         // Retorna los datos a la vista usando Inertia
-        return Inertia::render('PanelCoordi/Peticiones', [
+        return Inertia::render('Coordi/Peticiones', [
             'Programas' => $programas
         ]);
     }

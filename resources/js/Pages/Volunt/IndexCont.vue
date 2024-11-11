@@ -39,6 +39,9 @@ const noResultsFound = computed(() => {
     <Head title="Voluntarios" />
 
     <AuthenticatedLayout>
+        <template #header>
+		Contactos
+	    </template>
         <div class="mb-6">
             <input 
                 v-model="searchQuery" 

@@ -12,10 +12,7 @@ import { ref, computed } from 'vue';
 const props = defineProps({
     expenses: {
         type: Array,
-    },
-    programs: {
-        type: Array,
-    },
+    }
 });
 
 const showModal = ref(false);
@@ -51,7 +48,6 @@ const filteredExpenses = computed(() => {
             (expense.id && String(expense.id).toLowerCase().includes(searchLower)) ||
             (expense.value && String(expense.value).toLowerCase().includes(searchLower)) ||
             (expense.reason && expense.reason.toLowerCase().includes(searchLower)) ||
-            (expense.program.title && expense.program.title.toLowerCase().includes(searchLower)) ||
             (expense.created_at && expense.created_at.toLowerCase().includes(searchLower))
         );
     });
@@ -73,14 +69,37 @@ const noResultsFound = computed(() => {
             Expenses
         </template>
         <div class="mb-6">
-            <input v-model="searchQuery" type="text" placeholder="Search by #, value, reason, origen or date..."
+            <input v-model="searchQuery" type="text" placeholder="Search by #, value, reason or date..."
                 class="px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
                 style="width: 500px;" />
         </div>
         <div v-if="noResultsFound" class="mt-2 text-red-500 text-sm">
             No results found for "{{ searchQuery }}".
         </div>
+        <button 
+            @click="openModal"
+            class="w-20 bg-gradient-to-r py-2 from-[#004481] to-[#1464A5] text-white font-bold rounded transition-all duration-500 transform hover:scale-105 hover:shadow-lg hover:from-[#1464A5] hover:to-[#004481] flex justify-center items-center"
+        >
+            <svg 
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-ticket-plus"
+            >
+                <path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z" />
+                <path d="M9 12h6" />
+                <path d="M12 9v6" />
+            </svg>
+        </button>
+
         <br>
+        
 		<div class="w-full overflow-hidden rounded-lg border shadow-md ">
 			<div class="w-full overflow-x-auto bg-white">
                 <table class="w-full whitespace-no-wrap">
@@ -90,7 +109,6 @@ const noResultsFound = computed(() => {
                             <th class="px-4 py-3">#</th>
                             <th class="px-4 py-3">Value</th>
                             <th class="px-4 py-3">Reason</th>
-                            <th class="px-4 py-3">Origen</th>
                             <th class="px-4 py-3">Date</th>
                             <th class="px-4 py-3">Receipt</th>
                         </tr>
@@ -105,9 +123,6 @@ const noResultsFound = computed(() => {
                             </td>
                             <td class="px-4 py-3 text-sm">
                                 {{ expense.reason }}
-                            </td>
-                            <td class="px-4 py-3 text-sm">
-                                {{ expense.program.title }}
                             </td>
                             <td class="px-4 py-3 text-sm">
                                 {{ new Date(expense.created_at).toLocaleString() }}
@@ -129,7 +144,7 @@ const noResultsFound = computed(() => {
                                 </Modal>
 
                                 <Modal :show="isOpen" @close="closeModal2" maxWidth="lg">
-                                    <RegistrarGastos :programs="props.programs" />
+                                    <RegistrarGastos />
                                 </Modal>
                             </td>
                         </tr>

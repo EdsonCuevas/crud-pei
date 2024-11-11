@@ -2,16 +2,8 @@
 import { useForm } from '@inertiajs/vue3';
 import Swal from 'sweetalert2'; // Importar SweetAlert2
 
-const props = defineProps({
-    programs: {
-        type: Array,
-        required: true
-    }
-});
-
 // Usar useForm para gestionar el estado del formulario
 const form = useForm({
-    program_id: '',
     value: '',
     reason: ''
 });
@@ -83,23 +75,6 @@ const closeModal2 = () => {
           placeholder="Ingrese el motivo del gasto"
         />
         <div v-if="form.errors.reason" class="text-red-500 text-sm mt-1">{{ form.errors.reason }}</div>
-      </div>
-
-      <!-- Campo Origen (Programas) -->
-      <div class="space-y-2 transform transition-all duration-300 hover:scale-105">
-        <label for="program_id" class="block text-sm font-medium text-gray-700">Origen</label>
-        <select
-          v-model="form.program_id"
-          name="program_id"
-          id="program_id"
-          class="focus:ring-[#1464A5] focus:border-[#1464A5] block w-full shadow-sm sm:text-sm border-gray-300 rounded-md transition-all duration-300"
-        >
-          <option value="" disabled>Seleccione un programa</option>
-          <option v-for="program in programs" :key="program.id" :value="program.id">
-            {{ program.title }}
-          </option>
-        </select>
-        <div v-if="form.errors.program_id" class="text-red-500 text-sm mt-1">{{ form.errors.program_id }}</div>
       </div>
       <br>
       <!-- Botón Registrar -->
