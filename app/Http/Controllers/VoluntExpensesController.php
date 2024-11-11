@@ -22,7 +22,7 @@ class VoluntExpensesController extends Controller
 
         $expenses = Expenses::where('user_id', $userId)
             ->with(relations: 'user')
-            ->orderBy('created_at', 'desc')
+            ->orderBy('id', 'desc')
             ->get();
 
         // Pass the retrieved data to the Inertia view
