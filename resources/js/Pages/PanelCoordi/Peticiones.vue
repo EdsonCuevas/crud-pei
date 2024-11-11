@@ -100,6 +100,11 @@ const filteredProgramas = computed(() => {
         );
     });
 });
+
+// Check if the filtered result is empty
+const noResultsFound = computed(() => {
+    return filteredProgramas.value.length === 0 && searchQuery.value !== '';
+});
 </script>
 
 <template>
@@ -112,9 +117,14 @@ const filteredProgramas = computed(() => {
             <div class="flex justify-between mt-4 text-sm text-gray-700">
                 <div><strong>Total Pending: </strong>{{ totals.pendingCount }}</div>
             </div>
+
+            <!-- Show error message if no results found -->
+            <div v-if="noResultsFound" class="mt-2 text-red-500 text-sm">
+                No results found for "{{ searchQuery }}".
+            </div>
         </template>
         
-        <div class="mb-6 ">
+        <div class="mb-6">
             <input 
                 v-model="searchQuery" 
                 type="text" 
