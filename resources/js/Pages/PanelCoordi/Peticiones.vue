@@ -1,5 +1,6 @@
 <script setup>
 import { useForm } from '@inertiajs/vue3';
+import { ref, computed } from 'vue';
 import Swal from 'sweetalert2'; // Import SweetAlert2
 import SecondaryButton from '@/Components/SecondaryButton.vue';
 import AuthenticatedLayout from '@/Layouts/Coordi/AuthenticatedLayout.vue';
@@ -79,7 +80,28 @@ const acceptRequest = (userId, programId) => {
         }
     });
 };
+
+// Variable to store the search query
+const searchQuery = ref("");
+
+// Computed property to filter the programs based on the search query
+const filteredProgramas = computed(() => {
+    if (!searchQuery.value) {
+        return props.Programas;
+    }
+
+    // Filter programs and users based on search query
+    return props.Programas.filter(programa => {
+        // Check if the search query matches either the user name or the program title
+        const searchLower = searchQuery.value.toLowerCase();
+        return programa.users.some(user => 
+            user.name.toLowerCase().includes(searchLower) || 
+            programa.title.toLowerCase().includes(searchLower)
+        );
+    });
+});
 </script>
+
 <template>
     <AuthenticatedLayout>
         <template #header>
@@ -91,6 +113,16 @@ const acceptRequest = (userId, programId) => {
                 <div><strong>Total Pending: </strong>{{ totals.pendingCount }}</div>
             </div>
         </template>
+        
+        <div class="mb-6 ">
+            <input 
+                v-model="searchQuery" 
+                type="text" 
+                placeholder="Search by user or program..." 
+                class="px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                style="width: 500px;" 
+            />
+        </div>
 
         <div class="w-full overflow-hidden rounded-lg border shadow-md">
             <div class="w-full overflow-x-auto bg-white">
@@ -104,7 +136,7 @@ const acceptRequest = (userId, programId) => {
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y">
-                        <template v-for="(programa, index) in Programas" :key="index">
+                        <template v-for="(programa, index) in filteredProgramas" :key="index">
                             <tr v-for="(user, userIndex) in programa.users" :key="userIndex" class="text-gray-700">
                                 <td class="px-4 py-3 text-sm">{{ user.name }}</td>
                                 <td class="px-4 py-3 text-sm">{{ programa.title }}</td>
