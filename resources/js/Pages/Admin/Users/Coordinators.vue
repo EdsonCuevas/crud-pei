@@ -11,7 +11,7 @@ import InputGroup from '@/Components/InputGroup.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import SelectInput from '@/Components/SelectInput.vue';
 import getEdad from '@/Utils/getEdad.js';
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import Swal from 'sweetalert2';
 
 // En los props van las variables que se reciben desde el controlador
@@ -149,6 +149,26 @@ const deleteCoordi = (coordinator) => {
 const exportUsers = () => {
     window.location.href = '/export/2';
 };
+// Variable para almacenar la consulta de búsqueda
+const searchQuery = ref("");
+
+const filteredCoordinadores = computed(() => {
+    if (!searchQuery.value) {
+        return props.coordinadores;
+    }
+    return props.coordinadores.filter(coordi => {
+        const searchLower = searchQuery.value.toLowerCase();
+        return (
+            (coordi.id && String(coordi.id).toLowerCase().includes(searchLower)) ||
+            (coordi.name && coordi.name.toLowerCase().includes(searchLower)) ||
+            (coordi.email && coordi.email.toLowerCase().includes(searchLower)) ||
+            (coordi.rfc && coordi.rfc.toLowerCase().includes(searchLower)) ||
+            (coordi.phone && coordi.phone.toLowerCase().includes(searchLower)) ||
+            (coordi.birthdate && String(coordi.birthdate).toLowerCase().includes(searchLower))
+        );
+    });
+});
+
 </script>
 
 <template>
@@ -173,6 +193,16 @@ const exportUsers = () => {
                 </button>
             </div>
         </template>
+        
+        <div class="mb-6 ">
+            <input 
+                v-model="searchQuery" 
+                type="text" 
+                placeholder="Search by #, name, email, phone, rfc or age..." 
+                class="px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                style="width: 500px;" 
+            />
+        </div>
 
         <div class="w-full overflow-hidden rounded-lg border shadow-md">
             <div class="w-full overflow-x-auto bg-white">
@@ -191,7 +221,7 @@ const exportUsers = () => {
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y">
-                        <tr v-for="coordi in coordinadores" :key="coordi.id" class="text-gray-700">
+                        <tr v-for="coordi in filteredCoordinadores" :key="coordi.id" class="text-gray-700">
                             <td class="px-4 py-3 text-sm">
                                 {{ coordi.id }}
                             </td>

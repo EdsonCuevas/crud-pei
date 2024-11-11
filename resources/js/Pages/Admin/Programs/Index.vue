@@ -8,7 +8,7 @@ import WarningButton from '@/Components/WarningButton.vue';
 import DarkButton from '@/Components/DarkButton.vue';
 import SecondaryButton from '@/Components/SecondaryButton.vue';
 import Swal from 'sweetalert2'; // Importar SweetAlert
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 
 // En los props van las variables que se reciben desde el controlador
 const props = defineProps({
@@ -72,6 +72,26 @@ const deleteProgram = () => {
         }
     });
 }
+
+// Variable para almacenar la consulta de búsqueda
+const searchQuery = ref("");
+
+const filteredPrograms = computed(() => {
+    if (!searchQuery.value) {
+        return props.programas.data;
+    }
+    return props.programas.data.filter(programa => {
+        const searchLower = searchQuery.value.toLowerCase();
+        return (
+            (String(programa.id).toLowerCase().includes(searchLower)) || 
+            (programa.title && programa.title.toLowerCase().includes(searchLower)) || 
+            (programa.creator && programa.creator.name && programa.creator.name.toLowerCase().includes(searchLower)) ||
+            (programa.coordinator && programa.coordinator.name && programa.coordinator.name.toLowerCase().includes(searchLower)) || 
+            (programa.created_at && programa.created_at.toLowerCase().includes(searchLower))
+        );
+    });
+});
+
 </script>
 
 <template>
@@ -102,6 +122,15 @@ const deleteProgram = () => {
                 </div>
             </div>
         </template>
+        <div class="mb-6">
+            <input 
+                v-model="searchQuery" 
+                type="text" 
+                placeholder="Search by tittle, date or assigner by..." 
+                class="px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none" 
+                style="width: 500px;" 
+            />
+        </div>
 
         <div class="w-full overflow-hidden rounded-lg border shadow-md ">
             <div class="w-full overflow-x-auto bg-white">
@@ -119,8 +148,7 @@ const deleteProgram = () => {
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y">
-                        <tr v-for="programa in programas.data" :key="programa.id" class="text-gray-700">
-                            <td class="px-4 py-3 text-sm">
+                        <tr v-for="programa in filteredPrograms.value" :key="programa.id" class="text-gray-700">                            <td class="px-4 py-3 text-sm">
                                 {{ programa.id }}
                             </td>
                             <td class="px-4 py-3 text-sm">

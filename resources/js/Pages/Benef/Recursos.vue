@@ -3,7 +3,7 @@ import AuthenticatedLayout from '@/Layouts/Benef/AuthenticatedLayout.vue';
 import { Head, router } from '@inertiajs/vue3';
 import Modal from '@/Components/Modal.vue';
 import SecondaryButton from '@/Components/SecondaryButton.vue';
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import Swal from 'sweetalert2'; // Importar SweetAlert2
 
 // En los props van las variables que se reciben desde el controlador
@@ -76,6 +76,24 @@ const registerUserToProgram = (programId) => {
     });
 };
 
+// Variable para almacenar la consulta de búsqueda
+const searchQuery = ref("");
+
+// Computed para filtrar programas según la búsqueda
+const filteredRecursos = computed(() => {
+    if (!searchQuery.value) {
+        return props.programas; // Filtra los programas en lugar de los contactos
+    }
+    return props.programas.filter(programa => {
+        const searchLower = searchQuery.value.toLowerCase();
+        return (
+            (programa.title && programa.title.toLowerCase().includes(searchLower)) || // Cambié "tittle" por "title"
+            (programa.coordinator && programa.coordinator.name && programa.coordinator.name.toLowerCase().includes(searchLower)) // Asegúrate de que "coordinator.name" exista
+        );
+    });
+});
+
+
 </script>
 
 
@@ -89,6 +107,15 @@ const registerUserToProgram = (programId) => {
             <br>
             <br>
         </template>
+        <div class="mb-6">
+            <input 
+                v-model="searchQuery" 
+                type="text" 
+                placeholder="Search by program or administered by..." 
+                class="px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none" 
+                style="width: 500px;" 
+            />
+        </div>
 
         <div class="w-full overflow-hidden rounded-lg border shadow-md ">
             <div class="w-full overflow-x-auto bg-white">
@@ -103,7 +130,7 @@ const registerUserToProgram = (programId) => {
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y">
-                        <tr v-for="programa in programas" :key="programa.id" class="text-gray-700">
+                        <tr v-for="programa in filteredRecursos" :key="programa.id" class="text-gray-700">
                             <td class="px-4 py-3 text-sm">
                                 {{ programa.title }}
                             </td>

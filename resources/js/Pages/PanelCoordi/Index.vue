@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import { useForm } from '@inertiajs/vue3';
 import AuthenticatedLayout from '@/Layouts/Coordi/AuthenticatedLayout.vue';
 import Modal from '@/Components/Modal.vue';
@@ -44,12 +44,39 @@ const openModalFormBlue = () => {
 
 const closeModalFormWarning = () => showModalFormWarning.value = false;
 const closeModalFormBlue = () => showModalFormBlue.value = false;
+
+const searchQuery = ref("");
+
+const filteredProgams = computed(() => {
+    if (!searchQuery.value) {
+        return props.Programas; 
+    }
+    return props.Programas.filter(programa => {
+        const searchLower = searchQuery.value.toLowerCase();
+        return (
+            (programa.title && programa.title.toLowerCase().includes(searchLower)) ||
+            (programa.created_at && programa.created_at.toLowerCase().includes(searchLower)) ||
+            (programa.updated_at && programa.updated_at.toLowerCase().includes(searchLower)) ||
+            (programa.creator?.name && programa.creator.name.toLowerCase().includes(searchLower))
+        );
+    });
+});
+
+
 </script>
 
 <template>
     <AuthenticatedLayout>
         <template #header>Programs</template>
-
+        <div class="mb-6">
+            <input 
+                v-model="searchQuery" 
+                type="text" 
+                placeholder="Search by tittle, date or assigner by..." 
+                class="px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none" 
+                style="width: 500px;" 
+            />
+        </div>
         <div class="w-full overflow-hidden rounded-lg border shadow-md bg-white">
             <table class="w-full whitespace-no-wrap">
                 <thead>
@@ -62,7 +89,7 @@ const closeModalFormBlue = () => showModalFormBlue.value = false;
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y">
-                    <tr v-for="programa in Programas" :key="programa.id" class="text-gray-700">
+                    <tr v-for="programa in filteredProgams" :key="programa.id" class="text-gray-700">
                         <td class="px-4 py-3 text-sm">{{ programa.title }}</td>
                         <td class="px-4 py-3 text-sm">{{ new Date(programa.created_at).toLocaleString() }}</td>
                         <td class="px-4 py-3 text-sm">{{ new Date(programa.updated_at).toLocaleString() }}</td>

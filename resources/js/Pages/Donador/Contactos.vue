@@ -2,14 +2,9 @@
 import AuthenticatedLayout from '@/Layouts/Donors/AuthenticatedLayout.vue';
 import { Head, useForm } from '@inertiajs/vue3';
 import DangerButton from '@/Components/DangerButton.vue';
-import InputError from '@/Components/InputError.vue';
-import Modal from '@/Components/Modal.vue';
 import SecondaryButton from '@/Components/SecondaryButton.vue';
-import WarningButton from '@/Components/WarningButton.vue';
-import DarkButton from '@/Components/DarkButton.vue';
-import InputGroup from '@/Components/InputGroup.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
+
 const props = defineProps({
     contactos: {
         type: Array
@@ -55,7 +50,27 @@ const deleteContacto = (contactoId) => {
         }
     });
 };
+
+const searchQuery = ref("");
+
+// Computed para filtrar contactos según la búsqueda
+const filteredContactos = computed(() => {
+    if (!searchQuery.value) {
+        return props.contactos; // Si no hay búsqueda, mostrar todos los contactos
+    }
+    return props.contactos.filter(contacto => {
+        const searchLower = searchQuery.value.toLowerCase();
+        return (
+            (contacto.nombre && contacto.nombre.toLowerCase().includes(searchLower)) || // Cambio de 'name' a 'nombre'
+            (contacto.email && contacto.email.toLowerCase().includes(searchLower)) ||
+            (contacto.telefono && contacto.telefono.toLowerCase().includes(searchLower)) ||
+            (contacto.id && String(contacto.id).toLowerCase().includes(searchLower)) || // Convertir id a string
+            (contacto.direccion && contacto.direccion.toLowerCase().includes(searchLower))
+        );
+    });
+});
 </script>
+
 <template>
     <Head title="Contactos" />
 
@@ -68,6 +83,16 @@ const deleteContacto = (contactoId) => {
 
         <div :class="classMsj" class="bg-green-500 text-white text-center py-2 px-4 rounded mb-4">
             {{ msj }}
+        </div>
+
+        <div class="mb-6">
+            <input 
+                v-model="searchQuery" 
+                type="text" 
+                placeholder="Search by #, name, e-mail, phone or address..." 
+                class="px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none" 
+                style="width: 500px;" 
+            />
         </div>
 
         <div class="w-full overflow-hidden rounded-lg border shadow-md">
@@ -84,7 +109,7 @@ const deleteContacto = (contactoId) => {
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y">
-                        <tr v-for="contacto in contactos" :key="contacto.id" class="text-gray-700">
+                        <tr v-for="contacto in filteredContactos" :key="contacto.id" class="text-gray-700">
                             <td class="px-4 py-3 text-sm">{{ contacto.id }}</td>
                             <td class="px-4 py-3 text-sm">{{ contacto.nombre }}</td>
                             <td class="px-4 py-3 text-sm">{{ contacto.email }}</td>
@@ -99,6 +124,5 @@ const deleteContacto = (contactoId) => {
                 </table>
             </div>
         </div>
-
     </AuthenticatedLayout>
 </template>
