@@ -83,10 +83,10 @@ const filteredPrograms = computed(() => {
     return props.programas.data.filter(programa => {
         const searchLower = searchQuery.value.toLowerCase();
         return (
-            (String(programa.id).toLowerCase().includes(searchLower)) || 
-            (programa.title && programa.title.toLowerCase().includes(searchLower)) || 
+            (String(programa.id).toLowerCase().includes(searchLower)) ||
+            (programa.title && programa.title.toLowerCase().includes(searchLower)) ||
             (programa.creator && programa.creator.name && programa.creator.name.toLowerCase().includes(searchLower)) ||
-            (programa.coordinator && programa.coordinator.name && programa.coordinator.name.toLowerCase().includes(searchLower)) || 
+            (programa.coordinator && programa.coordinator.name && programa.coordinator.name.toLowerCase().includes(searchLower)) ||
             (programa.created_at && programa.created_at.toLowerCase().includes(searchLower))
         );
     });
@@ -95,6 +95,7 @@ const filteredPrograms = computed(() => {
 </script>
 
 <template>
+
     <Head title="Programas" />
 
     <AuthenticatedLayout>
@@ -105,38 +106,39 @@ const filteredPrograms = computed(() => {
             <div class="flex justify-between">
                 <NavLink :href="route('admin-programs.create')">
                     <DarkButton>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m3.75 9v6m3-3H9m1.5-12H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m3.75 9v6m3-3H9m1.5-12H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
                         </svg>
                     </DarkButton>
                 </NavLink>
                 <div class="flex items grid-cols-2 gap-2">
                     <a href="admin-programs-pdf">
-                        <button style="background-color: white; border: 2px solid red; padding: 10px; border-radius: 8px;">
+                        <button
+                            style="background-color: white; border: 2px solid red; padding: 10px; border-radius: 8px;">
                             <img src="storage/img/pdf.png" style="width: 24px; height: 24px;">
                         </button>
                     </a>
-                    <button @click="exportPrograms" style="background-color: white; border: 2px solid green; padding: 10px; border-radius: 8px;">
+                    <button @click="exportPrograms"
+                        style="background-color: white; border: 2px solid green; padding: 10px; border-radius: 8px;">
                         <img src="storage/img/EXLG.png" style="width: 24px; height: 24px;">
                     </button>
                 </div>
             </div>
         </template>
         <div class="mb-6">
-            <input 
-                v-model="searchQuery" 
-                type="text" 
-                placeholder="Search by tittle, date or assigner by..." 
-                class="px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none" 
-                style="width: 500px;" 
-            />
+            <input v-model="searchQuery" type="text" placeholder="Search by tittle, date or assigner by..."
+                class="px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                style="width: 500px;" />
         </div>
 
         <div class="w-full overflow-hidden rounded-lg border shadow-md ">
             <div class="w-full overflow-x-auto bg-white">
                 <table class="w-full whitespace-no-wrap">
                     <thead>
-                        <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b bg-gray-50">
+                        <tr
+                            class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b bg-gray-50">
                             <th class="px-4 py-3">#</th>
                             <th class="px-4 py-3">Title</th>
                             <th class="px-4 py-3">Creator</th>
@@ -148,7 +150,8 @@ const filteredPrograms = computed(() => {
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y">
-                        <tr v-for="programa in filteredPrograms.value" :key="programa.id" class="text-gray-700">                            <td class="px-4 py-3 text-sm">
+                        <tr v-for="programa in filteredPrograms" :key="programa.id" class="text-gray-700">
+                            <td class="px-4 py-3 text-sm">
                                 {{ programa.id }}
                             </td>
                             <td class="px-4 py-3 text-sm">
@@ -158,7 +161,8 @@ const filteredPrograms = computed(() => {
                                 {{ programa.creator ? (programa.creator.name ? programa.creator.name : '') : '' }}
                             </td>
                             <td class="px-4 py-3 text-sm">
-                                {{ programa.coordinator ? (programa.coordinator.name ? programa.coordinator.name : '') : '' }}
+                                {{ programa.coordinator ? (programa.coordinator.name ? programa.coordinator.name : '') :
+                                '' }}
                             </td>
                             <td class="px-4 py-3 text-sm">
                                 {{ new Date(programa.created_at).toLocaleString() }}
@@ -166,9 +170,12 @@ const filteredPrograms = computed(() => {
                             <td class="px-4 py-3 text-sm">
                                 <NavLink :href="route('admin-programs.show', programa.id)">
                                     <SecondaryButton @click="openModalView(coordi)">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                            stroke-width="1.5" stroke="currentColor" class="size-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                                         </svg>
                                     </SecondaryButton>
                                 </NavLink>
@@ -197,7 +204,8 @@ const filteredPrograms = computed(() => {
                     </tbody>
                 </table>
             </div>
-            <div class="px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase bg-gray-50 border-t sm:grid-cols-9">
+            <div
+                class="px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase bg-gray-50 border-t sm:grid-cols-9">
                 <pagination :links="programas.links" />
             </div>
         </div>
