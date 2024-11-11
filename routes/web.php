@@ -136,10 +136,11 @@ Route::middleware('auth')->group(function () {
     Route::resource('volunt-myinfo', VoluntMyInfoController::class)->only(['index']);
 
 
-
+    Route::post('/coordpeticiones/accept', [CoordPeticionesController::class, 'acceptRequest'])->name('coordpeticiones.accept');
     Route::resource('benef-recursos', BenefRecursosController::class);
     Route::post('/benef-recursos/register', [BenefRecursosController::class, 'registerUserToProgram'])->name('programs.register');
     Route::resource('benef-contacts', BenefContactsController::class);
 });
+
 
 require __DIR__ . '/auth.php';
