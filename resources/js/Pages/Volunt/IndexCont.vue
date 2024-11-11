@@ -1,13 +1,13 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/Volunt/AuthenticatedLayout.vue';
-import { Head, useForm } from '@inertiajs/vue3';
+import { Head } from '@inertiajs/vue3';
 import { ref, computed } from 'vue';
 
 // En los props van las variables que se reciben desde el controlador
 const props = defineProps({
     users: {
-		type: Array
-	},
+        type: Array
+    },
 });
 
 const searchQuery = ref("");
@@ -29,14 +29,16 @@ const filteredContactos = computed(() => {
     });
 });
 
-
+// Computed para verificar si no se encontraron resultados
+const noResultsFound = computed(() => {
+    return filteredContactos.value.length === 0 && searchQuery.value !== '';
+});
 </script>
 
 <template>
-	<Head title="Voluntarios" />
-	
-	<AuthenticatedLayout>
-		
+    <Head title="Voluntarios" />
+
+    <AuthenticatedLayout>
         <div class="mb-6">
             <input 
                 v-model="searchQuery" 
@@ -46,9 +48,14 @@ const filteredContactos = computed(() => {
                 style="width: 500px;" 
             />
         </div>
-		
-		<div class="w-full overflow-hidden rounded-lg border shadow-md ">
-			<div class="w-full overflow-x-auto bg-white">
+
+        <!-- Mostrar mensaje de error si no se encuentran resultados -->
+        <div v-if="noResultsFound" class="mt-2 text-red-500 text-sm">
+            No results found for "{{ searchQuery }}".
+        </div>
+
+        <div class="w-full overflow-hidden rounded-lg border shadow-md">
+            <div class="w-full overflow-x-auto bg-white">
                 <table class="w-full whitespace-no-wrap">
                     <thead>
                         <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b bg-gray-50">
@@ -80,6 +87,6 @@ const filteredContactos = computed(() => {
                     </tbody>
                 </table>
             </div>
-		</div>
-	</AuthenticatedLayout>
+        </div>
+    </AuthenticatedLayout>
 </template>

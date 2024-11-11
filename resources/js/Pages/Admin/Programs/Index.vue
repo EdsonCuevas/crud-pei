@@ -91,7 +91,9 @@ const filteredPrograms = computed(() => {
         );
     });
 });
-
+const noResultsFound = computed(() => {
+    return filteredPrograms.value.length === 0 && searchQuery.value !== '';
+});
 </script>
 
 <template>
@@ -126,11 +128,15 @@ const filteredPrograms = computed(() => {
             <input 
                 v-model="searchQuery" 
                 type="text" 
-                placeholder="Search by tittle, date or assigner by..." 
+                placeholder="Search by #, tittle, creator, coordinator or date..." 
                 class="px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none" 
                 style="width: 500px;" 
             />
         </div>
+        <div v-if="noResultsFound" class="mt-2 text-red-500 text-sm">
+            No results found for "{{ searchQuery }}".
+        </div>
+        <br>
 
         <div class="w-full overflow-hidden rounded-lg border shadow-md ">
             <div class="w-full overflow-x-auto bg-white">

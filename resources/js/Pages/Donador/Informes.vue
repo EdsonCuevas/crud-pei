@@ -58,15 +58,19 @@ const filteredInformes = computed(() => {
     if (!searchQuery.value) {
         return props.informes;
     }
-    return props.informe.filter(programa => {
+    return props.informes.filter(informe => { // Corregido: props.informes, no props.informe
         const searchLower = searchQuery.value.toLowerCase();
         return (
-            (informe.id && informe.id.toLowerCase().includes(searchLower)) || 
+            (informe.id && String(informe.id).toLowerCase().includes(searchLower)) || 
             (informe.titulo && informe.titulo.toLowerCase().includes(searchLower)) || 
             (informe.descripcion && informe.descripcion.toLowerCase().includes(searchLower)) || 
-            (informe.fecha && informe.fecha.toLowerCase().includes(searchLower)) 
+            (informe.fecha && informe.fecha.toLowerCase().includes(searchLower))
         );
     });
+});
+
+const noResultsFound = computed(() => {
+    return filteredInformes.value.length === 0 && searchQuery.value !== '';
 });
 </script>
 <template>
@@ -97,6 +101,11 @@ const filteredInformes = computed(() => {
                 style="width: 500px;" 
             />
         </div>
+
+        <div v-if="noResultsFound" class="mt-2 text-red-500 text-sm">
+            No results found for "{{ searchQuery }}".
+        </div>
+        <br>
 
         <div :class="classMsj" class="bg-green-500 text-white text-center py-2 px-4 rounded mb-4">
             {{ msj }}

@@ -181,6 +181,9 @@ const filteredDonador = computed(() => {
         );
     }); 
 });
+const noResultsFound = computed(() => {
+    return filteredDonador.value.length === 0 && searchQuery.value !== '';
+});
 </script>
 
 <template>
@@ -217,6 +220,10 @@ const filteredDonador = computed(() => {
                 @keydown.enter="triggerSearch"
             />
         </div>
+        <div v-if="noResultsFound" class="mt-2 text-red-500 text-sm">
+            No results found for "{{ searchQuery }}".
+        </div>
+        <br>
 
         <div class="w-full overflow-hidden rounded-lg border shadow-md">
             <div class="w-full overflow-x-auto bg-white">

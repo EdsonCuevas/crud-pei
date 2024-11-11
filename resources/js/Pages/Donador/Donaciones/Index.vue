@@ -40,7 +40,9 @@ const filteredDonations = computed(() => {
                formattedDate.includes(query);  // Añadimos la fecha como parte de la búsqueda
     });
 });
-
+const noResultsFound = computed(() => {
+    return filteredDonations.value.length === 0 && searchQuery.value !== '';
+});
 </script>
 
 <template>
@@ -77,6 +79,10 @@ const filteredDonations = computed(() => {
                 style="width: 500px;" 
             />
         </div>
+        <div v-if="noResultsFound" class="mt-2 text-red-500 text-sm">
+            No results found for "{{ searchQuery }}".
+        </div>
+        <br>
 
         <div class="w-full overflow-hidden rounded-lg border shadow-md">
             <div class="w-full overflow-x-auto bg-white">
