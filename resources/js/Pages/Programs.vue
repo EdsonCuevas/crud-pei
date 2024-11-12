@@ -35,6 +35,10 @@ const filteredPrograms = computed(() => {
     program.description.toLowerCase().includes(searchTerm.value.toLowerCase())
   );
 });
+const noResultsFound = computed(() => {
+    return filteredPrograms.value.length === 0 && searchTerm.value !== '';
+});
+
 </script>
 <template>
   <div class="flex flex-col min-h-screen">
@@ -55,6 +59,7 @@ const filteredPrograms = computed(() => {
             <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35" />
           </svg>
         </button>
+        
 
 
 
@@ -69,6 +74,11 @@ const filteredPrograms = computed(() => {
           />
         </transition>
       </div>
+      <div v-if="noResultsFound" class="text-4x1 text-center mb-center text-red-500 ">
+      No results found for "{{ searchTerm }}".
+    </div>
+      
+      
 
       <!-- Grid de Programas -->
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -90,6 +100,8 @@ const filteredPrograms = computed(() => {
         </div>
       </div>
     </div>
+
+
 
     <!-- Modal para la información detallada del programa -->
     <Modal :show="showModal" @close="closeModal">

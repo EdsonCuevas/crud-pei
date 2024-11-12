@@ -1,33 +1,61 @@
 <template>
-  <footer class="bg-gray-900 text-white py-12">
-    <div class="container mx-auto px-4">
+  <footer class="bg-gradient-to-r from-blue-900 via-blue-900 to-black text-white py-12">
+    <div class="container mx-auto px-6 lg:px-12">
       <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-        <div>
-          <h3 class="text-lg font-bold mb-4">Fundación CTI</h3>
-          <p>Working for a better future through knowledge and innovation.</p>
+        <!-- Logo and Call to Action -->
+        <div class="flex flex-col items-start space-y-4 text-right">
+          <img 
+            src="/images/LOGOCTI2.png" 
+            alt="Logo Fundación CTI" 
+            class="max-h-13 w-auto cursor-pointer" 
+            onclick="window.location.href='/home';"
+          >
+          <p class="text-sm text-left">Innovating for a brighter future through research and development. Join our mission to make a difference.</p>
           <br>
-          <a href="/terms-conditions" class="hover:underline"><p>Privacy Policy</p></a>
+          <div class="flex justify-center items-center">
+            <a href="" class="bg-white text-blue-600 px-4 py-2 rounded font-bold hover:bg-gray-100 ml-24">
+              Donate Now <span class="inline-block">↗</span>
+            </a>
+          </div>
         </div>
+
+        <!-- Quick Links Section -->
         <div>
-          <h3 class="text-lg font-bold mb-4">Quick Links</h3>
-          <ul class="space-y-2">
-            <li><a href="home" class="hover:underline">Home</a></li>
-            <li><a href="programs" class="hover:underline">Programs</a></li>
-            <li><a href="contact" class="hover:underline">Contact us</a></li>
+          <h3 class="text-xl text-right font-bold">Quick Links</h3>
+          <br>
+          <ul class="space-y-2 text-right">
+            <li><a href="/home" class="hover:text-gray-200 hover:underline">Home</a></li>
+            <li><a href="/programs" class="hover:text-gray-200 hover:underline">Programs</a></li>
+            <li><a href="/contact" class="hover:text-gray-200 hover:underline">Contact Us</a></li>
           </ul>
         </div>
+
+        <!-- Contact Section (moved to the left) -->
         <div>
-          <h3 class="text-lg font-bold mb-4">Contact</h3>
-          <p>E-mail: cti@support.com</p>
+          <h3 class="text-xl font-bold text-left">Contact</h3>
           <br>
-          <p>Phone: 3131410000</p>
+
+          <ul class="space-y-2 text-left">
+            <li>Email: <a href="mailto:cti@support.com" class="hover:text-gray-200 hover:underline">cti@support.com</a></li>
+            <li>Phone: <a href="tel:3131410000" class="hover:text-gray-200 hover:underline">313-141-0000</a></li>
+          </ul>
+        </div>
+
+        <!-- Google Translate (moved up) -->
+        <div class="space-y-4">
+          <div id="google_translate_element"></div>
         </div>
       </div>
-      <div class="mt-8 pt-8 border-t border-gray-700 text-center">
+
+      <!-- Footer Bottom -->
+      <div class="mt-8 pt-8 border-t border-gray-700 text-center text-sm">
         <p>&copy; {{ new Date().getFullYear() }} Fundación CTI. All rights reserved.</p>
+        <!-- Added Privacy Policy and Terms & Conditions -->
+        <div class="mt-2">
+          <a href="/terms-conditions" class="hover:underline text-gray-200">Terms and Conditions</a> | 
+          <a href="/terms-conditions" class="hover:underline text-gray-200">Privacy Policy</a>
+        </div>
       </div>
-      <!-- Elemento del Traductor de Google -->
-      <div id="google_translate_element"></div>
     </div>
   </footer>
 </template>
@@ -49,10 +77,22 @@ export default {
 </script>
 
 <style>
+footer {
+  background-size: cover;
+  position: relative;
+}
+
+footer a {
+  transition: color 0.3s;
+}
+
+button span {
+  transform: translateY(-2px);
+}
+
 #google_translate_element {
-  display: flex;               /* Utiliza flexbox para centrar */
-  justify-content: center;     /* Centra horizontalmente */
-  align-items: center;         /* Centra verticalmente (si es necesario) */
-  height: 100%;                /* Asegúrate de que ocupe el espacio necesario */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>
