@@ -15,7 +15,7 @@ const props = defineProps({
   },
 });
 
-// Extraer meses y valores de donaciones
+// Extraer meses y valores de donaciones y gastos
 const months = props.donations.map(d => d.month);
 const donationsValues = props.donations.map(d => d.total);
 const expensesValues = props.expenses.map(e => e.total);
@@ -50,9 +50,6 @@ const chartOptions1 = ref({
       horizontal: true,
       columnWidth: '70%',
       borderRadius: 6,
-      dataLabels: {
-        position: 'top',
-      },
     },
   },
   dataLabels: {
@@ -63,10 +60,6 @@ const chartOptions1 = ref({
       fontSize: '14px',
       fontWeight: 'bold',
     },
-  },
-  legend: {
-    show: true,
-    position: 'bottom',
   },
   xaxis: {
     categories: months,
@@ -79,15 +72,11 @@ const chartOptions1 = ref({
   },
   yaxis: {
     labels: {
-      formatter: (value) => value.toLocaleString(),
+      formatter: (value) => '$' + value.toLocaleString(),
       style: {
         colors: '#1F2937',
       },
     },
-  },
-  grid: {
-    show: true,
-    strokeDashArray: 4,
   },
   tooltip: {
     y: {
@@ -96,17 +85,17 @@ const chartOptions1 = ref({
   },
 });
 
-// Configuración para la segunda gráfica (Organic vs Social Media)
+// Configuración para la segunda gráfica (Stacked Bar)
 const chartOptions2 = ref({
   colors: ['#3B82F6', '#F59E0B'],
   series: [
     {
-      name: 'Organic',
-      data: [231, 122, 63, 421, 122, 323, 111],
+      name: 'Donations',
+      data: donationsValues,
     },
     {
-      name: 'Social media',
-      data: [232, 113, 341, 224, 522, 411, 243],
+      name: 'Expenses',
+      data: expensesValues,
     },
   ],
   chart: {
@@ -123,7 +112,7 @@ const chartOptions2 = ref({
     },
   },
   xaxis: {
-    categories: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+    categories: months,
     labels: {
       style: {
         colors: '#1F2937',
@@ -133,21 +122,72 @@ const chartOptions2 = ref({
   },
   yaxis: {
     labels: {
+      formatter: (value) => '$' + value.toLocaleString(),
       style: {
         colors: '#1F2937',
       },
     },
   },
-  grid: {
-    strokeDashArray: 4,
-  },
   tooltip: {
     shared: true,
     intersect: false,
+    y: {
+      formatter: (value) => '$' + value.toLocaleString(),
+    },
   },
-  legend: {
+});
+
+// Configuración para la tercera gráfica (Area Chart - Monthly Revenue)
+const chartOptions3 = ref({
+  series: [
+    {
+      name: 'Revenue',
+      data: [31, 40, 28, 51, 42, 109, 100],
+    },
+  ],
+  chart: {
+    height: 300,
+    type: 'area',
+    toolbar: {
+      show: false,
+    },
+    background: '#F3F4F6',
+  },
+  colors: ['#6366F1'],
+  fill: {
+    type: 'gradient',
+    gradient: {
+      shadeIntensity: 1,
+      opacityFrom: 0.7,
+      opacityTo: 0.3,
+      stops: [0, 90, 100],
+    },
+  },
+  dataLabels: {
+    enabled: false
+  },
+  stroke: {
+    curve: 'smooth',
+  },
+  xaxis: {
+    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
     labels: {
-      colors: '#1F2937',
+      style: {
+        colors: '#1F2937',
+      },
+    },
+  },
+  yaxis: {
+    labels: {
+      formatter: (value) => '$' + value.toLocaleString(),
+      style: {
+        colors: '#1F2937',
+      },
+    },
+  },
+  tooltip: {
+    y: {
+      formatter: (value) => '$' + value.toLocaleString(),
     },
   },
 });
@@ -157,7 +197,7 @@ const chartOptions2 = ref({
   <AuthenticatedLayout>
     <div class="financial-dashboard bg-white text-gray-800 p-6 rounded-lg shadow-lg w-full">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <!-- Primera gráfica: Donations vs Expenses -->
+        <!-- Primera gráfica: Donations vs Expenses (Horizontal Bar) -->
         <div>
           <h2 class="text-xl font-semibold mb-4 text-gray-800">Donation vs Expense</h2>
           <apexchart
@@ -168,9 +208,9 @@ const chartOptions2 = ref({
           ></apexchart>
         </div>
 
-        <!-- Segunda gráfica: Organic vs Social Media -->
+        <!-- Segunda gráfica: Donations vs Expenses (Stacked Bar) -->
         <div>
-          <h2 class="text-xl font-semibold mb-4 text-gray-800">Organic vs Social Media</h2>
+          <h2 class="text-xl font-semibold mb-4 text-gray-800">Donation vs Expense (Stacked)</h2>
           <apexchart
             type="bar"
             height="400"
@@ -178,6 +218,17 @@ const chartOptions2 = ref({
             :series="chartOptions2.series"
           ></apexchart>
         </div>
+      </div>
+
+      <!-- Tercera gráfica: Monthly Revenue (Area Chart) -->
+      <div class="mt-6">
+        <h2 class="text-xl font-semibold mb-4 text-gray-800">Monthly Revenue</h2>
+        <apexchart
+          type="area"
+          height="300"
+          :options="chartOptions3"
+          :series="chartOptions3.series"
+        ></apexchart>
       </div>
     </div>
   </AuthenticatedLayout>
