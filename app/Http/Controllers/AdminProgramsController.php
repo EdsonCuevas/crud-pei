@@ -17,7 +17,7 @@ class AdminProgramsController extends Controller
         $user = Auth::user();
 
         if ($user->role->id !== 1) {
-            return redirect()->route('401')->with('error', 'No tienes acceso a esta página.');
+            return redirect()->route('401');
         }
 
         return Inertia::render('Admin/Programs/Index', [
@@ -26,6 +26,12 @@ class AdminProgramsController extends Controller
     }
 
     public function pdf(){
+        $user = Auth::user();
+
+        if ($user->role->id !== 1) {
+            return redirect()->route('401');
+        }
+        
         $adminprogram = Program::all();
         $pdf = Pdf::loadView('programpdf', compact('adminprogram'));
         return $pdf->stream();
@@ -33,6 +39,11 @@ class AdminProgramsController extends Controller
 
     public function show(Program $admin_program)
     {
+        $user = Auth::user();
+
+        if ($user->role->id !== 1) {
+            return redirect()->route('401');
+        }
 
         $admin_program->load(['creator', 'coordinator']); // Cargar las relaciones
 
@@ -46,6 +57,12 @@ class AdminProgramsController extends Controller
 
     public function create()
     {
+        $user = Auth::user();
+
+        if ($user->role->id !== 1) {
+            return redirect()->route('401');
+        }
+
         $coordinators = User::where('role_id', 2)->get(['id', 'name']);
         $beneficiaries = User::where('role_id', 5)->get(['id', 'name']);
 
@@ -57,6 +74,12 @@ class AdminProgramsController extends Controller
 
     public function store(Request $request)
     {
+        $user = Auth::user();
+
+        if ($user->role->id !== 1) {
+            return redirect()->route('401');
+        }
+
         $request->validate([
             'title' => 'required|max:100',
             'description' => 'required',
@@ -81,6 +104,11 @@ class AdminProgramsController extends Controller
 
     public function edit(Program $admin_program)
     {
+        $user = Auth::user();
+
+        if ($user->role->id !== 1) {
+            return redirect()->route('401');
+        }
 
         $coordinators = User::where('role_id', 2)->get(['id', 'name']);
         $beneficiaries = User::where('role_id', 5)->get(['id', 'name']);
@@ -95,6 +123,12 @@ class AdminProgramsController extends Controller
 
     public function updateProgram(Request $request)
     {
+        $user = Auth::user();
+
+        if ($user->role->id !== 1) {
+            return redirect()->route('401');
+        }
+
         $request->validate([
             'title' => 'required|max:100',
             'description' => 'required|max:255',
@@ -123,6 +157,12 @@ class AdminProgramsController extends Controller
 
     public function destroy(Program $admin_program)
     {
+        $user = Auth::user();
+
+        if ($user->role->id !== 1) {
+            return redirect()->route('401');
+        }
+
         Storage::disk('public')->delete('img/' . $admin_program->image);
         $admin_program->delete();
         return redirect('admin-programs')->with('success', 'Programa Eliminado');

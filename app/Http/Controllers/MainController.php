@@ -13,7 +13,7 @@ class MainController extends Controller
 
         switch ($role) {
             case 1:
-                return redirect('admin-dashboard');
+                return redirect('admin-myinfo');
             case 2:
                 return redirect('coord-myinfo');
             case 3:
