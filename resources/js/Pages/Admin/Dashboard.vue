@@ -46,7 +46,16 @@ const chartOptions1 = ref({
     type: 'bar',
     height: 400,
     toolbar: {
-      show: false,
+      show: true, // Habilitar la barra de herramientas
+      tools: {
+        download: true, // Habilitar descarga
+        selection: false,
+        zoom: false,
+        zoomin: false,
+        zoomout: false,
+        pan: false,
+        reset: false,
+      },
     },
     background: '#F3F4F6',
   },
@@ -92,6 +101,7 @@ const chartOptions1 = ref({
     },
   },
 });
+
 
 // Configuración para la segunda gráfica (Stacked Bar)
 const chartOptions2 = ref({
@@ -157,7 +167,16 @@ const chartOptions3 = ref({
     height: 300,
     type: 'area',
     toolbar: {
-      show: false,
+      show: true, // Habilitar la barra de herramientas
+      tools: {
+        download: true, // Habilitar descarga
+        selection: false,
+        zoom: false,
+        zoomin: false,
+        zoomout: false,
+        pan: false,
+        reset: false,
+      },
     },
     background: '#F3F4F6',
   },
@@ -172,7 +191,7 @@ const chartOptions3 = ref({
     },
   },
   dataLabels: {
-    enabled: false
+    enabled: false,
   },
   stroke: {
     curve: 'smooth',
@@ -199,6 +218,7 @@ const chartOptions3 = ref({
     },
   },
 });
+
 
 </script>
 
