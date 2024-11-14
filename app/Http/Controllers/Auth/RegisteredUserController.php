@@ -27,24 +27,36 @@ class RegisteredUserController extends Controller
      * Handle an incoming registration request.
      *
      * @throws \Illuminate\Validation\ValidationException
-     */
+        */
     public function store(Request $request): RedirectResponse
     {
-        $request->validate([ #validaciones del usuario 
+        $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|string|lowercase|email|max:255|unique:' . User::class,
+            'email' => [
+                'required',
+                'string',
+                'lowercase',
+                'email',
+                'max:255',
+                'unique:' . User::class,
+                function ($attribute, $value, $fail) {
+                    $parts = explode('@', $value);
+                    if (count($parts) > 1 && strlen($parts[0]) < 6) {
+                        $fail('The email must have at least 6 characters before the "@" symbol.');
+                    }
+                },
+            ],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'phone' =>  ['required', 'digits_between:1,15'],
+            'phone' => ['required', 'digits_between:1,15'],
             'birthdate' => 'required|date|before_or_equal:' . now()->toDateString(),
-            
         ]);
 
-        $user = User::create([ #creaciones del usuario 
+        $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'phone' => $request->phone,
-            'rfc'=> $request->rfc,
+            'rfc' => $request->rfc,
             'role_id' => $request->role,
             'birthdate' => $request->birthdate,
         ]);
