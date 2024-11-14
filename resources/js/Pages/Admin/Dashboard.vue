@@ -80,7 +80,7 @@ const chartOptions1 = ref({
   },
   yaxis: {
     labels: {
-      formatter: (value) => '$' + value.toLocaleString(),
+      formatter: (value) => value.toLocaleString(),
       style: {
         colors: '#1F2937',
       },
