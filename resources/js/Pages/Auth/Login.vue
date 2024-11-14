@@ -4,8 +4,9 @@ import GuestLayout from '@/Layouts/GuestLayout.vue';
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
+import SecondaryButton from '@/Components/SecondaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
-import { Head, Link, useForm } from '@inertiajs/vue3';
+import { Head, Link, useForm, router } from '@inertiajs/vue3';
 import Swal from 'sweetalert2'; // Importa SweetAlert2
 
 // Definimos el Toast usando Swal.mixin
@@ -54,6 +55,10 @@ const submit = () => {
         onFinish: () => form.reset('password'), // Reinicia el campo de contraseña al terminar
     });
 };
+
+const goToRegister = () => {
+    router.visit(route('register'));
+};
 </script>
 
 <template>
@@ -97,12 +102,14 @@ const submit = () => {
                         </div>
 
                         <div class="flex items-center justify-end mt-4">
-                            <Link :href="route('register')"
-                                class="text-sm text-gray-600 underline hover:text-gray-900 mr-10">
+
+                            <SecondaryButton @click="goToRegister"
+                                class="text-sm mr-6 bg-blue-600">
                             Sign up
-                            </Link>
+                            </SecondaryButton>
+
                             <Link v-if="canResetPassword" :href="route('password.request')"
-                                class="text-sm text-gray-600 underline mr-10 hover:text-gray-900">
+                                class="text-sm text-gray-600 underline mr-6 hover:text-gray-900">
                             Forgot your password?
                             </Link>
 
