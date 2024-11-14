@@ -44,6 +44,8 @@ use Inertia\Inertia;
 
 use App\Http\Controllers\ProgramsExportController;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Auth;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -71,15 +73,21 @@ Route::get('/details-donation', function () {
 })->name('details-donation');
 
 Route::get('/about', function () {
-    return Inertia::render('About');
+    return Inertia::render('About', [
+        'authUser' => Auth::user(),
+    ]);
 })->name('about');
 
 Route::get('/contact', function () {
-    return Inertia::render('Contact');
+    return Inertia::render('Contact', [
+        'authUser' => Auth::user(),
+    ]);
 })->name('contact');
 
 Route::get('/terms-conditions', function () {
-    return Inertia::render('Terminos&condiciones');
+    return Inertia::render('Terminos&condiciones', [
+        'authUser' => Auth::user(),
+    ]);
 })->name('terminos.condiciones');
 
 Route::get('/', function () {
@@ -91,7 +99,7 @@ Route::get('/', function () {
 Route::middleware('auth')->group(function () {
 
 
-    Route::get('401', fn() => inertia::render('401'))->name('401');
+    Route::get('401', fn() => Inertia::render('401'))->name('401');
 
     Route::get('dashboard', [MainController::class, 'autoredirect']);
 
