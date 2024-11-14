@@ -33,12 +33,12 @@ use App\Http\Controllers\DonorContactosController;
 // Controladores para el panel Beneficiario
 use App\Http\Controllers\MyInfoController;
 use App\Http\Controllers\BenefContactsController;
-use App\Http\Controllers\BenefRecursosController;
+use App\Http\Controllers\BenefMyResourcesController;
+use App\Http\Controllers\BenefAllResourcesController;
 use App\Http\Controllers\ProfileController;
 
 use App\Http\Controllers\MainController;
 
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -134,8 +134,9 @@ Route::middleware('auth')->group(function () {
 
 
     Route::post('/coordpeticiones/accept', [CoordPeticionesController::class, 'acceptRequest'])->name('coordpeticiones.accept');
-    Route::resource('benef-recursos', BenefRecursosController::class);
-    Route::post('/benef-recursos/register', [BenefRecursosController::class, 'registerUserToProgram'])->name('programs.register');
+    Route::resource('benef-my-resources', BenefMyResourcesController::class);
+    Route::resource('benef-all-resources', BenefAllResourcesController::class);
+    Route::post('/benef-recursos/register', [BenefAllResourcesController::class, 'registerUserToProgram'])->name('programs.register');
     Route::resource('benef-contacts', BenefContactsController::class);
 });
 

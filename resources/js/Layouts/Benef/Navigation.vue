@@ -21,17 +21,43 @@
         </li>
 
         <li class="relative px-6 py-3">
-          <NavLink class="ml-4" :href="route('benef-recursos.index')" :active="route().current('benef-recursos.index')">
-            <template #icon>
+          <button @click="showingTwoLevelMenu = !showingTwoLevelMenu"
+            class="inline-flex items-center justify-between w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800"
+            aria-haspopup="true">
+            <span class="inline-flex items-center">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5" />
               </svg>
-            </template>
-            <span class="ml-4">Resources</span>
-            </NavLink>
+              <span class="ml-3">Resources</span>
+            </span>
+            <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd"
+                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                clip-rule="evenodd"></path>
+            </svg>
+          </button>
+          <ul
+            v-show="showingTwoLevelMenu || route().current('benef-my-resources.index') || route().current('benef-all-resources.index')"
+            class="p-2 mt-2 space-y-2 overflow-hidden text-sm font-medium text-gray-500 rounded-md shadow-inner bg-gray-50"
+            aria-label="submenu">
+
+            <li :class="{ 'text-gray-900': route().current('benef-my-resources.index') }"
+              class="px-2 py-1 transition-colors duration-150 hover:text-gray-900">
+              <NavLink :href="route('benef-my-resources.index')" :active="route().current('benef-my-resources.index')">
+                My Resources
+              </NavLink>
+            </li>
+
+            <li :class="{ 'text-gray-900': route().current('benef-all-resources.index') }"
+              class="px-2 py-1 transition-colors duration-150 hover:text-gray-900">
+              <NavLink :href="route('benef-all-resources.index')"
+                :active="route().current('benef-all-resources.index')">
+                All Resources
+              </NavLink>
+            </li>
+
+          </ul>
         </li>
-
-
 
         <li class="relative px-6 py-3">
           <NavLink :href="route('benef-contacts.index')" :active="route().current('benef-contacts.index')">

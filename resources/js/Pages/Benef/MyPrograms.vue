@@ -1,21 +1,14 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/Benef/AuthenticatedLayout.vue';
-import { Head, router } from '@inertiajs/vue3';
+import { Head } from '@inertiajs/vue3';
 import Modal from '@/Components/Modal.vue';
 import SecondaryButton from '@/Components/SecondaryButton.vue';
 import { ref, computed } from 'vue';
-import Swal from 'sweetalert2'; // Importar SweetAlert2
 
-// En los props van las variables que se reciben desde el controlador
 const props = defineProps({
-    programas: {
-        type: Array
-    },
-    userPrograms: Array,
+    programas: Array // Asegúrate de recibir los programas
 });
 
-
-// Variables para el título y la descripción del programa
 const selectedProgram = ref({
     title: '',
     description: '',
@@ -25,89 +18,43 @@ const selectedProgram = ref({
 const showModalView = ref(false);
 
 const openModalView = (programa) => {
-
-    // Pasamos el título y la descripción del programa
     selectedProgram.value.title = programa.title;
     selectedProgram.value.description = programa.description;
     selectedProgram.value.image = programa.image;
-
     showModalView.value = true;
-}
+};
 
 const closeModalView = () => {
     showModalView.value = false;
-}
-
-const registerUserToProgram = (programId) => {
-    Swal.fire({
-        title: "Are you sure you want to register?",
-        text: "You won't be able to revert this!",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, register!"
-    }).then((result) => {
-        if (result.isConfirmed) {
-            router.post(route('programs.register'), { program_id: programId }, {
-                onSuccess: () => {
-                    Swal.fire({
-                        title: 'Registered!',
-                        text: 'Your registration has been successful!',
-                        icon: 'success',
-                        timer: 1500,
-                        showConfirmButton: false
-                    });
-                },
-                onError: (errors) => {
-                    // Verifica si hay un error específico en el campo 'program'
-                    if (errors.program) {
-                        Swal.fire({
-                            title: 'Error!',
-                            text: 'You can not register again', // Muestra el mensaje de error específico
-                            icon: 'error',
-                            timer: 1500,
-                            showConfirmButton: false
-                        });
-                    }
-                }
-            });
-        }
-    });
 };
 
-// Variable para almacenar la consulta de búsqueda
 const searchQuery = ref("");
 
-// Computed para filtrar programas según la búsqueda
 const filteredRecursos = computed(() => {
     if (!searchQuery.value) {
-        return props.programas; // Filtra los programas en lugar de los contactos
+        return props.programas;
     }
     return props.programas.filter(programa => {
         const searchLower = searchQuery.value.toLowerCase();
         return (
-            (programa.title && programa.title.toLowerCase().includes(searchLower)) || // Cambié "tittle" por "title"
-            (programa.coordinator && programa.coordinator.name && programa.coordinator.name.toLowerCase().includes(searchLower)) // Asegúrate de que "coordinator.name" exista
+            (programa.title && programa.title.toLowerCase().includes(searchLower)) ||
+            (programa.coordinator && programa.coordinator.name && programa.coordinator.name.toLowerCase().includes(searchLower))
         );
     });
 });
+
 const noResultsFound = computed(() => {
     return filteredRecursos.value.length === 0 && searchQuery.value !== '';
 });
 
 </script>
 
-
 <template>
-
     <Head title="Beneficiario" />
-
     <AuthenticatedLayout>
         <template #header>
-            Resources
-            <br>
-            <br>
+            My Resources
+            <br><br>
         </template>
         <div class="mb-6">
             <input 
@@ -126,22 +73,27 @@ const noResultsFound = computed(() => {
             <div class="w-full overflow-x-auto bg-white">
                 <table class="w-full whitespace-no-wrap">
                     <thead>
-                        <tr
-                            class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b bg-gray-50">
+                        <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b bg-gray-50">
                             <th class="px-4 py-3">Program</th>
                             <th class="px-4 py-3">Administered by</th>
+                            <th class="px-4 py-3">Status</th>
                             <th class="px-4 py-3">Details</th>
-                            <th class="px-4 py-3">Register</th>
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y">
                         <tr v-for="programa in filteredRecursos" :key="programa.id" class="text-gray-700">
+                            <td class="px-4 py-3 text-sm">{{ programa.title }}</td>
                             <td class="px-4 py-3 text-sm">
-                                {{ programa.title }}
+                                {{ programa.coordinator ? (programa.coordinator.name || '') : '' }}
                             </td>
-                            <td class="px-4 py-3 text-sm">
-                                {{ programa.coordinator ? (programa.coordinator.name ? programa.coordinator.name : '') :
-                                    '' }}
+                            <td
+                                :class="{
+                                    'text-green-500 font-semibold': programa.pivot.approved,
+                                    'text-red-500 font-semibold': !programa.pivot.approved
+                                }"
+                                class="px-4 py-3 text-sm"
+                            >
+                                {{ programa.pivot.approved ? 'Approved' : 'Pending' }}
                             </td>
                             <td class="px-4 py-3 text-sm">
                                 <SecondaryButton @click="openModalView(programa)">
@@ -154,23 +106,12 @@ const noResultsFound = computed(() => {
                                     </svg>
                                 </SecondaryButton>
                             </td>
-                            <td class="px-4 py-3 text-sm">
-                                <SecondaryButton :disabled="props.userPrograms.includes(programa.id)"
-                                    @click="registerUserToProgram(programa.id)">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                        stroke-width="1.5" stroke="currentColor" class="size-6">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 0 0 2.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 0 0-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-.1-.664m-5.8 0A2.251 2.251 0 0 1 13.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25ZM6.75 12h.008v.008H6.75V12Zm0 3h.008v.008H6.75V15Zm0 3h.008v.008H6.75V18Z" />
-                                    </svg>
-                                </SecondaryButton>
-                            </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
 
-        <!-- Modal de vista del programa seleccionado -->
         <Modal :show="showModalView" @close="closeModalView">
             <div class="p-6">
                 <h2 class="text-xl font-bold">{{ selectedProgram.title }}</h2>
