@@ -59,7 +59,6 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::post('home-inscripcion', [HomeController::class, 'inscripcion'])->name('inscripcion');
 
 Route::get('/programs', [ProgramsController::class, 'index'])->name('programs');
-Route::post('programs-inscripcion', [ProgramsController::class, 'inscripcion']);
 Route::get('/', [ExportController::class, 'index'])->name('index');
 
 Route::get('/export/{roleId}', [ExportController::class, 'export'])->name('export');

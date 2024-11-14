@@ -27,11 +27,11 @@ class RegisteredUserController extends Controller
      * Handle an incoming registration request.
      *
      * @throws \Illuminate\Validation\ValidationException
-        */
+     */
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|min:4|max:255|regex:/^[a-zA-Z\s]+$/',
             'email' => [
                 'required',
                 'string',
@@ -48,6 +48,7 @@ class RegisteredUserController extends Controller
             ],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'phone' => ['required', 'digits_between:1,15'],
+            'rfc' => ['required', 'min:13', 'max:13'],
             'birthdate' => 'required|date|before_or_equal:' . now()->toDateString(),
         ]);
 
