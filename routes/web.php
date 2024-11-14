@@ -1,5 +1,4 @@
 <?php
-
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProgramsController;
 // Controladores para el panel Administrador
@@ -66,6 +65,9 @@ Route::get('/export/{roleId}', [ExportController::class, 'export'])->name('expor
 Route::get('/export-programs', function () {
     return Excel::download(new ProgramsExportController, 'programs.xlsx');
 });
+Route::get('/terms-and-conditions', function () {
+    return view('terms-and-conditions');
+})->name('terms-and-conditions');
 
 Route::get('/details-donation', function () {
     return Inertia::render('Donador/Detailsdonation');

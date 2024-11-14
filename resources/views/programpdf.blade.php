@@ -1,22 +1,3 @@
-<script setup>
-    import AuthenticatedLayout from '@/Layouts/Admin/AuthenticatedLayout.vue';
-    import {
-        Head,
-        useForm
-    } from '@inertiajs/vue3';
-    import NavLink from '@/Components/NavLink.vue';
-    import Pagination from '@/Components/Pagination.vue';
-    import Modal from '@/Components/Modal.vue';
-    import DangerButton from '@/Components/DangerButton.vue';
-    import SecondaryButton from '@/Components/SecondaryButton.vue';
-    import WarningButton from '@/Components/WarningButton.vue';
-    import DarkButton from '@/Components/DarkButton.vue';
-    import PrimaryButton from '@/Components/PrimaryButton.vue';
-    import {
-        ref
-    } from 'vue';
-</script>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -29,6 +10,8 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 20px;
+            position: relative;
+            min-height: 100vh;
         }
 
         header {
@@ -69,6 +52,41 @@
         tr:nth-child(even) {
             background-color: #f9f9f9;
         }
+
+        footer {
+            position: fixed;
+            bottom: 20px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            font-size: 12px;
+            color: #555;
+        }
+
+        footer a {
+            color: #555;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        footer img {
+            width: 150px;
+            display: block;
+            margin: 10px auto 0;
+        }
+
+        /* Numeración de páginas */
+        @page {
+            margin: 0;
+            size: auto;
+        }
+
+        footer:after {
+            content: "Página " counter(page) " de " counter(pages);
+        }
     </style>
 </head>
 
@@ -103,6 +121,13 @@
         </tbody>
     </table>
 
+    <!-- Footer -->
+    <footer>
+        <p>
+            <span>Para más información, consulta nuestros <a href="../terms-conditions" target="_blank">Términos y Condiciones</a>.</span>
+        </p>
+        <img src="{{ public_path('images/LOGOCTI.png') }}" alt="Logo">
+    </footer>
 
 </body>
 
