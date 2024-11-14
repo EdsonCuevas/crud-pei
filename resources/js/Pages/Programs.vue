@@ -3,6 +3,8 @@ import Footer from '@/Components/Footer.vue';
 import Header from '@/Components/Header.vue';
 import Modal from '@/Components/Modal.vue';
 import { ref, computed } from 'vue';
+import { router } from '@inertiajs/vue3';
+import Swal from 'sweetalert2';
 
 const props = defineProps({
   programas: { type: Object }
@@ -38,6 +40,51 @@ const filteredPrograms = computed(() => {
 const noResultsFound = computed(() => {
     return filteredPrograms.value.length === 0 && searchTerm.value !== '';
 });
+
+const registerUserToProgram = (programId) => {
+  Swal.fire({
+    title: "¿Estás seguro de que deseas inscribirte?",
+    text: "¡No podrás revertir esto!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Sí, inscribirme"
+  }).then((result) => {
+    if (result.isConfirmed) {
+      // Llamar a la ruta de inscripción en el controlador HomeController
+      router.post(route('inscripcion'), { program_id: programId }, {
+        onSuccess: () => {
+          Swal.fire({
+            title: 'Inscrito!',
+            text: '¡Tu inscripción ha sido exitosa!',
+            icon: 'success',
+            timer: 1500,
+            showConfirmButton: false
+          });
+        },
+        onError: (errors) => {
+          let errorMessage = '';
+          // Mostrar mensaje específico si el error es por estar ya inscrito
+          if (errors.error_auth) {
+            errorMessage = 'Necesitas iniciar sesion como beneficiario.';
+          }
+          else if (errors.already_registered) {
+            errorMessage = 'Ya estás inscrito en este programa.';
+          }
+          Swal.fire({
+            title: 'Error!',
+            text: errorMessage,
+            icon: 'error',
+            timer: 2000,
+            showConfirmButton: false
+          });
+        }
+      });
+    }
+  });
+};
+
 
 </script>
 <template>
@@ -119,7 +166,7 @@ const noResultsFound = computed(() => {
         <p class="text-gray-600 text-base leading-relaxed mb-6 text-justify break-words">{{ selectedProgram.description }}</p>
 
         <div class="flex justify-end">
-            <button @click="subscribeToProgram(selectedProgram)"
+            <button @click="registerUserToProgram(selectedProgram.id)"
                 class="bg-gradient-to-r from-blue-500 to-blue-600 text-white font-bold py-2 px-6 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105">
                 Inscribirse
             </button>

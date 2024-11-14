@@ -19,7 +19,6 @@ class HomeController extends Controller
         ]);
     }
 
-
     public function inscripcion(Request $request)
     {
         $user = Auth::user();
