@@ -13,12 +13,20 @@ const props = defineProps({
     type: Array,
     default: () => [],
   },
+  usersPerMonth: {
+    type: Array,
+    default: () => [],
+  },
 });
 
 // Extraer meses y valores de donaciones y gastos
 const months = props.donations.map(d => d.month);
 const donationsValues = props.donations.map(d => d.total);
 const expensesValues = props.expenses.map(e => e.total);
+
+const userMonths = props.usersPerMonth.map(u => u.month);
+const usersCount = props.usersPerMonth.map(u => u.total);
+
 
 // Configuración para la primera gráfica (Donations vs Expenses)
 const chartOptions1 = ref({
@@ -141,8 +149,8 @@ const chartOptions2 = ref({
 const chartOptions3 = ref({
   series: [
     {
-      name: 'Revenue',
-      data: [31, 40, 28, 51, 42, 109, 100],
+      name: 'Users Registered',
+      data: usersCount,
     },
   ],
   chart: {
@@ -170,7 +178,7 @@ const chartOptions3 = ref({
     curve: 'smooth',
   },
   xaxis: {
-    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+    categories: userMonths,
     labels: {
       style: {
         colors: '#1F2937',
@@ -179,7 +187,7 @@ const chartOptions3 = ref({
   },
   yaxis: {
     labels: {
-      formatter: (value) => '$' + value.toLocaleString(),
+      formatter: (value) => value.toLocaleString(),
       style: {
         colors: '#1F2937',
       },
@@ -187,10 +195,11 @@ const chartOptions3 = ref({
   },
   tooltip: {
     y: {
-      formatter: (value) => '$' + value.toLocaleString(),
+      formatter: (value) => value.toLocaleString() + ' users',
     },
   },
 });
+
 </script>
 
 <template>
@@ -222,7 +231,7 @@ const chartOptions3 = ref({
 
       <!-- Tercera gráfica: Monthly Revenue (Area Chart) -->
       <div class="mt-6">
-        <h2 class="text-xl font-semibold mb-4 text-gray-800">Monthly Revenue</h2>
+        <h2 class="text-xl font-semibold mb-4 text-gray-800">Users Registered per Month</h2>
         <apexchart
           type="area"
           height="300"

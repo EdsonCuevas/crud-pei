@@ -18,7 +18,7 @@ class AdminCoordiController extends Controller
         $user = Auth::user();
 
         if ($user->role->id !== 1) {
-            return redirect()->route('401')->with('error', 'No tienes acceso a esta página.');
+            return redirect()->route('401');
         }
 
         // Filtra los usuarios que tengan el rol 'coordi' y carga sus programas
@@ -33,6 +33,12 @@ class AdminCoordiController extends Controller
 
     public function store(Request $request)
     {
+        $user = Auth::user();
+
+        if ($user->role->id !== 1) {
+            return redirect()->route('401');
+        }
+
         $request->validate([
             'name' => 'required|max:60',
             'email' => 'required|email|max:60',
@@ -52,6 +58,12 @@ class AdminCoordiController extends Controller
 
     public function update(Request $request, User $admin_coordinator)
     {
+        $user = Auth::user();
+
+        if ($user->role->id !== 1) {
+            return redirect()->route('401');
+        }
+
         $request->validate([
             'name' => 'required|max:60',
             'email' => 'required|email|max:60',
@@ -79,7 +91,13 @@ class AdminCoordiController extends Controller
 
     public function destroy(User $admin_coordinator)
     {
+        $user = Auth::user();
+
+        if ($user->role->id !== 1) {
+            return redirect()->route('401');
+        }
+
         $admin_coordinator->delete();
-        return redirect('admin-dashboard');
+        return redirect('admin-coordinators');
     }
 }

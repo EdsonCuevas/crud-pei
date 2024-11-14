@@ -14,7 +14,7 @@ class AdminMyInfoController extends Controller
         $user = Auth::user();
 
         if ($user->role->id !== 1) {
-            return redirect()->route('401')->with('error', 'No tienes acceso a esta página.');
+            return redirect()->route('401');
         }
 
         return Inertia::render('Admin/MyInfo');

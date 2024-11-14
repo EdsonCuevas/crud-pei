@@ -17,7 +17,7 @@ class AdminVolunteersController extends Controller
         $user = Auth::user();
 
         if ($user->role->id !== 1) {
-            return redirect()->route('401')->with('error', 'No tienes acceso a esta página.');
+            return redirect()->route('401');
         }
 
         // Filtra los usuarios que tengan el rol 'coordi' y carga sus programas
@@ -32,6 +32,12 @@ class AdminVolunteersController extends Controller
 
     public function store(Request $request)
     {
+        $user = Auth::user();
+
+        if ($user->role->id !== 1) {
+            return redirect()->route('401');
+        }
+
         $request->validate([
             'name' => 'required|max:60',
             'email' => 'required|email|max:60',
@@ -51,6 +57,12 @@ class AdminVolunteersController extends Controller
 
     public function update(Request $request, User $admin_volunteer)
     {
+        $user = Auth::user();
+
+        if ($user->role->id !== 1) {
+            return redirect()->route('401');
+        }
+
         $request->validate([
             'name' => 'required|max:60',
             'email' => 'required|email|max:60',
@@ -77,6 +89,12 @@ class AdminVolunteersController extends Controller
 
     public function destroy(User $admin_volunteer)
     {
+        $user = Auth::user();
+
+        if ($user->role->id !== 1) {
+            return redirect()->route('401');
+        }
+        
         $admin_volunteer->delete();
         return redirect('admin-volunteers');
     }
