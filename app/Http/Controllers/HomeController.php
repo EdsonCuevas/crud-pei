@@ -15,7 +15,8 @@ class HomeController extends Controller
         $programas = Program::orderBy('created_at', 'desc')->take(6)->get();
 
         return Inertia::render('HomePage', [
-            'programas' => $programas
+            'programas' => $programas,
+            'authUser' => Auth::user(),
         ]);
     }
 

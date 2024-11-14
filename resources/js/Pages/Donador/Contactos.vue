@@ -11,46 +11,6 @@ const props = defineProps({
     },
 });
 
-const form = useForm({
-    nombre: '',
-    email: '',
-    telefono: '',
-    direccion: ''
-});
-
-const title = ref('Create Contact');
-const msj = ref('');
-const classMsj = ref('hidden');
-
-const save = () => {
-    if (form.id) {
-        form.put(route('contactos.update', form.id), {
-            onSuccess: () => {
-                msj.value = 'Updated Contact';
-                classMsj.value = 'block';
-                form.reset();
-            }
-        });
-    } else {
-        form.post(route('contactos.store'), {
-            onSuccess: () => {
-                msj.value = 'Contact Created';
-                classMsj.value = 'block';
-                form.reset();
-            }
-        });
-    }
-};
-
-const deleteContacto = (contactoId) => {
-    Inertia.delete(route('contactos.destroy', contactoId), {
-        onSuccess: () => {
-            msj.value = 'Contact Deleted';
-            classMsj.value = 'block';
-        }
-    });
-};
-
 const searchQuery = ref("");
 
 // Computed para filtrar contactos según la búsqueda
@@ -81,12 +41,8 @@ const noResultsFound = computed(() => {
         <template #header>
             Contacts
             <br>
-            <br>
+        
         </template>
-
-        <div :class="classMsj" class="bg-green-500 text-white text-center py-2 px-4 rounded mb-4">
-            {{ msj }}
-        </div>
 
         <div class="mb-6">
             <input 
@@ -107,24 +63,21 @@ const noResultsFound = computed(() => {
                 <table class="w-full whitespace-no-wrap">
                     <thead>
                         <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b bg-gray-50">
-                            <th class="px-4 py-3">#</th>
                             <th class="px-4 py-3">Name</th>
                             <th class="px-4 py-3">E-mail</th>
                             <th class="px-4 py-3">Phone</th>
-                            <th class="px-4 py-3">Address</th>
-                            <th class="px-4 py-3">Actions</th>
+                            <th class="px-4 py-3">Role</th>
+                            <th class="px-4 py-3">Photo</th>
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y">
                         <tr v-for="contacto in filteredContactos" :key="contacto.id" class="text-gray-700">
-                            <td class="px-4 py-3 text-sm">{{ contacto.id }}</td>
-                            <td class="px-4 py-3 text-sm">{{ contacto.nombre }}</td>
+                            <td class="px-4 py-3 text-sm">{{ contacto.name }}</td>
                             <td class="px-4 py-3 text-sm">{{ contacto.email }}</td>
-                            <td class="px-4 py-3 text-sm">{{ contacto.telefono }}</td>
-                            <td class="px-4 py-3 text-sm">{{ contacto.direccion }}</td>
+                            <td class="px-4 py-3 text-sm">{{ contacto.phone }}</td>
+                            <td class="px-4 py-3 text-sm">{{ contacto.role.role }}</td>
                             <td class="px-4 py-3 text-sm">
-                                <SecondaryButton @click="form.id = contacto.id, form.nombre = contacto.nombre, form.email = contacto.email, form.telefono = contacto.telefono, form.direccion = contacto.direccion, title = 'Editar Contacto'">Edit</SecondaryButton>
-                                <DangerButton @click="deleteContacto(contacto.id)">Delete</DangerButton>
+                                <img :src="contacto.photo ? `../../storage/img/profile/${contacto.photo}` : '../../storage/img/profile/profile-icon.png'" alt="Imagen de perfil" class="object-cover rounded-lg w-[50px]" />
                             </td>
                         </tr>
                     </tbody>

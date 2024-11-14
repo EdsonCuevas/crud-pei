@@ -8,7 +8,7 @@ use App\Models\Program;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
 
-class BenefRecursosController extends Controller
+class BenefAllResourcesController extends Controller
 {
 
     public function index()
@@ -24,7 +24,7 @@ class BenefRecursosController extends Controller
 
         $userPrograms = $user->programs->pluck('id')->toArray();
 
-        return Inertia::render('Benef/Recursos', [
+        return Inertia::render('Benef/AllPrograms', [
             'programas' => $programs,
             'userPrograms' => $userPrograms,
         ]);

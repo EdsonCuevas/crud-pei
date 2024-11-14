@@ -62,18 +62,15 @@ const noResultsFound = computed(() => {
                 <table class="w-full whitespace-no-wrap">
                     <thead>
                         <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b bg-gray-50">
-                            <th class="px-4 py-3">#</th>
                             <th class="px-4 py-3">Name</th>
                             <th class="px-4 py-3">Phone</th>
                             <th class="px-4 py-3">E-mail</th>
                             <th class="px-4 py-3">Role</th>
+                            <th class="px-4 py-3">Photo</th>
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y">
                         <tr v-for="user in filteredContactos" :key="user.id" class="text-gray-700">
-                            <td class="px-4 py-3 text-sm">
-                                {{ user.id }}
-                            </td>
                             <td class="px-4 py-3 text-sm">
                                 {{ user.name }}
                             </td>
@@ -85,6 +82,9 @@ const noResultsFound = computed(() => {
                             </td>
                             <td class="px-4 py-3 text-sm">
                                 {{ user.role.role }}
+                            </td>
+                            <td class="px-4 py-3 text-sm">
+                                <img :src="user.photo ? `../../storage/img/profile/${user.photo}` : '../../storage/img/profile/profile-icon.png'" alt="Imagen de perfil" class="object-cover rounded-lg w-[50px]" />
                             </td>
                         </tr>
                     </tbody>
