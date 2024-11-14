@@ -66,6 +66,7 @@ const noResultsFound = computed(() => {
                             <th class="px-4 py-3">Phone</th>
                             <th class="px-4 py-3">E-mail</th>
                             <th class="px-4 py-3">Role</th>
+                            <th class="px-4 py-3">Photo</th>
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y">
@@ -81,6 +82,9 @@ const noResultsFound = computed(() => {
                             </td>
                             <td class="px-4 py-3 text-sm">
                                 {{ user.role.role }}
+                            </td>
+                            <td class="px-4 py-3 text-sm">
+                                <img :src="user.photo ? `../../storage/img/profile/${user.photo}` : '../../storage/img/profile/profile-icon.png'" alt="Imagen de perfil" class="object-cover rounded-lg w-[50px]" />
                             </td>
                         </tr>
                     </tbody>

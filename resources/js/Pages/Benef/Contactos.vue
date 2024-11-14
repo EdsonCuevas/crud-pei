@@ -30,6 +30,7 @@ const filteredContactos = computed(() => {
 const noResultsFound = computed(() => {
     return filteredContactos.value.length === 0 && searchQuery.value !== '';
 });
+
 </script>
 
 <template>
@@ -63,7 +64,8 @@ const noResultsFound = computed(() => {
                             <th class="px-4 py-3">Name</th>
                             <th class="px-4 py-3">E-mail</th>
                             <th class="px-4 py-3">Phone</th>
-                            <th class="px-4 py-3">Charge</th>
+                            <th class="px-4 py-3">Role</th>
+                            <th class="px-4 py-3">Photo</th>
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y">
@@ -79,6 +81,9 @@ const noResultsFound = computed(() => {
                             </td>
                             <td class="px-4 py-3 text-sm">
                                 {{ contacto.role.role }}
+                            </td>
+                            <td class="px-4 py-3 text-sm">
+                                <img :src="contacto.photo ? `../../storage/img/profile/${contacto.photo}` : '../../storage/img/profile/profile-icon.png'" alt="Imagen de perfil" class="object-cover rounded-lg w-[50px]" />
                             </td>
                         </tr>
                     </tbody>

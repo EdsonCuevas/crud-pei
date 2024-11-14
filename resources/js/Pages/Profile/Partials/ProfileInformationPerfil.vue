@@ -8,13 +8,6 @@ const user = usePage().props.auth.user;
 // Ruta de la imagen
 const srcImg = ref(user.photo ? `../../storage/img/profile/${user.photo}` : '../../storage/img/profile/profile-icon.png');
 
-// Función para manejar la carga de imagen
-function showImg(event) {
-    const file = event.target.files[0];
-    if (file) {
-        srcImg.value = URL.createObjectURL(file);
-    }
-}
 </script>
 
 <template>

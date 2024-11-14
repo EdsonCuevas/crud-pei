@@ -76,6 +76,9 @@ const noResultsFound = computed(() => {
                             <td class="px-4 py-3 text-sm">{{ contacto.email }}</td>
                             <td class="px-4 py-3 text-sm">{{ contacto.phone }}</td>
                             <td class="px-4 py-3 text-sm">{{ contacto.role.role }}</td>
+                            <td class="px-4 py-3 text-sm">
+                                <img :src="contacto.photo ? `../../storage/img/profile/${contacto.photo}` : '../../storage/img/profile/profile-icon.png'" alt="Imagen de perfil" class="object-cover rounded-lg w-[50px]" />
+                            </td>
                         </tr>
                     </tbody>
                 </table>
