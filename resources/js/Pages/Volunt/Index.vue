@@ -69,14 +69,8 @@ const noResultsFound = computed(() => {
             Expenses
         </template>
         <div class="mb-6">
-            <input v-model="searchQuery" type="text" placeholder="Search by #, value, reason or date..."
-                class="px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
-                style="width: 500px;" />
-        </div>
-        <div v-if="noResultsFound" class="mt-2 text-red-500 text-sm">
-            No results found for "{{ searchQuery }}".
-        </div>
-        <button 
+
+            <button 
             @click="openModal"
             class="w-20 bg-gradient-to-r py-2 from-[#004481] to-[#1464A5] text-white font-bold rounded transition-all duration-500 transform hover:scale-105 hover:shadow-lg hover:from-[#1464A5] hover:to-[#004481] flex justify-center items-center"
         >
@@ -97,6 +91,15 @@ const noResultsFound = computed(() => {
                 <path d="M12 9v6" />
             </svg>
         </button>
+            <br>
+            <input v-model="searchQuery" type="text" placeholder="Search by #, value, reason or date..."
+                class="px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                style="width: 500px;" />
+        </div>
+        
+        <div v-if="noResultsFound" class="mt-2 text-red-500 text-sm">
+            No results found for "{{ searchQuery }}".
+        </div>
 
         <br>
         

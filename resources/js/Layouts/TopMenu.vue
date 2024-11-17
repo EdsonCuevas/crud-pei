@@ -9,6 +9,13 @@ const { props } = usePage()
 
 // Determinar si el usuario está autenticado
 const authUser = computed(() => props.auth.user)
+
+const srcImg = computed(() => {
+  return authUser.value && authUser.value.photo
+    ? `/storage/img/profile/${authUser.value.photo}`
+    : '/storage/img/profile/profile-icon.png';
+});
+
 </script>
 
 <template>
@@ -27,7 +34,7 @@ const authUser = computed(() => props.auth.user)
       <Dropdown>
         <template #trigger>
           <img 
-            :src="'../../storage/img/profile/'+authUser.photo || '/images/default-profile.png'" 
+            :src="srcImg" 
             alt="Profile" 
             class="w-10 h-10 rounded-full object-cover cursor-pointer"
             @click="window.location.href='/dashboard'">

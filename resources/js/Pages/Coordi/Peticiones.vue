@@ -2,7 +2,7 @@
 import { useForm } from '@inertiajs/vue3';
 import { ref, computed } from 'vue';
 import Swal from 'sweetalert2'; // Import SweetAlert2
-import SecondaryButton from '@/Components/SecondaryButton.vue';
+import SecondaryButtonGreen from '@/Components/SecondaryButtonGreen.vue';
 import AuthenticatedLayout from '@/Layouts/Coordi/AuthenticatedLayout.vue';
 
 // Props received from the controller
@@ -155,11 +155,11 @@ const noResultsFound = computed(() => {
                                     <span v-else class="text-red-500 font-semibold">Pending</span>
                                 </td>
                                 <td class="px-4 py-3 text-sm">
-                                    <SecondaryButton @click="acceptRequest(user.id, programa.id)">
+                                    <SecondaryButtonGreen @click="acceptRequest(user.id, programa.id)">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
                                         </svg>
-                                    </SecondaryButton>
+                                    </SecondaryButtonGreen>
                                 </td>
                             </tr>
                         </template>

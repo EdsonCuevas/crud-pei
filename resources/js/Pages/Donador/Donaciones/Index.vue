@@ -50,7 +50,7 @@ const noResultsFound = computed(() => {
             Donations
             <br><br>
             <NavLink :href="route('donor-donations.create')">
-                <DarkButton class="flex items-center space-x-2">
+                <button class="w-20 bg-gradient-to-r py-2 from-[#004481] to-[#1464A5] text-white font-bold rounded transition-all duration-500 transform hover:scale-105 hover:shadow-lg hover:from-[#1464A5] hover:to-[#004481] flex justify-center items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                         class="lucide lucide-hand-coins">
@@ -61,8 +61,7 @@ const noResultsFound = computed(() => {
                         <circle cx="16" cy="9" r="2.9" />
                         <circle cx="6" cy="5" r="3" />
                     </svg>
-                    <span>Donate</span>
-                </DarkButton>
+                </button>
             </NavLink>
         </template>
 

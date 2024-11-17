@@ -12,11 +12,6 @@
           >
           <p class="text-sm text-left">Innovating for a brighter future through research and development. Join our mission to make a difference.</p>
           <br>
-          <div class="flex justify-center items-center">
-            <a href="" class="bg-white text-blue-600 px-4 py-2 rounded font-bold hover:bg-gray-100 ml-24">
-              Donate Now <span class="inline-block">↗</span>
-            </a>
-          </div>
         </div>
 
         <!-- Quick Links Section -->
