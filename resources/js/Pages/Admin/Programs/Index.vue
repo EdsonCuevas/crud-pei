@@ -105,13 +105,13 @@ const noResultsFound = computed(() => {
             <br>
             <div class="flex justify-between">
                 <NavLink :href="route('admin-programs.create')">
-                    <DarkButton>
+                    <button class="w-20 bg-gradient-to-r py-2 from-[#004481] to-[#1464A5] text-white font-bold rounded transition-all duration-500 transform hover:scale-105 hover:shadow-lg hover:from-[#1464A5] hover:to-[#004481] flex justify-center items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="size-6">
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m3.75 9v6m3-3H9m1.5-12H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
                         </svg>
-                    </DarkButton>
+                    </button>
                 </NavLink>
                 <div class="flex items grid-cols-2 gap-2">
                     <a href="admin-programs-pdf">
@@ -127,19 +127,21 @@ const noResultsFound = computed(() => {
                 </div>
             </div>
         </template>
-        <div class="mb-6">
-            <input 
-                v-model="searchQuery" 
-                type="text" 
-                placeholder="Search by #, tittle, creator, coordinator or date..." 
-                class="px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none" 
-                style="width: 500px;" 
+        <div class="mb-6 relative" style="width: 500px;">
+            <input
+                v-model="searchQuery"
+                type="text"
+                placeholder="Search by #, name, email, phone, rfc or age..."
+                class="pl-10 pr-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none w-full"
             />
+            <!-- Ícono de lupa -->
+            <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            </span>
         </div>
         <div v-if="noResultsFound" class="mt-2 text-red-500 text-sm">
             No results found for "{{ searchQuery }}".
         </div>
-        <br>
 
         <div class="w-full overflow-hidden rounded-lg border shadow-md ">
             <div class="w-full overflow-x-auto bg-white">

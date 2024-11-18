@@ -187,11 +187,11 @@ const noResultsFound = computed(() => {
             <br>
             <div style="display: flex; justify-content: space-between; align-items: center;">
                 <!-- Botón para crear beneficiario -->
-                <DarkButton @click="openModalForm(1)">
+                <button @click="openModalForm(1)" class="w-20 bg-gradient-to-r py-2 from-[#004481] to-[#1464A5] text-white font-bold rounded transition-all duration-500 transform hover:scale-105 hover:shadow-lg hover:from-[#1464A5] hover:to-[#004481] flex justify-center items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M18 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0ZM3 19.235v-.11a6.375 6.375 0 0 1 12.75 0v.109A12.318 12.318 0 0 1 9.374 21c-2.331 0-4.512-.645-6.374-1.766Z" />
                     </svg>
-                </DarkButton>
+                </button>
 
                 <!-- Botón para exportar -->
                 <button @click="exportUsers" style="background-color: white; border: 2px solid green; padding: 10px; border-radius: 8px;">
@@ -199,19 +199,22 @@ const noResultsFound = computed(() => {
                 </button>
             </div>
         </template>
-        <div class="mb-6">
-            <input 
-                v-model="searchQuery" 
-                type="text" 
-                placeholder="Search by #, name, email, phone or age..." 
-                class="px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none" 
-                style="width: 500px;" 
+        <div class="mb-6 relative" style="width: 500px;">
+            <input
+                v-model="searchQuery"
+                type="text"
+                placeholder="Search by #, name, email, phone, rfc or age..."
+                class="pl-10 pr-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none w-full"
             />
+            <!-- Ícono de lupa -->
+            <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            </span>
         </div>
         <div v-if="noResultsFound" class="mt-2 text-red-500 text-sm">
             No results found for "{{ searchQuery }}".
         </div>
-        <br>
+
         <!-- Tabla de beneficiarios -->
         <div class="w-full overflow-hidden rounded-lg border shadow-md ">
             <div class="w-full overflow-x-auto bg-white">
