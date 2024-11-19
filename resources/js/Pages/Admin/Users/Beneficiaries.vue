@@ -320,32 +320,26 @@ const noResultsFound = computed(() => {
         <!-- Modal para ver programas -->
         <Modal :show="showModalView" @close="closeModalView">
             <div class="p-6">
-                You are enrolled in the following programs:
-                <ol>
-                    <li class="text-lg font-medium text-gray-900" v-for="b, i in v.programs">
-                        {{ (i + 1) + ') ' + b.title }}
-                    </li>
-                </ol>
+                <template v-if="v.programs && v.programs.length > 0">
+                    {{ v.name }} are enrolled in the following programs:
+                    <ol>
+                        <li class="text-lg font-medium text-gray-900" v-for="(b, i) in v.programs" :key="b.id">
+                            {{ (i + 1) + ') ' + b.title }}
+                        </li>
+                    </ol>
+                </template>
+                <template v-else>
+                    <p class="text-lg font-medium text-gray-900">
+                        {{ v.name }} are not enrolled in any programs.
+                    </p>
+                </template>
             </div>
             <div class="m-6 flex justify-end">
                 <SecondaryButton @click="closeModalView">Cancel</SecondaryButton>
             </div>
         </Modal>
 
-        <!-- Modal para crear/editar beneficiario -->
-        <Modal :show="showModalForm" @close="closeModalForm">
-            <div class="p-6">
-                You are enrolled in the following programs:
-                <ol>
-                    <li class="text-lg font-medium text-gray-900" v-for="b, i in v.programs">
-                        {{ (i + 1) + ') ' + b.title }}
-                    </li>
-                </ol>
-            </div>
-            <div class="m-6 flex justify-end">
-                <SecondaryButton @click="closeModalView">Cancel</SecondaryButton>
-            </div>
-        </Modal>
+
 
         <Modal :show="showModalForm" @close="closeModalForm">
             <div class="p-6">
