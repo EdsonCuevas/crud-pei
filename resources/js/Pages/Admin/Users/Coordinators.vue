@@ -41,7 +41,7 @@ const v = ref({
     rfc: '',
     birthdate: '',
     password: '',
-    programs: []
+    photo: '',
 });
 
 const showModalView = ref(false);
@@ -51,8 +51,8 @@ const operation = ref(1);
 
 const openModalView = (a) => {
     v.value.name = a.name;
-    v.value.phone = a.phone;
-    v.value.programs = a.programs;
+    v.value.rfc = a.rfc;
+    v.value.photo = a.photo;
     showModalView.value = true;
 };
 
@@ -224,7 +224,7 @@ const noResultsFound = computed(() => {
                             <th class="px-4 py-3">Phone</th>
                             <th class="px-4 py-3">RFC</th>
                             <th class="px-4 py-3">Age</th>
-                            <th class="px-4 py-3">Detail</th>
+                            <th class="px-4 py-3">Details</th>
                             <th class="px-4 py-3">Edit</th>
                             <th class="px-4 py-3">Delete</th>
                         </tr>
@@ -286,17 +286,30 @@ const noResultsFound = computed(() => {
 
         <Modal :show="showModalView" @close="closeModalView">
             <div class="p-6">
-                He is coordinator of the following programs:
-                <ol>
-                    <li class="text-lg font-medium text-gray-900" v-for="b, i in v.programs">
-                        {{ (i + 1) + ') ' + b.name }}
-                    </li>
-                </ol>
+                <div class="flex flex-col items-center">
+                    <!-- Mostrar imagen de perfil si existe -->
+                    <img
+                        v-if="v.photo"
+                        :src="`../../storage/img/profile/${v.photo}`"
+                        alt="Coordinator Photo"
+                        class="w-24 h-24 rounded-full object-cover mb-4"
+                    />
+                    <!-- Mostrar imagen por defecto si no existe -->
+                    <img
+                        v-else
+                        :src="`../../storage/img/profile/profile-icon.png`"
+                        alt="Default Photo"
+                        class="w-24 h-24 rounded-full object-cover mb-4"
+                    />
+                    <h3 class="text-lg font-medium text-gray-900">{{ v.name }}</h3>
+                    <p class="text-sm text-gray-500">{{ v.rfc }}</p>
+                </div>
             </div>
             <div class="m-6 flex justify-end">
                 <SecondaryButton @click="closeModalView">Cancel</SecondaryButton>
             </div>
         </Modal>
+
 
         <Modal :show="showModalForm" @close="closeModalForm">
             <div class="p-6">

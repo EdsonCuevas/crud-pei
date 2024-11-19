@@ -237,7 +237,7 @@ const noResultsFound = computed(() => {
                             <th class="px-4 py-3">Phone</th>
                             <th class="px-4 py-3">RFC</th>
                             <th class="px-4 py-3">Age</th>
-                            <th class="px-4 py-3">Detail</th>
+                            <th class="px-4 py-3">Details</th>
                             <th class="px-4 py-3">Edit</th>
                             <th class="px-4 py-3">Delete</th>
                         </tr>
