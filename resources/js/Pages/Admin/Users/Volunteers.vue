@@ -39,8 +39,10 @@ const v = ref({
     phone: '',
     birthdate: '',
     rfc: '',
-    password: ''
+    password: '',
+    photo: ''
 });
+
 const showModalView = ref(false);
 const showModalForm = ref(false);
 const title = ref('');
@@ -48,14 +50,9 @@ const operation = ref(1);
 
 const openModalView = (a) => {
     v.value.name = a.name;
-    v.value.phone = a.phone;
-    v.value.programs = a.programs;
+    v.value.photo = a.photo;
     showModalView.value = true;
-}
-
-const closeModalView = () => {
-    showModalView.value = false;
-}
+};
 
 const openModalForm = (op, a) => {
     showModalForm.value = true;
@@ -75,6 +72,10 @@ const openModalForm = (op, a) => {
         form.rfc = a.rfc;
         v.value.id = a.id;
     }
+};
+
+const closeModalView = () => {
+    showModalView.value = false;
 };
 
 const closeModalForm = () => {
@@ -125,15 +126,15 @@ const deleteVolunteer = (voluntario) => {
         preConfirm: () => {
             form.delete(route('admin-volunteers.destroy', voluntario.id), {
                 onSuccess: () => {
-                Swal.fire({
-                    title: 'Delete',
-                    text: 'Volunteer delete successfully!',
-                    icon: 'success',
-                    timer: 1500,
-                    showConfirmButton: false
-                });
-                closeModalForm();
-            },
+                    Swal.fire({
+                        title: 'Delete',
+                        text: 'Volunteer delete successfully!',
+                        icon: 'success',
+                        timer: 1500,
+                        showConfirmButton: false
+                    });
+                    closeModalForm();
+                },
             });
         }
     });
@@ -146,16 +147,16 @@ const exportVolunteers = () => {
 const searchQuery = ref("");
 const filteredVoluntarios = computed(() => {
     if (!searchQuery.value) {
-        return props.voluntarios; 
+        return props.voluntarios;
     }
     return props.voluntarios.filter(voluntario => {
         const searchLower = searchQuery.value.toLowerCase();
         return (
-            (voluntario.id && String(voluntario.id).toLowerCase().includes(searchLower)) || 
+            (voluntario.id && String(voluntario.id).toLowerCase().includes(searchLower)) ||
             (voluntario.name && String(voluntario.name).toLowerCase().includes(searchLower)) ||
             (voluntario.birthdate && voluntario.birthdate.toLowerCase().includes(searchLower)) ||
-            (voluntario.email && voluntario.email.toLowerCase().includes(searchLower)) || 
-            (voluntario.phone && voluntario.phone.toLowerCase().includes(searchLower)) || 
+            (voluntario.email && voluntario.email.toLowerCase().includes(searchLower)) ||
+            (voluntario.phone && voluntario.phone.toLowerCase().includes(searchLower)) ||
             (voluntario.rfc && voluntario.rfc.toLowerCase().includes(searchLower))
         );
     });
@@ -175,7 +176,8 @@ const noResultsFound = computed(() => {
             <br>
             <div style="display: flex; justify-content: space-between; align-items: center;">
                 <!-- Botón para crear voluntario -->
-                <button @click="openModalForm(1)" class="w-20 bg-gradient-to-r py-2 from-[#004481] to-[#1464A5] text-white font-bold rounded transition-all duration-500 transform hover:scale-105 hover:shadow-lg hover:from-[#1464A5] hover:to-[#004481] flex justify-center items-center">
+                <button @click="openModalForm(1)"
+                    class="w-20 bg-gradient-to-r py-2 from-[#004481] to-[#1464A5] text-white font-bold rounded transition-all duration-500 transform hover:scale-105 hover:shadow-lg hover:from-[#1464A5] hover:to-[#004481] flex justify-center items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="size-6">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -184,40 +186,43 @@ const noResultsFound = computed(() => {
                 </button>
 
                 <!-- Botón para exportar a Excel -->
-                <button @click="exportVolunteers" style="background-color: white; border: 2px solid green; padding: 10px; border-radius: 8px;">
+                <button @click="exportVolunteers"
+                    style="background-color: white; border: 2px solid green; padding: 10px; border-radius: 8px;">
                     <img src="storage/img/EXLG.png" style="width: 24px; height: 24px;">
                 </button>
             </div>
         </template>
         <div class="mb-6 relative" style="width: 500px;">
-            <input
-                v-model="searchQuery"
-                type="text"
-                placeholder="Search by #, name, email, phone, rfc or age..."
-                class="pl-10 pr-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none w-full"
-            />
+            <input v-model="searchQuery" type="text" placeholder="Search by #, name, email, phone, rfc or age..."
+                class="pl-10 pr-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none w-full" />
             <!-- Ícono de lupa -->
             <span class="absolute inset-y-0 left-0 flex items-center pl-3">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-search">
+                    <circle cx="11" cy="11" r="8" />
+                    <path d="m21 21-4.3-4.3" />
+                </svg>
             </span>
         </div>
         <div v-if="noResultsFound" class="mt-2 text-red-500 text-sm">
             No results found for "{{ searchQuery }}".
         </div>
-        
+
         <!-- Tabla de voluntarios -->
         <div class="w-full overflow-hidden rounded-lg border shadow-md ">
             <div class="w-full overflow-x-auto bg-white">
                 <table class="w-full whitespace-no-wrap">
                     <thead>
-                        <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b bg-gray-50">
+                        <tr
+                            class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b bg-gray-50">
                             <th class="px-4 py-3">#</th>
                             <th class="px-4 py-3">Name</th>
                             <th class="px-4 py-3">Email</th>
                             <th class="px-4 py-3">Phone</th>
                             <th class="px-4 py-3">RFC</th>
                             <th class="px-4 py-3">Age</th>
-                            <th class="px-4 py-3">Details</th>
+                            <th class="px-4 py-3">Photo</th>
                             <th class="px-4 py-3">Edit</th>
                             <th class="px-4 py-3">Delete</th>
                         </tr>
@@ -231,15 +236,10 @@ const noResultsFound = computed(() => {
                             <td class="px-4 py-3 text-sm">{{ voluntario.rfc }}</td>
                             <td class="px-4 py-3 text-sm">{{ getEdad(voluntario.birthdate) }}</td>
                             <td class="px-4 py-3 text-sm">
-                                <SecondaryButton @click="openModalView(voluntario)">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                        stroke-width="1.5" stroke="currentColor" class="size-6">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                                    </svg>
-                                </SecondaryButton>
+                                <button @click="openModalView(voluntario)">
+                                    <img :src="voluntario.photo ? `../../storage/img/profile/${voluntario.photo}` : '../../storage/img/profile/profile-icon.png'"
+                                        alt="Imagen de perfil" class="object-cover rounded-full w-[50px]" />
+                                </button>
                             </td>
                             <td class="px-4 py-3 text-sm">
                                 <WarningButton @click="openModalForm(2, voluntario)">
@@ -267,12 +267,16 @@ const noResultsFound = computed(() => {
 
         <Modal :show="showModalView" @close="closeModalView">
             <div class="p-6">
-                The programs you are in charge of:
-                <ol>
-                    <li class="text-lg font-medium text-gray-900" v-for="b, i in v.programs">
-                        {{ (i + 1) + ') ' + b.name }}
-                    </li>
-                </ol>
+                <div class="flex flex-col items-center">
+                    <h3 class="text-lg font-medium text-gray-900">{{ v.name }}</h3>
+                    <!-- Mostrar imagen de perfil si existe -->
+                    <img v-if="v.photo" :src="`../../storage/img/profile/${v.photo}`" alt="Coordinator Photo"
+                        class="w-96 rounded-full object-cover mb-4" />
+                    <!-- Mostrar imagen por defecto si no existe -->
+                    <img v-else :src="`../../storage/img/profile/profile-icon.png`" alt="Default Photo"
+                        class="w-96 rounded-full object-cover mb-4" />
+
+                </div>
             </div>
             <div class="m-6 flex justify-end">
                 <SecondaryButton @click="closeModalView">Cancel</SecondaryButton>
@@ -283,7 +287,7 @@ const noResultsFound = computed(() => {
         <Modal :show="showModalForm" @close="closeModalForm">
             <div class="p-6">
 
-            <h2 class="text-lg font-medium text-gray-900">{{ title }}</h2>
+                <h2 class="text-lg font-medium text-gray-900">{{ title }}</h2>
                 <div class="mt-6 mb-6 space-y-6 max-w-xl">
                     <InputGroup :text="'Name'" :required="'required'" v-model="form.name" :type="'text'">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -331,15 +335,19 @@ const noResultsFound = computed(() => {
                     <InputError class="mt-1" :message="form.errors.phone"></InputError>
 
                     <InputGroup :text="'Fecha de Usuario'" v-model="form.birthdate" :type="'date'">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z" />
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z" />
                         </svg>
                     </InputGroup>
                     <InputError class="mt-1" :message="form.errors.birthdate"></InputError>
 
                     <InputGroup :text="'RFC'" v-model="form.rfc">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v17.25m0 0c-1.472 0-2.882.265-4.185.75M12 20.25c1.472 0 2.882.265 4.185.75M18.75 4.97A48.416 48.416 0 0 0 12 4.5c-2.291 0-4.545.16-6.75.47m13.5 0c1.01.143 2.01.317 3 .52m-3-.52 2.62 10.726c.122.499-.106 1.028-.589 1.202a5.988 5.988 0 0 1-2.031.352 5.988 5.988 0 0 1-2.031-.352c-.483-.174-.711-.703-.59-1.202L18.75 4.971Zm-16.5.52c.99-.203 1.99-.377 3-.52m0 0 2.62 10.726c.122.499-.106 1.028-.589 1.202a5.989 5.989 0 0 1-2.031.352 5.989 5.989 0 0 1-2.031-.352c-.483-.174-.711-.703-.59-1.202L5.25 4.971Z" />
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M12 3v17.25m0 0c-1.472 0-2.882.265-4.185.75M12 20.25c1.472 0 2.882.265 4.185.75M18.75 4.97A48.416 48.416 0 0 0 12 4.5c-2.291 0-4.545.16-6.75.47m13.5 0c1.01.143 2.01.317 3 .52m-3-.52 2.62 10.726c.122.499-.106 1.028-.589 1.202a5.988 5.988 0 0 1-2.031.352 5.988 5.988 0 0 1-2.031-.352c-.483-.174-.711-.703-.59-1.202L18.75 4.971Zm-16.5.52c.99-.203 1.99-.377 3-.52m0 0 2.62 10.726c.122.499-.106 1.028-.589 1.202a5.989 5.989 0 0 1-2.031.352 5.989 5.989 0 0 1-2.031-.352c-.483-.174-.711-.703-.59-1.202L5.25 4.971Z" />
                         </svg>
                     </InputGroup>
                     <InputError class="mt-1" :message="form.errors.rfc"></InputError>
