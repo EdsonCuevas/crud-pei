@@ -1,7 +1,7 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/Donors/AuthenticatedLayout.vue';
-import { Head, useForm } from '@inertiajs/vue3';
-import DangerButton from '@/Components/DangerButton.vue';
+import { Head } from '@inertiajs/vue3';
+import Modal from '@/Components/Modal.vue';
 import SecondaryButton from '@/Components/SecondaryButton.vue';
 import { ref, computed } from 'vue';
 
@@ -12,7 +12,23 @@ const props = defineProps({
     usuario: Object,
 });
 
+const v = ref({
+    name: '',
+    photo: '',
+});
+
 const searchQuery = ref("");
+const showModalView = ref(false);
+
+const openModalView = (a) => {
+    v.value.name = a.name;
+    v.value.photo = a.photo;
+    showModalView.value = true;
+};
+
+const closeModalView = () => {
+    showModalView.value = false;
+};
 
 // Computed para filtrar contactos según la búsqueda
 const filteredContactos = computed(() => {
@@ -86,12 +102,32 @@ const noResultsFound = computed(() => {
                             </td>
                             <td class="px-4 py-3 text-sm">{{ contacto.role.role }}</td>
                             <td class="px-4 py-3 text-sm">
-                                <img :src="contacto.photo ? `../../storage/img/profile/${contacto.photo}` : '../../storage/img/profile/profile-icon.png'" alt="Imagen de perfil" class="object-cover rounded-lg w-[50px]" />
+                                <button @click="openModalView(contacto)">
+                                    <img :src="contacto.photo ? `../../storage/img/profile/${contacto.photo}` : '../../storage/img/profile/profile-icon.png'"
+                                        alt="Imagen de perfil" class="object-cover rounded-full w-[50px]" />
+                                </button>
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
+        <Modal :show="showModalView" @close="closeModalView">
+            <div class="p-6">
+                <div class="flex flex-col items-center">
+                    <h3 class="text-lg font-medium text-gray-900">{{ v.name }}</h3>
+                    <!-- Mostrar imagen de perfil si existe -->
+                    <img v-if="v.photo" :src="`../../storage/img/profile/${v.photo}`" alt="Coordinator Photo"
+                        class="w-96 rounded-full object-cover mb-4" />
+                    <!-- Mostrar imagen por defecto si no existe -->
+                    <img v-else :src="`../../storage/img/profile/profile-icon.png`" alt="Default Photo"
+                        class="w-96 rounded-full object-cover mb-4" />
+
+                </div>
+            </div>
+            <div class="m-6 flex justify-end">
+                <SecondaryButton @click="closeModalView">Cancel</SecondaryButton>
+            </div>
+        </Modal>
     </AuthenticatedLayout>
 </template>
