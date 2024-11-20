@@ -16,7 +16,7 @@ defineProps({
 <template>
 	<AuthenticatedLayout>
 	  <template #header>
-		Panel Voluntario
+		Volunteer Profile 
 	  </template>
 	  
 	  <div class="sm:px-6 md:px-0 lg:px-0 space-y-6">

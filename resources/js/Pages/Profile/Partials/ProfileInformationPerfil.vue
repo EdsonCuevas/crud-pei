@@ -51,32 +51,32 @@ onMounted(() => {
             </div>
             <div class="text-center">
               <h2 class="text-2xl font-bold text-white mb-2">{{ user.name }}</h2>
-              <p class="text-blue-200 text-sm">Usuario</p>
+              <p class="text-blue-200 text-sm">{{ user.role.role }}</p>
             </div>
           </div>
   
           <!-- Información personal -->
           <div class="profile-right flex-grow p-6 w-3/4 overflow-y-auto">
-            <h3 class="text-xl font-semibold text-gray-800 mb-4 border-b pb-2">Información Personal</h3>
+            <h3 class="text-xl font-semibold text-gray-800 mb-4 border-b pb-2">Personal Information</h3>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div class="flex items-center transition-all duration-300 ease-in-out hover:bg-gray-100 p-2 rounded">
                 <Mail class="w-5 h-5 text-blue-500 mr-3 flex-shrink-0" />
                 <div>
-                  <p class="text-xs text-gray-600">E-mail</p>
+                  <p class="text-xs text-gray-600">Email</p>
                   <p class="text-sm text-gray-800">{{ user.email }}</p>
                 </div>
               </div>
               <div class="flex items-center transition-all duration-300 ease-in-out hover:bg-gray-100 p-2 rounded">
                 <Phone class="w-5 h-5 text-green-500 mr-3 flex-shrink-0" />
                 <div>
-                  <p class="text-xs text-gray-600">Teléfono</p>
+                  <p class="text-xs text-gray-600">Phone</p>
                   <p class="text-sm text-gray-800">{{ user.phone }}</p>
                 </div>
               </div>
               <div class="flex items-center transition-all duration-300 ease-in-out hover:bg-gray-100 p-2 rounded">
                 <Calendar class="w-5 h-5 text-red-500 mr-3 flex-shrink-0" />
                 <div>
-                  <p class="text-xs text-gray-600">Fecha de Nacimiento</p>
+                  <p class="text-xs text-gray-600">Date of Birth</p>
                   <p class="text-sm text-gray-800">{{ user.birthdate }}</p>
                 </div>
               </div>
