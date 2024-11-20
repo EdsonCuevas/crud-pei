@@ -306,13 +306,11 @@ export default {
 .chart-container:nth-child(1) {
   animation-delay: 0.2s;
 }
-
 .chart-container:nth-child(2) {
   animation-delay: 0.4s;
 }
-
 .chart-container:nth-child(3) {
-  animation-delay: 0.6s;
+  animation-delay: 0.4s;
 }
 
 .chart-wrapper {
@@ -358,7 +356,7 @@ export default {
   white-space: nowrap;
   margin: 0 auto;
   animation: 
-    typing 3.5s steps(40, end),
+    typing 1s steps(40, end),
     blink-caret 0.75s step-end infinite;
 }
 
