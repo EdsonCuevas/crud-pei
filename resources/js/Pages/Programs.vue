@@ -141,7 +141,7 @@ const registerUserToProgram = (programId) => {
           <div class="text-center">
             <button @click="openModal(program)"
                 class="bg-gradient-to-r from-blue-500 to-blue-600 text-white font-bold py-2 px-6 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105">
-                Más información
+                More information
             </button>
           </div>
         </div>

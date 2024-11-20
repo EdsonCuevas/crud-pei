@@ -31,7 +31,7 @@ const donacion = ref({
   },
   frecuencia: 'Donación única',
   estado: 'Exitosa',
-  mensajeAgradecimiento: 'Gracias por su generosa donación. Su apoyo hace posible nuestro trabajo y marca la diferencia en la vida de muchos jovenes.',
+  mensajeAgradecimiento: 'Agradecemos sinceramente su generosa donación. Su apoyo es fundamental para continuar con nuestra misión y tener un impacto positivo en la vida de jóvenes. Gracias a su confianza, podemos seguir adelante con proyectos que marcan una diferencia real en la comunidad.',
   informacionContacto: 'Fundación CTI, Av. Universidad No. 333, Colonia Las Víboras, Colima, C.P. 28040 | support@cti.com | +52 313 141 0000',
   datosFiscales: 'RFC: BBA830831LJ2',
   codigoQR: 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://fundacion.bbva.mx/donacion/DON-2023051501'
