@@ -245,6 +245,7 @@ const noResultsFound = computed(() => {
                             <th class="px-4 py-3">Email</th>
                             <th class="px-4 py-3">Phone</th>
                             <th class="px-4 py-3">Age</th>
+                            <th class="px-4 py-3">RFC</th>
                             <th class="px-4 py-3">Photo</th>
                             <th class="px-4 py-3">Details</th>
                             <th class="px-4 py-3">Edit</th>
@@ -258,6 +259,9 @@ const noResultsFound = computed(() => {
                             <td class="px-4 py-3 text-sm">{{ beneficiario.email }}</td>
                             <td class="px-4 py-3 text-sm">{{ beneficiario.phone }}</td>
                             <td class="px-4 py-3 text-sm">{{ getEdad(beneficiario.birthdate) }}</td>
+                            <td class="px-4 py-3 text-sm">
+                                {{ beneficiario.rfc }}
+                            </td>
                             <td class="px-4 py-3 text-sm">
                                 <button @click="openModalView2(beneficiario)">
                                     <img :src="beneficiario.photo ? `../../storage/img/profile/${beneficiario.photo}` : '../../storage/img/profile/profile-icon.png'"

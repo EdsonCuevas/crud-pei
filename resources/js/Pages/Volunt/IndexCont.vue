@@ -8,6 +8,7 @@ const props = defineProps({
     users: {
         type: Array
     },
+    usuario: Object,
 });
 
 const searchQuery = ref("");
@@ -63,28 +64,32 @@ const noResultsFound = computed(() => {
                     <thead>
                         <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b bg-gray-50">
                             <th class="px-4 py-3">Name</th>
-                            <th class="px-4 py-3">Phone</th>
                             <th class="px-4 py-3">E-mail</th>
+                            <th class="px-4 py-3">Phone</th>
                             <th class="px-4 py-3">Role</th>
                             <th class="px-4 py-3">Photo</th>
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y">
-                        <tr v-for="user in filteredContactos" :key="user.id" class="text-gray-700">
+                        <tr v-for="contacto in filteredContactos" :key="contacto.id" class="text-gray-700">
                             <td class="px-4 py-3 text-sm">
-                                {{ user.name }}
+                                {{ contacto.name }}
                             </td>
                             <td class="px-4 py-3 text-sm">
-                                {{ user.phone }}
+                                <a :href="'mailto:' + contacto.email" class="text-blue-500 hover:underline">
+                                    {{ contacto.email }}
+                                </a>
                             </td>
                             <td class="px-4 py-3 text-sm">
-                                {{ user.email }}
+                                <a :href="'https://api.whatsapp.com/send?phone=521' + contacto.phone + '&text=Hola%20soy%20'+ usuario.name +'%20de%20la%20Fundación%20CTI'" class="text-blue-500 hover:underline" target="_blank">
+                                    {{ contacto.phone }}
+                                </a>
                             </td>
                             <td class="px-4 py-3 text-sm">
-                                {{ user.role.role }}
+                                {{ contacto.role.role }}
                             </td>
                             <td class="px-4 py-3 text-sm">
-                                <img :src="user.photo ? `../../storage/img/profile/${user.photo}` : '../../storage/img/profile/profile-icon.png'" alt="Imagen de perfil" class="object-cover rounded-lg w-[50px]" />
+                                <img :src="contacto.photo ? `../../storage/img/profile/${contacto.photo}` : '../../storage/img/profile/profile-icon.png'" alt="Imagen de perfil" class="object-cover rounded-lg w-[50px]" />
                             </td>
                         </tr>
                     </tbody>

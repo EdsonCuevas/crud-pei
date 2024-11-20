@@ -6,7 +6,8 @@ import { ref, computed } from 'vue';
 const props = defineProps({
     contactos: {
         type: Array
-    }
+    },
+    usuario: Object,
 });
 
 // Variable para almacenar la consulta de búsqueda
@@ -74,10 +75,14 @@ const noResultsFound = computed(() => {
                                 {{ contacto.name }}
                             </td>
                             <td class="px-4 py-3 text-sm">
-                                {{ contacto.email }}
+                                <a :href="'mailto:' + contacto.email" class="text-blue-500 hover:underline">
+                                    {{ contacto.email }}
+                                </a>
                             </td>
                             <td class="px-4 py-3 text-sm">
-                                {{ contacto.phone }}
+                                <a :href="'https://api.whatsapp.com/send?phone=521' + contacto.phone + '&text=Hola%20soy%20'+ usuario.name +'%20de%20la%20Fundación%20CTI'" class="text-blue-500 hover:underline" target="_blank">
+                                    {{ contacto.phone }}
+                                </a>
                             </td>
                             <td class="px-4 py-3 text-sm">
                                 {{ contacto.role.role }}

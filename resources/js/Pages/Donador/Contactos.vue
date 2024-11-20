@@ -9,6 +9,7 @@ const props = defineProps({
     contactos: {
         type: Array
     },
+    usuario: Object,
 });
 
 const searchQuery = ref("");
@@ -73,8 +74,16 @@ const noResultsFound = computed(() => {
                     <tbody class="bg-white divide-y">
                         <tr v-for="contacto in filteredContactos" :key="contacto.id" class="text-gray-700">
                             <td class="px-4 py-3 text-sm">{{ contacto.name }}</td>
-                            <td class="px-4 py-3 text-sm">{{ contacto.email }}</td>
-                            <td class="px-4 py-3 text-sm">{{ contacto.phone }}</td>
+                            <td class="px-4 py-3 text-sm">
+                                <a :href="'mailto:' + contacto.email" class="text-blue-500 hover:underline">
+                                    {{ contacto.email }}
+                                </a>
+                            </td>
+                            <td class="px-4 py-3 text-sm">
+                                <a :href="'https://api.whatsapp.com/send?phone=521' + contacto.phone + '&text=Hola%20soy%20'+ usuario.name +'%20de%20la%20Fundación%20CTI'" class="text-blue-500 hover:underline" target="_blank">
+                                    {{ contacto.phone }}
+                                </a>
+                            </td>
                             <td class="px-4 py-3 text-sm">{{ contacto.role.role }}</td>
                             <td class="px-4 py-3 text-sm">
                                 <img :src="contacto.photo ? `../../storage/img/profile/${contacto.photo}` : '../../storage/img/profile/profile-icon.png'" alt="Imagen de perfil" class="object-cover rounded-lg w-[50px]" />

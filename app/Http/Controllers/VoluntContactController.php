@@ -17,10 +17,11 @@ class VoluntContactController extends Controller
         }
 
         // Filtra los usuarios que tengan el rol 'voluntario' y carga sus programas
-        $user = User::whereIn('role_id', [2, 1])->with('role')->get();
+        $contacts = User::whereIn('role_id', [2, 1])->with('role')->get();
 
         return Inertia::render('Volunt/IndexCont', [
-            'users' => $user
+            'users' => $contacts,
+            'usuario' => $user
         ]);
     }
 }

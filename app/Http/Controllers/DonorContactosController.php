@@ -22,7 +22,8 @@ class DonorContactosController extends Controller
         $contactos = User::whereIn('role_id', [1])->with('role')->get();
 
         return Inertia::render('Donador/Contactos', [
-            'contactos' => $contactos
+            'contactos' => $contactos,
+            'usuario' => $user
         ]);
     }
 }

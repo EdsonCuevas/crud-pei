@@ -6,8 +6,6 @@ import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
 import { router } from '@inertiajs/vue3';
 import Swal from 'sweetalert2';
 
-
-
 const props = defineProps({
   programas: { type: Object }
 });

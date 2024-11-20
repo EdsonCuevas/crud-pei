@@ -21,7 +21,8 @@ class BenefContactsController extends Controller
 
 
         return Inertia::render('Benef/Contactos', [
-            'contactos' => $contacts
+            'contactos' => $contacts,
+            'usuario' => $user
         ]);
     }
 }
