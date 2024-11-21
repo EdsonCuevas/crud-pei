@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('concept');
             $table->integer('value');
-            $table->foreignId('users_id')->constrained('users')->onUpdate('cascade')->onDelete('set null');
-            $table->foreignId('programs_id')->constrained('programs')->onUpdate('cascade')->onDelete('set null');
+            $table->foreignId('users_id')->nullable()->constrained('users')->onUpdate('cascade')->onDelete('set null');
+            $table->foreignId('programs_id')->nullable()->constrained('programs')->onUpdate('cascade')->onDelete('set null');
             $table->timestamps();
         });
     }
