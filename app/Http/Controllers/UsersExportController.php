@@ -51,8 +51,32 @@ class UsersExportController implements FromCollection, WithHeadings, WithStyles
 
     public function styles(Worksheet $sheet)
     {
-        return [
-            1 => ['font' => ['bold' => true]], 
-        ];
+        // Obtener la última fila y columna
+        $highestRow = $sheet->getHighestRow(); // Última fila con datos
+        $highestColumn = $sheet->getHighestColumn(); // Última columna con datos
+
+        // Aplicar estilo a la fila de encabezados
+        $sheet->getStyle('A1:' . $highestColumn . '1')->applyFromArray([
+            'font' => ['bold' => true, 'color' => ['rgb' => 'FFFFFF']],
+            'fill' => [
+                'fillType' => 'solid',
+                'startColor' => ['rgb' => '3399FF'], // Fondo verde
+            ],
+        ]);
+
+        // Aplicar bordes a toda la tabla
+        $sheet->getStyle('A1:' . $highestColumn . $highestRow)->applyFromArray([
+            'borders' => [
+                'allBorders' => [
+                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                    'color' => ['rgb' => '000000'],
+                ],
+            ],
+        ]);
+
+        // Ajustar tamaño de las columnas automáticamente
+        foreach (range('A', $highestColumn) as $column) {
+            $sheet->getColumnDimension($column)->setAutoSize(true);
+        }
     }
 }
