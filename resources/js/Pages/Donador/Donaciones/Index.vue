@@ -43,7 +43,7 @@ const noResultsFound = computed(() => {
 </script>
 
 <template>
-    <Head title="Donadores" />
+    <Head title="Donations" />
 
     <AuthenticatedLayout>
         <template #header>
