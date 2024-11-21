@@ -33,7 +33,7 @@ const registerUserToProgram = (programId) => {
   }).then((result) => {
     if (result.isConfirmed) {
       // Call the registration route in the HomeController
-      router.post(route('registration'), { program_id: programId }, {
+      router.post(route('inscripcion'), { program_id: programId }, {
         onSuccess: () => {
           Swal.fire({
             title: 'Registered!',

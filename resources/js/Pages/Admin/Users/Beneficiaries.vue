@@ -264,8 +264,8 @@ const noResultsFound = computed(() => {
                             <th class="px-4 py-3">Name</th>
                             <th class="px-4 py-3">Email</th>
                             <th class="px-4 py-3">Phone</th>
-                            <th class="px-4 py-3">Age</th>
                             <th class="px-4 py-3">RFC</th>
+                            <th class="px-4 py-3">Age</th>
                             <th class="px-4 py-3">Photo</th>
                             <th class="px-4 py-3">Details</th>
                             <th class="px-4 py-3">Edit</th>
@@ -278,10 +278,10 @@ const noResultsFound = computed(() => {
                             <td class="px-4 py-3 text-sm">{{ beneficiario.name }}</td>
                             <td class="px-4 py-3 text-sm">{{ beneficiario.email }}</td>
                             <td class="px-4 py-3 text-sm">{{ beneficiario.phone }}</td>
-                            <td class="px-4 py-3 text-sm">{{ getEdad(beneficiario.birthdate) }}</td>
                             <td class="px-4 py-3 text-sm">
                                 {{ beneficiario.rfc }}
                             </td>
+                            <td class="px-4 py-3 text-sm">{{ getEdad(beneficiario.birthdate) }}</td>
                             <td class="px-4 py-3 text-sm">
                                 <button @click="openModalView2(beneficiario)">
                                     <img :src="beneficiario.photo ? `../../storage/img/profile/${beneficiario.photo}` : '../../storage/img/profile/profile-icon.png'"
@@ -337,7 +337,7 @@ const noResultsFound = computed(() => {
                 </div>
             </div>
             <div class="m-6 flex justify-end">
-                <SecondaryButton @click="closeModalView">Cancel</SecondaryButton>
+                <SecondaryButton @click="closeModalView2">Cancel</SecondaryButton>
             </div>
         </Modal>
 

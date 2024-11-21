@@ -1,6 +1,6 @@
 <script setup>
 import { CalendarIcon, UserIcon, UsersIcon, CircleDollarSign, Text  } from 'lucide-vue-next'
-import AuthenticatedLayout from '@/Layouts/Admin/AuthenticatedLayoutProgram.vue';
+import AuthenticatedLayout from '@/Layouts/Coordi/AuthenticatedLayoutProgram.vue';
 import { Head } from '@inertiajs/vue3';
 
 const props = defineProps({

@@ -16,7 +16,7 @@ defineProps({
 <template>
 	<AuthenticatedLayout>
 	  <template #header>
-		Admin Profile
+		Administrator Profile
 	  </template>
 	  
 	  <div class="sm:px-6 md:px-0 lg:px-0 space-y-6">

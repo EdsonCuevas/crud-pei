@@ -8,6 +8,7 @@ use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Program;
 use App\Models\User;
+use App\Models\Donation;
 use Barryvdh\DomPDF\Facade\Pdf;
 
 class AdminProgramsController extends Controller
@@ -25,13 +26,14 @@ class AdminProgramsController extends Controller
         ]);
     }
 
-    public function pdf(){
+    public function pdf()
+    {
         $user = Auth::user();
 
         if ($user->role->id !== 1) {
             return redirect()->route('401');
         }
-        
+
         $adminprogram = Program::all();
         $pdf = Pdf::loadView('programpdf', compact('adminprogram'));
         return $pdf->stream();
@@ -46,12 +48,14 @@ class AdminProgramsController extends Controller
         }
 
         $admin_program->load(['creator', 'coordinator']); // Cargar las relaciones
+        $totalDonations = Donation::where('programs_id', $admin_program->id)->sum('value');
 
         return Inertia::render('Admin/Programs/Show', [
             'program' => $admin_program,
             'creator' => $admin_program->creator,
             'coordinator' => $admin_program->coordinator,
-            'users' => $admin_program->users
+            'users' => $admin_program->users,
+            'totalDonations' => $totalDonations,
         ]);
     }
 

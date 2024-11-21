@@ -26,6 +26,8 @@ class UsersExportController implements FromCollection, WithHeadings, WithStyles
                 'users.name',
                 'users.email',
                 'users.phone',
+                'users.rfc',
+                'users.birthdate',
                 'users.created_at',
                 'users.updated_at'
             )
@@ -40,6 +42,8 @@ class UsersExportController implements FromCollection, WithHeadings, WithStyles
             'Name',
             'Email',
             'Phone',
+            'RFC',
+            'Birthdate',
             'Created At',
             'Updated At',
         ];

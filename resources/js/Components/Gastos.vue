@@ -1,6 +1,6 @@
 <template>
         <div class="bg-gradient-to-r from-blue-500 to-blue-700 p-6">
-          <h1 class="text-3xl font-bold text-white text-center">Comprobante de Gastos</h1>
+          <h1 class="text-3xl font-bold text-white text-center">Expense Receipt</h1>
         </div>
         
         <div class="p-8 space-y-6">
@@ -16,14 +16,14 @@
           <!-- Details Grid -->
           <div class="grid grid-cols-2 gap-6">
             <div class="space-y-2">
-              <label class="text-sm font-medium text-blue-700">Fecha y Hora</label>
+              <label class="text-sm font-medium text-blue-700">Date and time</label>
               <p class="text-gray-800 font-medium">  {{ new Date(props.expense.created_at).toLocaleString() }}
             </p>
             </div>
 
             <!-- Concept Section -->
           <div class="space-y-2">
-            <label class="text-sm font-medium text-blue-700">Motivo</label>
+            <label class="text-sm font-medium text-blue-700">Reason</label>
             <p class="text-gray-800 font-medium">{{ props.expense.reason }}</p>
           </div>
             
@@ -33,7 +33,7 @@
 
           <!-- Concept Section -->
           <div class="space-y-2">
-            <label class="text-sm font-medium text-blue-700">Responsable</label>
+            <label class="text-sm font-medium text-blue-700">Person responsible</label>
             <p class="text-gray-800 font-medium">{{ props.expense.user.name }}</p>
           </div>
         </div>
@@ -43,7 +43,7 @@
           <!-- Reference Number -->
           <div class="pt-4 border-t border-gray-200">
             <div class="flex justify-between text-sm">
-              <span class="text-gray-500">No. de Referencia:</span>
+              <span class="text-gray-500">Reference No. :</span>
               <span class="text-gray-800 font-medium">GTO-{{ props.expense.id }}</span>
             </div>
           </div>
@@ -51,7 +51,7 @@
           <!-- Status Badge -->
           <div class="flex justify-center">
             <span class="px-4 py-1 rounded-full text-sm font-medium" 
-                  :class="expense.status === 'Aprobado' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'">
+                  :class="expense.status === 'Approved' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'">
               {{ expense.status }}
             </span>
           </div>
@@ -61,11 +61,11 @@
             <button @click="printTicket" 
                     class="flex-1 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg flex items-center justify-center gap-2 transition-colors">
               <PrinterIcon class="h-5 w-5" />
-              Imprimir
+              Print
             </button>
             <button @click="closeModal" 
                     class="flex-1 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg flex items-center justify-center gap-2 transition-colors">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-x"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>              Salir
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-x"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>              Close
             </button>
           </div>
         </div>
@@ -98,7 +98,7 @@ const closeModal = () => {
   // Sample expense data
   const expense = ref({
     amount: props.expense.value,
-    status: 'Aprobado'
+    status: 'Approved'
   })
   
   // Format amount with commas and decimals

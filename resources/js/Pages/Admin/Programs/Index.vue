@@ -5,7 +5,6 @@ import NavLink from '@/Components/NavLink.vue';
 import Pagination from '@/Components/Pagination.vue';
 import DangerButton from '@/Components/DangerButton.vue';
 import WarningButton from '@/Components/WarningButton.vue';
-import DarkButton from '@/Components/DarkButton.vue';
 import SecondaryButton from '@/Components/SecondaryButton.vue';
 import Swal from 'sweetalert2'; // Importar SweetAlert
 import { ref, computed } from 'vue';
@@ -196,7 +195,7 @@ const noResultsFound = computed(() => {
                             </td>
                             <td class="px-4 py-3 text-sm">
                                 <NavLink :href="route('admin-programs.show', programa.id)">
-                                    <SecondaryButton @click="openModalView(coordi)">
+                                    <SecondaryButton>
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                             stroke-width="1.5" stroke="currentColor" class="size-6">
                                             <path stroke-linecap="round" stroke-linejoin="round"

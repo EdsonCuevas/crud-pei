@@ -33,4 +33,10 @@ class Program extends Model
     {
         return $this->belongsTo(User::class, 'coordi_id');
     }
+
+    public function donations()
+{
+    return $this->hasMany(Donation::class, 'programs_id');
+}
+
 }

@@ -55,11 +55,11 @@ const noResultsFound = computed(() => {
 </script>
 
 <template>
-    <Head title="Voluntarios" />
+    <Head title="Contacts" />
 
     <AuthenticatedLayout>
         <template #header>
-		Contactos
+		Contacts
 	    </template>
         <div class="mb-6">
             <input 
