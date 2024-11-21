@@ -1,4 +1,5 @@
 <?php
+
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProgramsController;
 // Controladores para el panel Administrador
@@ -44,6 +45,10 @@ use Inertia\Inertia;
 use App\Http\Controllers\ProgramsExportController;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Auth;
+use App\Mail\ContactMessage;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -85,6 +90,19 @@ Route::get('/contact', function () {
         'authUser' => Auth::user(),
     ]);
 })->name('contact');
+
+Route::post('/contact', function (Request $request) {
+    $validated = $request->validate([
+        'firstName' => 'required|string|max:255',
+        'lastName' => 'required|string|max:255',
+        'email' => 'required|email|max:255',
+        'message' => 'required|string|max:500',
+    ]);
+
+    Mail::to('recipient@example.com')->send(new ContactMessage($validated));
+
+    return back()->with('success', 'Message sent successfully!');
+})->name('contact.submit');
 
 Route::get('/terms-conditions', function () {
     return Inertia::render('Terminos&condiciones', [
