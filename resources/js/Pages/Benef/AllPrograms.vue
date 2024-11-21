@@ -170,6 +170,8 @@ const noResultsFound = computed(() => {
                 </table>
             </div>
         </div>
+        <br>
+        <br>
 
         <!-- Modal de vista del programa seleccionado -->
         <Modal :show="showModalView" @close="closeModalView">

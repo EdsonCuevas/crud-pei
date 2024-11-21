@@ -156,19 +156,38 @@ const filteredCoordinadores = computed(() => {
     }
     return props.coordinadores.filter(coordi => {
         const searchLower = searchQuery.value.toLowerCase();
+        
+        // Función para calcular la edad a partir de la fecha de nacimiento
+        const calculateAge = (birthdate) => {
+            if (!birthdate) return null;
+            const birthDateObj = new Date(birthdate);
+            const today = new Date();
+            let age = today.getFullYear() - birthDateObj.getFullYear();
+            const m = today.getMonth() - birthDateObj.getMonth();
+            if (m < 0 || (m === 0 && today.getDate() < birthDateObj.getDate())) {
+                age--;
+            }
+            return age;
+        };
+
+        const age = calculateAge(coordi.birthdate); // Calculamos la edad
+        
         return (
             (coordi.id && String(coordi.id).toLowerCase().includes(searchLower)) ||
             (coordi.name && coordi.name.toLowerCase().includes(searchLower)) ||
             (coordi.email && coordi.email.toLowerCase().includes(searchLower)) ||
             (coordi.rfc && coordi.rfc.toLowerCase().includes(searchLower)) ||
             (coordi.phone && coordi.phone.toLowerCase().includes(searchLower)) ||
-            (coordi.birthdate && String(coordi.birthdate).toLowerCase().includes(searchLower))
+            (coordi.birthdate && String(coordi.birthdate).toLowerCase().includes(searchLower)) ||
+            (age !== null && String(age).includes(searchLower)) // Búsqueda por edad
         );
     });
 });
+
 const noResultsFound = computed(() => {
     return filteredCoordinadores.value.length === 0 && searchQuery.value !== '';
 });
+
 </script>
 
 <template>

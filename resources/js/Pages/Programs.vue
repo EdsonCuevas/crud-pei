@@ -43,21 +43,21 @@ const noResultsFound = computed(() => {
 
 const registerUserToProgram = (programId) => {
   Swal.fire({
-    title: "¿Estás seguro de que deseas inscribirte?",
-    text: "¡No podrás revertir esto!",
+    title: "Are you sure you want to register?",
+    text: "You won't be able to undo this!",
     icon: "warning",
     showCancelButton: true,
     confirmButtonColor: "#3085d6",
     cancelButtonColor: "#d33",
-    confirmButtonText: "Sí, inscribirme"
+    confirmButtonText: "Yes, register me"
   }).then((result) => {
     if (result.isConfirmed) {
-      // Llamar a la ruta de inscripción en el controlador HomeController
-      router.post(route('inscripcion'), { program_id: programId }, {
+      // Call the registration route in the HomeController
+      router.post(route('registration'), { program_id: programId }, {
         onSuccess: () => {
           Swal.fire({
-            title: 'Inscrito!',
-            text: '¡Tu inscripción ha sido exitosa!',
+            title: 'Registered!',
+            text: 'Your registration was successful!',
             icon: 'success',
             timer: 1500,
             showConfirmButton: false
@@ -65,12 +65,12 @@ const registerUserToProgram = (programId) => {
         },
         onError: (errors) => {
           let errorMessage = '';
-          // Mostrar mensaje específico si el error es por estar ya inscrito
+          // Show specific message if the error is due to already being registered
           if (errors.error_auth) {
-            errorMessage = 'Necesitas iniciar sesion como beneficiario.';
+            errorMessage = 'You need to log in as a beneficiary.';
           }
           else if (errors.already_registered) {
-            errorMessage = 'Ya estás inscrito en este programa.';
+            errorMessage = 'You are already registered in this program.';
           }
           Swal.fire({
             title: 'Error!',
@@ -84,6 +84,7 @@ const registerUserToProgram = (programId) => {
     }
   });
 };
+
 
 
 </script>
@@ -168,7 +169,7 @@ const registerUserToProgram = (programId) => {
         <div class="flex justify-end">
             <button @click="registerUserToProgram(selectedProgram.id)"
                 class="bg-gradient-to-r from-blue-500 to-blue-600 text-white font-bold py-2 px-6 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105">
-                Inscribirse
+                Register
             </button>
         </div>
       </div>

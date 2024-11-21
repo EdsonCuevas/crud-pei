@@ -66,7 +66,7 @@ const noResultsFound = computed(() => {
             <input 
                 v-model="searchQuery" 
                 type="text" 
-                placeholder="Search by name, e-mail, phone or charge..." 
+                placeholder="Search by name, e-mail, phone or role..." 
                 class="px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none" 
                 style="width: 500px;" 
             />

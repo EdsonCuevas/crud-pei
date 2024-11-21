@@ -78,20 +78,37 @@ const filteredPrograms = computed(() => {
     if (!searchQuery.value) {
         return props.programas.data;
     }
+
+    const searchLower = searchQuery.value.toLowerCase();
+    const regex = new RegExp(searchLower, "i"); // Crear expresión regular insensible a mayúsculas
+
     return props.programas.data.filter(programa => {
-        const searchLower = searchQuery.value.toLowerCase();
+        // Normalizar fecha y hora para asegurarse de que estén en un formato consistente
+        const createdAt = programa.created_at
+            ? new Date(programa.created_at).toLocaleString("es-ES", {
+                day: "2-digit",
+                month: "2-digit",
+                year: "numeric",
+                hour: "2-digit",
+                minute: "2-digit",
+                second: "2-digit"
+            })
+            : "";
+
         return (
-            (String(programa.id).toLowerCase().includes(searchLower)) ||
-            (programa.title && programa.title.toLowerCase().includes(searchLower)) ||
-            (programa.creator && programa.creator.name && programa.creator.name.toLowerCase().includes(searchLower)) ||
-            (programa.coordinator && programa.coordinator.name && programa.coordinator.name.toLowerCase().includes(searchLower)) ||
-            (programa.created_at && programa.created_at.toLowerCase().includes(searchLower))
+            String(programa.id).match(regex) ||
+            (programa.title && programa.title.match(regex)) ||
+            (programa.creator && programa.creator.name && programa.creator.name.match(regex)) ||
+            (programa.coordinator && programa.coordinator.name && programa.coordinator.name.match(regex)) ||
+            createdAt.match(regex) // Comparar la fecha/hora formateada con la búsqueda
         );
     });
 });
+
 const noResultsFound = computed(() => {
     return filteredPrograms.value.length === 0 && searchQuery.value !== '';
 });
+
 </script>
 
 <template>
@@ -131,7 +148,7 @@ const noResultsFound = computed(() => {
             <input
                 v-model="searchQuery"
                 type="text"
-                placeholder="Search by #, name, email, phone, rfc or age..."
+                placeholder="Search by #, title, creator, coordinator or date..."
                 class="pl-10 pr-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none w-full"
             />
             <!-- Ícono de lupa -->
@@ -219,5 +236,6 @@ const noResultsFound = computed(() => {
                 <pagination :links="programas.links" />
             </div>
         </div>
+        <br>
     </AuthenticatedLayout>
 </template>

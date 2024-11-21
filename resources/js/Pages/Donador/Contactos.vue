@@ -38,11 +38,11 @@ const filteredContactos = computed(() => {
     return props.contactos.filter(contacto => {
         const searchLower = searchQuery.value.toLowerCase();
         return (
-            (contacto.nombre && contacto.nombre.toLowerCase().includes(searchLower)) || // Cambio de 'name' a 'nombre'
+            (contacto.name && contacto.name.toLowerCase().includes(searchLower)) || // Cambio de 'name' a 'nombre'
             (contacto.email && contacto.email.toLowerCase().includes(searchLower)) ||
-            (contacto.telefono && contacto.telefono.toLowerCase().includes(searchLower)) ||
+            (contacto.phone && contacto.phone.toLowerCase().includes(searchLower)) ||
             (contacto.id && String(contacto.id).toLowerCase().includes(searchLower)) || // Convertir id a string
-            (contacto.direccion && contacto.direccion.toLowerCase().includes(searchLower))
+            (contacto.role.role && contacto.role.role.toLowerCase().includes(searchLower))
         );
     });
 });
@@ -65,7 +65,7 @@ const noResultsFound = computed(() => {
             <input 
                 v-model="searchQuery" 
                 type="text" 
-                placeholder="Search by #, name, e-mail, phone or address..." 
+                placeholder="Search by name, e-mail, phone or role..." 
                 class="px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none" 
                 style="width: 500px;" 
             />

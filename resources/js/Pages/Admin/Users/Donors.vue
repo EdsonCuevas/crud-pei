@@ -163,26 +163,45 @@ const exportUsers = () => {
 };
 
 const searchQuery = ref("");
-// Computed property para los voluntarios filtrados
+// Computed property para los donadores filtrados
 const filteredDonador = computed(() => {
     if (!searchQuery.value) {
         return props.donadores;
     }
     return props.donadores.filter(donador => {
         const searchLower = searchQuery.value.toLowerCase();
+        
+        // Función para calcular la edad a partir de la fecha de nacimiento
+        const calculateAge = (birthdate) => {
+            if (!birthdate) return null;
+            const birthDateObj = new Date(birthdate);
+            const today = new Date();
+            let age = today.getFullYear() - birthDateObj.getFullYear();
+            const m = today.getMonth() - birthDateObj.getMonth();
+            if (m < 0 || (m === 0 && today.getDate() < birthDateObj.getDate())) {
+                age--;
+            }
+            return age;
+        };
+
+        const age = calculateAge(donador.birthdate); // Calculamos la edad
+        
         return (
             (donador.id && String(donador.id).toLowerCase().includes(searchLower)) ||
             (donador.name && donador.name.toLowerCase().includes(searchLower)) ||
             (donador.email && donador.email.toLowerCase().includes(searchLower)) ||
             (donador.phone && donador.phone.toLowerCase().includes(searchLower)) ||
             (donador.rfc && donador.rfc.toLowerCase().includes(searchLower)) ||
-            (donador.birthdate && donador.birthdate.toLowerCase().includes(searchLower))
+            (donador.birthdate && donador.birthdate.toLowerCase().includes(searchLower)) ||
+            (age !== null && String(age).includes(searchLower)) // Búsqueda por edad
         );
     });
 });
+
 const noResultsFound = computed(() => {
     return filteredDonador.value.length === 0 && searchQuery.value !== '';
 });
+
 </script>
 
 <template>
