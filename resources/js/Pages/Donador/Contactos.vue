@@ -61,20 +61,23 @@ const noResultsFound = computed(() => {
         
         </template>
 
-        <div class="mb-6">
-            <input 
-                v-model="searchQuery" 
-                type="text" 
-                placeholder="Search by name, e-mail, phone or role..." 
-                class="px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none" 
-                style="width: 500px;" 
-            />
+        <div class="mb-6 relative" style="width: 500px;">
+            <input v-model="searchQuery" type="text" placeholder="Search by name, e-mail, phone or role..."
+                class="pl-10 pr-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none w-full" />
+            <!-- Ícono de lupa -->
+            <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-search">
+                    <circle cx="11" cy="11" r="8" />
+                    <path d="m21 21-4.3-4.3" />
+                </svg>
+            </span>
         </div>
+
         <div v-if="noResultsFound" class="mt-2 text-red-500 text-sm">
             No results found for "{{ searchQuery }}".
         </div>
-        <br>
-
         <div class="w-full overflow-hidden rounded-lg border shadow-md">
             <div class="w-full overflow-x-auto bg-white">
                 <table class="w-full whitespace-no-wrap">
