@@ -175,18 +175,38 @@ const filteredBeneficiarios = computed(() => {
     }
     return props.beneficiarios.filter(beneficiario => {
         const searchLower = searchQuery.value.toLowerCase();
+        
+        // Función para calcular la edad a partir de la fecha de nacimiento
+        const calculateAge = (birthdate) => {
+            if (!birthdate) return null;
+            const birthDateObj = new Date(birthdate);
+            const today = new Date();
+            let age = today.getFullYear() - birthDateObj.getFullYear();
+            const m = today.getMonth() - birthDateObj.getMonth();
+            if (m < 0 || (m === 0 && today.getDate() < birthDateObj.getDate())) {
+                age--;
+            }
+            return age;
+        };
+
+        const age = calculateAge(beneficiario.birthdate); // Calculamos la edad
+        
         return (
             (beneficiario.id && String(beneficiario.id).toLowerCase().includes(searchLower)) ||
-            (beneficiario.name && String(beneficiario.name).toLowerCase().includes(searchLower)) ||
+            (beneficiario.name && beneficiario.name.toLowerCase().includes(searchLower)) ||
             (beneficiario.email && beneficiario.email.toLowerCase().includes(searchLower)) ||
             (beneficiario.phone && beneficiario.phone.toLowerCase().includes(searchLower)) ||
-            (beneficiario.birthdate && beneficiario.birthdate.toLowerCase().includes(searchLower))
+            (beneficiario.rfc && beneficiario.rfc.toLowerCase().includes(searchLower)) ||
+            (beneficiario.birthdate && String(beneficiario.birthdate).toLowerCase().includes(searchLower)) ||
+            (age !== null && String(age).includes(searchLower)) // Búsqueda por edad
         );
     });
 });
+
 const noResultsFound = computed(() => {
     return filteredBeneficiarios.value.length === 0 && searchQuery.value !== '';
 });
+
 </script>
 
 <template>

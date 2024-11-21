@@ -151,10 +151,24 @@ const filteredVoluntarios = computed(() => {
     }
     return props.voluntarios.filter(voluntario => {
         const searchLower = searchQuery.value.toLowerCase();
+        const calculateAge = (birthdate) => {
+            if (!birthdate) return null;
+            const birthDateObj = new Date(birthdate);
+            const today = new Date();
+            let age = today.getFullYear() - birthDateObj.getFullYear();
+            const m = today.getMonth() - birthDateObj.getMonth();
+            if (m < 0 || (m === 0 && today.getDate() < birthDateObj.getDate())) {
+                age--;
+            }
+            return age;
+        };
+
+        const age = calculateAge(voluntario.birthdate);
         return (
             (voluntario.id && String(voluntario.id).toLowerCase().includes(searchLower)) ||
-            (voluntario.name && String(voluntario.name).toLowerCase().includes(searchLower)) ||
+            (voluntario.name && voluntario.name.toLowerCase().includes(searchLower)) ||
             (voluntario.birthdate && voluntario.birthdate.toLowerCase().includes(searchLower)) ||
+            (age !== null && String(age).includes(searchLower)) || // Búsqueda por edad
             (voluntario.email && voluntario.email.toLowerCase().includes(searchLower)) ||
             (voluntario.phone && voluntario.phone.toLowerCase().includes(searchLower)) ||
             (voluntario.rfc && voluntario.rfc.toLowerCase().includes(searchLower))
@@ -164,6 +178,7 @@ const filteredVoluntarios = computed(() => {
 const noResultsFound = computed(() => {
     return filteredVoluntarios.value.length === 0 && searchQuery.value !== '';
 });
+
 </script>
 
 <template>
